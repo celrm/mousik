@@ -1,0 +1,222 @@
+\RequirePackage{musixtex}
+\RequirePackage{harmony}
+
+\RequirePackage{tikz}
+
+	\newcounter{xpos}
+	\newcounter{ypos}
+	\newcounter{timer}
+	
+	\newcommand{\Staff}{
+		\foreach\i in {0,...,\theypos} {
+			\foreach\j in {0,...,4} {
+				\ifnum\i=\theypos
+					\draw (-0.25,-\i*2+\j*0.2) -- (\thexpos*0.5,-\i*2+\j*0.2);
+				\else
+					\draw (-0.25,-\i*2+\j*0.2) -- (11,-\i*2+\j*0.2);
+				\fi
+			}
+		}
+	}
+	
+	\newcommand{\Clef}[2][\theypos]{	
+		\Adv	
+		%
+		\ifnum#2=2
+			\node at (\thexpos*0.5-0.25,-#1*2+0.35) 
+			{\begin{music}\trebleclef\end{music}};
+		\else\ifnum#2=3
+			\node at (\thexpos*0.5-0.25,-#1*2+0.8)
+			{\begin{music}{\resizebox{0.7cm}{0.8cm}{\bassclef}}\end{music}};
+		\else\ifnum#2=4
+			\node at (\thexpos*0.5-0.25,-#1*2+1)
+			{\begin{music}{\resizebox{0.7cm}{0.8cm}{\bassclef}}\end{music}};
+		\else\ifnum#2=11
+			\node at (\thexpos*0.5-0.25,-#1*2+0.4) 
+			{\begin{music}{\resizebox{0.7cm}{0.8cm}{\altoclef}}\end{music}};
+		\else\ifnum#2=12
+			\node at (\thexpos*0.5-0.25,-#1*2+0.6) 
+			{\begin{music}{\resizebox{0.7cm}{0.8cm}{\altoclef}}\end{music}};
+		\else\ifnum#2=13
+			\node at (\thexpos*0.5-0.25,-#1*2+0.8) 
+			{\begin{music}{\resizebox{0.7cm}{0.8cm}{\altoclef}}\end{music}};
+		\else\ifnum#2=14
+			\node at (\thexpos*0.5-0.25,-#1*2+1) 
+			{\begin{music}{\resizebox{0.7cm}{0.8cm}{\altoclef}}\end{music}};
+		\else\ifnum#2=15
+			\node at (\thexpos*0.5-0.25,-#1*2+1.2) 
+			{\begin{music}{\resizebox{0.7cm}{0.8cm}{\altoclef}}\end{music}};
+		\fi\fi\fi\fi\fi\fi\fi\fi
+		\addtocounter{xpos}{2}
+	}
+	\newcommand{\AboveDec}[1]{%
+		\ifnum#1<10
+		\resizebox{0.3cm}{0.35cm}{#1}
+		\else
+		\resizebox{0.6cm}{0.35cm}{#1}
+		\fi
+	}
+	\newcommand{\TimeS}[3][0]{
+		\Adv
+		\ifnum#1=0
+		\node at (\thexpos*0.5,-\theypos*2+0.6) {\bf \AboveDec{#2}};
+		\node at (\thexpos*0.5,-\theypos*2+0.2) {\bf \AboveDec{#3}};
+		\else\ifnum#1=1
+		\node at (\thexpos*0.5,-\theypos*2+0.5) {\meterC};
+		\else
+		\node at (\thexpos*0.5,-\theypos*2+0.575) {\allabreve};
+		\fi\fi
+		\addtocounter{xpos}{2}
+	}
+
+	\newcommand{\Note}[2]{
+		\Adv
+		%
+		\ifnum#1=1
+			\node at (\thexpos*0.5,-\theypos*2-0.2+#2*0.1) {\resizebox{0.3cm}{0.2cm}{\Ganz}};
+		\else\ifnum#1=2
+			\node at (\thexpos*0.5,-\theypos*2-0.2+#2*0.1) {\resizebox{0.3cm}{0.2cm}{\Halb}};
+		\else\ifnum#1=4
+			\node at (\thexpos*0.5,-\theypos*2-0.2+#2*0.1) {\resizebox{0.3cm}{0.21cm}{\Vier}};
+		\else\ifnum#1=8
+			\node at (\thexpos*0.5,-\theypos*2+0.02+#2*0.1) {\resizebox{0.45cm}{0.65cm}{\Acht}};
+		\else\ifnum#1=16
+			\node at (\thexpos*0.5,-\theypos*2+0.02+#2*0.1) {\resizebox{0.45cm}{0.65cm}{\Sech}};
+		\else\ifnum#1=32
+			\node at (\thexpos*0.5,-\theypos*2+0.095+#2*0.1) {\resizebox{0.45cm}{0.8cm}{\Zwdr}};
+		\fi\fi\fi\fi\fi\fi
+		%
+		\ifnum1>#2
+		% si es menor igual a 0
+		\foreach\i in {0,...,#2} {
+			\ifthenelse{\isodd{\i}}{}
+			{\draw (\thexpos*0.5-0.25,-\theypos*2-0.2+\i*0.1) -- (\thexpos*0.5+0.25,-\theypos*2-0.2+\i*0.1);}
+		}
+		\fi
+		\ifnum11<#2
+		% si es mayor igual a 12
+		\foreach\i in {12,...,#2} {
+			\ifthenelse{\isodd{\i}}{}
+			{\draw (\thexpos*0.5-0.25,-\theypos*2-0.2+\i*0.1) -- (\thexpos*0.5+0.25,-\theypos*2-0.2+\i*0.1);}
+		}
+		\fi
+		\addtocounter{xpos}{2}
+	}
+	
+	
+	\newcommand{\TwoNote}[3]{
+		\Adv
+		%
+		\ifnum#1=1
+			\node at (\thexpos*0.5,-\theypos*2-0.2+#2*0.1) {\resizebox{0.3cm}{0.2cm}{\Ganz}};
+			\stepcounter{xpos}
+			\node at (\thexpos*0.5,-\theypos*2-0.2+#3*0.1) {\resizebox{0.3cm}{0.2cm}{\Ganz}};
+		\else\ifnum#1=2
+			\node at (\thexpos*0.5,-\theypos*2-0.2+#2*0.1) {\resizebox{0.3cm}{0.2cm}{\Halb}};
+			\stepcounter{xpos}
+			\node at (\thexpos*0.5,-\theypos*2-0.2+#3*0.1) {\resizebox{0.3cm}{0.2cm}{\Halb}};
+		\else\ifnum#1=4
+			\node at (\thexpos*0.5,-\theypos*2-0.2+#2*0.1) {\resizebox{0.3cm}{0.21cm}{\Vier}};
+			\stepcounter{xpos}
+			\node at (\thexpos*0.5,-\theypos*2-0.2+#3*0.1) {\resizebox{0.3cm}{0.21cm}{\Vier}};
+		\else\ifnum#1=8
+			\node at (\thexpos*0.5,-\theypos*2-0.2+#2*0.1) {\resizebox{0.3cm}{0.21cm}{\Vier}};
+			\stepcounter{xpos}
+			\node at (\thexpos*0.5,-\theypos*2-0.2+#3*0.1) {\resizebox{0.3cm}{0.21cm}{\Vier}};
+			\draw[line width=1mm] (\thexpos*0.5-0.401,0.3+#2*0.1) -- (\thexpos*0.5+0.123,0.3+#3*0.1);
+		\else\ifnum#1=16
+			\node at (\thexpos*0.5,-\theypos*2-0.2+#2*0.1) {\resizebox{0.3cm}{0.21cm}{\Vier}};
+			\stepcounter{xpos}
+			\node at (\thexpos*0.5,-\theypos*2-0.2+#3*0.1) {\resizebox{0.3cm}{0.21cm}{\Vier}};
+		\else\ifnum#1=32
+			\node at (\thexpos*0.5,-\theypos*2-0.2+#2*0.1) {\resizebox{0.3cm}{0.21cm}{\Vier}};
+			\stepcounter{xpos}
+			\node at (\thexpos*0.5,-\theypos*2-0.2+#3*0.1) {\resizebox{0.3cm}{0.21cm}{\Vier}};
+		\fi\fi\fi\fi\fi\fi
+		%
+		\ifnum1>#2
+		% si es menor igual a 0
+		\foreach\i in {0,...,#2} {
+			\ifthenelse{\isodd{\i}}{}
+			{\draw (\thexpos*0.5-0.75,-\theypos*2-0.2+\i*0.1) -- (\thexpos*0.5-0.25,-\theypos*2-0.2+\i*0.1);}
+		}
+		\fi
+		\ifnum11<#2
+		% si es mayor igual a 12
+		\foreach\i in {12,...,#2} {
+			\ifthenelse{\isodd{\i}}{}
+			{\draw (\thexpos*0.5-0.75,-\theypos*2-0.2+\i*0.1) -- (\thexpos*0.5-0.25,-\theypos*2-0.2+\i*0.1);}
+		}
+		\fi
+		%
+		\ifnum1>#3
+		% si es menor igual a 0
+		\foreach\i in {0,...,#3} {
+			\ifthenelse{\isodd{\i}}{}
+			{\draw (\thexpos*0.5-0.25,-\theypos*2-0.2+\i*0.1) -- (\thexpos*0.5+0.25,-\theypos*2-0.2+\i*0.1);}
+		}
+		\fi
+		\ifnum11<#3
+		% si es mayor igual a 12
+		\foreach\i in {12,...,#3} {
+			\ifthenelse{\isodd{\i}}{}
+			{\draw (\thexpos*0.5-0.25,-\theypos*2-0.2+\i*0.1) -- (\thexpos*0.5+0.25,-\theypos*2-0.2+\i*0.1);}
+		}
+		\fi
+		\addtocounter{xpos}{2}
+	}
+	
+	
+	\newcommand{\Rest}[1]{
+		\Adv
+		%
+		\ifnum#1=1
+		\node at (\thexpos*0.5-0.5,-\theypos*2+0.33) {%
+		\GaPa};
+		\else\ifnum#1=2
+		\node at (\thexpos*0.5-0.5,-\theypos*2+0.22) {%
+			\HaPa};
+		\else\ifnum#1=4
+		\node at (\thexpos*0.5-0.5,-\theypos*2+0.33) {%
+		\ViPa};
+		\else\ifnum#1=8
+		\node at (\thexpos*0.5,-\theypos*2+0.33) {%
+			\resizebox{0.3cm}{0.45cm}{\AcPa}};
+		\else\ifnum#1=16
+		\node at (\thexpos*0.5,-\theypos*2+0.33) {%
+			\resizebox{0.35cm}{0.525cm}{\SePa}};
+		\else\ifnum#1=32
+		\node at (\thexpos*0.5,-\theypos*2+0.375) {%
+			\resizebox{0.4cm}{0.6cm}{\ZwPa}};
+		\fi\fi\fi\fi\fi\fi
+		%
+		\addtocounter{xpos}{2}
+	}
+
+	\newcommand{\Chord}{\addtocounter{xpos}{-2}}
+	\newcommand{\Space}{\Adv\addtocounter{xpos}{2}}
+	
+	\newcommand{\Bar}{
+		\draw (\thexpos*0.5,-\theypos*2+0.8) -- (\thexpos*0.5,-\theypos*2);
+		\addtocounter{xpos}{2}}
+
+	\newcommand{\FinalBar}{%
+	\draw[line width=1mm] (\thexpos*0.5,-\theypos*2+0.805) -- (\thexpos*0.5,-\theypos*2-0.005);
+	\draw (\thexpos*0.5-0.12,-\theypos*2+0.8) -- (\thexpos*0.5-0.12,-\theypos*2);
+	\addtocounter{xpos}{2}
+	}
+
+	\newcommand{\RepeatBar}{%
+		\node at (\thexpos*0.5-0.25,0.4-\theypos*2) {\resizebox{0.175cm}{0.25cm}{:}};
+		\FinalBar
+	}
+
+	\newcommand{\Adv}{%
+		\ifnum\thexpos>20
+			\addtocounter{ypos}{1}
+			\setcounter{xpos}{0}
+			\Clef{2}
+		\fi
+	}
+
+\newenvironment{mousik}{\noindent\begin{tikzpicture}}{\addtocounter{xpos}{-2}\Staff\end{tikzpicture}}

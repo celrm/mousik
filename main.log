@@ -1,0 +1,804 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2018.11.4)  3 JUN 2020 13:59
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**main.tex
+(./main.tex
+LaTeX2e <2017-04-15>
+Babel <3.9r> and hyphenation patterns for 4 language(s) loaded.
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+) (./mousik.sty
+(/usr/share/texlive/texmf-dist/tex/latex/musixtex/musixtex.sty
+(/usr/share/texlive/texmf-dist/tex/generic/musixtex/musixtex.tex
+MusiXTeX(c) 1.25 <2017-07-25>
+\n@i=\count87
+\n@ii=\count88
+\n@iii=\count89
+\n@iv=\count90
+\n@v=\count91
+\n@vi=\count92
+\n@vii=\count93
+\n@viii=\count94
+\count@=\count95
+\toks@box=\box26
+\w@rkbox=\box27
+\n@otebox=\box28
+\y@=\dimen103
+\y@i=\dimen104
+\y@ii=\dimen105
+\y@iii=\dimen106
+\y@iv=\dimen107
+\y@v=\dimen108
+\group@no=\count96
+\interinstrument=\dimen109
+\N@s=\count97
+\s@Y=\dimen110
+\lin@pos=\dimen111
+\meet@minus@n@iv=\count98
+\interbeam=\dimen112
+\b@amthick=\dimen113
+\Interligne=\dimen114
+\Internote=\dimen115
+\ch@box=\box29
+\musicsize=\count99
+\qd@skip=\dimen116
+\qn@width=\dimen117
+\wn@width=\dimen118
+\txt@ff=\skip43
+\s@indent=\skip44
+\big@spc=\skip45
+\lthick=\dimen119
+\afterruleskip=\skip46
+\staffbotmarg=\dimen120
+\stafftopmarg=\dimen121
+\line@width=\dimen122
+\interportee=\dimen123
+\noport@@=\count100
+\noinstrum@nt=\count101
+\altportee=\dimen124
+\systemheight=\dimen125
+\altplancher=\dimen126
+\instrum@in@group=\skip47
+\boxitsep=\skip48
+\barsinpi@c@=\count102
+\barno=\count103
+\startbarno=\count104
+\sign@skip=\dimen127
+\maxsign@skip=\dimen128
+\x@skip=\dimen129
+\n@skip=\dimen130
+\beforeruleskip=\skip49
+\widthtyp@=\count105
+\lastbarno=\count106
+\cut@v=\skip50
+\init@volta@pos=\skip51
+\volta@startcor=\skip52
+\volta@endcor=\skip53
+\writ@volta@box=\box30
+\barsinlin@=\count107
+\maxbarsinlin@=\count108
+\lastbarpos=\skip54
+\ut@ref=\count109
+\meterskip=\skip55
+\t@c=\toks14
+\clef@skip=\skip56
+\noteskip=\dimen131
+\transpose=\count110
+\normaltranspose=\count111
+\locx@skip=\dimen132
+\elemskip=\dimen133
+\@l@mskip=\dimen134
+\inh@alt=\count112
+\st@bot=\dimen135
+\st@top=\dimen136
+\stem@skip=\dimen137
+\s@lope=\dimen138
+\y@vi=\dimen139
+\lift@rest=\dimen140
+\accshift=\skip57
+\@icresc=\skip58
+\pdl@pos=\dimen141
+\bigwedgebox=\box31
+\@itrillei=\skip59
+\@itrilleii=\skip60
+\@itrilleiii=\skip61
+\@itrilleiv=\skip62
+\@itrillev=\skip63
+\@itrillevi=\skip64
+\tr@number=\count113
+\tr@nspose=\count114
+\o@swz=\toks15
+\o@number=\count115
+\y@vii=\dimen142
+\y@viii=\dimen143
+\y@ix=\dimen144
+\tuptxtb@x=\box32
+\notes@open=\count116
+\k@ii=\skip65
+\i@ni=\dimen145
+\b@xi=\dimen146
+\b@zi=\dimen147
+\c@xi=\dimen148
+\c@zi=\skip66
+\d@xi=\dimen149
+\d@zi=\skip67
+\e@xi=\dimen150
+\e@zi=\skip68
+\b@pi=\count117
+\b@ni=\count118
+\n@pi=\count119
+\a@si=\count120
+\o@si=\count121
+\a@ci=\toks16
+\o@ci=\toks17
+\m@ti=\toks18
+\k@iii=\skip69
+\i@nii=\dimen151
+\b@xii=\dimen152
+\b@zii=\dimen153
+\c@xii=\dimen154
+\c@zii=\skip70
+\d@xii=\dimen155
+\d@zii=\skip71
+\e@xii=\dimen156
+\e@zii=\skip72
+\b@pii=\count122
+\b@nii=\count123
+\n@pii=\count124
+\a@sii=\count125
+\o@sii=\count126
+\a@cii=\toks19
+\o@cii=\toks20
+\m@tii=\toks21
+\k@iiii=\skip73
+\i@niii=\dimen157
+\b@xiii=\dimen158
+\b@ziii=\dimen159
+\c@xiii=\dimen160
+\c@ziii=\skip74
+\d@xiii=\dimen161
+\d@ziii=\skip75
+\e@xiii=\dimen162
+\e@ziii=\skip76
+\b@piii=\count127
+\b@niii=\count128
+\n@piii=\count129
+\a@siii=\count130
+\o@siii=\count131
+\a@ciii=\toks22
+\o@ciii=\toks23
+\m@tiii=\toks24
+\k@iiv=\skip77
+\i@niv=\dimen163
+\b@xiv=\dimen164
+\b@ziv=\dimen165
+\c@xiv=\dimen166
+\c@ziv=\skip78
+\d@xiv=\dimen167
+\d@ziv=\skip79
+\e@xiv=\dimen168
+\e@ziv=\skip80
+\b@piv=\count132
+\b@niv=\count133
+\n@piv=\count134
+\a@siv=\count135
+\o@siv=\count136
+\a@civ=\toks25
+\o@civ=\toks26
+\m@tiv=\toks27
+\k@iv=\skip81
+\i@nv=\dimen169
+\b@xv=\dimen170
+\b@zv=\dimen171
+\c@xv=\dimen172
+\c@zv=\skip82
+\d@xv=\dimen173
+\d@zv=\skip83
+\e@xv=\dimen174
+\e@zv=\skip84
+\b@pv=\count137
+\b@nv=\count138
+\n@pv=\count139
+\a@sv=\count140
+\o@sv=\count141
+\a@cv=\toks28
+\o@cv=\toks29
+\m@tv=\toks30
+\k@ivi=\skip85
+\i@nvi=\dimen175
+\b@xvi=\dimen176
+\b@zvi=\dimen177
+\c@xvi=\dimen178
+\c@zvi=\skip86
+\d@xvi=\dimen179
+\d@zvi=\skip87
+\e@xvi=\dimen180
+\e@zvi=\skip88
+\b@pvi=\count142
+\b@nvi=\count143
+\n@pvi=\count144
+\a@svi=\count145
+\o@svi=\count146
+\a@cvi=\toks31
+\o@cvi=\toks32
+\m@tvi=\toks33
+maxinstruments=6
+\f@xi=\dimen181
+\f@zi=\skip89
+\f@xii=\dimen182
+\f@zii=\skip90
+\f@xiii=\dimen183
+\f@ziii=\skip91
+\f@xiv=\dimen184
+\f@ziv=\skip92
+\f@xv=\dimen185
+\f@zv=\skip93
+\f@xvi=\dimen186
+\f@zvi=\skip94
+ max128beams=6
+\g@bi=\skip95
+\g@hi=\skip96
+\g@bii=\skip97
+\g@hii=\skip98
+\g@biii=\skip99
+\g@hiii=\skip100
+ maxgroups=3
+\s@xi=\dimen187
+\s@si=\toks34
+\s@Yi=\dimen188
+\s@ai=\skip101
+\s@yi=\count147
+\s@Ni=\count148
+\s@zi=\count149
+\s@di=\toks35
+\s@xii=\dimen189
+\s@sii=\toks36
+\s@Yii=\dimen190
+\s@aii=\skip102
+\s@yii=\count150
+\s@Nii=\count151
+\s@zii=\count152
+\s@dii=\toks37
+\s@xiii=\dimen191
+\s@siii=\toks38
+\s@Yiii=\dimen192
+\s@aiii=\skip103
+\s@yiii=\count153
+\s@Niii=\count154
+\s@ziii=\count155
+\s@diii=\toks39
+\s@xiv=\dimen193
+\s@siv=\toks40
+\s@Yiv=\dimen194
+\s@aiv=\skip104
+\s@yiv=\count156
+\s@Niv=\count157
+\s@ziv=\count158
+\s@div=\toks41
+\s@xv=\dimen195
+\s@sv=\toks42
+\s@Yv=\dimen196
+\s@av=\skip105
+\s@yv=\count159
+\s@Nv=\count160
+\s@zv=\count161
+\s@dv=\toks43
+\s@xvi=\dimen197
+\s@svi=\toks44
+\s@Yvi=\dimen198
+\s@avi=\skip106
+\s@yvi=\count162
+\s@Nvi=\count163
+\s@zvi=\count164
+\s@dvi=\toks45
+ maxslurs=6
+\tr@xi=\skip107
+\tr@swi=\toks46
+\tr@yi=\skip108
+\tr@xii=\skip109
+\tr@swii=\toks47
+\tr@yii=\skip110
+\tr@xiii=\skip111
+\tr@swiii=\toks48
+\tr@yiii=\skip112
+\tr@xiv=\skip113
+\tr@swiv=\toks49
+\tr@yiv=\skip114
+\tr@xv=\skip115
+\tr@swv=\toks50
+\tr@yv=\skip116
+\tr@xvi=\skip117
+\tr@swvi=\toks51
+\tr@yvi=\skip118
+ maxtrills=6
+\o@xi=\skip119
+\o@yi=\skip120
+\o@swi=\toks52
+\o@xii=\skip121
+\o@yii=\skip122
+\o@swii=\toks53
+\o@xiii=\skip123
+\o@yiii=\skip124
+\o@swiii=\toks54
+\o@xiv=\skip125
+\o@yiv=\skip126
+\o@swiv=\toks55
+\o@xv=\skip127
+\o@yv=\skip128
+\o@swv=\toks56
+\o@xvi=\skip129
+\o@yvi=\skip130
+\o@swvi=\toks57
+
+maxoctlines=6
+\outmux=\write3
+\mulooseness=\count165
+\linegoal=\count166
+\l@eftrightbox=\box33
+\inmux=\read1
+) (/usr/share/texlive/texmf-dist/tex/latex/musixtex/musixltx.tex
+MusiXLaTeX T.125 <8 April 2017>
+)) (/usr/share/texlive/texmf-dist/tex/latex/harmony/harmony.sty
+Package: harmony 2007/05/04
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\@emptytoks=\toks58
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
+\tmpdima=\dimen199
+\tmpdimb=\dimen256
+\tmpdimc=\dimen257
+\tmpdimd=\dimen258
+\tmpdime=\dimen259
+\nbxa=\box34
+\nbxb=\box35
+\nbxc=\box36
+\nbxd=\box37
+\nbxe=\box38
+\nbxf=\box39
+\nbxg=\box40
+\nbxh=\box41
+\nbxi=\box42
+)
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
+\pgfutil@everybye=\toks59
+\pgfutil@tempdima=\dimen260
+\pgfutil@tempdimb=\dimen261
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common-lists.t
+ex)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
+\pgfutil@abb=\box43
+(/usr/share/texlive/texmf-dist/tex/latex/ms/everyshi.sty
+Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex
+Package: pgfrcs 2015/08/07 v3.0.1a (rcs-revision 1.31)
+))
+Package: pgf 2015/08/07 v3.0.1a (rcs-revision 1.15)
+
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks60
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2016/05/09 v1.0r Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/01/02 v1.10 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 96.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2016/07/10 v0.06j Graphics/color for pdfTeX
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count167
+))
+\Gin@req@height=\dimen262
+\Gin@req@width=\dimen263
+)
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
+Package: pgfsys 2014/07/09 v3.0.1a (rcs-revision 1.48)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks61
+\pgfkeys@temptoks=\toks62
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeysfiltered.code.t
+ex
+\pgfkeys@tmptoks=\toks63
+))
+\pgf@x=\dimen264
+\pgf@y=\dimen265
+\pgf@xa=\dimen266
+\pgf@ya=\dimen267
+\pgf@xb=\dimen268
+\pgf@yb=\dimen269
+\pgf@xc=\dimen270
+\pgf@yc=\dimen271
+\w@pgf@writea=\write4
+\r@pgf@reada=\read2
+\c@pgf@counta=\count168
+\c@pgf@countb=\count169
+\c@pgf@countc=\count170
+\c@pgf@countd=\count171
+\t@pgf@toka=\toks64
+\t@pgf@tokb=\toks65
+\t@pgf@tokc=\toks66
+ (/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
+File: pgf.cfg 2008/05/14  (rcs-revision 1.7)
+)
+Driver file for pgf: pgfsys-pdftex.def
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdftex.def
+File: pgfsys-pdftex.def 2014/10/11  (rcs-revision 1.35)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-pdf.de
+f
+File: pgfsys-common-pdf.def 2013/10/10  (rcs-revision 1.13)
+)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.
+tex
+File: pgfsyssoftpath.code.tex 2013/09/09  (rcs-revision 1.9)
+\pgfsyssoftpath@smallbuffer@items=\count172
+\pgfsyssoftpath@bigbuffer@items=\count173
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.
+tex
+File: pgfsysprotocol.code.tex 2006/10/16  (rcs-revision 1.4)
+)) (/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
+Package xcolor Info: Model `RGB' extended on input line 1364.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex
+Package: pgfcore 2010/04/11 v3.0.1a (rcs-revision 1.7)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
+\pgfmath@dimen=\dimen272
+\pgfmath@count=\count174
+\pgfmath@box=\box44
+\pgfmath@toks=\toks67
+\pgfmath@stack@operand=\toks68
+\pgfmath@stack@operation=\toks69
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code
+.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigonomet
+ric.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.random.cod
+e.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.comparison
+.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.
+tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round.code
+.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.
+tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerari
+thmetics.code.tex)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count175
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.te
+x
+File: pgfcorepoints.code.tex 2013/10/07  (rcs-revision 1.27)
+\pgf@picminx=\dimen273
+\pgf@picmaxx=\dimen274
+\pgf@picminy=\dimen275
+\pgf@picmaxy=\dimen276
+\pgf@pathminx=\dimen277
+\pgf@pathmaxx=\dimen278
+\pgf@pathminy=\dimen279
+\pgf@pathmaxy=\dimen280
+\pgf@xx=\dimen281
+\pgf@xy=\dimen282
+\pgf@yx=\dimen283
+\pgf@yy=\dimen284
+\pgf@zx=\dimen285
+\pgf@zy=\dimen286
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconstruct.
+code.tex
+File: pgfcorepathconstruct.code.tex 2013/10/07  (rcs-revision 1.29)
+\pgf@path@lastx=\dimen287
+\pgf@path@lasty=\dimen288
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage.code
+.tex
+File: pgfcorepathusage.code.tex 2014/11/02  (rcs-revision 1.24)
+\pgf@shorten@end@additional=\dimen289
+\pgf@shorten@start@additional=\dimen290
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.code.te
+x
+File: pgfcorescopes.code.tex 2015/05/08  (rcs-revision 1.46)
+\pgfpic=\box45
+\pgf@hbox=\box46
+\pgf@layerbox@main=\box47
+\pgf@picture@serial@count=\count176
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.c
+ode.tex
+File: pgfcoregraphicstate.code.tex 2014/11/02  (rcs-revision 1.12)
+\pgflinewidth=\dimen291
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformation
+s.code.tex
+File: pgfcoretransformations.code.tex 2015/08/07  (rcs-revision 1.20)
+\pgf@pt@x=\dimen292
+\pgf@pt@y=\dimen293
+\pgf@pt@temp=\dimen294
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
+File: pgfcorequick.code.tex 2008/10/09  (rcs-revision 1.3)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobjects.code.t
+ex
+File: pgfcoreobjects.code.tex 2006/10/11  (rcs-revision 1.2)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathprocessing
+.code.tex
+File: pgfcorepathprocessing.code.tex 2013/09/09  (rcs-revision 1.9)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.code.te
+x
+File: pgfcorearrows.code.tex 2015/05/14  (rcs-revision 1.43)
+\pgfarrowsep=\dimen295
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
+File: pgfcoreshade.code.tex 2013/07/15  (rcs-revision 1.15)
+\pgf@max=\dimen296
+\pgf@sys@shading@range@num=\count177
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
+File: pgfcoreimage.code.tex 2013/07/15  (rcs-revision 1.18)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.code.
+tex
+File: pgfcoreexternal.code.tex 2014/07/09  (rcs-revision 1.21)
+\pgfexternal@startupbox=\box48
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.code.te
+x
+File: pgfcorelayers.code.tex 2013/07/18  (rcs-revision 1.7)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransparency.c
+ode.tex
+File: pgfcoretransparency.code.tex 2013/09/30  (rcs-revision 1.5)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepatterns.code.
+tex
+File: pgfcorepatterns.code.tex 2013/11/07  (rcs-revision 1.5)
+)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.tex
+File: pgfmoduleshapes.code.tex 2014/03/21  (rcs-revision 1.35)
+\pgfnodeparttextbox=\box49
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex
+File: pgfmoduleplot.code.tex 2015/08/03  (rcs-revision 1.13)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65
+.sty
+Package: pgfcomp-version-0-65 2007/07/03 v3.0.1a (rcs-revision 1.7)
+\pgf@nodesepstart=\dimen297
+\pgf@nodesepend=\dimen298
+)
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18
+.sty
+Package: pgfcomp-version-1-18 2007/07/23 v3.0.1a (rcs-revision 1.1)
+)) (/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgffor.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex))
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/math/pgfmath.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex
+Package: pgffor 2013/12/13 v3.0.1a (rcs-revision 1.25)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)
+\pgffor@iter=\dimen299
+\pgffor@skip=\dimen300
+\pgffor@stack=\toks70
+\pgffor@toks=\toks71
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
+Package: tikz 2015/08/07 v3.0.1a (rcs-revision 1.151)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers
+.code.tex
+File: pgflibraryplothandlers.code.tex 2013/08/31 v3.0.1a (rcs-revision 1.20)
+\pgf@plot@mark@count=\count178
+\pgfplotmarksize=\dimen301
+)
+\tikz@lastx=\dimen302
+\tikz@lasty=\dimen303
+\tikz@lastxsaved=\dimen304
+\tikz@lastysaved=\dimen305
+\tikzleveldistance=\dimen306
+\tikzsiblingdistance=\dimen307
+\tikz@figbox=\box50
+\tikz@figbox@bg=\box51
+\tikz@tempbox=\box52
+\tikz@tempbox@bg=\box53
+\tikztreelevel=\count179
+\tikznumberofchildren=\count180
+\tikznumberofcurrentchild=\count181
+\tikz@fig@count=\count182
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
+File: pgfmodulematrix.code.tex 2013/09/17  (rcs-revision 1.8)
+\pgfmatrixcurrentrow=\count183
+\pgfmatrixcurrentcolumn=\count184
+\pgf@matrix@numberofcolumns=\count185
+)
+\tikz@expandcount=\count186
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibrarytopaths.code.tex
+File: tikzlibrarytopaths.code.tex 2008/06/17 v3.0.1a (rcs-revision 1.2)
+)))
+\c@xpos=\count187
+\c@ypos=\count188
+\c@timer=\count189
+) (./main.aux)
+\openout1 = `main.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+
+ABD: EveryShipout initializing macros
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count190
+\scratchdimen=\dimen308
+\scratchbox=\box54
+\nofMPsegments=\count191
+\nofMParguments=\count192
+\everyMPshowfont=\toks72
+\MPscratchCnt=\count193
+\MPscratchDim=\dimen309
+\MPnumerator=\count194
+\makeMPintoPDFobject=\count195
+\everyMPtoPDFconversion=\toks73
+) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2017/03/19 v0.25 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2017/03/15 v3.2 Provides the ifpdf switch
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
+
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
+))
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+38.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 456.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+\openout3 = `main.mx1'.
+
+
+[1
+
+{/usr/share/texlive/texmf-dist/fonts/map/pdftex/updmap/pdftex.map}]
+(./main.aux) ) 
+Here is how much of TeX's memory you used:
+ 13793 strings out of 494923
+ 252556 string characters out of 6180163
+ 289741 words of memory out of 5000000
+ 16799 multiletter control sequences out of 15000+600000
+ 39163 words of font info for 137 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 62i,7n,56p,386b,549s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmb
+x10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/public/musixtex-fonts/musix13.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/public/musixtex-fonts/musix20.pfb>
+Output written on main.pdf (1 page, 22994 bytes).
+PDF statistics:
+ 27 PDF objects out of 1000 (max. 8388607)
+ 19 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 13 words of extra memory for PDF output out of 10000 (max. 10000000)
+

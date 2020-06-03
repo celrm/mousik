@@ -1,0 +1,18 @@
+\documentclass{article}
+
+\usepackage{mousik}
+
+\begin{document}
+	
+	\begin{mousik}
+		\Clef{2}
+		\TimeS{2}{4}
+		
+		\foreach\i in {1,2,4,8,16,32} {
+			\TwoNote{\i}{6}{9}
+		}
+		
+		\RepeatBar
+	\end{mousik}
+	
+\end{document}
