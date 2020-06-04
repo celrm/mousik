@@ -5,14 +5,223 @@
 \begin{document}
 	
 	\begin{mousik}
-		\Clef{2}
-		\TimeS{2}{4}
-		
-		\foreach\i in {1,2,4,8,16,32} {
-			\TwoNote{\i}{6}{9}
-		}
-		
+		\Space
+		\Bar
+		\FinalBar
 		\RepeatBar
 	\end{mousik}
+	
+	\begin{mousik}
+		\Clef{2}
+		\Space[1]
+		\Clef{2}
+		\Space
+		\Clef{2}
+		\Space[3]
+		\FinalBar
+	\end{mousik}
+	
+	\begin{mousik}
+		\Clef{1}
+		\Clef{2}
+		\Clef{3}
+		\Clef{4}
+		\Clef{11}
+		\Clef{12}
+		\Clef{13}
+		\Clef{14}
+		\Clef{15}
+		\FinalBar
+	\end{mousik}
+	
+	\begin{mousik}
+		\Clef{2}
+		
+		\TimeS{2}{4}
+		\TimeS{12}{8}
+		
+		\TimeS[1]{}{}
+		\TimeS[2]{}{}
+		
+		\FinalBar
+	\end{mousik}
+	
+	\begin{mousik}
+		\Clef{2}
+		\foreach \n in {0,...,6} {
+			\Note{1}{\n}
+		}
+		\Bar
+		\Note{1}{-1}
+		\Note{1}{12}
+		\FinalBar
+	\end{mousik}
+	
+	\begin{mousik}
+		\Clef{2}
+		\foreach \i in {1,2,4,8,16,32} {
+			\Note{\i}{5}
+		}
+		\foreach \i in {8,16,32} {
+			\TwoNote{\i}{3}{7}
+		}
+		\FinalBar
+	\end{mousik}	
+	
+	\begin{mousik}
+		\Clef{2}
+		\foreach \i in {1,2,4,8,16,32} {
+			\Rest{\i}
+		}
+		\Bar
+		
+		\Dot{5}
+		\Note{4}{5}
+		
+		\Dot[2]{7}
+		\Rest{8}
+		
+		\FinalBar
+	\end{mousik}
+	
+	\begin{mousik}
+		\Clef{2}
+		
+		\Note{1}{4}
+		\Chord
+		\Note{1}{6}		
+		
+		\Note{4}{4}
+		\Chord
+		\Note{4}{6}	
+		
+		\Note{4}{4}
+		\Chord
+		\Note{16}{6}
+		
+		\Bar
+		
+		\TwoNote{4}{1}{2}
+		\Chord[2]
+		\TwoNote{8}{5}{4}
+		
+		\TwoNote{8}{5}{4}
+		\Chord
+		\Note{4}{1}
+		
+		\TwoNote{8}{5}{4}
+		\Chord[2]
+		\Note{4}{1}
+		\Space[1]
+		
+		\FinalBar
+	\end{mousik}
+	
+	\begin{mousik}
+		\Clef{2}	
+		\foreach \a in {-2,-1,0,1,2} {
+			\Acc{\a}{5}
+			\Note{4}{5}
+		}
+		\Bar
+		
+		\Acc[+0.25]{-1}{2}		
+		\TwoNote{8}{6}{2}
+		
+		\FinalBar
+	\end{mousik}
+	
+	\begin{mousik}
+		\Clef{2}
+		\foreach \k in {-1,...,-7} {
+			\Key{\k}
+			\Bar
+		}
+	\end{mousik}
+	
+	\begin{mousik}
+		\Clef{2}	
+		\foreach \k in {1,...,7} {
+			\Key{\k}
+			\Bar
+		}
+	\end{mousik}
+	
+	\begin{mousik}
+		\Clef{2}
+		\foreach \k in {-1,...,-7} {
+			\NoKey{\k}
+			\Bar
+		}
+	\end{mousik}
+	
+	\begin{mousik}
+		\Clef{2}	
+		\foreach \k in {1,...,7} {
+			\NoKey{\k}
+			\Bar
+		}
+	\end{mousik}
+	
+	\begin{mousik}
+		\Clef{4}
+		\Key{1}
+		
+		\Acc{1}{0}
+		\Note{1}{0}
+		\FinalBar
+	\end{mousik}
+
+	\begin{mousik}
+		\Clef{2}
+		\Key{-2}
+		\TimeS{2}{4}
+		
+		\Text{C}
+		\Note{4}{0}
+		
+		\TwoNote{8}{1}{2}		
+		\Chord
+		\Text{E}
+		\Space
+			
+		\Bar
+		
+		\Text[2]{\it rit.}
+		\TwoNote{8}{3}{4}
+		
+		\Text{\pp}
+		\Note{4}{7}
+		
+		\FinalBar
+	\end{mousik}
+
+	\begin{mousik}
+	\Clef{2}
+	\foreach \i in {2,4} {
+		\foreach \n in {0,...,4} {
+			\Note{\i}{\n}
+			\Bar
+		}
+	}
+	\end{mousik}
+	
+	\begin{mousik}
+		\Clef{2}
+		\Key{2}
+		\Space[1]
+		\foreach \i in {2,4} {
+			\foreach \n in {0,...,4} {
+				\Note{\i}{\n}
+				\Bar
+			}
+		}
+	\end{mousik}
+		
+		% Tresillos
+		% Alargar plica
+		% Plica al revés
+		% Clean up +0.25
+		% Longitud score
 	
 \end{document}
