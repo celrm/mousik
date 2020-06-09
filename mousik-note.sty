@@ -1,0 +1,186 @@
+\newcommand{\Head}[1]{%
+\node [opacity=0.0] (tmp) at (\thexpos*0.5,-\theypos*2-0.2+#1*0.1) {};
+\fill[rotate around={16:(tmp.center)}] (\thexpos*0.5-0.01,-\theypos*2-0.195+#1*0.1) ellipse (4pt and 2.75pt);}
+
+\newcommand{\Enlarge}[3][]{%
+\draw[line width=0.25mm]  (\thexpos*0.5+0.115,-\theypos*2+#2*0.1-0.2) --
+(\thexpos*0.5+0.115,-\theypos*2+#3*0.1#1);}
+
+\newcommand{\Ledger}[1]{
+	\ifnum1>#1
+	\foreach\i in {0,...,#1} {
+		\ifthenelse{\isodd{\i}}{}
+		{\draw (\thexpos*0.5-0.25,-\theypos*2-0.2+\i*0.1) -- (\thexpos*0.5+0.25,-\theypos*2-0.2+\i*0.1);}
+	}
+	\fi\ifnum11<#1
+	\foreach\i in {12,...,#1} {
+		\ifthenelse{\isodd{\i}}{}
+		{\draw (\thexpos*0.5-0.25,-\theypos*2-0.2+\i*0.1) -- (\thexpos*0.5+0.25,-\theypos*2-0.2+\i*0.1);}
+	}
+	\fi
+}
+
+\newcommand{\Beam}[4]{%
+	\draw[line width=1mm] (#1*0.5+0.103,-\theypos*2+#2*0.1#4) -- (\thexpos*0.5-0.372,-\theypos*2+#3*0.1#4);}
+
+\newcommand{\BeamS}[1]{%
+	\ifnum\thefirst=\themin
+	\begin{scope}
+		\clip (\thexpos*0.5-0.4,-\theypos*2+\themin*0.1-0.3) rectangle (\thexpos*0.5+0.125,-\theypos*2+0.05+\themax*0.1#1);
+		\draw[line width=1mm] (\thexpos*0.5-0.411,-\theypos*2+\themin*0.1#1) -- (\thexpos*0.5+0.147,-\theypos*2+\themax*0.1#1);
+	\end{scope}
+	\else
+	\begin{scope}
+		\clip (\thexpos*0.5-0.4,-\theypos*2+0.05+\themax*0.1#1) rectangle (\thexpos*0.5+0.125,-\theypos*2+0.05+\themin*0.1-0.3);
+		\draw[line width=1mm] (\thexpos*0.5-0.411,-\theypos*2+\themax*0.1#1) -- (\thexpos*0.5+0.147,-\theypos*2+\themin*0.1#1);
+	\end{scope}
+	\fi
+}
+
+\newcommand{\Note}[2]{
+	\Adv
+	%
+	\ifnum#1=1
+		\node at (\thexpos*0.5,-\theypos*2-0.2+#2*0.1) {\resizebox{0.3cm}{0.2cm}{\Ganz}};
+	\fi\ifnum#1=2
+		\node at (\thexpos*0.5,-\theypos*2-0.2+#2*0.1) {\resizebox{0.3cm}{0.2cm}{\Halb}};
+	\fi\ifnum#1=4
+		\node at (\thexpos*0.5,-\theypos*2-0.2+#2*0.1) {\resizebox{0.3cm}{0.21cm}{\Vier}};
+	\fi\ifnum#1=8
+		\node at (\thexpos*0.5+0.09,-\theypos*2+0.02+#2*0.1) {\resizebox{0.45cm}{0.65cm}{\Acht}};
+	\fi\ifnum#1=16
+		\node at (\thexpos*0.5+0.09,-\theypos*2+0.02+#2*0.1) {\resizebox{0.45cm}{0.65cm}{\Sech}};
+	\fi\ifnum#1=32
+		\node at (\thexpos*0.5+0.09,-\theypos*2+0.095+#2*0.1) {\resizebox{0.45cm}{0.8cm}{\Zwdr}};
+	\fi
+	%
+	\Ledger{#2}
+	\addtocounter{xpos}{2}
+}
+
+\newcommand{\PolyNote}[2]{
+	\Adv
+	\setcounter{first}{-50}
+	\setcounter{max}{-50}
+	\setcounter{min}{50}
+	\setcounter{aux}{\thexpos}
+	
+	\ifnum#1=1
+		\foreach\n in {#2} {
+			\node at (\thexpos*0.5,-\theypos*2-0.2+\n*0.1) {\resizebox{0.3cm}{0.2cm}{\Ganz}};
+			\stepcounter{xpos}
+		}
+	\fi\ifnum#1=2
+		\foreach\n in {#2} {
+			\node at (\thexpos*0.5,-\theypos*2-0.2+\n*0.1) {\resizebox{0.3cm}{0.2cm}{\Halb}};
+			\stepcounter{xpos}
+		}	
+	\fi\ifnum#1=4
+		\foreach\n in {#2} {
+			\node at (\thexpos*0.5,-\theypos*2-0.2+\n*0.1) {\resizebox{0.3cm}{0.21cm}{\Vier}};
+			\stepcounter{xpos}
+		}
+	\fi\ifnum#1=8
+		\foreach\n in {#2} {
+			\Head{\n}
+			\stepcounter{xpos}
+			\Max{\n}\Min{\n}
+			\ifnum\thefirst=-50\setcounter{first}{\n}\fi
+		}
+		\ifnum\Eval{\thexpos-\theaux}=2
+			\setcounter{xpos}{\theaux}
+			\foreach\n in {#2} {
+				\Enlarge[+0.4]{\n}{\n}
+				\stepcounter{xpos}
+			}
+			\addtocounter{xpos}{-1}
+			\BeamS{+0.4}
+		\else
+			\setcounter{xpos}{\theaux}
+			\foreach\n in {#2} {
+				\Enlarge[+0.4]{\n}{\themax}
+				\stepcounter{xpos}
+			}
+			\Beam{\theaux}{\themax}{\themax}{+0.4}
+		\fi
+	\fi\ifnum#1=16
+		\foreach\n in {#2} {
+			\Head{\n}
+			\stepcounter{xpos}
+			\Max{\n}\Min{\n}
+			\ifnum\thefirst=-50\setcounter{first}{\n}\fi
+		}
+		\ifnum\Eval{\thexpos-\theaux}=2
+			\setcounter{xpos}{\theaux}
+			\foreach\n in {#2} {
+				\Enlarge[+0.5]{\n}{\n}
+				\stepcounter{xpos}
+			}
+			\addtocounter{xpos}{-1}
+			\BeamS{+0.5}
+			\BeamS{+0.35}
+		\else
+			\setcounter{xpos}{\theaux}
+			\foreach\n in {#2} {
+				\Enlarge[+0.5]{\n}{\themax}
+				\stepcounter{xpos}
+			}
+			\Beam{\theaux}{\themax}{\themax}{+0.5}
+			\Beam{\theaux}{\themax}{\themax}{+0.35}
+		\fi
+	\fi\ifnum#1=32
+		\foreach\n in {#2} {
+			\Head{\n}
+			\stepcounter{xpos}
+			\Max{\n}\Min{\n}
+			\ifnum\thefirst=-50\setcounter{first}{\n}\fi
+		}
+		\ifnum\Eval{\thexpos-\theaux}=2
+			\setcounter{xpos}{\theaux}
+			\foreach\n in {#2} {
+				\Enlarge[+0.6]{\n}{\n}
+				\stepcounter{xpos}
+			}
+			\addtocounter{xpos}{-1}
+			\BeamS{+0.6}
+			\BeamS{+0.45}
+			\BeamS{+0.3}
+		\else
+			\setcounter{xpos}{\theaux}
+			\foreach\n in {#2} {
+				\Enlarge[+0.6]{\n}{\themax}
+				\stepcounter{xpos}
+			}
+			\Beam{\theaux}{\themax}{\themax}{+0.6}
+			\Beam{\theaux}{\themax}{\themax}{+0.45}
+			\Beam{\theaux}{\themax}{\themax}{+0.3}
+		\fi
+	\fi
+	%
+	\setcounter{xpos}{\theaux}
+	\foreach\n in {#2} {
+		\Ledger{\n}
+		\stepcounter{xpos}
+	}
+	\addtocounter{xpos}{1}
+}
+
+\newcommand{\Rest}[1]{
+	\Adv
+	%
+	\ifnum#1=1
+		\node at (\thexpos*0.5,-\theypos*2+0.52) {\resizebox{0.3cm}{0.15cm}{\GaPa}};
+	\fi\ifnum#1=2
+		\node at (\thexpos*0.5,-\theypos*2+0.42) {\resizebox{0.3cm}{0.15cm}{\HaPa}};
+	\fi\ifnum#1=4
+		\node at (\thexpos*0.5,-\theypos*2+0.4) {\resizebox{0.3cm}{0.7cm}{\ViPa}};
+	\fi\ifnum#1=8
+		\node at (\thexpos*0.5,-\theypos*2+0.32) {\resizebox{0.3cm}{0.45cm}{\AcPa}};
+	\fi\ifnum#1=16
+		\node at (\thexpos*0.5,-\theypos*2+0.3) {\resizebox{0.35cm}{0.525cm}{\SePa}};
+	\fi\ifnum#1=32
+		\node at (\thexpos*0.5,-\theypos*2+0.375) {\resizebox{0.4cm}{0.6cm}{\ZwPa}};
+	\fi
+	%
+	\addtocounter{xpos}{2}
+}
