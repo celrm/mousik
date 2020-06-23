@@ -1,57 +1,68 @@
 \RequirePackage[minimal]{leadsheets}
 \useleadsheetslibraries{musicsymbols}
-
-\RequirePackage{musixtex}
-
 \RequirePackage{harmony}
+
 \RequirePackage{tikz}
 
-\RequirePackage{xstring}
-\RequirePackage{xparse}
-\ExplSyntaxOn
-\DeclareExpandableDocumentCommand{\Eval}{m}{\int_eval:n {#1}}
-\ExplSyntaxOff
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newcounter{modulo}
-\newcommand{\Modulo}[2]{%
-	\setcounter{modulo}{#1}%
-	\loop%
-	\ifnum\themodulo>\Eval{#2-1}%		
-	\setcounter{modulo}{\Eval{\themodulo-#2}}%
-	\repeat%
-	\ifnum\themodulo<0%
-	\setcounter{modulo}{\Eval{\themodulo+#2}}%
-	\repeat%
-%	\themodulo%
+\newcounter{Mevaluate}
+
+\newcounter{Mmodulo}
+\newcommand{\MModulo}[2]{
+	\setcounter{Mmodulo}{#1}
+	\loop
+	\setcounter{Mevaluate}{#2}\addtocounter{Mevaluate}{-1}
+	\ifnum\theMmodulo>\theMevaluate
+		\addtocounter{Mmodulo}{-#2}
+		\repeat
+	\ifnum\theMmodulo<0
+		\addtocounter{Mmodulo}{#2}
+		\repeat
 }
 
-\newcounter{max}
-\newcommand{\Max}[2][\themax]{%
-	\setcounter{max}{#1}%
+\newcounter{Mmax}
+\newcommand{\MMax}[2][\theMmax]{
+	\setcounter{Mmax}{#1}
 	\ifnum#2>#1
-	\setcounter{max}{#2}%
+	\setcounter{Mmax}{#2}
 	\fi
 }
 
-\newcounter{min}
-\newcommand{\Min}[2][\themin]{%
-	\setcounter{min}{#1}%
+\newcounter{Mmin}
+\newcommand{\MMin}[2][\theMmin]{
+	\setcounter{Mmin}{#1}
 	\ifnum#2<#1
-	\setcounter{min}{#2}%
+	\setcounter{Mmin}{#2}
 	\fi
 }
-\newcounter{first}
 
-\newcounter{xpos}
-\newcounter{ypos}
-\newcounter{clef}
-\newcounter{key}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newcommand{\Staff}{
-	\foreach\i in {0,...,\theypos} {
+\newcounter{Mfirst}
+\newcounter{Mxpos}
+\newcounter{Mypos}
+\newcounter{Mclef}
+\newcounter{Mkey}
+
+\newenvironment{mousik}
+{\setcounter{Mxpos}{0}
+	\setcounter{Mypos}{0}
+	\setcounter{Mclef}{0}
+	\setcounter{Mkey}{0}
+	\noindent\begin{tikzpicture}}
+{\addtocounter{Mxpos}{-2}\MStaff
+	\setcounter{Mxpos}{0}
+	\setcounter{Mypos}{0}
+	\setcounter{Mclef}{0}
+	\setcounter{Mkey}{0}
+	\end{tikzpicture}}
+
+\newcommand{\MStaff}{
+	\foreach\i in {0,...,\theMypos} {
 		\foreach\j in {0,...,4} {
-			\ifnum\i=\theypos
-				\draw (-0.25,-\i*2+\j*0.2) -- (\thexpos*0.5,-\i*2+\j*0.2);
+			\ifnum\i=\theMypos
+				\draw (-0.25,-\i*2+\j*0.2) -- (\theMxpos*0.5,-\i*2+\j*0.2);
 			\else
 				\draw (-0.25,-\i*2+\j*0.2) -- (11,-\i*2+\j*0.2);
 			\fi
@@ -60,121 +71,668 @@
 }
 
 \newcommand{\Clef}[1]{
-	\setcounter{clef}{#1}
+	\setcounter{Mclef}{#1}
 	\Adv
-	%
+	
 	\ifnum#1=1
-		\node at (\thexpos*0.5+0.1,-\theypos*2+0.15) 
+		\node at (\theMxpos*0.5+0.1,-\theMypos*2+0.15) 
 		{\trebleclef};
 	\fi\ifnum#1=2
-		\node at (\thexpos*0.5+0.1,-\theypos*2+0.35) 
+		\node at (\theMxpos*0.5+0.1,-\theMypos*2+0.35) 
 		{\trebleclef};
 	\fi\ifnum#1=3
-		\node at (\thexpos*0.5+0.1,-\theypos*2+0.8)
+		\node at (\theMxpos*0.5+0.1,-\theMypos*2+0.8)
 		{{\resizebox{0.7cm}{0.8cm}{\bassclef}}};
 	\fi\ifnum#1=4
-		\node at (\thexpos*0.5+0.1,-\theypos*2+1)
+		\node at (\theMxpos*0.5+0.1,-\theMypos*2+1)
 		{{\resizebox{0.7cm}{0.8cm}{\bassclef}}};
 	\fi\ifnum#1=11
-		\node at (\thexpos*0.5+0.1,-\theypos*2+0.4) 
+		\node at (\theMxpos*0.5+0.1,-\theMypos*2+0.4) 
 		{{\resizebox{0.65cm}{0.8cm}{\altoclef}}};
 	\fi\ifnum#1=12
-		\node at (\thexpos*0.5+0.1,-\theypos*2+0.6) 
+		\node at (\theMxpos*0.5+0.1,-\theMypos*2+0.6) 
 		{{\resizebox{0.65cm}{0.8cm}{\altoclef}}};
 	\fi\ifnum#1=13
-		\node at (\thexpos*0.5+0.1,-\theypos*2+0.8) 
+		\node at (\theMxpos*0.5+0.1,-\theMypos*2+0.8) 
 		{{\resizebox{0.65cm}{0.8cm}{\altoclef}}};
 	\fi\ifnum#1=14
-		\node at (\thexpos*0.5+0.1,-\theypos*2+1) 
+		\node at (\theMxpos*0.5+0.1,-\theMypos*2+1) 
 		{{\resizebox{0.65cm}{0.8cm}{\altoclef}}};
 	\fi\ifnum#1=15
-		\node at (\thexpos*0.5+0.1,-\theypos*2+1.2) 
+		\node at (\theMxpos*0.5+0.1,-\theMypos*2+1.2) 
 		{{\resizebox{0.65cm}{0.8cm}{\altoclef}}};
 	\fi
-	\addtocounter{xpos}{2}
+	\addtocounter{Mxpos}{2}
 }
 
-\input{mousik-key.sty}
-
-\newlength{\TSLen}
-\newlength{\TSHei}
-\newcommand{\AboveDec}[1]{%
-	\settowidth{\TSLen}{#1}
-	\settoheight{\TSHei}{#1}
-	\resizebox{1.5\TSLen}{1.5\TSHei}{#1}
+\newlength{\MWidth}
+\newlength{\MHeight}
+\newcommand{\MResize}[1]{
+	\settowidth{\MWidth}{#1}
+	\settoheight{\MHeight}{#1}
+	\resizebox{1.5\MWidth}{1.5\MHeight}{#1}
 }
-\newcommand{\TimeS}[3][0]{
+\newcommand{\TimeSig}[3][0]{
 	\Adv
 	\ifnum#1=0
-		\node at (\thexpos*0.5,-\theypos*2+0.6) {\bf \AboveDec{#2}};
-		\node at (\thexpos*0.5,-\theypos*2+0.2) {\bf \AboveDec{#3}};
+	\node at (\theMxpos*0.5,-\theMypos*2+0.6) {\bf \MResize{#2}};
+	\node at (\theMxpos*0.5,-\theMypos*2+0.2) {\bf \MResize{#3}};
 	\fi\ifnum#1=1
-		\node at (\thexpos*0.5,-\theypos*2+0.5) {\meterC};
+	\node at (\theMxpos*0.5,-\theMypos*2+0.5) {\meterC};
 	\fi\ifnum#1=2
-		\node at (\thexpos*0.5,-\theypos*2+0.575) {\allabreve};
+	\node at (\theMxpos*0.5,-\theMypos*2+0.575) {\allabreve};
 	\fi
-	\addtocounter{xpos}{3}
+	\addtocounter{Mxpos}{3}
 }
 
-\newcommand{\Dot}[2][1]{%
+\newcommand{\Dot}[2][1]{
 	\foreach \d in {1,...,#1}
-	{\node at (\thexpos*0.5+0.1+0.15*\d,-\theypos*2-0.21+0.1*#2)
-	{{\resizebox{0.1cm}{0.1cm}{$\bullet$}}};}
+	{\node at (\theMxpos*0.5+0.1+0.15*\d,-\theMypos*2-0.21+0.1*#2)
+		{{\resizebox{0.1cm}{0.1cm}{$\bullet$}}};}
 }
 
-\input{mousik-note.sty}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Head}[1]{
+	\node [opacity=0.0] (tmp) at (\theMxpos*0.5,-\theMypos*2-0.2+#1*0.1) {};
+	\fill[rotate around={16:(tmp.center)}] (\theMxpos*0.5-0.01,-\theMypos*2-0.195+#1*0.1) ellipse (4pt and 2.75pt);}
+
+\newcommand{\HollowHead}[1]{
+	\node [opacity=0.0] (tmp) at (\theMxpos*0.5,-\theMypos*2-0.2+#1*0.1) {};
+	\fill[black,rotate around={16:(tmp.center)}] (\theMxpos*0.5-0.01,-\theMypos*2-0.195+#1*0.1) ellipse (4pt and 2.75pt);
+	\fill[white,rotate around={19:(tmp.center)}] (\theMxpos*0.5-0.01,-\theMypos*2-0.195+#1*0.1) ellipse (3.2pt and 1.35pt);
+}
+
+
+\newcommand{\Enlarge}[3][0]{
+	\draw[line width=0.25mm]  (\theMxpos*0.5+0.115,-\theMypos*2+#2*0.1-0.2) --
+		(\theMxpos*0.5+0.115,-\theMypos*2+#3*0.1+#1);
+}
+
+\newcommand{\EnlargeDown}[3][0]{
+	\draw[line width=0.25mm]  (\theMxpos*0.5-0.14,-\theMypos*2+#2*0.1-0.2) --
+		(\theMxpos*0.5-0.14,-\theMypos*2+#3*0.1-0.5-#1);
+}
+
+\newcommand{\Ledger}[1]{
+	\ifnum1>#1
+	\foreach\i in {0,...,#1} {
+		\ifthenelse{\isodd{\i}}{}
+		{\draw (\theMxpos*0.5-0.25,-\theMypos*2-0.2+\i*0.1) -- (\theMxpos*0.5+0.25,-\theMypos*2-0.2+\i*0.1);}
+	}
+	\fi\ifnum11<#1
+	\foreach\i in {12,...,#1} {
+		\ifthenelse{\isodd{\i}}{}
+		{\draw (\theMxpos*0.5-0.25,-\theMypos*2-0.2+\i*0.1) -- (\theMxpos*0.5+0.25,-\theMypos*2-0.2+\i*0.1);}
+	}
+	\fi
+}
+
+\newcommand{\Beam}[4]{
+	\draw[line width=1mm] (#1*0.5+0.103,-\theMypos*2+#2*0.1#4) -- (\theMxpos*0.5-0.372,-\theMypos*2+#3*0.1#4);}
+
+\newcommand{\BeamDown}[4]{
+	\draw[line width=1mm] (#1*0.5-0.153,-\theMypos*2+#2*0.1-0.5-#4) -- (\theMxpos*0.5-0.625,-\theMypos*2+#3*0.1-0.5-#4);}
+
+\newcommand{\BeamS}[1]{
+	\ifnum\theMfirst=\theMmin
+	\begin{scope}
+		\clip (\theMxpos*0.5-0.4,-\theMypos*2+\theMmin*0.1-0.3) rectangle (\theMxpos*0.5+0.125,-\theMypos*2+0.05+\theMmax*0.1#1);
+		\draw[line width=1mm] (\theMxpos*0.5-0.411,-\theMypos*2+\theMmin*0.1#1) -- (\theMxpos*0.5+0.147,-\theMypos*2+\theMmax*0.1#1);
+	\end{scope}
+	\else
+	\begin{scope}
+		\clip (\theMxpos*0.5-0.4,-\theMypos*2+0.05+\theMmax*0.1#1) rectangle (\theMxpos*0.5+0.125,-\theMypos*2+0.05+\theMmin*0.1-0.3);
+		\draw[line width=1mm] (\theMxpos*0.5-0.411,-\theMypos*2+\theMmax*0.1#1) -- (\theMxpos*0.5+0.147,-\theMypos*2+\theMmin*0.1#1);
+	\end{scope}
+	\fi
+}
+
+\newcommand{\BeamSDown}[1]{
+	\ifnum\theMfirst=\theMmin
+	\begin{scope}
+		\clip (\theMxpos*0.5-0.645,-\theMypos*2+\theMmin*0.1-0.5-#1) rectangle (\theMxpos*0.5-0.129,-\theMypos*2+\theMmax*0.1);
+		\draw[line width=1mm] (\theMxpos*0.5-0.7,-\theMypos*2+\theMmin*0.1-#1-0.48) -- (\theMxpos*0.5-0.1,-\theMypos*2+\theMmax*0.1-#1-0.48);
+	\end{scope}
+	\else
+	\begin{scope}
+		\clip (\theMxpos*0.5-0.65,-\theMypos*2+\theMmin*0.1-0.5-#1) rectangle (\theMxpos*0.5-0.129,-\theMypos*2+\theMmax*0.1);
+		\draw[line width=1mm] (\theMxpos*0.5-0.7,-\theMypos*2+\theMmax*0.1-#1-0.48) -- (\theMxpos*0.5-0.1,-\theMypos*2+\theMmin*0.1-#1-0.48);
+	\end{scope}
+	\fi
+}
+
+\newcommand{\Semibreve}[1]{
+	\node at (\theMxpos*0.5,-\theMypos*2-0.2+#1*0.1) {\resizebox{0.3cm}{0.2cm}{\Ganz}};
+}
+\newcommand{\Minim}[1]{
+	\HollowHead{#1}
+	\ifnum#1<6
+		\Enlarge[0.3]{#1}{#1}
+	\else
+		\EnlargeDown[0.3]{#1}{#1}
+	\fi
+}
+\newcommand{\Crotchet}[1]{
+	\Head{#1}
+	\ifnum#1<6
+		\Enlarge[0.3]{#1}{#1}
+	\else
+		\EnlargeDown[0.3]{#1}{#1}
+	\fi
+}% TODO
+\newcommand{\Quaver}[1]{
+	\Head{#1}
+	\ifnum#1<6
+	\Enlarge[0.4]{#1}{#1}
+	\else
+	\EnlargeDown[0.4]{#1}{#1}
+	\fi
+}
+
+\newcommand{\Semiquaver}[1]{
+	\Head{#1}
+	\ifnum#1<6
+	\Enlarge[0.5]{#1}{#1}
+	\else
+	\EnlargeDown[0.5]{#1}{#1}
+	\fi
+}
+\newcommand{\Demisemiquaver}[1]{
+	\Head{#1}
+	\ifnum#1<6
+	\Enlarge[0.6]{#1}{#1}
+	\else
+	\EnlargeDown[0.6]{#1}{#1}
+	\fi
+}
+\newcommand{\Note}[2]{
+	\Adv
+	
+	\ifnum#1=1
+	\Semibreve{#2}
+	\fi\ifnum#1=2
+	\Minim{#2}
+	\fi\ifnum#1=4
+	\Crotchet{#2}
+	\fi\ifnum#1=8 %%%%%% TODO
+	\node at (\theMxpos*0.5+0.09,-\theMypos*2+0.02+#2*0.1) {\resizebox{0.45cm}{0.65cm}{\Acht}};
+	\fi\ifnum#1=16
+	\node at (\theMxpos*0.5+0.09,-\theMypos*2+0.02+#2*0.1) {\resizebox{0.45cm}{0.65cm}{\Sech}};
+	\fi\ifnum#1=32
+	\node at (\theMxpos*0.5+0.09,-\theMypos*2+0.095+#2*0.1) {\resizebox{0.45cm}{0.8cm}{\Zwdr}};
+	\fi
+	
+	\Ledger{#2}
+	\addtocounter{Mxpos}{2}
+}
+
+\newcommand{\PolyNote}[2]{
+	\Adv
+	\setcounter{Mfirst}{-50}
+	\setcounter{Mmax}{-50}
+	\setcounter{Mmin}{50}
+	\setcounter{aux}{\theMxpos}
+	
+	\ifnum#1=1
+	\foreach\n in {#2} {
+		\Semibreve{\n}
+		\stepcounter{Mxpos}}
+	\else\ifnum#1=2
+	\foreach\n in {#2} {
+		\node at (\theMxpos*0.5,-\theMypos*2-0.2+\n*0.1) {\resizebox{0.3cm}{0.2cm}{\Halb}};
+		\stepcounter{Mxpos}}	
+	\else\ifnum#1=4
+	\foreach\n in {#2} {
+		\Crotchet{\n}
+		\stepcounter{Mxpos}}
+\else
+	\foreach\n in {#2} {
+		\Head{\n}
+		\stepcounter{Mxpos}
+		\MMax{\n}\MMin{\n}
+		\ifnum\theMfirst=-50\setcounter{Mfirst}{\n}\fi
+	}
+	\setcounter{Mevaluate}{\theMxpos}\addtocounter{Mevaluate}{-\theaux}
+	\setcounter{Mxpos}{\theaux}
+	\ifnum\theMevaluate=2
+		\foreach\n in {#2} {
+			\ifnum\theMmax<6
+				\ifnum#1=8
+					\Enlarge[0.4]{\n}{\n}
+				\fi\ifnum#1=16
+					\Enlarge[0.5]{\n}{\n}
+				\fi\ifnum#1=32
+					\Enlarge[0.6]{\n}{\n}
+				\fi
+			\else
+				\ifnum#1=8
+					\EnlargeDown[0.4]{\n}{\n}
+				\fi\ifnum#1=16
+					\EnlargeDown[0.5]{\n}{\n}
+				\fi\ifnum#1=32
+					\EnlargeDown[0.6]{\n}{\n}
+				\fi
+			\fi
+			\stepcounter{Mxpos}
+		}
+		\addtocounter{Mxpos}{-1}
+		
+		\ifnum\theMmax<6
+			\ifnum#1=8
+				\BeamS{+0.4}
+			\fi\ifnum#1=16
+				\BeamS{+0.5}
+				\BeamS{+0.35}
+			\fi\ifnum#1=32
+				\BeamS{+0.6}
+				\BeamS{+0.45}
+				\BeamS{+0.3}
+			\fi
+		\else
+			\ifnum#1=8
+				\BeamSDown{+0.4}
+			\fi\ifnum#1=16
+				\BeamSDown{+0.5}
+				\BeamSDown{+0.35}
+			\fi\ifnum#1=32
+				\BeamSDown{+0.6}
+				\BeamSDown{+0.45}
+				\BeamSDown{+0.3}
+			\fi
+		\fi
+	\else
+		\foreach\n in {#2} {
+			\ifnum\theMmax<6
+				\ifnum#1=8
+					\Enlarge[0.4]{\n}{\theMmax}
+				\fi\ifnum#1=16
+					\Enlarge[0.5]{\n}{\theMmax}
+				\fi\ifnum#1=32
+					\Enlarge[0.6]{\n}{\theMmax}
+				\fi
+			\else
+				\ifnum#1=8
+					\EnlargeDown[0.3]{\n}{\theMmin}
+				\fi\ifnum#1=16
+					\EnlargeDown[0.4]{\n}{\theMmin}
+				\fi\ifnum#1=32
+					\EnlargeDown[0.5]{\n}{\theMmin}
+				\fi
+			\fi
+			\stepcounter{Mxpos}
+		}
+		\ifnum\theMmax<6
+			\ifnum#1=8
+				\Beam{\theaux}{\theMmax}{\theMmax}{+0.4}
+			\fi\ifnum#1=16
+				\Beam{\theaux}{\theMmax}{\theMmax}{+0.5}
+				\Beam{\theaux}{\theMmax}{\theMmax}{+0.35}
+			\fi\ifnum#1=32
+				\Beam{\theaux}{\theMmax}{\theMmax}{+0.6}
+				\Beam{\theaux}{\theMmax}{\theMmax}{+0.45}
+				\Beam{\theaux}{\theMmax}{\theMmax}{+0.3}
+			\fi
+		\else
+			\ifnum#1=8
+				\BeamDown{\theaux}{\theMmin}{\theMmin}{+0.3}
+			\fi\ifnum#1=16
+				\BeamDown{\theaux}{\theMmin}{\theMmin}{+0.4}
+				\BeamDown{\theaux}{\theMmin}{\theMmin}{+0.25}
+			\fi\ifnum#1=32
+				\BeamDown{\theaux}{\theMmin}{\theMmin}{+0.5}
+				\BeamDown{\theaux}{\theMmin}{\theMmin}{+0.35}
+				\BeamDown{\theaux}{\theMmin}{\theMmin}{+0.2}
+			\fi
+		\fi
+	\fi
+\fi\fi\fi
+	\setcounter{Mxpos}{\theaux}
+	\foreach\n in {#2} {
+		\Ledger{\n}
+		\stepcounter{Mxpos}
+	}
+	\addtocounter{Mxpos}{1}
+}
+
+\newcommand{\Rest}[1]{
+	\Adv
+	
+	\ifnum#1=1
+	\node at (\theMxpos*0.5,-\theMypos*2+0.52) {\resizebox{0.3cm}{0.15cm}{\GaPa}};
+	\fi\ifnum#1=2
+	\node at (\theMxpos*0.5,-\theMypos*2+0.42) {\resizebox{0.3cm}{0.15cm}{\HaPa}};
+	\fi\ifnum#1=4
+	\node at (\theMxpos*0.5,-\theMypos*2+0.4) {\resizebox{0.3cm}{0.7cm}{\ViPa}};
+	\fi\ifnum#1=8
+	\node at (\theMxpos*0.5,-\theMypos*2+0.32) {\resizebox{0.3cm}{0.45cm}{\AcPa}};
+	\fi\ifnum#1=16
+	\node at (\theMxpos*0.5,-\theMypos*2+0.3) {\resizebox{0.35cm}{0.525cm}{\SePa}};
+	\fi\ifnum#1=32
+	\node at (\theMxpos*0.5,-\theMypos*2+0.375) {\resizebox{0.4cm}{0.6cm}{\ZwPa}};
+	\fi
+	
+	\addtocounter{Mxpos}{2}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Acc}[3][-0.25]{
+	\ifnum#2=0
+	\node at (\theMxpos*0.5#1,-\theMypos*2-0.2+0.1*#3)
+	{{\resizebox{0.15cm}{0.35cm}{\natural}}};
+	\fi\ifnum#2=1
+	\node at (\theMxpos*0.5#1,-\theMypos*2-0.2+0.1*#3)
+	{{\resizebox{0.15cm}{0.35cm}{\sharp}}};
+	\fi\ifnum#2=-1
+	\node at (\theMxpos*0.5#1,-\theMypos*2-0.1+0.1*#3) 
+	{{\resizebox{0.15cm}{0.35cm}{\flat}}};
+	\fi\ifnum#2=2
+	\node at (\theMxpos*0.5#1,-\theMypos*2-0.205+0.1*#3)
+	{{\resizebox{0.15cm}{0.15cm}{\doublesharp}}};
+	\fi\ifnum#2=-2
+	\node at (\theMxpos*0.5#1,-\theMypos*2-0.1+0.1*#3) 
+	{{\resizebox{0.2cm}{0.35cm}{\doubleflat}}};
+	\fi
+}
+
+\newcounter{aux}
+\newcommand{\AccFN}[2][-0.25]{
+	\KB{#2}
+	\Acc[#1]{0}{\theaux}}
+\newcommand{\AccSN}[2][-0.25]{
+	\KS{#2}
+	\Acc[#1]{0}{\theaux}}
+\newcommand{\AccF}[2][-0.25]{
+	\KB{#2}
+	\Acc[#1]{-1}{\theaux}}
+\newcommand{\AccS}[2][-0.25]{	
+	\KS{#2}
+	\Acc[#1]{1}{\theaux}}
+
+\newcommand{\KB}[1]{
+	\setcounter{aux}{#1}
+	\addtocounter{aux}{-3}
+	
+	\ifnum\theMclef=1
+	\addtocounter{aux}{-2}
+	\fi\ifnum\theMclef=2
+	\addtocounter{aux}{0}
+	\fi\ifnum\theMclef=3
+	\addtocounter{aux}{3}
+	\fi\ifnum\theMclef=4
+	\addtocounter{aux}{-2}
+	\fi\ifnum\theMclef=11
+	\addtocounter{aux}{2}
+	\fi\ifnum\theMclef=12
+	\addtocounter{aux}{-3}
+	\fi\ifnum\theMclef=13
+	\addtocounter{aux}{-1}
+	\fi\ifnum\theMclef=14
+	\addtocounter{aux}{1}
+	\fi\ifnum\theMclef=15
+	\addtocounter{aux}{3}
+	\fi
+	\MModulo{\theaux}{7}
+	\setcounter{aux}{\theMmodulo}
+	\addtocounter{aux}{3}
+}
+\newcommand{\KS}[1]{
+	\setcounter{aux}{#1}
+	\addtocounter{aux}{-5}
+	
+	\ifnum\theMclef=1
+	\addtocounter{aux}{-2}
+	\fi\ifnum\theMclef=2
+	\addtocounter{aux}{0}
+	\fi\ifnum\theMclef=3
+	\addtocounter{aux}{3}
+	\fi\ifnum\theMclef=4
+	\addtocounter{aux}{-2}
+	\fi\ifnum\theMclef=11
+	\addtocounter{aux}{2}
+	\fi\ifnum\theMclef=12
+	\addtocounter{aux}{-3}
+	\fi\ifnum\theMclef=13
+	\addtocounter{aux}{-1}
+	\fi\ifnum\theMclef=14
+	\addtocounter{aux}{1}
+	\fi\ifnum\theMclef=15
+	\addtocounter{aux}{3}
+	\fi
+	\MModulo{\theaux}{7}
+	\setcounter{aux}{\theMmodulo}
+	\addtocounter{aux}{5}
+}
+
+\newcommand{\Key}[1]{
+	\setcounter{Mkey}{#1}
+	\ifnum#1=-1
+	\AccF[-0.2]{6}
+	\fi\ifnum#1=-2
+	\AccF[-0.35]{6}
+	\AccF[-0.05]{9}
+	\fi\ifnum#1=-3
+	\AccF[-0.4]{6}
+	\AccF[-0.15]{9}
+	\AccF[-0.0]{5}
+	\fi\ifnum#1=-4
+	\AccF[-0.45]{6}
+	\AccF[-0.25]{9}
+	\AccF[-0.1]{5}
+	\AccF[+0.1]{8}
+	\fi\ifnum#1=-5
+	\AccF[-0.45]{6}
+	\AccF[-0.25]{9}
+	\AccF[-0.15]{5}
+	\AccF[+0.05]{8}
+	\AccF[+0.15]{4}
+	\fi\ifnum#1=-6
+	\AccF[-0.45]{6}
+	\AccF[-0.3]{9}
+	\AccF[-0.2]{5}
+	\AccF[-0.05]{8}
+	\AccF[+0.05]{4}
+	\AccF[+0.2]{7}
+	\fi\ifnum#1=-7
+	\AccF[-0.45]{6}
+	\AccF[-0.35]{9}
+	\AccF[-0.25]{5}
+	\AccF[-0.15]{8}
+	\AccF[-0.05]{4}
+	\AccF[+0.05]{7}
+	\AccF[+0.15]{3}
+	\fi		
+	\ifnum#1=1
+	\AccS[-0.2]{10}
+	\fi\ifnum#1=2
+	\AccS[-0.35]{10}
+	\AccS[-0.05]{7}
+	\fi\ifnum#1=3			
+	\AccS[-0.425]{10}
+	\AccS[-0.2]{7}
+	\AccS[-0.025]{11}
+	\fi\ifnum#1=4
+	\AccS[-0.45]{10}
+	\AccS[-0.25]{7}
+	\AccS[-0.1]{11}
+	\AccS[+0.1]{8}
+	\fi\ifnum#1=5
+	\AccS[-0.45]{10}
+	\AccS[-0.3]{7}
+	\AccS[-0.15]{11}
+	\AccS[-0.0]{8}
+	\AccS[+0.15]{5}
+	\fi\ifnum#1=6
+	\AccS[-0.4]{10}
+	\AccS[-0.3]{7}
+	\AccS[-0.2]{11}
+	\AccS[-0.1]{8}
+	\AccS[+0.0]{5}
+	\AccS[+0.1]{9}
+	\fi\ifnum#1=7
+	\AccS[-0.45]{10}
+	\AccS[-0.35]{7}
+	\AccS[-0.25]{11}
+	\AccS[-0.15]{8}
+	\AccS[-0.05]{5}
+	\AccS[+0.05]{9}
+	\AccS[+0.15]{6}
+	\fi
+	\stepcounter{Mxpos}
+}
+
+\newcommand{\NoKey}[1]{
+	\setcounter{Mkey}{0}
+	\ifnum#1=-1
+	\AccFN[-0.2]{6}
+	\fi\ifnum#1=-2
+	\AccFN[-0.35]{6}
+	\AccFN[-0.05]{9}
+	\fi\ifnum#1=-3
+	\AccFN[-0.4]{6}
+	\AccFN[-0.15]{9}
+	\AccFN[-0.0]{5}
+	\fi\ifnum#1=-4
+	\AccFN[-0.45]{6}
+	\AccFN[-0.25]{9}
+	\AccFN[-0.1]{5}
+	\AccFN[+0.1]{8}
+	\fi\ifnum#1=-5
+	\AccFN[-0.45]{6}
+	\AccFN[-0.25]{9}
+	\AccFN[-0.15]{5}
+	\AccFN[+0.05]{8}
+	\AccFN[+0.15]{4}
+	\fi\ifnum#1=-6
+	\AccFN[-0.45]{6}
+	\AccFN[-0.3]{9}
+	\AccFN[-0.2]{5}
+	\AccFN[-0.05]{8}
+	\AccFN[+0.05]{4}
+	\AccFN[+0.2]{7}
+	\fi\ifnum#1=-7
+	\AccFN[-0.45]{6}
+	\AccFN[-0.35]{9}
+	\AccFN[-0.25]{5}
+	\AccFN[-0.15]{8}
+	\AccFN[-0.05]{4}
+	\AccFN[+0.05]{7}
+	\AccFN[+0.15]{3}
+	\fi		
+	\ifnum#1=1
+	\AccSN[-0.2]{10}
+	\fi\ifnum#1=2
+	\AccSN[-0.35]{10}
+	\AccSN[-0.05]{7}
+	\fi\ifnum#1=3			
+	\AccSN[-0.425]{10}
+	\AccSN[-0.2]{7}
+	\AccSN[-0.025]{11}
+	\fi\ifnum#1=4
+	\AccSN[-0.45]{10}
+	\AccSN[-0.25]{7}
+	\AccSN[-0.1]{11}
+	\AccSN[+0.1]{8}
+	\fi\ifnum#1=5
+	\AccSN[-0.45]{10}
+	\AccSN[-0.3]{7}
+	\AccSN[-0.15]{11}
+	\AccSN[-0.0]{8}
+	\AccSN[+0.15]{5}
+	\fi\ifnum#1=6
+	\AccSN[-0.4]{10}
+	\AccSN[-0.3]{7}
+	\AccSN[-0.2]{11}
+	\AccSN[-0.1]{8}
+	\AccSN[+0.0]{5}
+	\AccSN[+0.1]{9}
+	\fi\ifnum#1=7
+	\AccSN[-0.45]{10}
+	\AccSN[-0.35]{7}
+	\AccSN[-0.25]{11}
+	\AccSN[-0.15]{8}
+	\AccSN[-0.05]{5}
+	\AccSN[+0.05]{9}
+	\AccSN[+0.15]{6}
+	\fi
+	\stepcounter{Mxpos}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newcommand{\Text}[2][0]{
-\node at (\thexpos*0.5,-\theypos*2-0.7+#1) {#2};
+\node at (\theMxpos*0.5,-\theMypos*2-0.7+#1) {#2};
 }
 
-\newcommand{\Chord}[1][1]{\addtocounter{xpos}{\Eval{-1-#1}}}
-\newcommand{\Space}[1][2]{\Adv\addtocounter{xpos}{#1}}
+\newcommand{\Chord}[1][1]{
+	\addtocounter{Mxpos}{-1}
+	\addtocounter{Mxpos}{-#1}}
+\newcommand{\Space}[1][2]{\Adv\addtocounter{Mxpos}{#1}}
 
-\newcommand{\Bar}{%
-	\ifnum\thexpos=23
-	\addtocounter{xpos}{-1}
+\newcommand{\Bar}{
+	\ifnum\theMxpos=23
+	\addtocounter{Mxpos}{-1}
 	\fi
-	\draw (\thexpos*0.5,-\theypos*2+0.8) -- (\thexpos*0.5,-\theypos*2);
-	\addtocounter{xpos}{2}}
+	\draw (\theMxpos*0.5,-\theMypos*2+0.8) -- (\theMxpos*0.5,-\theMypos*2);
+	\addtocounter{Mxpos}{2}}
 
-\newcommand{\FinalBar}{%
-	\ifnum\thexpos=23
-		\addtocounter{xpos}{-1}
+\newcommand{\DoubleBar}{
+	\ifnum\theMxpos=23
+	\addtocounter{Mxpos}{-1}
 	\fi
-	\draw[line width=1mm] (\thexpos*0.5,-\theypos*2+0.805) -- (\thexpos*0.5,-\theypos*2-0.005);
-	\draw (\thexpos*0.5-0.12,-\theypos*2+0.8) -- (\thexpos*0.5-0.12,-\theypos*2);
-	\addtocounter{xpos}{2}
+	\draw (\theMxpos*0.5-0.06,-\theMypos*2+0.8) -- (\theMxpos*0.5-0.06,-\theMypos*2);
+	\draw (\theMxpos*0.5+0.06,-\theMypos*2+0.8) -- (\theMxpos*0.5+0.06,-\theMypos*2);
+	\addtocounter{Mxpos}{2}}
+
+\newcommand{\FinalBar}{
+	\ifnum\theMxpos=23
+		\addtocounter{Mxpos}{-1}
+	\fi
+	\draw (\theMxpos*0.5-0.12,-\theMypos*2+0.8) -- (\theMxpos*0.5-0.12,-\theMypos*2);
+	\draw[line width=1mm] (\theMxpos*0.5,-\theMypos*2+0.805) -- (\theMxpos*0.5,-\theMypos*2-0.005);
+	\addtocounter{Mxpos}{2}
 }
 
-\newcommand{\RepeatBar}{%
-	\ifnum\thexpos=23
-		\addtocounter{xpos}{-1}
-	\fi
-	\node at (\thexpos*0.5-0.25,0.4-\theypos*2) {\resizebox{0.175cm}{0.25cm}{:}};
-	\draw[line width=1mm] (\thexpos*0.5,-\theypos*2+0.805) -- (\thexpos*0.5,-\theypos*2-0.005);
-	\draw (\thexpos*0.5-0.12,-\theypos*2+0.8) -- (\thexpos*0.5-0.12,-\theypos*2);
-	\addtocounter{xpos}{2}
+\newcommand{\MString}[3]{%
+	\ifthenelse{\equal{#1}{#2}}
+	{#3}
+	{}
 }
 
-\newcommand{\Adv}{%
-	\ifnum\thexpos>20
-		\addtocounter{ypos}{1}
-		\setcounter{xpos}{0}
-		\ifnum\theclef=0\else
-		\Clef{\theclef}
+\newcommand{\RepeatBar}[1]{
+	\ifnum\theMxpos=23
+		\addtocounter{Mxpos}{-1}
+	\fi
+	\MString{#1}{L}{
+		\node at (\theMxpos*0.5-0.24,0.4-\theMypos*2) {\resizebox{0.175cm}{0.25cm}{:}};
+		\draw (\theMxpos*0.5-0.12,-\theMypos*2+0.8) -- (\theMxpos*0.5-0.12,-\theMypos*2);
+		\draw[line width=1mm] (\theMxpos*0.5,-\theMypos*2+0.805) -- (\theMxpos*0.5,-\theMypos*2-0.005);
+	}
+	\MString{#1}{R}{
+		\draw[line width=1mm] (\theMxpos*0.5,-\theMypos*2+0.805) -- (\theMxpos*0.5,-\theMypos*2-0.005);
+		\node at (\theMxpos*0.5+0.24,0.4-\theMypos*2) {\resizebox{0.175cm}{0.25cm}{:}};
+		\draw (\theMxpos*0.5+0.12,-\theMypos*2+0.8) -- (\theMxpos*0.5+0.12,-\theMypos*2);
+	}
+	\MString{#1}{LR}{
+		\node at (\theMxpos*0.5-0.24,0.4-\theMypos*2) {\resizebox{0.175cm}{0.25cm}{:}};
+		\draw (\theMxpos*0.5-0.12,-\theMypos*2+0.8) -- (\theMxpos*0.5-0.12,-\theMypos*2);
+		\draw[line width=1mm] (\theMxpos*0.5,-\theMypos*2+0.805) -- (\theMxpos*0.5,-\theMypos*2-0.005);
+		\node at (\theMxpos*0.5+0.24,0.4-\theMypos*2) {\resizebox{0.175cm}{0.25cm}{:}};
+		\draw (\theMxpos*0.5+0.12,-\theMypos*2+0.8) -- (\theMxpos*0.5+0.12,-\theMypos*2);
+	}
+	\addtocounter{Mxpos}{2}
+}
+
+\newcommand{\Adv}{
+	\ifnum\theMxpos>20
+		\addtocounter{Mypos}{1}
+		\setcounter{Mxpos}{0}
+		\ifnum\theMclef=0\else
+		\Clef{\theMclef}
 		\fi
-		\ifnum\thekey=0\else
-		\Key{\thekey}
+		\ifnum\theMkey=0\else
+		\Key{\theMkey}
 		\fi
 	\fi
 }
-
-\newenvironment{mousik}
-{\noindent\begin{tikzpicture}}
-{\addtocounter{xpos}{-2}\Staff%
-\setcounter{xpos}{0}
-\setcounter{ypos}{0}
-\setcounter{clef}{0}
-\setcounter{key}{0}
-\end{tikzpicture}}

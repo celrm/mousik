@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017) (preloaded format=xelatex 2020.6.4)  10 JUN 2020 01:19
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017) (preloaded format=xelatex 2020.6.4)  23 JUN 2020 14:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -463,337 +463,7 @@ bols.code.tex
 File: leadsheets.library.musicsymbols.code.tex 2016/02/02 v0.3a leadsheets libr
 ary `musicsymbols' 2015/07/13 musical symbols
 \leadsheets@barheight=\skip55
-) (/usr/share/texlive/texmf-dist/tex/latex/musixtex/musixtex.sty
-(/usr/share/texlive/texmf-dist/tex/generic/musixtex/musixtex.tex
-MusiXTeX(c) 1.25 <2017-07-25>
-\n@i=\count150
-\n@ii=\count151
-\n@iii=\count152
-\n@iv=\count153
-\n@v=\count154
-\n@vi=\count155
-\n@vii=\count156
-\n@viii=\count157
-\count@=\count158
-\toks@box=\box72
-\w@rkbox=\box73
-\n@otebox=\box74
-\y@=\dimen152
-\y@i=\dimen153
-\y@ii=\dimen154
-\y@iii=\dimen155
-\y@iv=\dimen156
-\y@v=\dimen157
-\group@no=\count159
-\interinstrument=\dimen158
-\N@s=\count160
-\s@Y=\dimen159
-\lin@pos=\dimen160
-\meet@minus@n@iv=\count161
-\interbeam=\dimen161
-\b@amthick=\dimen162
-\Interligne=\dimen163
-\Internote=\dimen164
-\ch@box=\box75
-\musicsize=\count162
-\qd@skip=\dimen165
-\qn@width=\dimen166
-\wn@width=\dimen167
-\txt@ff=\skip56
-\s@indent=\skip57
-\big@spc=\skip58
-\lthick=\dimen168
-\afterruleskip=\skip59
-\staffbotmarg=\dimen169
-\stafftopmarg=\dimen170
-\line@width=\dimen171
-\interportee=\dimen172
-\noport@@=\count163
-\noinstrum@nt=\count164
-\altportee=\dimen173
-\systemheight=\dimen174
-\altplancher=\dimen175
-\instrum@in@group=\skip60
-\boxitsep=\skip61
-\barsinpi@c@=\count165
-\barno=\count166
-\startbarno=\count167
-\sign@skip=\dimen176
-\maxsign@skip=\dimen177
-\x@skip=\dimen178
-\n@skip=\dimen179
-\beforeruleskip=\skip62
-\widthtyp@=\count168
-\lastbarno=\count169
-\cut@v=\skip63
-\init@volta@pos=\skip64
-\volta@startcor=\skip65
-\volta@endcor=\skip66
-\writ@volta@box=\box76
-\barsinlin@=\count170
-\maxbarsinlin@=\count171
-\lastbarpos=\skip67
-\ut@ref=\count172
-\meterskip=\skip68
-\t@c=\toks21
-\clef@skip=\skip69
-\noteskip=\dimen180
-\transpose=\count173
-\normaltranspose=\count174
-\locx@skip=\dimen181
-\elemskip=\dimen182
-\@l@mskip=\dimen183
-\inh@alt=\count175
-\st@bot=\dimen184
-\st@top=\dimen185
-\stem@skip=\dimen186
-\s@lope=\dimen187
-\y@vi=\dimen188
-\lift@rest=\dimen189
-\accshift=\skip70
-\@icresc=\skip71
-\pdl@pos=\dimen190
-\bigwedgebox=\box77
-\@itrillei=\skip72
-\@itrilleii=\skip73
-\@itrilleiii=\skip74
-\@itrilleiv=\skip75
-\@itrillev=\skip76
-\@itrillevi=\skip77
-\tr@number=\count176
-\tr@nspose=\count177
-\o@swz=\toks22
-\o@number=\count178
-\y@vii=\dimen191
-\y@viii=\dimen192
-\y@ix=\dimen193
-\tuptxtb@x=\box78
-\notes@open=\count179
-\k@ii=\skip78
-\i@ni=\dimen194
-\b@xi=\dimen195
-\b@zi=\dimen196
-\c@xi=\dimen197
-\c@zi=\skip79
-\d@xi=\dimen198
-\d@zi=\skip80
-\e@xi=\dimen199
-\e@zi=\skip81
-\b@pi=\count180
-\b@ni=\count181
-\n@pi=\count182
-\a@si=\count183
-\o@si=\count184
-\a@ci=\toks23
-\o@ci=\toks24
-\m@ti=\toks25
-\k@iii=\skip82
-\i@nii=\dimen256
-\b@xii=\dimen257
-\b@zii=\dimen258
-\c@xii=\dimen259
-\c@zii=\skip83
-\d@xii=\dimen260
-\d@zii=\skip84
-\e@xii=\dimen261
-\e@zii=\skip85
-\b@pii=\count185
-\b@nii=\count186
-\n@pii=\count187
-\a@sii=\count188
-\o@sii=\count189
-\a@cii=\toks26
-\o@cii=\toks27
-\m@tii=\toks28
-\k@iiii=\skip86
-\i@niii=\dimen262
-\b@xiii=\dimen263
-\b@ziii=\dimen264
-\c@xiii=\dimen265
-\c@ziii=\skip87
-\d@xiii=\dimen266
-\d@ziii=\skip88
-\e@xiii=\dimen267
-\e@ziii=\skip89
-\b@piii=\count190
-\b@niii=\count191
-\n@piii=\count192
-\a@siii=\count193
-\o@siii=\count194
-\a@ciii=\toks29
-\o@ciii=\toks30
-\m@tiii=\toks31
-\k@iiv=\skip90
-\i@niv=\dimen268
-\b@xiv=\dimen269
-\b@ziv=\dimen270
-\c@xiv=\dimen271
-\c@ziv=\skip91
-\d@xiv=\dimen272
-\d@ziv=\skip92
-\e@xiv=\dimen273
-\e@ziv=\skip93
-\b@piv=\count195
-\b@niv=\count196
-\n@piv=\count197
-\a@siv=\count198
-\o@siv=\count199
-\a@civ=\toks32
-\o@civ=\toks33
-\m@tiv=\toks34
-\k@iv=\skip94
-\i@nv=\dimen274
-\b@xv=\dimen275
-\b@zv=\dimen276
-\c@xv=\dimen277
-\c@zv=\skip95
-\d@xv=\dimen278
-\d@zv=\skip96
-\e@xv=\dimen279
-\e@zv=\skip97
-\b@pv=\count266
-\b@nv=\count267
-\n@pv=\count268
-\a@sv=\count269
-\o@sv=\count270
-\a@cv=\toks35
-\o@cv=\toks36
-\m@tv=\toks37
-\k@ivi=\skip98
-\i@nvi=\dimen280
-\b@xvi=\dimen281
-\b@zvi=\dimen282
-\c@xvi=\dimen283
-\c@zvi=\skip99
-\d@xvi=\dimen284
-\d@zvi=\skip100
-\e@xvi=\dimen285
-\e@zvi=\skip101
-\b@pvi=\count271
-\b@nvi=\count272
-\n@pvi=\count273
-\a@svi=\count274
-\o@svi=\count275
-\a@cvi=\toks38
-\o@cvi=\toks39
-\m@tvi=\toks40
-maxinstruments=6
-\f@xi=\dimen286
-\f@zi=\skip102
-\f@xii=\dimen287
-\f@zii=\skip103
-\f@xiii=\dimen288
-\f@ziii=\skip104
-\f@xiv=\dimen289
-\f@ziv=\skip105
-\f@xv=\dimen290
-\f@zv=\skip106
-\f@xvi=\dimen291
-\f@zvi=\skip107
- max128beams=6
-\g@bi=\skip108
-\g@hi=\skip109
-\g@bii=\skip110
-\g@hii=\skip111
-\g@biii=\skip112
-\g@hiii=\skip113
- maxgroups=3
-\s@xi=\dimen292
-\s@si=\toks41
-\s@Yi=\dimen293
-\s@ai=\skip114
-\s@yi=\count276
-\s@Ni=\count277
-\s@zi=\count278
-\s@di=\toks42
-\s@xii=\dimen294
-\s@sii=\toks43
-\s@Yii=\dimen295
-\s@aii=\skip115
-\s@yii=\count279
-\s@Nii=\count280
-\s@zii=\count281
-\s@dii=\toks44
-\s@xiii=\dimen296
-\s@siii=\toks45
-\s@Yiii=\dimen297
-\s@aiii=\skip116
-\s@yiii=\count282
-\s@Niii=\count283
-\s@ziii=\count284
-\s@diii=\toks46
-\s@xiv=\dimen298
-\s@siv=\toks47
-\s@Yiv=\dimen299
-\s@aiv=\skip117
-\s@yiv=\count285
-\s@Niv=\count286
-\s@ziv=\count287
-\s@div=\toks48
-\s@xv=\dimen300
-\s@sv=\toks49
-\s@Yv=\dimen301
-\s@av=\skip118
-\s@yv=\count288
-\s@Nv=\count289
-\s@zv=\count290
-\s@dv=\toks50
-\s@xvi=\dimen302
-\s@svi=\toks51
-\s@Yvi=\dimen303
-\s@avi=\skip119
-\s@yvi=\count291
-\s@Nvi=\count292
-\s@zvi=\count293
-\s@dvi=\toks52
- maxslurs=6
-\tr@xi=\skip120
-\tr@swi=\toks53
-\tr@yi=\skip121
-\tr@xii=\skip122
-\tr@swii=\toks54
-\tr@yii=\skip123
-\tr@xiii=\skip124
-\tr@swiii=\toks55
-\tr@yiii=\skip125
-\tr@xiv=\skip126
-\tr@swiv=\toks56
-\tr@yiv=\skip127
-\tr@xv=\skip128
-\tr@swv=\toks57
-\tr@yv=\skip129
-\tr@xvi=\skip130
-\tr@swvi=\toks58
-\tr@yvi=\skip131
- maxtrills=6
-\o@xi=\skip132
-\o@yi=\skip133
-\o@swi=\toks59
-\o@xii=\skip134
-\o@yii=\skip135
-\o@swii=\toks60
-\o@xiii=\skip136
-\o@yiii=\skip137
-\o@swiii=\toks61
-\o@xiv=\skip138
-\o@yiv=\skip139
-\o@swiv=\toks62
-\o@xv=\skip140
-\o@yv=\skip141
-\o@swv=\toks63
-\o@xvi=\skip142
-\o@yvi=\skip143
-\o@swvi=\toks64
-
-maxoctlines=6
-\outmux=\write3
-\mulooseness=\count294
-\linegoal=\count295
-\l@eftrightbox=\box79
-\inmux=\read2
-) (/usr/share/texlive/texmf-dist/tex/latex/musixtex/musixltx.tex
-MusiXLaTeX T.125 <8 April 2017>
-)) (/usr/share/texlive/texmf-dist/tex/latex/harmony/harmony.sty
+) (/usr/share/texlive/texmf-dist/tex/latex/harmony/harmony.sty
 Package: harmony 2007/05/04
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
@@ -804,38 +474,38 @@ Package: amssymb 2013/01/14 v3.01 AMS font symbols
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
-\@emptytoks=\toks65
+\@emptytoks=\toks21
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 ))
-\tmpdima=\dimen304
-\tmpdimb=\dimen305
-\tmpdimc=\dimen306
-\tmpdimd=\dimen307
-\tmpdime=\dimen308
-\nbxa=\box80
-\nbxb=\box81
-\nbxc=\box82
-\nbxd=\box83
-\nbxe=\box84
-\nbxf=\box85
-\nbxg=\box86
-\nbxh=\box87
-\nbxi=\box88
+\tmpdima=\dimen152
+\tmpdimb=\dimen153
+\tmpdimc=\dimen154
+\tmpdimd=\dimen155
+\tmpdime=\dimen156
+\nbxa=\box72
+\nbxb=\box73
+\nbxc=\box74
+\nbxd=\box75
+\nbxe=\box76
+\nbxf=\box77
+\nbxg=\box78
+\nbxh=\box79
+\nbxi=\box80
 )
 (/usr/share/texlive/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty
 (/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
 (/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
-\pgfutil@everybye=\toks66
-\pgfutil@tempdima=\dimen309
-\pgfutil@tempdimb=\dimen310
+\pgfutil@everybye=\toks22
+\pgfutil@tempdima=\dimen157
+\pgfutil@tempdimb=\dimen158
 
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common-lists.t
 ex)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
-\pgfutil@abb=\box89
+\pgfutil@abb=\box81
 (/usr/share/texlive/texmf-dist/tex/latex/ms/everyshi.sty
 Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
 ))
@@ -859,31 +529,31 @@ File: graphics.cfg 2016/01/02 v1.10 sample graphics configuration
 )
 Package graphics Info: Driver file: xetex.def on input line 96.
 )
-\Gin@req@height=\dimen311
-\Gin@req@width=\dimen312
+\Gin@req@height=\dimen159
+\Gin@req@width=\dimen160
 )
 (/usr/share/texlive/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
 Package: pgfsys 2014/07/09 v3.0.1a (rcs-revision 1.48)
 
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex)
-\pgf@x=\dimen313
-\pgf@y=\dimen314
-\pgf@xa=\dimen315
-\pgf@ya=\dimen316
-\pgf@xb=\dimen317
-\pgf@yb=\dimen318
-\pgf@xc=\dimen319
-\pgf@yc=\dimen320
-\w@pgf@writea=\write4
-\r@pgf@reada=\read3
-\c@pgf@counta=\count296
-\c@pgf@countb=\count297
-\c@pgf@countc=\count298
-\c@pgf@countd=\count299
-\t@pgf@toka=\toks67
-\t@pgf@tokb=\toks68
-\t@pgf@tokc=\toks69
+\pgf@x=\dimen161
+\pgf@y=\dimen162
+\pgf@xa=\dimen163
+\pgf@ya=\dimen164
+\pgf@xb=\dimen165
+\pgf@yb=\dimen166
+\pgf@xc=\dimen167
+\pgf@yc=\dimen168
+\w@pgf@writea=\write3
+\r@pgf@reada=\read2
+\c@pgf@counta=\count150
+\c@pgf@countb=\count151
+\c@pgf@countc=\count152
+\c@pgf@countd=\count153
+\t@pgf@toka=\toks23
+\t@pgf@tokb=\toks24
+\t@pgf@tokc=\toks25
 
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
 File: pgf.cfg 2008/05/14  (rcs-revision 1.7)
@@ -900,13 +570,13 @@ File: pgfsys-dvipdfmx.def 2014/07/09  (rcs-revision 1.14)
 f
 File: pgfsys-common-pdf.def 2013/10/10  (rcs-revision 1.13)
 )
-\pgfsys@objnum=\count300
+\pgfsys@objnum=\count154
 )))
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.
 tex
 File: pgfsyssoftpath.code.tex 2013/09/09  (rcs-revision 1.9)
-\pgfsyssoftpath@smallbuffer@items=\count301
-\pgfsyssoftpath@bigbuffer@items=\count302
+\pgfsyssoftpath@smallbuffer@items=\count155
+\pgfsyssoftpath@bigbuffer@items=\count156
 )
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.
 tex
@@ -919,12 +589,12 @@ Package: pgfcore 2010/04/11 v3.0.1a (rcs-revision 1.7)
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex)
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
-\pgfmath@dimen=\dimen321
-\pgfmath@count=\count303
-\pgfmath@box=\box90
-\pgfmath@toks=\toks70
-\pgfmath@stack@operand=\toks71
-\pgfmath@stack@operation=\toks72
+\pgfmath@dimen=\dimen169
+\pgfmath@count=\count157
+\pgfmath@box=\box82
+\pgfmath@toks=\toks26
+\pgfmath@stack@operand=\toks27
+\pgfmath@stack@operation=\toks28
 )
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code
@@ -944,57 +614,57 @@ tex)
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerari
 thmetics.code.tex)))
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
-\c@pgfmathroundto@lastzeros=\count304
+\c@pgfmathroundto@lastzeros=\count158
 ))
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.te
 x
 File: pgfcorepoints.code.tex 2013/10/07  (rcs-revision 1.27)
-\pgf@picminx=\dimen322
-\pgf@picmaxx=\dimen323
-\pgf@picminy=\dimen324
-\pgf@picmaxy=\dimen325
-\pgf@pathminx=\dimen326
-\pgf@pathmaxx=\dimen327
-\pgf@pathminy=\dimen328
-\pgf@pathmaxy=\dimen329
-\pgf@xx=\dimen330
-\pgf@xy=\dimen331
-\pgf@yx=\dimen332
-\pgf@yy=\dimen333
-\pgf@zx=\dimen334
-\pgf@zy=\dimen335
+\pgf@picminx=\dimen170
+\pgf@picmaxx=\dimen171
+\pgf@picminy=\dimen172
+\pgf@picmaxy=\dimen173
+\pgf@pathminx=\dimen174
+\pgf@pathmaxx=\dimen175
+\pgf@pathminy=\dimen176
+\pgf@pathmaxy=\dimen177
+\pgf@xx=\dimen178
+\pgf@xy=\dimen179
+\pgf@yx=\dimen180
+\pgf@yy=\dimen181
+\pgf@zx=\dimen182
+\pgf@zy=\dimen183
 )
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconstruct.
 code.tex
 File: pgfcorepathconstruct.code.tex 2013/10/07  (rcs-revision 1.29)
-\pgf@path@lastx=\dimen336
-\pgf@path@lasty=\dimen337
+\pgf@path@lastx=\dimen184
+\pgf@path@lasty=\dimen185
 )
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage.code
 .tex
 File: pgfcorepathusage.code.tex 2014/11/02  (rcs-revision 1.24)
-\pgf@shorten@end@additional=\dimen338
-\pgf@shorten@start@additional=\dimen339
+\pgf@shorten@end@additional=\dimen186
+\pgf@shorten@start@additional=\dimen187
 )
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.code.te
 x
 File: pgfcorescopes.code.tex 2015/05/08  (rcs-revision 1.46)
-\pgfpic=\box91
-\pgf@hbox=\box92
-\pgf@layerbox@main=\box93
-\pgf@picture@serial@count=\count305
+\pgfpic=\box83
+\pgf@hbox=\box84
+\pgf@layerbox@main=\box85
+\pgf@picture@serial@count=\count159
 )
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.c
 ode.tex
 File: pgfcoregraphicstate.code.tex 2014/11/02  (rcs-revision 1.12)
-\pgflinewidth=\dimen340
+\pgflinewidth=\dimen188
 )
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformation
 s.code.tex
 File: pgfcoretransformations.code.tex 2015/08/07  (rcs-revision 1.20)
-\pgf@pt@x=\dimen341
-\pgf@pt@y=\dimen342
-\pgf@pt@temp=\dimen343
+\pgf@pt@x=\dimen189
+\pgf@pt@y=\dimen190
+\pgf@pt@temp=\dimen191
 )
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
 File: pgfcorequick.code.tex 2008/10/09  (rcs-revision 1.3)
@@ -1010,12 +680,12 @@ File: pgfcorepathprocessing.code.tex 2013/09/09  (rcs-revision 1.9)
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.code.te
 x
 File: pgfcorearrows.code.tex 2015/05/14  (rcs-revision 1.43)
-\pgfarrowsep=\dimen344
+\pgfarrowsep=\dimen192
 )
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
 File: pgfcoreshade.code.tex 2013/07/15  (rcs-revision 1.15)
-\pgf@max=\dimen345
-\pgf@sys@shading@range@num=\count306
+\pgf@max=\dimen193
+\pgf@sys@shading@range@num=\count160
 )
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
 File: pgfcoreimage.code.tex 2013/07/15  (rcs-revision 1.18)
@@ -1023,7 +693,7 @@ File: pgfcoreimage.code.tex 2013/07/15  (rcs-revision 1.18)
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.code.
 tex
 File: pgfcoreexternal.code.tex 2014/07/09  (rcs-revision 1.21)
-\pgfexternal@startupbox=\box94
+\pgfexternal@startupbox=\box86
 ))
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.code.te
 x
@@ -1039,15 +709,15 @@ File: pgfcorepatterns.code.tex 2013/11/07  (rcs-revision 1.5)
 )))
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.tex
 File: pgfmoduleshapes.code.tex 2014/03/21  (rcs-revision 1.35)
-\pgfnodeparttextbox=\box95
+\pgfnodeparttextbox=\box87
 ) (/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex
 File: pgfmoduleplot.code.tex 2015/08/03  (rcs-revision 1.13)
 )
 (/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65
 .sty
 Package: pgfcomp-version-0-65 2007/07/03 v3.0.1a (rcs-revision 1.7)
-\pgf@nodesepstart=\dimen346
-\pgf@nodesepend=\dimen347
+\pgf@nodesepstart=\dimen194
+\pgf@nodesepend=\dimen195
 )
 (/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18
 .sty
@@ -1059,10 +729,10 @@ Package: pgfcomp-version-1-18 2007/07/23 v3.0.1a (rcs-revision 1.1)
 Package: pgffor 2013/12/13 v3.0.1a (rcs-revision 1.25)
 
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)
-\pgffor@iter=\dimen348
-\pgffor@skip=\dimen349
-\pgffor@stack=\toks73
-\pgffor@toks=\toks74
+\pgffor@iter=\dimen196
+\pgffor@skip=\dimen197
+\pgffor@stack=\toks29
+\pgffor@toks=\toks30
 ))
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
 Package: tikz 2015/08/07 v3.0.1a (rcs-revision 1.151)
@@ -1070,90 +740,406 @@ Package: tikz 2015/08/07 v3.0.1a (rcs-revision 1.151)
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers
 .code.tex
 File: pgflibraryplothandlers.code.tex 2013/08/31 v3.0.1a (rcs-revision 1.20)
-\pgf@plot@mark@count=\count307
-\pgfplotmarksize=\dimen350
+\pgf@plot@mark@count=\count161
+\pgfplotmarksize=\dimen198
 )
-\tikz@lastx=\dimen351
-\tikz@lasty=\dimen352
-\tikz@lastxsaved=\dimen353
-\tikz@lastysaved=\dimen354
-\tikzleveldistance=\dimen355
-\tikzsiblingdistance=\dimen356
-\tikz@figbox=\box96
-\tikz@figbox@bg=\box97
-\tikz@tempbox=\box98
-\tikz@tempbox@bg=\box99
-\tikztreelevel=\count308
-\tikznumberofchildren=\count309
-\tikznumberofcurrentchild=\count310
-\tikz@fig@count=\count311
+\tikz@lastx=\dimen199
+\tikz@lasty=\dimen256
+\tikz@lastxsaved=\dimen257
+\tikz@lastysaved=\dimen258
+\tikzleveldistance=\dimen259
+\tikzsiblingdistance=\dimen260
+\tikz@figbox=\box88
+\tikz@figbox@bg=\box89
+\tikz@tempbox=\box90
+\tikz@tempbox@bg=\box91
+\tikztreelevel=\count162
+\tikznumberofchildren=\count163
+\tikznumberofcurrentchild=\count164
+\tikz@fig@count=\count165
 
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
 File: pgfmodulematrix.code.tex 2013/09/17  (rcs-revision 1.8)
-\pgfmatrixcurrentrow=\count312
-\pgfmatrixcurrentcolumn=\count313
-\pgf@matrix@numberofcolumns=\count314
+\pgfmatrixcurrentrow=\count166
+\pgfmatrixcurrentcolumn=\count167
+\pgf@matrix@numberofcolumns=\count168
 )
-\tikz@expandcount=\count315
+\tikz@expandcount=\count169
 
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
 zlibrarytopaths.code.tex
 File: tikzlibrarytopaths.code.tex 2008/06/17 v3.0.1a (rcs-revision 1.2)
 )))
-(/usr/share/texlive/texmf-dist/tex/generic/xstring/xstring.sty
-(/usr/share/texlive/texmf-dist/tex/generic/xstring/xstring.tex
-\@xs@message=\write5
-\integerpart=\count316
-\decimalpart=\count317
+\c@Mevaluate=\count170
+\c@Mmodulo=\count171
+\c@Mmax=\count172
+\c@Mmin=\count173
+\c@Mfirst=\count174
+\c@Mxpos=\count175
+\c@Mypos=\count176
+\c@Mclef=\count177
+\c@Mkey=\count178
+\MWidth=\skip56
+\MHeight=\skip57
+\c@aux=\count179
 )
-Package: xstring 2013/10/13  v1.7c  String manipulations (C Tellechea)
-)
-.................................................
-. LaTeX info: "xparse/define-command"
-. 
-. Defining command \Eval with sig. 'm' on line 12.
-.................................................
-\c@modulo=\count318
-\c@max=\count319
-\c@min=\count320
-\c@first=\count321
-\c@xpos=\count322
-\c@ypos=\count323
-\c@clef=\count324
-\c@key=\count325
+(/usr/share/texlive/texmf-dist/tex/latex/musixtex/musixtex.sty
+(/usr/share/texlive/texmf-dist/tex/generic/musixtex/musixtex.tex
+MusiXTeX(c) 1.25 <2017-07-25>
+\n@i=\count180
+\n@ii=\count181
+\n@iii=\count182
+\n@iv=\count183
+\n@v=\count184
+\n@vi=\count185
+\n@vii=\count186
+\n@viii=\count187
+\count@=\count188
+\toks@box=\box92
+\w@rkbox=\box93
+\n@otebox=\box94
+\y@=\dimen261
+\y@i=\dimen262
+\y@ii=\dimen263
+\y@iii=\dimen264
+\y@iv=\dimen265
+\y@v=\dimen266
+\group@no=\count189
+\interinstrument=\dimen267
+\N@s=\count190
+\s@Y=\dimen268
+\lin@pos=\dimen269
+\meet@minus@n@iv=\count191
+\interbeam=\dimen270
+\b@amthick=\dimen271
+\Interligne=\dimen272
+\Internote=\dimen273
+\ch@box=\box95
+\musicsize=\count192
+\qd@skip=\dimen274
+\qn@width=\dimen275
+\wn@width=\dimen276
+\txt@ff=\skip58
+\s@indent=\skip59
+\big@spc=\skip60
+\lthick=\dimen277
+\afterruleskip=\skip61
+\staffbotmarg=\dimen278
+\stafftopmarg=\dimen279
+\line@width=\dimen280
+\interportee=\dimen281
+\noport@@=\count193
+\noinstrum@nt=\count194
+\altportee=\dimen282
+\systemheight=\dimen283
+\altplancher=\dimen284
+\instrum@in@group=\skip62
+\boxitsep=\skip63
+\barsinpi@c@=\count195
+\barno=\count196
+\startbarno=\count197
+\sign@skip=\dimen285
+\maxsign@skip=\dimen286
+\x@skip=\dimen287
+\n@skip=\dimen288
+\beforeruleskip=\skip64
+\widthtyp@=\count198
+\lastbarno=\count199
+\cut@v=\skip65
+\init@volta@pos=\skip66
+\volta@startcor=\skip67
+\volta@endcor=\skip68
+\writ@volta@box=\box96
+\barsinlin@=\count266
+\maxbarsinlin@=\count267
+\lastbarpos=\skip69
+\ut@ref=\count268
+\meterskip=\skip70
+\t@c=\toks31
+\clef@skip=\skip71
+\noteskip=\dimen289
+\transpose=\count269
+\normaltranspose=\count270
+\locx@skip=\dimen290
+\elemskip=\dimen291
+\@l@mskip=\dimen292
+\inh@alt=\count271
+\st@bot=\dimen293
+\st@top=\dimen294
+\stem@skip=\dimen295
+\s@lope=\dimen296
+\y@vi=\dimen297
+\lift@rest=\dimen298
+\accshift=\skip72
+\@icresc=\skip73
+\pdl@pos=\dimen299
+\bigwedgebox=\box97
+\@itrillei=\skip74
+\@itrilleii=\skip75
+\@itrilleiii=\skip76
+\@itrilleiv=\skip77
+\@itrillev=\skip78
+\@itrillevi=\skip79
+\tr@number=\count272
+\tr@nspose=\count273
+\o@swz=\toks32
+\o@number=\count274
+\y@vii=\dimen300
+\y@viii=\dimen301
+\y@ix=\dimen302
+\tuptxtb@x=\box98
+\notes@open=\count275
+\k@ii=\skip80
+\i@ni=\dimen303
+\b@xi=\dimen304
+\b@zi=\dimen305
+\c@xi=\dimen306
+\c@zi=\skip81
+\d@xi=\dimen307
+\d@zi=\skip82
+\e@xi=\dimen308
+\e@zi=\skip83
+\b@pi=\count276
+\b@ni=\count277
+\n@pi=\count278
+\a@si=\count279
+\o@si=\count280
+\a@ci=\toks33
+\o@ci=\toks34
+\m@ti=\toks35
+\k@iii=\skip84
+\i@nii=\dimen309
+\b@xii=\dimen310
+\b@zii=\dimen311
+\c@xii=\dimen312
+\c@zii=\skip85
+\d@xii=\dimen313
+\d@zii=\skip86
+\e@xii=\dimen314
+\e@zii=\skip87
+\b@pii=\count281
+\b@nii=\count282
+\n@pii=\count283
+\a@sii=\count284
+\o@sii=\count285
+\a@cii=\toks36
+\o@cii=\toks37
+\m@tii=\toks38
+\k@iiii=\skip88
+\i@niii=\dimen315
+\b@xiii=\dimen316
+\b@ziii=\dimen317
+\c@xiii=\dimen318
+\c@ziii=\skip89
+\d@xiii=\dimen319
+\d@ziii=\skip90
+\e@xiii=\dimen320
+\e@ziii=\skip91
+\b@piii=\count286
+\b@niii=\count287
+\n@piii=\count288
+\a@siii=\count289
+\o@siii=\count290
+\a@ciii=\toks39
+\o@ciii=\toks40
+\m@tiii=\toks41
+\k@iiv=\skip92
+\i@niv=\dimen321
+\b@xiv=\dimen322
+\b@ziv=\dimen323
+\c@xiv=\dimen324
+\c@ziv=\skip93
+\d@xiv=\dimen325
+\d@ziv=\skip94
+\e@xiv=\dimen326
+\e@ziv=\skip95
+\b@piv=\count291
+\b@niv=\count292
+\n@piv=\count293
+\a@siv=\count294
+\o@siv=\count295
+\a@civ=\toks42
+\o@civ=\toks43
+\m@tiv=\toks44
+\k@iv=\skip96
+\i@nv=\dimen327
+\b@xv=\dimen328
+\b@zv=\dimen329
+\c@xv=\dimen330
+\c@zv=\skip97
+\d@xv=\dimen331
+\d@zv=\skip98
+\e@xv=\dimen332
+\e@zv=\skip99
+\b@pv=\count296
+\b@nv=\count297
+\n@pv=\count298
+\a@sv=\count299
+\o@sv=\count300
+\a@cv=\toks45
+\o@cv=\toks46
+\m@tv=\toks47
+\k@ivi=\skip100
+\i@nvi=\dimen333
+\b@xvi=\dimen334
+\b@zvi=\dimen335
+\c@xvi=\dimen336
+\c@zvi=\skip101
+\d@xvi=\dimen337
+\d@zvi=\skip102
+\e@xvi=\dimen338
+\e@zvi=\skip103
+\b@pvi=\count301
+\b@nvi=\count302
+\n@pvi=\count303
+\a@svi=\count304
+\o@svi=\count305
+\a@cvi=\toks48
+\o@cvi=\toks49
+\m@tvi=\toks50
+maxinstruments=6
+\f@xi=\dimen339
+\f@zi=\skip104
+\f@xii=\dimen340
+\f@zii=\skip105
+\f@xiii=\dimen341
+\f@ziii=\skip106
+\f@xiv=\dimen342
+\f@ziv=\skip107
+\f@xv=\dimen343
+\f@zv=\skip108
+\f@xvi=\dimen344
+\f@zvi=\skip109
+ max128beams=6
+\g@bi=\skip110
+\g@hi=\skip111
+\g@bii=\skip112
+\g@hii=\skip113
+\g@biii=\skip114
+\g@hiii=\skip115
+ maxgroups=3
+\s@xi=\dimen345
+\s@si=\toks51
+\s@Yi=\dimen346
+\s@ai=\skip116
+\s@yi=\count306
+\s@Ni=\count307
+\s@zi=\count308
+\s@di=\toks52
+\s@xii=\dimen347
+\s@sii=\toks53
+\s@Yii=\dimen348
+\s@aii=\skip117
+\s@yii=\count309
+\s@Nii=\count310
+\s@zii=\count311
+\s@dii=\toks54
+\s@xiii=\dimen349
+\s@siii=\toks55
+\s@Yiii=\dimen350
+\s@aiii=\skip118
+\s@yiii=\count312
+\s@Niii=\count313
+\s@ziii=\count314
+\s@diii=\toks56
+\s@xiv=\dimen351
+\s@siv=\toks57
+\s@Yiv=\dimen352
+\s@aiv=\skip119
+\s@yiv=\count315
+\s@Niv=\count316
+\s@ziv=\count317
+\s@div=\toks58
+\s@xv=\dimen353
+\s@sv=\toks59
+\s@Yv=\dimen354
+\s@av=\skip120
+\s@yv=\count318
+\s@Nv=\count319
+\s@zv=\count320
+\s@dv=\toks60
+\s@xvi=\dimen355
+\s@svi=\toks61
+\s@Yvi=\dimen356
+\s@avi=\skip121
+\s@yvi=\count321
+\s@Nvi=\count322
+\s@zvi=\count323
+\s@dvi=\toks62
+ maxslurs=6
+\tr@xi=\skip122
+\tr@swi=\toks63
+\tr@yi=\skip123
+\tr@xii=\skip124
+\tr@swii=\toks64
+\tr@yii=\skip125
+\tr@xiii=\skip126
+\tr@swiii=\toks65
+\tr@yiii=\skip127
+\tr@xiv=\skip128
+\tr@swiv=\toks66
+\tr@yiv=\skip129
+\tr@xv=\skip130
+\tr@swv=\toks67
+\tr@yv=\skip131
+\tr@xvi=\skip132
+\tr@swvi=\toks68
+\tr@yvi=\skip133
+ maxtrills=6
+\o@xi=\skip134
+\o@yi=\skip135
+\o@swi=\toks69
+\o@xii=\skip136
+\o@yii=\skip137
+\o@swii=\toks70
+\o@xiii=\skip138
+\o@yiii=\skip139
+\o@swiii=\toks71
+\o@xiv=\skip140
+\o@yiv=\skip141
+\o@swiv=\toks72
+\o@xv=\skip142
+\o@yv=\skip143
+\o@swv=\toks73
+\o@xvi=\skip144
+\o@yvi=\skip145
+\o@swvi=\toks74
 
-(./mousik-key.sty
-\c@aux=\count326
-)
-\TSLen=\skip144
-\TSHei=\skip145
- (./mousik-note.sty))
+maxoctlines=6
+\outmux=\write4
+\mulooseness=\count324
+\linegoal=\count325
+\l@eftrightbox=\box99
+\inmux=\read3
+) (/usr/share/texlive/texmf-dist/tex/latex/musixtex/musixltx.tex
+MusiXLaTeX T.125 <8 April 2017>
+))
 Package translations Info: No language package found. I am going to use `englis
-h' as default language. on input line 17.
+h' as default language. on input line 20.
  (files/main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-\c@lstlisting=\count327
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+\c@lstlisting=\count326
 \AtBeginShipoutBox=\box100
-Package hyperref Info: Link coloring OFF on input line 17.
+Package hyperref Info: Link coloring OFF on input line 20.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -1161,15 +1147,15 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count328
+\c@section@level=\count327
 )
-LaTeX Info: Redefining \ref on input line 17.
-LaTeX Info: Redefining \pageref on input line 17.
-LaTeX Info: Redefining \nameref on input line 17.
+LaTeX Info: Redefining \ref on input line 20.
+LaTeX Info: Redefining \pageref on input line 20.
+LaTeX Info: Redefining \nameref on input line 20.
 
 (files/main.out) (files/main.out)
-\@outlinefile=\write6
-\openout6 = `main.out'.
+\@outlinefile=\write5
+\openout5 = `main.out'.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/translations/translations-basic-dictio
@@ -1178,16 +1164,16 @@ File: translations-basic-dictionary-english.trsl (english translation file `tra
 nslations-basic-dictionary')
 )
 Package translations Info: loading dictionary `translations-basic-dictionary' f
-or `english'. on input line 17.
+or `english'. on input line 20.
  ABD: EveryShipout initializing macros
-\openout3 = `main.mx1'.
+\openout4 = `main.mx1'.
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 20.
+LaTeX Font Info:    Try loading font information for U+msa on input line 23.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 20.
+LaTeX Font Info:    Try loading font information for U+msb on input line 23.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -1202,172 +1188,174 @@ File: se-ascii-print.def 2016/05/16 v1.11 stringenc: Printable ASCII characters
 [1
 
 ])
-\tf@toc=\write7
-\openout7 = `main.toc'.
+\tf@toc=\write6
+\openout6 = `main.toc'.
 
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <14.4> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 39.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 42.
 LaTeX Font Info:    Font shape `U/musix/m/n' will be
-(Font)              scaled to size 15.0pt on input line 46.
+(Font)              scaled to size 15.0pt on input line 49.
  [2]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 103.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 116.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 103.
+(hyperref)                removing `math shift' on input line 116.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\delimiter' on input line 103.
+(hyperref)                removing `\delimiter' on input line 116.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 103.
-
-
-Overfull \hbox (13.1266pt too wide) in paragraph at lines 108--121
- [] 
-
-\hbox(41.66595+0.0)x167.5 []
+(hyperref)                removing `math shift' on input line 116.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 134.
+(hyperref)                removing `math shift' on input line 146.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\delimiter' on input line 134.
+(hyperref)                removing `\delimiter' on input line 146.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 134.
+(hyperref)                removing `math shift' on input line 146.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 158.
+(hyperref)                removing `math shift' on input line 170.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\delimiter' on input line 158.
+(hyperref)                removing `\delimiter' on input line 170.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 158.
+(hyperref)                removing `math shift' on input line 170.
 
 [3]
+Overfull \hbox (9.73668pt too wide) in paragraph at lines 173--174
+[]\TU/lmr/m/n/10 Also [][]\TU/lmtt/m/n/10 \TimeSig[1]{}{} []\TU/lmr/m/n/10 will
+ produce a \TU/lmr/m/it/10 common time \TU/lmr/m/n/10 symbol and [][]\TU/lmtt/m
+/n/10 \TimeSig[2]{}{}
 
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 180.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\delimiter' on input line 180.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 180.
+\hbox(7.16+2.28998)x345.0, glue set - 1.0 []
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 209.
+(hyperref)                removing `math shift' on input line 192.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\delimiter' on input line 209.
+(hyperref)                removing `\delimiter' on input line 192.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 209.
+(hyperref)                removing `math shift' on input line 192.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 221.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\delimiter' on input line 221.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 221.
 
 [4]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 229.
+(hyperref)                removing `math shift' on input line 241.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\delimiter' on input line 229.
+(hyperref)                removing `\delimiter' on input line 241.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 229.
+(hyperref)                removing `math shift' on input line 241.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 242.
+(hyperref)                removing `math shift' on input line 254.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\delimiter' on input line 242.
+(hyperref)                removing `\delimiter' on input line 254.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 242.
+(hyperref)                removing `math shift' on input line 254.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 269.
+(hyperref)                removing `math shift' on input line 280.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\delimiter' on input line 269.
+(hyperref)                removing `\delimiter' on input line 280.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 269.
+(hyperref)                removing `math shift' on input line 280.
 
 [5]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 340.
+(hyperref)                removing `math shift' on input line 351.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\delimiter' on input line 340.
+(hyperref)                removing `\delimiter' on input line 351.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 340.
+(hyperref)                removing `math shift' on input line 351.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 374.
+(hyperref)                removing `math shift' on input line 385.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\delimiter' on input line 374.
+(hyperref)                removing `\delimiter' on input line 385.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 374.
+(hyperref)                removing `math shift' on input line 385.
 
 [6]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 397.
+(hyperref)                removing `math shift' on input line 408.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\delimiter' on input line 397.
+(hyperref)                removing `\delimiter' on input line 408.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 397.
+(hyperref)                removing `math shift' on input line 408.
+
+[7]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 458.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 433.
+(hyperref)                removing `\delimiter' on input line 458.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\delimiter' on input line 433.
+(hyperref)                removing `math shift' on input line 458.
 
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 433.
-
-[7] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang2.sty
@@ -1397,33 +1385,261 @@ File: lstlang3.sty 2015/06/04 1.6 listings language file
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
 ) (./mousik.sty
-[8] [9] [10]
-Overfull \hbox (36.05571pt too wide) in paragraph at lines 145--146
+[8]
+Overfull \hbox (30.24pt too wide) in paragraph at lines 7--9
+[][][][][][] 
+
+\hbox(6.64996+2.85002)x345.0 []
+
+
+Overfull \hbox (30.24pt too wide) in paragraph at lines 40--42
+[][][][][] 
+
+\hbox(6.64996+2.85002)x345.0 []
+
+[9] [10]
+Overfull \hbox (30.24pt too wide) in paragraph at lines 134--136
+[][][][][] 
+
+\hbox(6.64996+2.85002)x345.0 []
+
+
+Overfull \hbox (107.28923pt too wide) in paragraph at lines 138--140
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+
+\hbox(6.64996+2.85002)x345.0 []
+
+
+Overfull \hbox (124.64108pt too wide) in paragraph at lines 142--143
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+
+\hbox(6.64996+2.85002)x345.0 []
+
+
+Overfull \hbox (131.24908pt too wide) in paragraph at lines 143--144
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+
+\hbox(6.64996+2.85002)x345.0 []
+
+
+Overfull \hbox (106.09433pt too wide) in paragraph at lines 161--162
+[][][][][][][][][][][][][][][][][][][][][][][][][] 
+
+\hbox(6.64996+2.85002)x345.0 []
+
+
+Overfull \hbox (106.09433pt too wide) in paragraph at lines 166--167
+[][][][][][][][][][][][][][][][][][][][][][][][] 
+
+\hbox(6.64996+2.85002)x345.0 []
+
+
+Overfull \hbox (131.0717pt too wide) in paragraph at lines 172--174
+[][][][][][][][][][][][][][][][][][][][][][][][][] 
+
+\hbox(6.64996+2.85002)x345.0 []
+
+[11]
+Overfull \hbox (179.23175pt too wide) in paragraph at lines 175--177
+[][][][][][][][][][][][][][][][][][][][][][][][][][] 
+
+\hbox(6.64996+2.85002)x345.0 []
+
+
+Overfull \hbox (190.75653pt too wide) in paragraph at lines 180--181
+[][][][][][][][][][][][][][][][][][][][][][][][] 
+
+\hbox(6.64996+2.85002)x345.0 []
+
+
+Overfull \hbox (219.92764pt too wide) in paragraph at lines 181--182
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+
+\hbox(6.64996+2.85002)x345.0 []
+
+
+Overfull \hbox (212.46852pt too wide) in paragraph at lines 185--186
+[][][][][][][][][][][][][][][][][][][][][][][][][] 
+
+\hbox(6.64996+2.85002)x345.0 []
+
+
+Overfull \hbox (219.92764pt too wide) in paragraph at lines 186--187
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+
+\hbox(6.64996+2.85002)x345.0 []
+
+
+Overfull \hbox (184.15497pt too wide) in paragraph at lines 194--195
+[][][][][][][][][][][][][][][][][][][][][][][][] 
+
+\hbox(6.64996+2.85002)x345.0 []
+
+
+Overfull \hbox (259.59169pt too wide) in paragraph at lines 195--196
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+
+\hbox(6.64996+2.85002)x345.0 []
+
+
+Overfull \hbox (179.90697pt too wide) in paragraph at lines 199--200
+[][][][][][][][][][][][][][][][][][][][][][][][][] 
+
+\hbox(6.64996+2.85002)x345.0 []
+
+
+Overfull \hbox (259.59169pt too wide) in paragraph at lines 200--201
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+
+\hbox(6.64996+2.85002)x345.0 []
+
+
+Overfull \hbox (11.38235pt too wide) in paragraph at lines 206--207
+[][][][][][][][][][][][][][][][][][][][][][][][] 
+
+\hbox(6.64996+2.85002)x345.0 []
+
+[12]
+Overfull \hbox (44.66716pt too wide) in paragraph at lines 259--260
+[][][][][][][][][][][][][][][][][][][][][][][][][] 
+
+\hbox(6.64996+2.85002)x345.0 []
+
+
+Overfull \hbox (44.66716pt too wide) in paragraph at lines 261--262
+[][][][][][][][][][][][][][][][][][][][][][][][][] 
+
+\hbox(6.64996+2.85002)x345.0 []
+
+
+Overfull \hbox (46.29916pt too wide) in paragraph at lines 263--264
+[][][][][][][][][][][][][][][][][][][][][][][][][] 
+
+\hbox(6.64996+2.85002)x345.0 []
+
+
+Overfull \hbox (21.75827pt too wide) in paragraph at lines 283--284
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+
+\hbox(6.64996+2.85002)x345.0 []
+
+[13] [14] [15]
+Overfull \hbox (30.24pt too wide) in paragraph at lines 418--420
+[][][][][] 
+
+\hbox(6.64996+2.85002)x345.0 []
+
+[16] [17] [18] [19]
+Overfull \hbox (30.24pt too wide) in paragraph at lines 662--664
+[][][][][] 
+
+\hbox(6.64996+2.85002)x345.0 []
+
+
+Overfull \hbox (9.7632pt too wide) in paragraph at lines 684--685
+[][][][][][][][][][][][][][][][][][][][] 
+
+\hbox(6.64996+2.85002)x345.0 []
+
+
+Overfull \hbox (9.75679pt too wide) in paragraph at lines 685--686
+[][][][][][][][][][][][][][][][][][][][][] 
+
+\hbox(6.64996+2.85002)x345.0 []
+
+[20]
+Overfull \hbox (9.7632pt too wide) in paragraph at lines 692--693
+[][][][][][][][][][][][][][][][][][][][] 
+
+\hbox(6.64996+2.85002)x345.0 []
+
+
+Overfull \hbox (65.71971pt too wide) in paragraph at lines 693--694
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
 
 \hbox(6.64996+2.85002)x345.0 []
 
 
-Overfull \hbox (36.05571pt too wide) in paragraph at lines 155--156
+Overfull \hbox (0.87027pt too wide) in paragraph at lines 708--709
+[][][][][][][][][][][][][][][][][][][][][][] 
+
+\hbox(6.64996+2.85002)x345.0 []
+
+
+Overfull \hbox (24.1631pt too wide) in paragraph at lines 709--710
+[][][][][][][][][][][][][][][][][][][][][] 
+
+\hbox(6.64996+2.85002)x345.0 []
+
+
+Overfull \hbox (80.11961pt too wide) in paragraph at lines 710--711
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+
+\hbox(6.64996+2.85002)x345.0 []
+
+
+Overfull \hbox (80.11961pt too wide) in paragraph at lines 713--714
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
 
 \hbox(6.64996+2.85002)x345.0 []
 
-) [11]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 515.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 515.
+
+Overfull \hbox (0.86707pt too wide) in paragraph at lines 714--715
+[][][][][][][][][][][][][][][][][][][][][][] 
+
+\hbox(6.64996+2.85002)x345.0 []
+
+
+Overfull \hbox (24.1567pt too wide) in paragraph at lines 715--716
+[][][][][][][][][][][][][][][][][][][][][] 
+
+\hbox(6.64996+2.85002)x345.0 []
+
+
+Overfull \hbox (0.87027pt too wide) in paragraph at lines 718--719
+[][][][][][][][][][][][][][][][][][][][][][] 
+
+\hbox(6.64996+2.85002)x345.0 []
+
+
+Overfull \hbox (24.1631pt too wide) in paragraph at lines 719--720
+[][][][][][][][][][][][][][][][][][][][][] 
+
+\hbox(6.64996+2.85002)x345.0 []
+
+
+Overfull \hbox (80.11961pt too wide) in paragraph at lines 720--721
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+
+\hbox(6.64996+2.85002)x345.0 []
+
+
+Overfull \hbox (0.86707pt too wide) in paragraph at lines 721--722
+[][][][][][][][][][][][][][][][][][][][][][][] 
+
+\hbox(6.64996+2.85002)x345.0 []
+
+
+Overfull \hbox (24.1567pt too wide) in paragraph at lines 722--723
+[][][][][][][][][][][][][][][][][][][][] 
+
+\hbox(6.64996+2.85002)x345.0 []
+
+) [21]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 545.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 545.
  (files/main.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 515.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 515.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 515.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 545.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 545.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 545.
  ) 
 Here is how much of TeX's memory you used:
- 32080 strings out of 494979
- 569670 string characters out of 6178170
- 661093 words of memory out of 5000000
- 35432 multiletter control sequences out of 15000+600000
+ 31903 strings out of 494979
+ 566875 string characters out of 6178170
+ 694376 words of memory out of 5000000
+ 35266 multiletter control sequences out of 15000+600000
  48521 words of font info for 194 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  68i,11n,67p,10359b,2805s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on files/main.pdf (11 pages).
+Output written on files/main.pdf (21 pages).

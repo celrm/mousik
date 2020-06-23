@@ -7,11 +7,14 @@
 
 \usepackage{mousik}
 
+\usepackage{musixtex}
 
 \title{The \textsf{mousik} package\footnote{This
 		document corresponds to \textsf{mousik} v0.1, dated 2020/07/01.}}
 \author{Celia Rubio Madrigal\footnote{Email: \href{mailto:celirubio.m@gmail.com}{\texttt{celirubio.m@gmail.com}}}}
 \date{July 1, 2020}
+
+\newcommand{\TTT}[2][0]{\Text[#1]{\texttt{$\backslash$#2}}}
 
 
 \begin{document}
@@ -19,13 +22,13 @@
 	\maketitle
 	
 	\begin{abstract}
-		This is a music-related package focused on writing music scores. It works specially well with small examples, such as fragments in theoretical articles. It is easier than other music writing methods in \LaTeX{} because it is based on the Tikz package.
+		This is a music-related package focused on writing music fragments. It works specially well with small examples, such as excerpts for theoretical articles. It is easier than other music writing methods in \LaTeX{} because it is based on the Tikz package.
 		
 		\begin{center}
 			\textbf{Keywords}
 		\end{center}
 		
-		\textit{mousik, music, music theory, music notation, music writing, score, tikz diagram, bar, clef, time signature, note, symbol, rest, dot, chord, accidental, sharp, flat, natural, key}
+		\textit{mousik, music, music theory, music notation, music writing, score, sheet, tikz diagram, bar, clef, time signature, note, symbol, rest, dot, chord, accidental, sharp, flat, natural, key}
 	\end{abstract}
 	
 	\tableofcontents
@@ -34,7 +37,7 @@
 	There are already several ways to set music using Tex. As stated by the ABC package, ``\textit{notably MusixTEX and Lilypond}'', as well as ABC per se.
 	Some of them are difficult to use for simple or short fragments; others do not work at all.
 	
-	The \texttt{mousik} package is perfect for short, one-line music fragments. In spite of its compactness, the package is quite complete and versatile, but easy to learn and use.
+	The \texttt{mousik} package is perfect for short, one line music fragments. It may be used for longer scores, but there are more adaptable packages than this one. However, in spite of its compactness, the package is quite complete and versatile, but easy to learn and use.
 	
 	\section{The \texttt{mousik} environment}
 	The way to draw a score is by means of the \texttt{mousik} environment.
@@ -44,7 +47,7 @@
 		\begin{mousik}
 			\Clef{2}
 			\Key{-3}
-			\TimeS{4}{4}
+			\TimeSig{4}{4}
 			
 			\Note{1}{5}
 			\Chord
@@ -58,77 +61,86 @@
 		\end{mousik}
 	\end{center}
 	
-	\begin{verbatim}
-	\begin{mousik}
-	\Clef{2}
-	\Key{-3}
-	\TimeS{4}{4}
-	
-	\Note{1}{5}
-	\Chord
-	\Acc{-1}{9}
-	\Note{1}{9}
-	\Bar
-	
-	\Rest{8}
-	\PolyNote{8}{5,2,5}
-	\FinalBar
-	\end{mousik}
-	\end{verbatim}
+	\begin{lstlisting}[basicstyle=\ttfamily]
+		  \begin{mousik}
+			\Clef{2}
+			\Key{-3}
+			\TimeSig{4}{4}
+			
+			\Note{1}{5}
+			\Chord
+			\Acc{-1}{9}
+			\Note{1}{9}
+			\Bar
+			
+			\Rest{8}
+			\PolyNote{8}{5,2,5}
+			\FinalBar
+		  \end{mousik}
+	\end{lstlisting}
 	
 	\newpage
 	
 	\subsection{Ending a line: bars}
-	The only ways to end a line in the score are: 
-	\begin{multicols}{2}
-		\begin{itemize}
-			\item \verb|\Space|: no bar
-			\item \verb|\Bar|: single bar
-			\item \verb|\FinalBar|: final bar
-			\item \verb|\RepeatBar|: left repeating bar
-		\end{itemize}
-	\end{multicols}
+	
 	
 	\begin{center}
 		\begin{mousik}
-			\Space
-			\Bar
+			\Space[1]
+			
+			\TTT{Space}
+			\Space[3]
+			
+			\TTT{Bar}
+			\Bar			
+			\Space[1]
+			
+			\TTT{DoubleBar}
+			\DoubleBar		
+			\Space[1]
+			
+			\RepeatBar{L}
+			\TTT{RepeatBar}
+			\Text[-0.5]{\texttt{\{L\} \ \{R\} \ \{LR\}}}
+			\RepeatBar{R}
+			\RepeatBar{LR}
+			\Space[1]
+			
+			\TTT{FinalBar}
 			\FinalBar
-			\RepeatBar
 		\end{mousik}
 	\end{center}
 	
-	Any other way to end a line may cause visual errors (see section \ref{errors}).
+	The only way to end a line in the score is with a bar. Any other way may cause visual errors (see subsection \ref{overflow}).
 	
 	\subsection{The \texttt{$\backslash$Space} command}
-	The \verb|\Space| command is not only used when no bar is needed. It may also be used to input extra space between symbols. The default space is 2 (which is the default space between symbols in general), but it may be any whole number.
+	The \verb|\Space| command is not only used when no bar is needed. It may also be used to input \textit{extra} space between symbols. The default space is 2 (which is the default space between symbols in general), but it may be any whole number (see subsection \ref{space}).
 	
-	\begin{multicols}{2}
-		\begin{center}
-			\begin{mousik}
-				\Clef{2}
-				\Space[1]
-				
-				\Clef{2}
-				\Space
-				
-				\Clef{2}
-				\Space[3]
-				
-				\FinalBar
-			\end{mousik}
-			\columnbreak
+	\begin{center}
+		\begin{mousik}
+			\Bar
+			\Text{\hspace*{-40pt}$\backslash$\texttt{Space[-1]}}
+			\Space[-1]
 			
-			\begin{verbatim}
-			\Clef{2}
-			\Space[1]		
-			\Clef{2}
+			\Bar
+			\Text[-0.5]{\hspace*{-25pt}$\backslash$\texttt{Space[0]}}
+%			\Space[0]
+			
+			\Bar
+			\Text{\hspace*{-10pt}$\backslash$\texttt{Space[1]}}
+			\Space[1]
+			
+			\Bar
+			\Text{\hspace*{10pt}$\backslash$\texttt{Space}}
 			\Space
-			\Clef{2}
+			
+			\Bar
+			\Text{\hspace*{20pt}$\backslash$\texttt{Space[3]}}
 			\Space[3]
-			\end{verbatim}
-		\end{center}
-	\end{multicols}
+			
+			\FinalBar
+		\end{mousik}
+	\end{center}
 	
 	\section{Common symbols}
 	\subsection{The \texttt{$\backslash$Clef} command}
@@ -156,21 +168,21 @@
 	\end{center}
 	
 	\subsection{The \texttt{$\backslash$TimeS} command}
-	Time signatures might be used at any moment on the score. \verb|\TimeS{2}{4}| will draw a 2 by 4 time signature. Any number or symbol can be written inside the brackets.
+	Time signatures might be used at any moment on the score. \verb|\TimeSig{2}{4}| will draw a 2 by 4 time signature. Any number or symbol can be written inside the brackets.
 	
-	Also \verb|\TimeS[1]{}{}| will produce a \textit{common time} symbol and \verb|\TimeS[2]{}{}| will produce an \textit{alla breve} symbol.
+	Also \verb|\TimeSig[1]{}{}| will produce a \textit{common time} symbol and \verb|\TimeSig[2]{}{}| will produce an \textit{alla breve} symbol. % TODO
 	\begin{center}		
 		\begin{mousik}
 			\Clef{2}
 			
-			\TimeS{2}{4}
-			\TimeS{12}{8}
+			\TimeSig{2}{4}
+			\TimeSig{12}{8}
 			\Space[1]
-			\TimeS{2+3}{8}
+			\TimeSig{2+3}{8}
 			\Space[1]
 			
-			\TimeS[1]..
-			\TimeS[2]..
+			\TimeSig[1]..
+			\TimeSig[2]..
 			
 			\FinalBar
 		\end{mousik}
@@ -187,20 +199,20 @@
 			\Clef{2}
 			\foreach \i in {1,2,4,8,16,32} {
 				\Text{\i}
-				\Note{\i}{5}
+				\Note{\i}{6}
 			}
 			\FinalBar
 		\end{mousik}
 	\end{center}
 	
-	The second argument is the absolute height. These are the notes from 0 to 6:
+	The second argument is the absolute height. For example, these are the notes from 0 to 9:
 	
 	\begin{center}
 		\begin{mousik}
 			\Clef{2}
-			\foreach \n in {0,...,6} {
+			\foreach \n in {0,...,9} {
 				\Text{\n}
-				\Note{1}{\n}
+				\Note{4}{\n}
 			}
 			\FinalBar
 		\end{mousik}
@@ -220,8 +232,8 @@
 			}
 			\Bar
 			
-			\PolyNote{8}{6,3,6}
-			\PolyNote{16}{0,4,2,4}
+			\PolyNote{8}{5,1,5}
+			\PolyNote{16}{1,4,2,6}
 			\FinalBar
 		\end{mousik}
 	\end{center}
@@ -241,11 +253,10 @@
 	
 	\subsubsection{The \texttt{$\backslash$Dot} command}
 	
-	The \verb|\Dot| command prints any amount of dots in front of a note or rest. It accepts two arguments.
+	The \verb|\Dot| command prints any amount of dots in front of a note or rest. It accepts an optional argument and a compulsory argument.
 	
-	The default number of dots is 1, but it may be any whole number bigger than one. The second argument is compulsory: the height of the dot: \verb|\Dot[2]{7}|.
+	The default number of dots is 1, but it may be any whole number bigger than one. The second, compulsory argument is the height of the dot: \verb|\Dot[2]{7}|.
 	
-	\newcommand{\TTT}[2][0]{\Text[#1]{\texttt{$\backslash$#2}}}
 	\begin{center}
 		\begin{mousik}		
 			\Clef{2}
@@ -270,7 +281,7 @@
 	
 	Chords may be obtained by means of the \verb|\Chord| command. It accepts an optional argument: the number of notes to step backwards \textemdash mostly for the \verb|\PolyNote| command\textemdash\ with 1 as default.
 	
-	The best way is to call the \verb|\Note| or \verb|\PolyNote| commands with the highest notes; then call the \verb|\Chord| command; then call the \verb|\Note| or \verb|\PolyNote| commands with the duration 4 of a quarter note.
+	The best way to use it is to call the \verb|\Note| or \verb|\PolyNote| commands with the highest notes; then call the \verb|\Chord| command; then call the \verb|\Note| or \verb|\PolyNote| commands with the duration 4 of a quarter note, to print them on top.
 	
 	If the stem needs to be longer, the user may need the \verb|\Enlarge| command, which accepts as arguments the 2 heights of both notes.	
 	
@@ -278,23 +289,23 @@
 		\begin{mousik}
 			\Clef{2}
 			
-			\TTT{Note\{1\}\{4\}}
+			\TTT{Note\{1\}\{6\}}
 			\TTT[-0.5]{Chord}
-			\TTT[-1]{Note\{1\}\{6\}}
-			\Note{1}{4}
-			\Chord
+			\TTT[-1]{Note\{1\}\{4\}}
 			\Note{1}{6}
+			\Chord
+			\Note{1}{4}
 			
 			\Space[3]
 			
-			\TTT{Note\{4\}\{0\}}
+			\TTT{Note\{16\}\{7\}}
 			\TTT[-0.5]{Chord}
-			\TTT[-1]{Enlarge\{0\}\{7\}}
-			\TTT[-1.5]{Note\{16\}\{7\}}
-			\Note{4}{0}
-			\Chord
-			\Enlarge{0}{7}
+			\TTT[-1]{Enlarge\{7\}\{0\}}
+			\TTT[-1.5]{Note\{4\}\{0\}}
 			\Note{16}{7}
+			\Chord
+			\Enlarge{7}{0}
+			\Note{4}{0}
 			
 			\FinalBar
 		\end{mousik}
@@ -351,7 +362,7 @@
 		\end{itemize}
 	\end{multicols}
 
-	The second argument is the height of the symbol. For usage related to the \verb|\PolyNote| command, an optional argument might be used before the other two, but it is still experimental.
+	The second argument is the height of the symbol. For usage related to the \verb|\PolyNote| command, an optional argument might be used before the other two, but it is still experimental. % TODO
 	
 	\begin{center}
 		\begin{mousik}
@@ -365,7 +376,7 @@
 			\TTT{Acc[+0.25]\{-1\}\{2\}}			
 			\TTT[-0.5]{PolyNote\{8\}\{6,2\}}
 			\Acc[+0.25]{-1}{2}		
-			\PolyNote{8}{6,2}
+			\PolyNote{8}{5,2}
 			
 			\FinalBar
 		\end{mousik}
@@ -417,18 +428,32 @@
 	
 	Be careful: the \verb|\Key| and \verb|\NoKey| commands are affected by the current clef! Nonetheless, other commands such as \verb|\Note| or \verb|\Acc| are not affected and need absolute height values.
 	
-	\begin{center}
+	\begin{multicols}{2}
 		\begin{center}
 			\begin{mousik}
 				\Clef{4}
 				\Key{1}
+				\TimeSig[2]{}{}
 				
-				\Acc{1}{0}
-				\Note{1}{0}
+				\Acc{0}{8}
+				\Note{1}{8}
 				\FinalBar
 			\end{mousik}
 		\end{center}
-	\end{center}
+		\columnbreak
+		
+	\begin{lstlisting}[basicstyle=\ttfamily]
+  \begin{mousik}
+	\Clef{4}
+	\Key{1}
+	\TimeSig[2]{}{}
+	
+	\Acc{0}{8}
+	\Note{1}{8}
+	\FinalBar
+  \end{mousik}
+\end{lstlisting}
+	\end{multicols}
 	
 	\subsection{The \texttt{$\backslash$Text} command}
 	The \verb|\Text| command allows the printing of any text string, including dynamics and lyrics. It has a compulsory argument, but also an optional one where the user may choose the height of the string: \verb|\Text[2]{\it rit.}|.
@@ -437,7 +462,7 @@
 		\begin{mousik}
 			\Clef{2}
 			\Key{-3}
-			\TimeS{2}{4}
+			\TimeSig{2}{4}
 			
 			\Text{C}
 			\Note{4}{0}
@@ -459,7 +484,7 @@
 		\end{mousik}
 	\end{center}
 	
-	\section{Common errors} \label{errors}
+	\section{Observations} \label{errors}	
 	\subsection{Overflow of lines} \label{overflow}
 	
 	\begin{mousik}
@@ -483,6 +508,11 @@
 			}
 		}
 	\end{mousik}
+
+
+	\subsection{How do spaces work?}\label{space}
+	
+	Spaces serve as the manual progression of an invisible cursor during the printing. A negative 
 	
 	\section{The package code}	
 	\lstset{

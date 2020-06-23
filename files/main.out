@@ -15,6 +15,7 @@
 \BOOKMARK [2][-]{subsection.3.5}{The\040"026E30F\040Key\040command}{section.3}% 15
 \BOOKMARK [2][-]{subsection.3.6}{The\040"026E30F\040NoKey\040command}{section.3}% 16
 \BOOKMARK [2][-]{subsection.3.7}{The\040"026E30F\040Text\040command}{section.3}% 17
-\BOOKMARK [1][-]{section.4}{Common\040errors}{}% 18
+\BOOKMARK [1][-]{section.4}{Observations}{}% 18
 \BOOKMARK [2][-]{subsection.4.1}{Overflow\040of\040lines}{section.4}% 19
-\BOOKMARK [1][-]{section.5}{The\040package\040code}{}% 20
+\BOOKMARK [2][-]{subsection.4.2}{How\040do\040spaces\040work?}{section.4}% 20
+\BOOKMARK [1][-]{section.5}{The\040package\040code}{}% 21

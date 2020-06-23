@@ -14,7 +14,8 @@
 \contentsline {subsection}{\numberline {3.4}The \texttt {$\delimiter "026E30F $Acc} command}{6}{subsection.3.4}
 \contentsline {subsection}{\numberline {3.5}The \texttt {$\delimiter "026E30F $Key} command}{7}{subsection.3.5}
 \contentsline {subsection}{\numberline {3.6}The \texttt {$\delimiter "026E30F $NoKey} command}{7}{subsection.3.6}
-\contentsline {subsection}{\numberline {3.7}The \texttt {$\delimiter "026E30F $Text} command}{7}{subsection.3.7}
-\contentsline {section}{\numberline {4}Common errors}{8}{section.4}
+\contentsline {subsection}{\numberline {3.7}The \texttt {$\delimiter "026E30F $Text} command}{8}{subsection.3.7}
+\contentsline {section}{\numberline {4}Observations}{8}{section.4}
 \contentsline {subsection}{\numberline {4.1}Overflow of lines}{8}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}How do spaces work?}{8}{subsection.4.2}
 \contentsline {section}{\numberline {5}The package code}{8}{section.5}
