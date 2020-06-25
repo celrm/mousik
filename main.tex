@@ -4,6 +4,7 @@
 \usepackage{hyperref}
 \usepackage{multicol}
 \usepackage{parskip}
+\usepackage{todonotes}
 
 \usepackage{mousik}
 
@@ -14,7 +15,7 @@
 \author{Celia Rubio Madrigal\footnote{Email: \href{mailto:celirubio.m@gmail.com}{\texttt{celirubio.m@gmail.com}}}}
 \date{July 1, 2020}
 
-\newcommand{\TTT}[2][0]{\Text[#1]{\texttt{$\backslash$#2}}}
+\newcommand{\TTT}[2][0]{\Text[#1]{\texttt{\textbackslash #2}}}
 
 
 \begin{document}
@@ -22,7 +23,7 @@
 	\maketitle
 	
 	\begin{abstract}
-		This is a music-related package focused on writing music fragments. It works specially well with small examples, such as excerpts for theoretical articles. It is easier than other music writing methods in \LaTeX{} because it is based on the Tikz package.
+		This is a music-related package focused on writing music fragments. It works specially well with small examples, such as excerpts for theoretical articles. It is easier than other music writing methods in \LaTeX{} because it is based on the \textsf{tikz} package.
 		
 		\begin{center}
 			\textbf{Keywords}
@@ -34,18 +35,17 @@
 	\tableofcontents
 	
 	\section{Introduction}
-	There are already several ways to set music using Tex. As stated by the ABC package, ``\textit{notably MusixTEX and Lilypond}'', as well as ABC per se.
-	Some of them are difficult to use for simple or short fragments; others do not work at all.
+	There are already several ways to set music using Tex. As stated by the \textsf{abc} package, ``\textit{notably MusixTEX and Lilypond}'', as well as \textsf{abc} per se.
+	Some of them are too difficult to use for simple music; others do not work at all.
 	
-	The \texttt{mousik} package is perfect for short, one line music fragments. It may be used for longer scores, but there are more adaptable packages than this one. However, in spite of its compactness, the package is quite complete and versatile, but easy to learn and use.
+	The \textsf{mousik} package is perfect for short, one line music fragments. It may be used for longer scores, but there are more adaptable packages than this one. However, in spite of its compactness, the package is quite complete and versatile, but easy to learn and use.
 	
 	\section{The \texttt{mousik} environment}
 	The way to draw a score is by means of the \texttt{mousik} environment.
 	
-	
 	\begin{center}
 		\begin{mousik}
-			\Clef{2}
+			\ClefMX{2}
 			\Key{-3}
 			\TimeSig{4}{4}
 			
@@ -81,7 +81,7 @@
 	
 	\newpage
 	
-	\subsection{Ending a line: bars}
+	\subsection{Ending a line: bars}\todo{the bar command}
 	
 	
 	\begin{center}
@@ -113,29 +113,29 @@
 	
 	The only way to end a line in the score is with a bar. Any other way may cause visual errors (see subsection \ref{overflow}).
 	
-	\subsection{The \texttt{$\backslash$Space} command}
+	\subsection{The \texttt{\textbackslash Space} command}
 	The \verb|\Space| command is not only used when no bar is needed. It may also be used to input \textit{extra} space between symbols. The default space is 2 (which is the default space between symbols in general), but it may be any whole number (see subsection \ref{space}).
 	
 	\begin{center}
 		\begin{mousik}
 			\Bar
-			\Text{\hspace*{-40pt}$\backslash$\texttt{Space[-1]}}
+			\Text{\hspace*{-40pt}\texttt{\textbackslash Space[-1]}}
 			\Space[-1]
 			
 			\Bar
-			\Text[-0.5]{\hspace*{-25pt}$\backslash$\texttt{Space[0]}}
+			\Text[-0.5]{\hspace*{-25pt}\texttt{\textbackslash Space[0]}}
 %			\Space[0]
 			
 			\Bar
-			\Text{\hspace*{-10pt}$\backslash$\texttt{Space[1]}}
+			\Text{\hspace*{-10pt}\texttt{\textbackslash Space[1]}}
 			\Space[1]
 			
 			\Bar
-			\Text{\hspace*{10pt}$\backslash$\texttt{Space}}
+			\Text{\hspace*{10pt}\texttt{\textbackslash Space}}
 			\Space
 			
 			\Bar
-			\Text{\hspace*{20pt}$\backslash$\texttt{Space[3]}}
+			\Text{\hspace*{20pt}\texttt{\textbackslash Space[3]}}
 			\Space[3]
 			
 			\FinalBar
@@ -143,7 +143,7 @@
 	\end{center}
 	
 	\section{Common symbols}
-	\subsection{The \texttt{$\backslash$Clef} command}
+	\subsection{The \texttt{\textbackslash Clef} command}
 	Clefs might be used at any moment on the score, although they are automatically printed if an overflow happens (see subsection \ref{overflow}).
 	
 	\begin{itemize}
@@ -154,26 +154,26 @@
 	
 	\begin{center}
 		\begin{mousik}
-			\Clef{1}
-			\Clef{2}
-			\Clef{3}
-			\Clef{4}
-			\Clef{11}
-			\Clef{12}
-			\Clef{13}
-			\Clef{14}
-			\Clef{15}
+			\ClefMX{1}
+			\ClefMX{2}
+			\ClefMX{3}
+			\ClefMX{4}
+			\ClefMX{11}
+			\ClefMX{12}
+			\ClefMX{13}
+			\ClefMX{14}
+			\ClefMX{15}
 			\FinalBar
 		\end{mousik}
 	\end{center}
 	
-	\subsection{The \texttt{$\backslash$TimeS} command}
+	\subsection{The \texttt{\textbackslash TimeS} command}
 	Time signatures might be used at any moment on the score. \verb|\TimeSig{2}{4}| will draw a 2 by 4 time signature. Any number or symbol can be written inside the brackets.
 	
-	Also \verb|\TimeSig[1]{}{}| will produce a \textit{common time} symbol and \verb|\TimeSig[2]{}{}| will produce an \textit{alla breve} symbol. % TODO
+	Also \verb|\TimeSig[1]{}{}| will produce a \textit{common time} symbol and \verb|\TimeSig[2]{}{}| will produce an \textit{alla breve} symbol. \todo{Clean up alla breve}
 	\begin{center}		
 		\begin{mousik}
-			\Clef{2}
+			\ClefMX{2}
 			
 			\TimeSig{2}{4}
 			\TimeSig{12}{8}
@@ -189,17 +189,19 @@
 	\end{center}
 	
 	\subsection{Notes and rests}
-	\subsubsection{The \texttt{$\backslash$Note} command}
+	\subsubsection{The \texttt{\textbackslash Note} command}
 	The \verb|\Note| command prints a note on the score. It accepts 2 arguments.
 	
 	The first argument is the duration of the note, from one of these: 1 (whole note / semibreve), 2 (half note / minim), 4 (quarter note / crotchet), 8 (eighth note / quaver), 16 (sixteenth note / semiquaver), 32 (thirty second note / demisemiquaver).
 	
 	\begin{center}
 		\begin{mousik}
-			\Clef{2}
+			\ClefMX{2}
 			\foreach \i in {1,2,4,8,16,32} {
-				\Text{\i}
-				\Note{\i}{6}
+				\Text[-0.75]{\i}
+				\Note{\i}{5}
+				\Chord
+				\Swap\Note{\i}{2}
 			}
 			\FinalBar
 		\end{mousik}
@@ -209,7 +211,7 @@
 	
 	\begin{center}
 		\begin{mousik}
-			\Clef{2}
+			\ClefMX{2}
 			\foreach \n in {0,...,9} {
 				\Text{\n}
 				\Note{4}{\n}
@@ -218,32 +220,38 @@
 		\end{mousik}
 	\end{center}
 	
-	\subsubsection{The \texttt{$\backslash$PolyNote} command}
+	\subsubsection{The \texttt{\textbackslash PolyNote} command}\todo{fuse note and polynote together}
 	
-	The \verb|\PolyNote| command prints several notes tied together by a beamer. It accepts 2 arguments: the duration of the note and the list of heights separated by commas: \verb|\PolyNote{8}{6,3,6}|.
+	The \verb|\PolyNote| command prints several notes tied together by a beam. It accepts 2 arguments: the duration of the note and the list of heights separated by commas: \verb|\PolyNote{8}{6,3,6}|.
 	
-	When there are 2 notes, the beamer is diagonal; when there are more notes, the beamer becomes horizontal.
+	When there are 2 notes, the beam is diagonal; when there are more notes, the beam becomes horizontal.\todo{monotone triplets sliding beam}
 	
 	\begin{center}
 		\begin{mousik}
-			\Clef{2}
-			\foreach \i in {8,16,32} {
-				\PolyNote{\i}{3,7}
-			}
+			\ClefMX{2}
+			\PolyNote{8}{3,7}
+			\Swap\PolyNote{16}{3,7}
+			\PolyNote{32}{3,7}
 			\Bar
 			
 			\PolyNote{8}{5,1,5}
-			\PolyNote{16}{1,4,2,6}
+			\PolyNote{16}{2,4,2,6}
 			\FinalBar
 		\end{mousik}
 	\end{center}
+
+	The notes (or polynotes) go upside down when their height (or maximum height) is bigger than 6. However, for manual control, the \verb|\Swap| command might be used before them, as seen above in the second group.
 	
-	\subsubsection{The \texttt{$\backslash$Rest} command}
+	The \verb|\PolyNote| command might accept a list of durations as the first argument for a mixed beam. \todo{ta taca beams}
+	
+	\todo{numerito del tresillo}
+	
+	\subsubsection{The \texttt{\textbackslash Rest} command}
 	The \verb|\Rest| command prints a rest. It accepts its duration as an argument: 1, 2, 4, 8, 16 or 32.
 	
 	\begin{center}
 		\begin{mousik}
-			\Clef{2}
+			\ClefMX{2}
 			\foreach \i in {1,2,4,8,16,32} {
 				\Rest{\i}
 			}
@@ -251,7 +259,7 @@
 		\end{mousik}
 	\end{center}
 	
-	\subsubsection{The \texttt{$\backslash$Dot} command}
+	\subsubsection{The \texttt{\textbackslash Dot} command}
 	
 	The \verb|\Dot| command prints any amount of dots in front of a note or rest. It accepts an optional argument and a compulsory argument.
 	
@@ -259,7 +267,7 @@
 	
 	\begin{center}
 		\begin{mousik}		
-			\Clef{2}
+			\ClefMX{2}
 			
 			\TTT{Dot\{5\}}
 			\TTT[-0.5]{Note\{4\}\{5\}}
@@ -277,17 +285,17 @@
 		\end{mousik}
 	\end{center}
 	
-	\subsubsection{The \texttt{$\backslash$Chord} command}
+	\subsubsection{The \texttt{\textbackslash Chord} command}
 	
 	Chords may be obtained by means of the \verb|\Chord| command. It accepts an optional argument: the number of notes to step backwards \textemdash mostly for the \verb|\PolyNote| command\textemdash\ with 1 as default.
 	
 	The best way to use it is to call the \verb|\Note| or \verb|\PolyNote| commands with the highest notes; then call the \verb|\Chord| command; then call the \verb|\Note| or \verb|\PolyNote| commands with the duration 4 of a quarter note, to print them on top.
 	
-	If the stem needs to be longer, the user may need the \verb|\Enlarge| command, which accepts as arguments the 2 heights of both notes.	
+	If the stem needs to be longer, the user may need the \verb|\Enlarge| command, which accepts as arguments the 2 heights of both notes.
 	
 	\begin{center}
 		\begin{mousik}
-			\Clef{2}
+			\ClefMX{2}
 			
 			\TTT{Note\{1\}\{6\}}
 			\TTT[-0.5]{Chord}
@@ -296,16 +304,16 @@
 			\Chord
 			\Note{1}{4}
 			
-			\Space[3]
+			\Space[5]	
 			
-			\TTT{Note\{16\}\{7\}}
+			\TTT{Swap\textbackslash Note\{16\}\{7\}}
 			\TTT[-0.5]{Chord}
-			\TTT[-1]{Enlarge\{7\}\{0\}}
-			\TTT[-1.5]{Note\{4\}\{0\}}
-			\Note{16}{7}
+			\TTT[-1]{Swap\textbackslash Enlarge\{7\}\{0\}}
+			\TTT[-1.5]{Swap\textbackslash Note\{4\}\{0\}}
+			\Swap\Note{16}{7}
 			\Chord
-			\Enlarge{7}{0}
-			\Note{4}{0}
+			\Swap\Enlarge{7}{0}
+			\Swap\Note{4}{0}
 			
 			\FinalBar
 		\end{mousik}
@@ -315,7 +323,7 @@
 	
 	\begin{center}
 		\begin{mousik}
-			\Clef{2}
+			\ClefMX{2}
 			
 			\TTT{PolyNote\{8\}\{5,4\}}
 			\TTT[-0.5]{Chord[2]}
@@ -348,7 +356,7 @@
 		\end{mousik}
 	\end{center}
 	
-	\subsection{The \texttt{$\backslash$Acc} command}
+	\subsection{The \texttt{\textbackslash Acc} command}
 	The \verb|Acc| command prints an accidental before any note. It accepts 2 arguments.
 	
 	The first argument is the type of accidental:
@@ -362,34 +370,39 @@
 		\end{itemize}
 	\end{multicols}
 
-	The second argument is the height of the symbol. For usage related to the \verb|\PolyNote| command, an optional argument might be used before the other two, but it is still experimental. % TODO
+	The second argument is the height of the symbol. For usage related to the \verb|\PolyNote|, the \verb|\Space| command is still useful.
 	
 	\begin{center}
 		\begin{mousik}
-			\Clef{2}	
+			\ClefMX{2}	
 			\foreach \a in {-2,-1,0,1,2} {
+				\Text{\a}
 				\Acc{\a}{5}
 				\Note{4}{5}
 			}
 			\Bar
 			
-			\TTT{Acc[+0.25]\{-1\}\{2\}}			
-			\TTT[-0.5]{PolyNote\{8\}\{6,2\}}
-			\Acc[+0.25]{-1}{2}		
+			\TTT{Space[1]}
+			\TTT[-0.5]{Acc\{-1\}\{2\}}	
+			\TTT[-1]{Space[-1]}			
+			\TTT[-1.5]{PolyNote\{8\}\{6,2\}}
+			\Space[1]
+			\Acc{-1}{2}
+			\Space[-1]
 			\PolyNote{8}{5,2}
 			
 			\FinalBar
 		\end{mousik}
 	\end{center}
 	
-	\subsection{The \texttt{$\backslash$Key} command}
+	\subsection{The \texttt{\textbackslash Key} command}
 	The \verb|\Key| command prints the key at any moment on the score, although they are automatically printed if an overflow happens (see subsection \ref{overflow}).
 	
 	It accepts an argument: a positive whole number from 1 to 7 for sharps \sharp, and a negative whole number from -1 to -7 for flats \flat.
 	
 	\begin{center}
 		\begin{mousik}
-			\Clef{2}
+			\ClefMX{2}
 			\foreach \k in {-1,...,-7} {
 				\Key{\k}
 				\Bar
@@ -397,7 +410,7 @@
 		\end{mousik}
 		
 		\begin{mousik}
-			\Clef{2}	
+			\ClefMX{2}	
 			\foreach \k in {1,...,7} {
 				\Key{\k}
 				\Bar
@@ -405,12 +418,12 @@
 		\end{mousik}
 	\end{center}
 	
-	\subsection{The \texttt{$\backslash$NoKey} command}
+	\subsection{The \texttt{\textbackslash NoKey} command}
 	The \verb|\NoKey| command is the same as the \verb|\Key| command, but it prints naturals \natural\ instead of sharps or flats.
 	
 	\begin{center}
 		\begin{mousik}
-			\Clef{2}
+			\ClefMX{2}
 			\foreach \k in {-1,...,-7} {
 				\NoKey{\k}
 				\Bar
@@ -418,7 +431,7 @@
 		\end{mousik}
 		
 		\begin{mousik}
-			\Clef{2}	
+			\ClefMX{2}	
 			\foreach \k in {1,...,7} {
 				\NoKey{\k}
 				\Bar
@@ -431,7 +444,7 @@
 	\begin{multicols}{2}
 		\begin{center}
 			\begin{mousik}
-				\Clef{4}
+				\ClefMX{4}
 				\Key{1}
 				\TimeSig[2]{}{}
 				
@@ -454,13 +467,13 @@
   \end{mousik}
 \end{lstlisting}
 	\end{multicols}
-	
-	\subsection{The \texttt{$\backslash$Text} command}
+
+	\subsection{The \texttt{\textbackslash Text} command}
 	The \verb|\Text| command allows the printing of any text string, including dynamics and lyrics. It has a compulsory argument, but also an optional one where the user may choose the height of the string: \verb|\Text[2]{\it rit.}|.
 	
 	\begin{center}
 		\begin{mousik}
-			\Clef{2}
+			\ClefMX{2}
 			\Key{-3}
 			\TimeSig{2}{4}
 			
@@ -483,12 +496,14 @@
 			\FinalBar
 		\end{mousik}
 	\end{center}
+
+	\todo{explain ligaduras}
 	
 	\section{Observations} \label{errors}	
 	\subsection{Overflow of lines} \label{overflow}
 	
 	\begin{mousik}
-		\Clef{2}
+		\ClefMX{2}
 		\foreach \i in {2,4} {
 			\foreach \n in {0,...,4} {
 				\Note{\i}{\n}
@@ -497,24 +512,41 @@
 		}
 	\end{mousik}
 	
-	\begin{mousik}
-		\Clef{2}
-		\Key{2}
-		\Space[1]
-		\foreach \i in {2,4} {
-			\foreach \n in {0,...,4} {
-				\Note{\i}{\n}
-				\Bar
-			}
-		}
-	\end{mousik}
-
-
 	\subsection{How do spaces work?}\label{space}
 	
-	Spaces serve as the manual progression of an invisible cursor during the printing. A negative 
+	Spaces serve as the manual progression of an invisible cursor during the printing. A negative \todo{explain spaces}
 	
-	\section{The package code}	
+	\subsection{title}
+	\todo[inline]{Be careful not to use any package that oversteps the alto bla bla such as musixtex \textbackslash ClefMX vs \textbackslash Clef}
+	
+	\section{A very long and complete example}
+	\todo{explain indent}
+	\todo{aumentar longitud}
+	\begin{mousik}[4]
+	\ClefMX{2}
+	\Key{-1}
+	\TimeSig{6}{8}
+		\Note{8}{12}
+	\Bar
+		\PolyNote{8}{12,11,12}
+		\PolyNote{8}{10,9,10}
+	\Bar
+		\Space[2]\Acc{1}{7}\Space[-1]
+		\PolyNote{8}{8,7,8}
+		\PolyNote{8}{5,8,10}
+	\Bar
+		\PolyNote{8}{4,9,11}
+		\PolyNote{8}{5,10,9}
+		\Bar
+		\PolyNote{8}{10,11,9}
+		\Dot{9}
+		\Note{4}{8}
+		
+		\FinalBar
+	\end{mousik}
+
+
+	\section{The package code}	\todo{beautiful code}
 	\lstset{
 		language=[Latex]Tex,
 		%
@@ -535,12 +567,6 @@
 		tabsize=4,
 	}
 	\lstinputlisting{mousik.sty}
-	
-	% Plica al revés
-	% Clean up +0.25
-	% Clean up alla breve
-	% Longitud score
-	% LR repeat bar
 	
 \end{document}
 	

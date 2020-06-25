@@ -1,21 +1,23 @@
 \contentsline {section}{\numberline {1}Introduction}{2}{section.1}
 \contentsline {section}{\numberline {2}The \texttt {mousik} environment}{2}{section.2}
 \contentsline {subsection}{\numberline {2.1}Ending a line: bars}{3}{subsection.2.1}
-\contentsline {subsection}{\numberline {2.2}The \texttt {$\delimiter "026E30F $Space} command}{3}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.2}The \texttt {\textbackslash Space} command}{3}{subsection.2.2}
 \contentsline {section}{\numberline {3}Common symbols}{3}{section.3}
-\contentsline {subsection}{\numberline {3.1}The \texttt {$\delimiter "026E30F $Clef} command}{3}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}The \texttt {$\delimiter "026E30F $TimeS} command}{4}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.1}The \texttt {\textbackslash Clef} command}{3}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}The \texttt {\textbackslash TimeS} command}{4}{subsection.3.2}
 \contentsline {subsection}{\numberline {3.3}Notes and rests}{4}{subsection.3.3}
-\contentsline {subsubsection}{\numberline {3.3.1}The \texttt {$\delimiter "026E30F $Note} command}{4}{subsubsection.3.3.1}
-\contentsline {subsubsection}{\numberline {3.3.2}The \texttt {$\delimiter "026E30F $PolyNote} command}{4}{subsubsection.3.3.2}
-\contentsline {subsubsection}{\numberline {3.3.3}The \texttt {$\delimiter "026E30F $Rest} command}{5}{subsubsection.3.3.3}
-\contentsline {subsubsection}{\numberline {3.3.4}The \texttt {$\delimiter "026E30F $Dot} command}{5}{subsubsection.3.3.4}
-\contentsline {subsubsection}{\numberline {3.3.5}The \texttt {$\delimiter "026E30F $Chord} command}{5}{subsubsection.3.3.5}
-\contentsline {subsection}{\numberline {3.4}The \texttt {$\delimiter "026E30F $Acc} command}{6}{subsection.3.4}
-\contentsline {subsection}{\numberline {3.5}The \texttt {$\delimiter "026E30F $Key} command}{7}{subsection.3.5}
-\contentsline {subsection}{\numberline {3.6}The \texttt {$\delimiter "026E30F $NoKey} command}{7}{subsection.3.6}
-\contentsline {subsection}{\numberline {3.7}The \texttt {$\delimiter "026E30F $Text} command}{8}{subsection.3.7}
+\contentsline {subsubsection}{\numberline {3.3.1}The \texttt {\textbackslash Note} command}{4}{subsubsection.3.3.1}
+\contentsline {subsubsection}{\numberline {3.3.2}The \texttt {\textbackslash PolyNote} command}{4}{subsubsection.3.3.2}
+\contentsline {subsubsection}{\numberline {3.3.3}The \texttt {\textbackslash Rest} command}{5}{subsubsection.3.3.3}
+\contentsline {subsubsection}{\numberline {3.3.4}The \texttt {\textbackslash Dot} command}{5}{subsubsection.3.3.4}
+\contentsline {subsubsection}{\numberline {3.3.5}The \texttt {\textbackslash Chord} command}{6}{subsubsection.3.3.5}
+\contentsline {subsection}{\numberline {3.4}The \texttt {\textbackslash Acc} command}{6}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.5}The \texttt {\textbackslash Key} command}{7}{subsection.3.5}
+\contentsline {subsection}{\numberline {3.6}The \texttt {\textbackslash NoKey} command}{7}{subsection.3.6}
+\contentsline {subsection}{\numberline {3.7}The \texttt {\textbackslash Text} command}{8}{subsection.3.7}
 \contentsline {section}{\numberline {4}Observations}{8}{section.4}
 \contentsline {subsection}{\numberline {4.1}Overflow of lines}{8}{subsection.4.1}
-\contentsline {subsection}{\numberline {4.2}How do spaces work?}{8}{subsection.4.2}
-\contentsline {section}{\numberline {5}The package code}{8}{section.5}
+\contentsline {subsection}{\numberline {4.2}How do spaces work?}{9}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}title}{9}{subsection.4.3}
+\contentsline {section}{\numberline {5}A very long and complete example}{9}{section.5}
+\contentsline {section}{\numberline {6}The package code}{9}{section.6}
