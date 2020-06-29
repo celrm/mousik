@@ -1,23 +1,25 @@
-\contentsline {section}{\numberline {1}Introduction}{2}{section.1}
-\contentsline {section}{\numberline {2}The \texttt {mousik} environment}{2}{section.2}
-\contentsline {subsection}{\numberline {2.1}Ending a line: bars}{3}{subsection.2.1}
-\contentsline {subsection}{\numberline {2.2}The \texttt {\textbackslash Space} command}{3}{subsection.2.2}
-\contentsline {section}{\numberline {3}Common symbols}{3}{section.3}
-\contentsline {subsection}{\numberline {3.1}The \texttt {\textbackslash Clef} command}{3}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}The \texttt {\textbackslash TimeS} command}{4}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}Notes and rests}{4}{subsection.3.3}
-\contentsline {subsubsection}{\numberline {3.3.1}The \texttt {\textbackslash Note} command}{4}{subsubsection.3.3.1}
-\contentsline {subsubsection}{\numberline {3.3.2}The \texttt {\textbackslash PolyNote} command}{4}{subsubsection.3.3.2}
-\contentsline {subsubsection}{\numberline {3.3.3}The \texttt {\textbackslash Rest} command}{5}{subsubsection.3.3.3}
-\contentsline {subsubsection}{\numberline {3.3.4}The \texttt {\textbackslash Dot} command}{5}{subsubsection.3.3.4}
-\contentsline {subsubsection}{\numberline {3.3.5}The \texttt {\textbackslash Chord} command}{6}{subsubsection.3.3.5}
-\contentsline {subsection}{\numberline {3.4}The \texttt {\textbackslash Acc} command}{6}{subsection.3.4}
-\contentsline {subsection}{\numberline {3.5}The \texttt {\textbackslash Key} command}{7}{subsection.3.5}
-\contentsline {subsection}{\numberline {3.6}The \texttt {\textbackslash NoKey} command}{7}{subsection.3.6}
-\contentsline {subsection}{\numberline {3.7}The \texttt {\textbackslash Text} command}{8}{subsection.3.7}
-\contentsline {section}{\numberline {4}Observations}{8}{section.4}
-\contentsline {subsection}{\numberline {4.1}Overflow of lines}{8}{subsection.4.1}
-\contentsline {subsection}{\numberline {4.2}How do spaces work?}{9}{subsection.4.2}
-\contentsline {subsection}{\numberline {4.3}title}{9}{subsection.4.3}
-\contentsline {section}{\numberline {5}A very long and complete example}{9}{section.5}
-\contentsline {section}{\numberline {6}The package code}{9}{section.6}
+\contentsline {section}{\numberline {1}Introduction}{3}{section.1}
+\contentsline {section}{\numberline {2}The \texttt {mousik} environment}{3}{section.2}
+\contentsline {section}{\numberline {3}Available commands}{4}{section.3}
+\contentsline {subsection}{\numberline {3.1}\texttt {\textbackslash Bar}}{4}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}\texttt {\textbackslash Space}}{4}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}\texttt {\textbackslash Clef}}{4}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}\texttt {\textbackslash TimeSig}}{5}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.5}Notes and rests}{5}{subsection.3.5}
+\contentsline {subsubsection}{\numberline {3.5.1}\texttt {\textbackslash Note}}{5}{subsubsection.3.5.1}
+\contentsline {subsubsection}{\numberline {3.5.2}\texttt {\textbackslash Rest}}{6}{subsubsection.3.5.2}
+\contentsline {subsubsection}{\numberline {3.5.3}\texttt {\textbackslash Chord}}{6}{subsubsection.3.5.3}
+\contentsline {subsection}{\numberline {3.6}Keys and accidentals}{7}{subsection.3.6}
+\contentsline {subsubsection}{\numberline {3.6.1}\texttt {\textbackslash Acc}}{7}{subsubsection.3.6.1}
+\contentsline {subsubsection}{\numberline {3.6.2}\texttt {\textbackslash Key}}{8}{subsubsection.3.6.2}
+\contentsline {subsubsection}{\numberline {3.6.3}\texttt {\textbackslash NoKey}}{8}{subsubsection.3.6.3}
+\contentsline {subsection}{\numberline {3.7}Other symbols}{9}{subsection.3.7}
+\contentsline {subsubsection}{\numberline {3.7.1}\texttt {\textbackslash Dot}}{9}{subsubsection.3.7.1}
+\contentsline {subsubsection}{\numberline {3.7.2}\texttt {\textbackslash Tied}}{9}{subsubsection.3.7.2}
+\contentsline {subsubsection}{\numberline {3.7.3}The \texttt {slurred} environment}{9}{subsubsection.3.7.3}
+\contentsline {subsection}{\numberline {3.8}\texttt {\textbackslash Text} and \texttt {\textbackslash Dynamics}}{10}{subsection.3.8}
+\contentsline {section}{\numberline {4}Observations}{10}{section.4}
+\contentsline {subsection}{\numberline {4.1}Overflow of lines}{10}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}How do spaces work?}{10}{subsection.4.2}
+\contentsline {section}{\numberline {5}A very long and complete example}{11}{section.5}
+\contentsline {section}{\numberline {6}The package code}{12}{section.6}

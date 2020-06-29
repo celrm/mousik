@@ -1,23 +1,25 @@
 \BOOKMARK [1][-]{section.1}{Introduction}{}% 1
-\BOOKMARK [1][-]{section.2}{The\040mousik\040environment}{}% 2
-\BOOKMARK [2][-]{subsection.2.1}{Ending\040a\040line:\040bars}{section.2}% 3
-\BOOKMARK [2][-]{subsection.2.2}{The\040\\Space\040command}{section.2}% 4
-\BOOKMARK [1][-]{section.3}{Common\040symbols}{}% 5
-\BOOKMARK [2][-]{subsection.3.1}{The\040\\Clef\040command}{section.3}% 6
-\BOOKMARK [2][-]{subsection.3.2}{The\040\\TimeS\040command}{section.3}% 7
-\BOOKMARK [2][-]{subsection.3.3}{Notes\040and\040rests}{section.3}% 8
-\BOOKMARK [3][-]{subsubsection.3.3.1}{The\040\\Note\040command}{subsection.3.3}% 9
-\BOOKMARK [3][-]{subsubsection.3.3.2}{The\040\\PolyNote\040command}{subsection.3.3}% 10
-\BOOKMARK [3][-]{subsubsection.3.3.3}{The\040\\Rest\040command}{subsection.3.3}% 11
-\BOOKMARK [3][-]{subsubsection.3.3.4}{The\040\\Dot\040command}{subsection.3.3}% 12
-\BOOKMARK [3][-]{subsubsection.3.3.5}{The\040\\Chord\040command}{subsection.3.3}% 13
-\BOOKMARK [2][-]{subsection.3.4}{The\040\\Acc\040command}{section.3}% 14
-\BOOKMARK [2][-]{subsection.3.5}{The\040\\Key\040command}{section.3}% 15
-\BOOKMARK [2][-]{subsection.3.6}{The\040\\NoKey\040command}{section.3}% 16
-\BOOKMARK [2][-]{subsection.3.7}{The\040\\Text\040command}{section.3}% 17
-\BOOKMARK [1][-]{section.4}{Observations}{}% 18
-\BOOKMARK [2][-]{subsection.4.1}{Overflow\040of\040lines}{section.4}% 19
-\BOOKMARK [2][-]{subsection.4.2}{How\040do\040spaces\040work?}{section.4}% 20
-\BOOKMARK [2][-]{subsection.4.3}{title}{section.4}% 21
-\BOOKMARK [1][-]{section.5}{A\040very\040long\040and\040complete\040example}{}% 22
-\BOOKMARK [1][-]{section.6}{The\040package\040code}{}% 23
+\BOOKMARK [1][-]{section.2}{The mousik environment}{}% 2
+\BOOKMARK [1][-]{section.3}{Available commands}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{\134Bar}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{\134Space}{section.3}% 5
+\BOOKMARK [2][-]{subsection.3.3}{\134Clef}{section.3}% 6
+\BOOKMARK [2][-]{subsection.3.4}{\134TimeSig}{section.3}% 7
+\BOOKMARK [2][-]{subsection.3.5}{Notes and rests}{section.3}% 8
+\BOOKMARK [3][-]{subsubsection.3.5.1}{\134Note}{subsection.3.5}% 9
+\BOOKMARK [3][-]{subsubsection.3.5.2}{\134Rest}{subsection.3.5}% 10
+\BOOKMARK [3][-]{subsubsection.3.5.3}{\134Chord}{subsection.3.5}% 11
+\BOOKMARK [2][-]{subsection.3.6}{Keys and accidentals}{section.3}% 12
+\BOOKMARK [3][-]{subsubsection.3.6.1}{\134Acc}{subsection.3.6}% 13
+\BOOKMARK [3][-]{subsubsection.3.6.2}{\134Key}{subsection.3.6}% 14
+\BOOKMARK [3][-]{subsubsection.3.6.3}{\134NoKey}{subsection.3.6}% 15
+\BOOKMARK [2][-]{subsection.3.7}{Other symbols}{section.3}% 16
+\BOOKMARK [3][-]{subsubsection.3.7.1}{\134Dot}{subsection.3.7}% 17
+\BOOKMARK [3][-]{subsubsection.3.7.2}{\134Tied}{subsection.3.7}% 18
+\BOOKMARK [3][-]{subsubsection.3.7.3}{The slurred environment}{subsection.3.7}% 19
+\BOOKMARK [2][-]{subsection.3.8}{\134Text and \134Dynamics}{section.3}% 20
+\BOOKMARK [1][-]{section.4}{Observations}{}% 21
+\BOOKMARK [2][-]{subsection.4.1}{Overflow of lines}{section.4}% 22
+\BOOKMARK [2][-]{subsection.4.2}{How do spaces work?}{section.4}% 23
+\BOOKMARK [1][-]{section.5}{A very long and complete example}{}% 24
+\BOOKMARK [1][-]{section.6}{The package code}{}% 25
