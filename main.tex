@@ -1,6 +1,9 @@
 \documentclass[]{article}
 
-\usepackage{listings}
+\usepackage{listings}\usepackage{courier}
+\lstset{
+	literate={≡}{{$\equiv$}}1
+}
 \usepackage{hyperref}
 \usepackage{multicol}
 \usepackage{parskip}
@@ -55,87 +58,91 @@
 	
 	The \textsf{mousik} package is perfect for short, one line music fragments. It may be used for longer scores, but there are more adaptable and lighter packages than this one. However, in spite of its compactness, the package is quite complete and versatile, but easy to learn and use.
 	
-	\todo[inline,color=green]{piano scores}
-	\todo[inline,color=orange!50]{options (also for packages)}
-	\todo[color=yellow]{indent}
-	\todo[color=yellow]{aumentar longitud}
-	
 	\section{The \texttt{mousik} environment}
 	The way to draw a score is by means of the \texttt{mousik} environment.
 	
 	\begin{center}
 		\begin{mousik}
-			\Clef{2}
+			\Clef
 			\Key{-3}
 			\TimeSig{4}{4}
 			
-			\Note{1}{5}
-			\Chord
-			
-			\Acc{0}{9}
-			\Note{1}{9}
+			\Rest{8}
+			\Note{16}{7,6}
+			\Note{|=,-,=|}{5,2,5}			
 			\Bar
 			
-			\Rest{8}
-			\Note{8}{5,2,5}
+			\Note{1}{5}
+			\Chord			
+			\Acc{0}{9}
+			\Note{1}{9}
+			
 			\Bar[|.]
 		\end{mousik}
 	\end{center}
 	
 	\begin{lstlisting}[basicstyle=\ttfamily]
 		  \begin{mousik}
-			\Clef{2}
-			\Key{-3}
-			\TimeSig{4}{4}
-			
-			\Note{1}{5}
-			\Chord
-			\Acc{0}{9}
-			\Note{1}{9}
-			\Bar
-			
-			\Rest{8}
-			\Note{8}{5,2,5}
-			\Bar[|.]
+		     \Clef
+		     \Key{-3}
+		     \TimeSig{4}{4}
+		  
+		     \Rest{8}
+		     \Note{16}{7,6}
+		     \Note{|=,-,=|}{5,2,5}			
+		     \Bar
+		  
+		     \Note{1}{5}
+		     \Chord			
+		     \Acc{0}{9}
+		     \Note{1}{9}
+		  
+		     \Bar[|.]
 		  \end{mousik}
 	\end{lstlisting}
+	
+	\subsection{Options}
+	
+	\todo[inline,color=orange!50]{options (also for packages)}
+	\todo[color=yellow]{indent}
+	\todo[color=yellow]{aumentar longitud}
+	\todo[color=green]{piano scores}
+	\todo[color=yellow]{space between notes is weird}
 	
 	\newpage
 	\section{Available commands}
 	
 	\subsection{\texttt{\textbackslash Bar}}
-	The \verb|\Bar| command prints a bar on the score. It has an optional argument depending on the type of bar, with default \texttt{|}, the single bar (\verb+\Bar = \Bar[|]+).
+	The \verb|\Bar| command prints a bar on the score. It has an optional argument depending on the type of bar, with default \texttt{|}, the single bar (\verb+\Bar+ = \verb+\Bar[|]+).
 	
 	\begin{center}
 		\begin{mousik}
-%			\TTT{Bar}
 			\Text{\ttfamily[|]}
 			\Bar
 			\Space[1]
 			
-%			\TTT{Bar[||]}
 			\Text{\ttfamily[||]}
 			\Bar[||]
 			\Space[1]
 			
-%			\TTT{Bar[|.]}
 			\Text{\ttfamily[|.]}
 			\Bar[|.]
 			\Space[1]
 			
-%			\TTT{Bar[|:]}
 			\Text{\ttfamily[|:]}
 			\Bar[|:]
 			\Space[1]
 			
-%			\TTT{Bar[:|:]}
 			\Text{\ttfamily[:|:]}
 			\Bar[:|:]
 			\Space[1]
 			
-%			\TTT{Bar[:|]}
 			\Text{\ttfamily[:|]}
 			\Bar[:|]
+			\Space[1]
+			
+			\Text{\ttfamily[:]}
+			\Bar[:]
 			\Space[1]
 			
 			\TTT{Space}
@@ -180,34 +187,37 @@
 	\end{center}
 	
 	\subsection{\texttt{\textbackslash Clef}}
-	Clefs might be used at any moment on the score, although they are automatically printed if an overflow happens (see subsection \ref{overflow}).
+	Clefs might be used at any moment on the score, although they are automatically printed if an overflow happens (see subsection \ref{overflow}). The \verb|\Clef| command has an optional argument which corresponds to its type; the Treble Clef is the default (\verb|\Clef| = \verb|\Clef[2]|).\todo[color=green]{octaves}
 	
-	\begin{itemize}
-		\item \verb|\Clef{1}| and \verb|\Clef{2}| are Treble Clefs in the first and second lines.
-		\item \verb|\Clef{3}| and \verb|\Clef{4}| are Bass Clefs in the third and fourth lines.
-		\item \verb|\Clef{11}|, \verb|\Clef{12}|, \verb|\Clef{13}|, \verb|\Clef{14}| and \verb|\Clef{15}| are Alto Clefs in each of the five lines.
-	\end{itemize}
+%	\begin{itemize}
+%		\item \verb|\Clef[1]| and \verb|\Clef[2]| are Treble Clefs in the first and second lines.
+%		\item \verb|\Clef[3]| and \verb|\Clef[4]| are Bass Clefs in the third and fourth lines.
+%		\item \verb|\Clef[11]|, \verb|\Clef[12]|, \verb|\Clef[13]|, \verb|\Clef[14]| and \verb|\Clef[15]| are Alto Clefs in each of the five lines.
+%		\item \verb|\Clef[0]| is a Neutral Clef.
+%	\end{itemize}
 	
 	\begin{center}
 		\begin{mousik}
-			\Text{\quad\texttt{1}}
-			\Clef{1}
-			\Text{\quad\texttt{2}}
-			\Clef{2}
-			\Text{\quad\texttt{3}}
-			\Clef{3}
-			\Text{\quad\texttt{4}}
-			\Clef{4}
-			\Text{\quad\texttt{11}}
-			\Clef{11}
-			\Text{\quad\texttt{12}}
-			\Clef{12}
-			\Text{\quad\texttt{13}}
-			\Clef{13}
-			\Text{\quad\texttt{14}}
-			\Clef{14}
-			\Text{\quad\texttt{15}}
-			\Clef{15}
+			\Text{\quad\texttt{[1]}}
+			\Clef[1]
+			\Text{\quad\texttt{[2]}}
+			\Clef
+			\Text{\quad\texttt{[3]}}
+			\Clef[3]
+			\Text{\quad\texttt{[4]}}
+			\Clef[4]
+			\Text{\quad\texttt{[11]}}
+			\Clef[11]
+			\Text{\quad\texttt{[12]}}
+			\Clef[12]
+			\Text{\quad\texttt{[13]}}
+			\Clef[13]
+			\Text{\quad\texttt{[14]}}
+			\Clef[14]
+			\Text{\quad\texttt{[15]}}
+			\Clef[15]
+			\Text{\quad\texttt{[0]}}
+			\Clef[0]
 			\Bar[|.]
 		\end{mousik}
 	\end{center}
@@ -217,7 +227,7 @@
 	Also \verb|\TimeSig{C}{}| will produce a \textit{common time} symbol and \verb+\TimeSig{C|}{}+ will produce an \textit{alla breve} symbol.
 	\begin{center}
 		\begin{mousik}
-			\Clef{2}
+			\Clef
 			
 			\TimeSig{2}{4}
 			\TimeSig{12}{8}
@@ -234,13 +244,13 @@
 	
 	\subsection{Notes and rests}
 	\subsubsection{\texttt{\textbackslash Note}}
-	The \verb|\Note| command prints a note on the score. It accepts 2 arguments.
+	The \verb|\Note| command prints a note on the score. It accepts 2 arguments. \todo{Ghost note x, hollow note o}
 	
 	The first argument is the duration of the note, from one of these:% 1 (whole note / semibreve), 2 (half note / minim), 4 (quarter note / crotchet), 8 (eighth note / quaver), 16 (sixteenth note / semiquaver), 32 (thirty second note / demisemiquaver).
 	
 	\begin{center}
 		\begin{mousik}\ttfamily
-			\Clef{2}
+			\Clef
 			\foreach \i in {1,2,4,8,16,32} {
 				\Text[-0.5]{\i}
 				\Note{\i}{5}
@@ -255,7 +265,7 @@
 	
 	\begin{center}
 		\begin{mousik}\ttfamily
-			\Clef{2}
+			\Clef
 			\foreach \n in {0,...,9} {
 				\Text{\n}
 				\Note{4}{\n}
@@ -264,37 +274,75 @@
 		\end{mousik}
 	\end{center}
 	
-	The \verb|\Note| command might also print several notes tied together with a beam. Two notes will be tied together with an oblique beam, but three or more will have a straight beam.\todo[color=yellow]{monotone triplets sliding beam}
+	The \verb|\Note| command might also print several notes tied together with a beam. Two notes will be tied together with an oblique beam, but three or more will have a straight beam.\todo[color=yellow]{monotone triplets sliding beam}\todo[color=orange!50]{fix clip}
+	
+	The notes go upside down when their height (or maximum height) is bigger than 6. However, for manual control, the \verb|\Swap| command might be used \textit{before} the note.
+	
+	To write the number of a tuplet, the \verb|\Tuplet| command might be used \textit{after} the note. It has two arguments, an optional one and a compulsory one. The optional one is the written number, which is automatically calculated by default. The compulsory one is the height.\todo[color=orange!50]{bar on tuplet, fix height}
 	
 	\begin{center}
 		\begin{mousik}
-			\Clef{2}
+			\Clef
+			
+			\TTT[-0.5]{Note\{16\}\{5,6\}}
 			\Note{16}{5,6}
+			\Space[3]
+			
+			\Space[1]\TTT[0.25]{Swap\textbackslash Note\{32\}\{5,6\}}\Space[-1]
 			\Swap\Note{32}{5,6}
+			\Space[3]
+			
+			\Space[1]\TTT[-0.5]{Note\{16\}\{7,8\}}
+			\TTT[-1]{Tuplet\{-5\}}\Space[-1]
 			\Note{8}{7,8,9}
-			\Grupetto{-5}
+			\Tuplet{-5}
+			
+			\Bar[|.]
+		\end{mousik}
+	\end{center}
+	
+	Notes with different durations that are tied together have a different syntax. Instead of using 8, 16 and 32 for the duration, each note has to be referenced with a \texttt{-}, a \texttt{=} or a $\equiv$, respectively, and additional \texttt{|} might be needed for the edges.
+	\todo[color=yellow]{explain better}
+	\todo[color=orange!50]{bigger space , ,}
+	
+	\begin{center}
+		\begin{mousik}
+			\Clef
+			
+			\Space[4]
+			\TTT{Note\{|$\equiv$,-,|=,=,=|,-,|=,$\equiv$|\}\{0,1,2,3,4,3,2,1\}}
+			\Space[-4]
+			\Note{|≡,-,|=,=,=|,-,|=,≡|}{0,1,2,3,4,3,2,1}
 			
 			\Bar[|.]
 		\end{mousik}
 	\end{center}
 
-	The notes go upside down when their height (or maximum height) is bigger than 6. However, for manual control, the \verb|\Swap| command might be used before the note, as seen above in the second group.
-	
-	To write the grupetto number of a tuplet, the \verb|\Grupetto| command might be used \textit{after} the note. It has two arguments, an optional one and a compulsory one. The optional one is the written number, which is automatically calculated by default. The compulsory one is the height: \verb|\Grupetto{-5}|.\todo[color=orange!50]{bar on grupetto}
-	
-	
-	\todo[inline,color=orange]{ta taca beams}
+	To be able to write the $\equiv$ as a symbol on the .tex file, I usually copy and paste it wherever I need it. Nonetheless, an alternative keyboard-friendly input that is equally valid is using \texttt{/$\!$/$\!$/} instead of $\equiv$.
 	
 	\subsubsection{\texttt{\textbackslash Rest}}
 	The \verb|\Rest| command prints a rest. It accepts its duration as an argument: 1, 2, 4, 8, 16 or 32.
 	
 	\begin{center}
 		\begin{mousik}\ttfamily
-			\Clef{2}
+			\Clef
 			\foreach \i in {1,2,4,8,16,32} {
 				\Text{\i}
 				\Rest{\i}
 			}
+			\Bar[|.]
+		\end{mousik}
+	\end{center}
+
+	If a multimeasure rest is needed \textemdash where the rest lasts an arbitrary amount of bars\textemdash~an optional argument accepts a \texttt{*}.
+	
+	\begin{center}
+		\begin{mousik}\ttfamily
+			\Clef
+			
+			\Space[1]\Text{\quad\texttt{\textbackslash Rest[*]\{17\}}}\Space[-1]
+			\Rest[*]{17}
+			
 			\Bar[|.]
 		\end{mousik}
 	\end{center}
@@ -309,7 +357,7 @@
 	
 	\begin{center}
 		\begin{mousik}
-			\Clef{2}
+			\Clef
 			
 			\TTT{Note\{1\}\{6\}}
 			\TTT[-0.5]{Chord}
@@ -333,11 +381,11 @@
 		\end{mousik}
 	\end{center}
 		
-	For extreme uses of the command, extra \verb|\Space| commands might be needed, as seen here:
+	For extreme uses of the command, extra \verb|\Space| commands might be needed.
 	
 	\begin{center}
 		\begin{mousik}
-			\Clef{2}
+			\Clef
 			
 			\TTT{Note\{8\}\{5,4\}}
 			\TTT[-0.5]{Chord[2]}
@@ -373,25 +421,23 @@
 	\subsection{Keys and accidentals}
 	
 	\subsubsection{\texttt{\textbackslash Acc}}
-	The \verb|Acc| command prints an accidental \textit{before} a note. It accepts 2 arguments.
+	The \verb|Acc| command prints an accidental before a note. It accepts 2 arguments.
 	
-	The first argument is the type of accidental:
-	\begin{multicols}{2}
-		\begin{itemize}
-			\item -2 for the \doubleflat\ double flat symbol.
-			\item -1 for the \flat\ flat symbol.
-			\item 0 for the \natural\ natural symbol.
-			\item 1 for the \sharp\ sharp symbol.
-			\item 2 for the \doublesharp\ double sharp symbol.
-		\end{itemize}
-	\end{multicols}
-
-	The second argument is the height of the symbol.
+	The first argument is the type of accidental.
+%	\begin{multicols}{2}
+%		\begin{itemize}
+%			\item -2 for the \doubleflat\ double flat symbol.
+%			\item -1 for the \flat\ flat symbol.
+%			\item 0 for the \natural\ natural symbol.
+%			\item 1 for the \sharp\ sharp symbol.
+%			\item 2 for the \doublesharp\ double sharp symbol.
+%		\end{itemize}
+%	\end{multicols}
 	
 	\begin{center}
 		\begin{mousik}
-			\Clef{2}	
-			\foreach \a in {-2,-1,0,1,2} {
+			\Clef	
+			\foreach \a in {-2,-1.5,...,2} {
 				\Text{\texttt{\a}}
 				\Acc{\a}{5}
 				\Note{4}{5}
@@ -400,11 +446,13 @@
 		\end{mousik}
 	\end{center}
 
+The second argument is the height of the symbol.
+
 When there are several notes, the \verb|\Accs| command might be useful. It accepts as an argument a list of pairs: type/height. Where there is no accidental, the spot shall be left empty.
 	
 \begin{center}
 	\begin{mousik}
-		\Clef{2}
+		\Clef
 		\Space[1]
 		\TTT{Accs\{-2/5, ,-1/0\}}
 		\TTT[-0.5]{Note\{5,3,0\}}
@@ -424,7 +472,7 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 	
 	\begin{center}
 		\begin{mousik}
-			\Clef{2}
+			\Clef
 			\foreach \k in {-1,...,-7} {
 				\Key{\k}
 				\Bar
@@ -432,7 +480,7 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 		\end{mousik}
 		
 		\begin{mousik}
-			\Clef{2}	
+			\Clef	
 			\foreach \k in {1,...,7} {
 				\Key{\k}
 				\Bar
@@ -445,7 +493,7 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 	
 	\begin{center}
 		\begin{mousik}
-			\Clef{2}
+			\Clef
 			\foreach \k in {-1,...,-7} {
 				\NoKey{\k}
 				\Bar
@@ -453,7 +501,7 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 		\end{mousik}
 		
 		\begin{mousik}
-			\Clef{2}	
+			\Clef	
 			\foreach \k in {1,...,7} {
 				\NoKey{\k}
 				\Bar
@@ -466,7 +514,7 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 	\begin{multicols}{2}
 		\begin{center}
 			\begin{mousik}
-				\Clef{4}
+				\Clef[4]
 				\Key{1}
 				\TimeSig{C|}{}
 				
@@ -479,7 +527,7 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 		
 	\begin{lstlisting}[basicstyle=\ttfamily]
   \begin{mousik}
-	\Clef{4}
+	\Clef[4]
 	\Key{1}
 	\TimeSig{C|}{}
 	
@@ -500,7 +548,7 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 	
 	\begin{center}
 		\begin{mousik}		
-			\Clef{2}
+			\Clef
 			
 			\TTT{Dot\{5\}}
 			\TTT[-0.5]{Note\{4\}\{5\}}
@@ -524,7 +572,7 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 	
 	\begin{center}
 		\begin{mousik}		
-			\Clef{2}
+			\Clef
 			\TimeSig{3}{4}
 			
 			\Rest{4}
@@ -551,16 +599,148 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 	
 	\begin{center}\todo[color=orange!50]{Fix angle}
 		\begin{mousik}
-			\Clef{2}
+			\Clef
 			
 			\begin{slurred}{5}{11}
 				\foreach\i in {5,...,11}{\Note{4}{\i}}
 			\end{slurred}
-			
+
 			\Bar[|.]
 		\end{mousik}
-	\end{center}\todo[color=yellow]{crescendo}
-\todo[color=orange]{articulation}
+	\end{center}
+
+	\subsubsection{The \texttt{Crescendo} and \texttt{Decrescendo} environments}
+	\todo[color=orange!50]{Explain crescendo}
+	\todo[color=orange!50]{Half line}
+
+	\begin{center}
+		\begin{mousik}
+			\Clef
+
+			\begin{Crescendo}[-3]
+				\foreach\i in {2,...,-1}{\Note{4}{\i}}
+			\end{Crescendo}			
+
+			\begin{Decrescendo}
+				\foreach\i in {6,...,3}{\Note{4}{\i}}
+			\end{Decrescendo}
+
+			\Bar[|.]
+		\end{mousik}
+	\end{center}
+
+	\subsubsection{Articulation}
+%	\upz{0}\quad \uppz{0}\quad \usf{0}\quad \usfz{0}\quad \fermataup{0}\quad \ust{0}\quad \upzst{0}\quad \flageolett{0}
+	
+	
+	\begin{itemize}
+		\item Staccato: \verb+{.}+
+		\item Staccatissimo: \verb+{'}+
+		\item Accent: \verb+{>}+
+		\item Tenuto: \verb+{-}+
+		\item Marcato: \verb+{^}+
+		\item Fermata: \verb+{(.)}+
+		\item Trill: \verb|{+}|
+		\item Mordent: \verb+{~}+
+		\item Lower mordent: \verb+{~|}+
+		\item Turn: \verb+{?}+
+%		\item Tremolo: \verb+{=}+
+		\\
+		
+		\item Snap: \verb+{o|}+
+		\item Open note: \verb+{o}+
+		\item Sull arco: \verb+{v}+
+		\item Giu arco: \verb+{n}+
+		
+		\item Breath: \verb+{,}+
+		\item Caesura: \verb+{||}+
+		\item Simile: \verb+{\%}+
+		\item Segno: \verb+{s\%}+
+		\item Coda: \verb|{o+}|
+		
+		\item Arpeggio: \verb+{s}+
+		\item Glissando: \verb+{/}+
+%	appoggiatura, acciaccatura
+%	octaves
+%	volta 1---2
+%	pedal, release
+\end{itemize}
+	
+	\todo[color=orange]{finish articulation}
+	
+	\begin{center}
+	\begin{mousik}
+		\Clef
+		
+		\Artic{.}{9}
+		\Note{4}{9}
+		
+		\Artic{'}{9}
+		\Note{4}{9}
+		
+		\Artic{>}{9}
+		\Note{4}{9}
+		
+		\Artic{-}{9}
+		\Note{4}{9}
+		
+		\Artic{^}{9}
+		\Note{4}{9}
+		
+		\Artic{(.)}{9}
+		\Note{4}{9}
+		
+		\Artic{+}{9}
+		\Note{4}{9}
+		
+		\Artic{~}{9}
+		\Note{4}{9}
+		
+		\Artic{~|}{9}
+		\Note{4}{9}
+		
+		\Artic{?}{9}
+		\Note{4}{9}
+		
+		\Bar[|.]
+	\end{mousik}
+	
+	\begin{mousik}
+		\Clef
+		
+		\Artic{.}{3}
+		\Note{4}{3}
+		
+		\Artic{'}{3}
+		\Note{4}{3}
+		
+		\Artic{>}{3}
+		\Note{4}{3}
+		
+		\Artic{-}{3}
+		\Note{4}{3}
+		
+		\Artic{^}{3}
+		\Note{4}{3}
+		
+		\Artic{(.)}{3}
+		\Note{4}{3}
+		
+		\Artic{+}{3}
+		\Note{4}{3}
+		
+		\Artic{~}{3}
+		\Note{4}{3}
+		
+		\Artic{~|}{3}
+		\Note{4}{3}
+		
+		\Artic{?}{3}
+		\Note{4}{3}
+		
+		\Bar[|.]
+	\end{mousik}
+	\end{center}
 
 	\subsection{\texttt{\textbackslash Text} and \texttt{\textbackslash Dynamics}}
 	The \verb|\Text| command allows the printing of any text string. It has a compulsory argument, but also an optional one where the user may choose the height of the string: \verb|\Text[2]{\it rit.}|.
@@ -568,7 +748,7 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 	To write anything in the usual font of dynamics, the \verb|\Dynamics| command will work the same: \verb|\Dynamics[-0.5]{pp}|.
 	\begin{center}
 		\begin{mousik}
-			\Clef{2}
+			\Clef
 			\Key{-3}
 			\TimeSig{2}{4}
 			
@@ -591,12 +771,31 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 			\Bar[|.]
 		\end{mousik}
 	\end{center}
+
+\subsection{\texttt{\textbackslash Tempo}}
+The \verb|\Tempo| command prints a metronome tempo indicator. It has two arguments: the duration of the note and the numerical tempo which will be printed.
+
+\begin{center}
+\begin{mousik}
+	\Clef
+	\Tempo{8}{120}
+	\Note{4}{2}
+	\Note{4}{3}
+	\Bar
+	\Tempo[-0.1]{2}{60}
+	\Note{4}{4}
+	\Rest{4}
 	
-	\section{Observations} \label{errors}	
-	\subsection{Overflow of lines} \label{overflow}
+	\Bar[|.]
+\end{mousik}
+\end{center}
+	
+	\section{Tips and observations} \label{errors}
+	\newcommand{\sbs}[1]{\refstepcounter{subsection}\phantomsection\label{#1}\thesubsection\quad}
+	\subsection*{\sbs{overflow}Overflow of lines}
 	
 	\begin{mousik}
-		\Clef{2}
+		\Clef
 		\TimeSig{2}{4}
 		\Note{8}{0,1}
 		\Bar
@@ -607,15 +806,20 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 		\Note{8}{6,7}
 		\Bar
 		\Note{8}{8,9}
-	\end{mousik}
+	\end{mousik}\todo[color=yellow]{explain overflow}
 	
-	\subsection{How do spaces work?}\label{space}
+	\subsection*{\sbs{space}How do spaces work?}
 	
 	Spaces serve as the manual progression of an invisible cursor during the printing. A negative \todo[color=orange]{explain spaces}
 	
+	\subsection*{\sbs{command}What if it becomes too cumbersome: your own commands}
+	If a concrete rhythm is constantly used on a music piece.
+	
+	\subsection*{\sbs{tikz}On your own: working with the \textsf{tikz} package} \todo[color=green]{explain tikz}
+	
 	\section{A very long and complete example}
 %	\begin{mousik}[4]
-%	\Clef{2}
+%	\Clef
 %	\Key{-1}
 %	\TimeSig{6}{8}
 %		\Note{8}{12}
@@ -637,12 +841,11 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 %		\Bar[|.]
 %	\end{mousik}
 
-\todo[color=red]{Tempo command}
 \setcounter{Mlong}{27}
 	\begin{mousik}[1]
-		\Clef{2}
+		\Clef
 		\TimeSig{6}{4}
-		\Text[2.5]{\tikz{\Crotchet{0}}\Large\textbf{ = 62}}
+		\Tempo{4}{62}
 		
 	\Dynamics[0.25]{pp}
 	\Dot{11}
@@ -650,15 +853,15 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 	\Tie{11}
 	\Accs{,,,-1/9}
 	\Note{16}{11,12,11,9,8}
-	\Grupetto{-5}
+	\Tuplet{-5}
 	
 	\Accs{,1/7,,,-1/2}
 	\Swap\Note{16}{5,7,5,4,2}
-	\Grupetto{15}
+	\Tuplet{15}
 	
 	\Accs{0/1,-1/2,,1/4,0/5,1/7}
 	\Swap\Note{16}{1,2,4,4,5,7}
-	\Grupetto{15}
+	\Tuplet{15}
 	\Tie[2]{7}
 	
 	\Bar
@@ -670,7 +873,7 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 	% tenuto
 %	\PolyAcc[3]{-1}{5}
 	\Note{8}{7,11,5}
-	\Grupetto{-7}
+	\Tuplet{-7}
 	\Tie{5}
 	
 	\Note{2}{5}
@@ -682,28 +885,28 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 			
 	\end{mousik}
 
-\newpage
-	\section{The package code}	\todo[color=green]{beautiful code}
-	\lstset{
-		language=[Latex]Tex,
-		%
-		basicstyle=\footnotesize\sffamily,
-		keywordstyle=\footnotesize\sffamily,
-		identifierstyle=\footnotesize\sffamily,
-		commentstyle=\footnotesize\sffamily,
-		stringstyle=\footnotesize\sffamily,
-		escapechar=¬,
-		%		
-		numberstyle=\footnotesize\sffamily,%\ttfamily\tiny\color[gray]{0.3},
-		numbers=left,
-		stepnumber=2,
-		numbersep=15pt,
-		%
-		columns=flexible,
-		showstringspaces=false,
-		tabsize=4,
-	}
-	\lstinputlisting{mousik.sty}
+%\newpage
+%	\section{The package code}	\todo[color=green]{beautiful code}
+%	\lstset{
+%		language=[Latex]Tex,
+%		%
+%		basicstyle=\footnotesize\sffamily,
+%		keywordstyle=\footnotesize\sffamily,
+%		identifierstyle=\footnotesize\sffamily,
+%		commentstyle=\footnotesize\sffamily,
+%		stringstyle=\footnotesize\sffamily,
+%		escapechar=¬,
+%		%		
+%		numberstyle=\footnotesize\sffamily,%\ttfamily\tiny\color[gray]{0.3},
+%		numbers=left,
+%		stepnumber=2,
+%		numbersep=15pt,
+%		%
+%		columns=flexible,
+%		showstringspaces=false,
+%		tabsize=4,
+%	}
+%	\lstinputlisting{mousik.sty}`
 	
 \end{document}
 	

@@ -1,15 +1,21 @@
-\contentsline {todo}{\color@fb@x {}{black}{}{green}{\leavevmode {\color {green}o}}\ piano scores}{3}{section*.3}
-\contentsline {todo}{\color@fb@x {}{black}{}{orange!50}{\leavevmode {\color {orange!50}o}}\ options (also for packages)}{3}{section*.4}
-\contentsline {todo}{\color@fb@x {}{black}{}{yellow}{\leavevmode {\color {yellow}o}}\ indent}{3}{section*.5}
-\contentsline {todo}{\color@fb@x {}{black}{}{yellow}{\leavevmode {\color {yellow}o}}\ aumentar longitud}{3}{section*.6}
-\contentsline {todo}{\color@fb@x {}{black}{}{yellow}{\leavevmode {\color {yellow}o}}\ monotone triplets sliding beam}{5}{section*.7}
-\contentsline {todo}{\color@fb@x {}{black}{}{orange!50}{\leavevmode {\color {orange!50}o}}\ bar on grupetto}{6}{section*.8}
-\contentsline {todo}{\color@fb@x {}{black}{}{orange}{\leavevmode {\color {orange}o}}\ ta taca beams}{6}{section*.9}
-\contentsline {todo}{\color@fb@x {}{black}{}{green}{\leavevmode {\color {green}o}}\ maybe fix this}{7}{section*.10}
-\contentsline {todo}{\color@fb@x {}{black}{}{orange!50}{\leavevmode {\color {orange!50}o}}\ fix, add swap}{9}{section*.11}
-\contentsline {todo}{\color@fb@x {}{black}{}{orange!50}{\leavevmode {\color {orange!50}o}}\ Fix angle}{9}{section*.12}
-\contentsline {todo}{\color@fb@x {}{black}{}{yellow}{\leavevmode {\color {yellow}o}}\ crescendo}{9}{section*.13}
-\contentsline {todo}{\color@fb@x {}{black}{}{orange}{\leavevmode {\color {orange}o}}\ articulation}{9}{section*.14}
-\contentsline {todo}{\color@fb@x {}{black}{}{orange}{\leavevmode {\color {orange}o}}\ explain spaces}{10}{section*.15}
-\contentsline {todo}{\color@fb@x {}{black}{}{red}{\leavevmode {\color {red}o}}\ Tempo command}{11}{section*.16}
-\contentsline {todo}{\color@fb@x {}{black}{}{green}{\leavevmode {\color {green}o}}\ beautiful code}{12}{section*.17}
+\contentsline {todo}{\color@fb@x {}{black}{}{orange!50}{\leavevmode {\color {orange!50}o}}\ options (also for packages)}{3}{section*.3}
+\contentsline {todo}{\color@fb@x {}{black}{}{yellow}{\leavevmode {\color {yellow}o}}\ indent}{3}{section*.4}
+\contentsline {todo}{\color@fb@x {}{black}{}{yellow}{\leavevmode {\color {yellow}o}}\ aumentar longitud}{3}{section*.5}
+\contentsline {todo}{\color@fb@x {}{black}{}{green}{\leavevmode {\color {green}o}}\ piano scores}{3}{section*.6}
+\contentsline {todo}{\color@fb@x {}{black}{}{yellow}{\leavevmode {\color {yellow}o}}\ space between notes is weird}{3}{section*.7}
+\contentsline {todo}{\color@fb@x {}{black}{}{green}{\leavevmode {\color {green}o}}\ octaves}{4}{section*.8}
+\contentsline {todo}{\color@fb@x {}{black}{}{orange}{\leavevmode {\color {orange}o}}\ Ghost note x, hollow note o}{5}{section*.9}
+\contentsline {todo}{\color@fb@x {}{black}{}{yellow}{\leavevmode {\color {yellow}o}}\ monotone triplets sliding beam}{5}{section*.10}
+\contentsline {todo}{\color@fb@x {}{black}{}{orange!50}{\leavevmode {\color {orange!50}o}}\ fix clip}{5}{section*.11}
+\contentsline {todo}{\color@fb@x {}{black}{}{orange!50}{\leavevmode {\color {orange!50}o}}\ bar on tuplet, fix height}{5}{section*.12}
+\contentsline {todo}{\color@fb@x {}{black}{}{yellow}{\leavevmode {\color {yellow}o}}\ explain better}{6}{section*.13}
+\contentsline {todo}{\color@fb@x {}{black}{}{orange!50}{\leavevmode {\color {orange!50}o}}\ bigger space , ,}{6}{section*.14}
+\contentsline {todo}{\color@fb@x {}{black}{}{green}{\leavevmode {\color {green}o}}\ maybe fix this}{7}{section*.15}
+\contentsline {todo}{\color@fb@x {}{black}{}{orange!50}{\leavevmode {\color {orange!50}o}}\ fix, add swap}{9}{section*.16}
+\contentsline {todo}{\color@fb@x {}{black}{}{orange!50}{\leavevmode {\color {orange!50}o}}\ Fix angle}{10}{section*.17}
+\contentsline {todo}{\color@fb@x {}{black}{}{orange!50}{\leavevmode {\color {orange!50}o}}\ Explain crescendo}{10}{section*.18}
+\contentsline {todo}{\color@fb@x {}{black}{}{orange!50}{\leavevmode {\color {orange!50}o}}\ Half line}{10}{section*.19}
+\contentsline {todo}{\color@fb@x {}{black}{}{orange}{\leavevmode {\color {orange}o}}\ finish articulation}{11}{section*.20}
+\contentsline {todo}{\color@fb@x {}{black}{}{yellow}{\leavevmode {\color {yellow}o}}\ explain overflow}{12}{section*.23}
+\contentsline {todo}{\color@fb@x {}{black}{}{orange}{\leavevmode {\color {orange}o}}\ explain spaces}{12}{section*.26}
+\contentsline {todo}{\color@fb@x {}{black}{}{green}{\leavevmode {\color {green}o}}\ explain tikz}{12}{section*.31}

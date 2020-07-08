@@ -1,25 +1,26 @@
 \BOOKMARK [1][-]{section.1}{Introduction}{}% 1
 \BOOKMARK [1][-]{section.2}{The mousik environment}{}% 2
-\BOOKMARK [1][-]{section.3}{Available commands}{}% 3
-\BOOKMARK [2][-]{subsection.3.1}{\134Bar}{section.3}% 4
-\BOOKMARK [2][-]{subsection.3.2}{\134Space}{section.3}% 5
-\BOOKMARK [2][-]{subsection.3.3}{\134Clef}{section.3}% 6
-\BOOKMARK [2][-]{subsection.3.4}{\134TimeSig}{section.3}% 7
-\BOOKMARK [2][-]{subsection.3.5}{Notes and rests}{section.3}% 8
-\BOOKMARK [3][-]{subsubsection.3.5.1}{\134Note}{subsection.3.5}% 9
-\BOOKMARK [3][-]{subsubsection.3.5.2}{\134Rest}{subsection.3.5}% 10
-\BOOKMARK [3][-]{subsubsection.3.5.3}{\134Chord}{subsection.3.5}% 11
-\BOOKMARK [2][-]{subsection.3.6}{Keys and accidentals}{section.3}% 12
-\BOOKMARK [3][-]{subsubsection.3.6.1}{\134Acc}{subsection.3.6}% 13
-\BOOKMARK [3][-]{subsubsection.3.6.2}{\134Key}{subsection.3.6}% 14
-\BOOKMARK [3][-]{subsubsection.3.6.3}{\134NoKey}{subsection.3.6}% 15
-\BOOKMARK [2][-]{subsection.3.7}{Other symbols}{section.3}% 16
-\BOOKMARK [3][-]{subsubsection.3.7.1}{\134Dot}{subsection.3.7}% 17
-\BOOKMARK [3][-]{subsubsection.3.7.2}{\134Tied}{subsection.3.7}% 18
-\BOOKMARK [3][-]{subsubsection.3.7.3}{The slurred environment}{subsection.3.7}% 19
-\BOOKMARK [2][-]{subsection.3.8}{\134Text and \134Dynamics}{section.3}% 20
-\BOOKMARK [1][-]{section.4}{Observations}{}% 21
-\BOOKMARK [2][-]{subsection.4.1}{Overflow of lines}{section.4}% 22
-\BOOKMARK [2][-]{subsection.4.2}{How do spaces work?}{section.4}% 23
-\BOOKMARK [1][-]{section.5}{A very long and complete example}{}% 24
-\BOOKMARK [1][-]{section.6}{The package code}{}% 25
+\BOOKMARK [2][-]{subsection.2.1}{Options}{section.2}% 3
+\BOOKMARK [1][-]{section.3}{Available commands}{}% 4
+\BOOKMARK [2][-]{subsection.3.1}{\134Bar}{section.3}% 5
+\BOOKMARK [2][-]{subsection.3.2}{\134Space}{section.3}% 6
+\BOOKMARK [2][-]{subsection.3.3}{\134Clef}{section.3}% 7
+\BOOKMARK [2][-]{subsection.3.4}{\134TimeSig}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.5}{Notes and rests}{section.3}% 9
+\BOOKMARK [3][-]{subsubsection.3.5.1}{\134Note}{subsection.3.5}% 10
+\BOOKMARK [3][-]{subsubsection.3.5.2}{\134Rest}{subsection.3.5}% 11
+\BOOKMARK [3][-]{subsubsection.3.5.3}{\134Chord}{subsection.3.5}% 12
+\BOOKMARK [2][-]{subsection.3.6}{Keys and accidentals}{section.3}% 13
+\BOOKMARK [3][-]{subsubsection.3.6.1}{\134Acc}{subsection.3.6}% 14
+\BOOKMARK [3][-]{subsubsection.3.6.2}{\134Key}{subsection.3.6}% 15
+\BOOKMARK [3][-]{subsubsection.3.6.3}{\134NoKey}{subsection.3.6}% 16
+\BOOKMARK [2][-]{subsection.3.7}{Other symbols}{section.3}% 17
+\BOOKMARK [3][-]{subsubsection.3.7.1}{\134Dot}{subsection.3.7}% 18
+\BOOKMARK [3][-]{subsubsection.3.7.2}{\134Tied}{subsection.3.7}% 19
+\BOOKMARK [3][-]{subsubsection.3.7.3}{The slurred environment}{subsection.3.7}% 20
+\BOOKMARK [3][-]{subsubsection.3.7.4}{The Crescendo and Decrescendo environments}{subsection.3.7}% 21
+\BOOKMARK [3][-]{subsubsection.3.7.5}{Articulation}{subsection.3.7}% 22
+\BOOKMARK [2][-]{subsection.3.8}{\134Text and \134Dynamics}{section.3}% 23
+\BOOKMARK [2][-]{subsection.3.9}{\134Tempo}{section.3}% 24
+\BOOKMARK [1][-]{section.4}{Tips and observations}{}% 25
+\BOOKMARK [1][-]{section.5}{A very long and complete example}{}% 26

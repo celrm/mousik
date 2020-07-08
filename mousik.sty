@@ -46,6 +46,11 @@
 	\foreach\IND in {#1} {\stepcounter{Mcount}}
 }
 
+\newcommand{\MStringz}[3]{
+\ifthenelse{\equal{#1}{#2}}
+{#3}{}
+}
+
 \newcommand{\MString}[3]{
 	\ifthenelse{\equal{#1}{\string #2}}
 	{#3}{}
@@ -150,7 +155,7 @@
 %	\addtocounter{MX}{2}
 %}
 
-\newcommand{\Clef}[1]{
+\newcommand{\Clef}[1][2]{
 	\setcounter{Mclef}{#1}
 	\Adv
 	
@@ -181,6 +186,9 @@
 	\fi\ifnum#1=15
 		\node at (\theMX*0.5+0.1,-\theMY*2+1.2)
 		{{\resizebox{0.65cm}{0.8cm}{\altoclef}}};
+	\fi\ifnum#1=0
+		\draw[line width=1.5mm] (\theMX*0.5,-\theMY*2+0.2) -- (\theMX*0.5,-\theMY*2+0.6);
+		\draw[line width=1.5mm] (\theMX*0.5+0.3,-\theMY*2+0.2) -- (\theMX*0.5+0.3,-\theMY*2+0.6);
 	\fi
 	\addtocounter{MX}{2}
 }
@@ -210,13 +218,12 @@
 
 \newcommand{\Dot}[2][1]{
 	\foreach \IND in {1,...,#1}
-	{\node at (\theMX*0.5+0.1+0.15*\IND,-\theMY*2-0.21+0.1*#2)
-		{{\resizebox{0.1cm}{0.1cm}{$\bullet$}}};}
+	{\MPlaceNR[+0.15*\IND]{#2}{\resizebox{0.1cm}{0.1cm}{$\bullet$}};}
 }
 
 \newcounter{Maux}
 \newcounter{MauxB}
-\newcommand{\Grupetto}[2][]{
+\newcommand{\Tuplet}[2][]{
 	\addtocounter{MX}{-1}
 	\setcounter{Mevaluate}{\theMX}
 	\addtocounter{Mevaluate}{-\theMaux}
@@ -274,12 +281,12 @@
 	\fi
 }
 
-\newcommand{\Beam}[4]{
+\newcommand{\Beam}[5][\theMX]{
 	\ifswap\Mswap\fi
 	\ifnoswap
-		\draw[line width=1mm] (#1*0.5+0.103,-\theMY*2+#2*0.1#4) -- (\theMX*0.5-0.372,-\theMY*2+#3*0.1#4);
+		\draw[line width=1mm] (#2*0.5+0.103,-\theMY*2+#3*0.1#5) -- (#1*0.5-0.372,-\theMY*2+#4*0.1#5);
 	\else
-		\draw[line width=1mm] (#1*0.5-0.153,-\theMY*2+#2*0.1-0.5-#4) -- (\theMX*0.5-0.625,-\theMY*2+#3*0.1-0.5-#4);
+		\draw[line width=1mm] (#2*0.5-0.153,-\theMY*2+#3*0.1-0.5-#5) -- (#1*0.5-0.625,-\theMY*2+#4*0.1-0.5-#5);
 	\fi	
 	\ifswap\Mswap\fi
 }
@@ -387,6 +394,9 @@
 	\Adv\noswaptrue
 	\setcounter{Maux}{\theMX}
 	
+	\MCount{#1}\setcounter{Mduration}{\theMcount}
+\ifnum\theMduration=1
+	
 	\ifnum#1=1
 		\foreach\IND in {#2} {\Semibreve{\IND}\stepcounter{MX}}
 	\else\ifnum#1=2
@@ -405,6 +415,10 @@
 			\MFlatNote{#1}{#2}
 		\fi\fi\fi
 	\fi\fi\fi
+	
+\else\MCount{#2}\ifnum\theMduration=\theMcount
+	\MMixedNote{#1}{#2}
+\fi\fi
 
 	\setcounter{MX}{\theMaux}
 	\foreach\IND in {#2} {
@@ -415,17 +429,74 @@
 
 \newcounter{MMdur}
 \newcommand{\MMixedNote}[2]{
-%	\foreach\INDd in {#1} {
-%		\Max{\INDd}
-%	}
-%	\setcounter{MMdur}{\theMMax}
-%	\MHeads{#2}
-%	
-%	\setcounter{Mfirst}{-1}
-%	\ifnum\theMMdur=16
-%		\foreach \INDi
-%	{}{}
-%	\fi
+	\setcounter{Mduration}{8}
+	\foreach\INDd in {#1} {
+		\ifnum\theMduration<16
+			\MStringz{\INDd}{=}{\setcounter{Mduration}{16}}
+			\MStringz{\INDd}{=|}{\setcounter{Mduration}{16}}
+			\MStringz{\INDd}{|=}{\setcounter{Mduration}{16}}
+		\fi\ifnum\theMduration<32
+			\MStringz{\INDd}{≡}{\setcounter{Mduration}{32}}
+			\MStringz{\INDd}{≡|}{\setcounter{Mduration}{32}}
+			\MStringz{\INDd}{|≡}{\setcounter{Mduration}{32}}
+		\fi
+	}
+	
+	\MHeads{#2}
+	\ifnum\theMmax<6
+		\ifswap\setcounter{Mevaluate}{\theMmin}
+		\else\setcounter{Mevaluate}{\theMmax}\fi
+	\else\Mswap
+		\ifswap\setcounter{Mevaluate}{\theMmax}
+		\else\setcounter{Mevaluate}{\theMmin}\fi
+	\fi
+	
+	\setcounter{MX}{\theMaux}
+	\foreach\IND in {#2} {
+		\ifnum\theMduration<16
+			\Menlarge[0.4]{\IND}{\theMevaluate}
+		\fi\ifnum\theMduration=16
+			\Menlarge[0.5]{\IND}{\theMevaluate}
+		\fi\ifnum\theMduration=32
+			\Menlarge[0.6]{\IND}{\theMevaluate}
+		\fi
+		\stepcounter{MX}
+	}
+	
+	\ifnum\theMduration<16
+		\Beam{\theMaux}{\theMevaluate}{\theMevaluate}{+0.4}
+	\fi\ifnum\theMduration=16
+		\Beam{\theMaux}{\theMevaluate}{\theMevaluate}{+0.5}
+	
+		\setcounter{MX}{\theMaux}
+		\setcounter{Mfirst}{-50}
+		\foreach\INDd in {#1} {
+			\stepcounter{MX}
+			\MStringz{\INDd}{=}{\Beam[-0.275+\theMX]{-0.25+\theMX}{\theMevaluate}{\theMevaluate}{+0.35}}
+			\MStringz{\INDd}{=|}{\Beam[-0.275+\theMX]{-0.5+\theMX}{\theMevaluate}{\theMevaluate}{+0.35}}
+			\MStringz{\INDd}{|=}{\Beam[\theMX]{-0.25+\theMX}{\theMevaluate}{\theMevaluate}{+0.35}}
+		}
+	
+	\fi\ifnum\theMduration=32
+		\Beam{\theMaux}{\theMevaluate}{\theMevaluate}{+0.6}
+		
+		\setcounter{MX}{\theMaux}
+		\setcounter{Mfirst}{-50}
+		\foreach\INDd in {#1} {
+			\stepcounter{MX}
+			\MStringz{\INDd}{=}{\Beam[-0.275+\theMX]{-0.25+\theMX}{\theMevaluate}{\theMevaluate}{+0.45}}
+			\MStringz{\INDd}{=|}{\Beam[-0.275+\theMX]{-0.5+\theMX}{\theMevaluate}{\theMevaluate}{+0.45}}
+			\MStringz{\INDd}{|=}{\Beam[\theMX]{-0.25+\theMX}{\theMevaluate}{\theMevaluate}{+0.45}}
+			\MStringz{\INDd}{≡}
+			{\Beam[-0.275+\theMX]{-0.25+\theMX}{\theMevaluate}{\theMevaluate}{+0.45}
+				\Beam[-0.275+\theMX]{-0.25+\theMX}{\theMevaluate}{\theMevaluate}{+0.3}}
+			\MStringz{\INDd}{≡|}
+			{\Beam[-0.275+\theMX]{-0.5+\theMX}{\theMevaluate}{\theMevaluate}{+0.45}
+				\Beam[-0.275+\theMX]{-0.5+\theMX}{\theMevaluate}{\theMevaluate}{+0.3}}
+			\MStringz{\INDd}{|≡}{\Beam[\theMX]{-0.25+\theMX}{\theMevaluate}{\theMevaluate}{+0.45}
+				\Beam[\theMX]{-0.25+\theMX}{\theMevaluate}{\theMevaluate}{+0.3}}
+		}
+	\fi
 }
 
 \newcommand{\MHeads}[1]{	
@@ -500,51 +571,116 @@
 	\fi
 }
 
-\newcommand{\Rest}[1]{
+\newcommand{\Rest}[2][]{
 	\Adv
 	
-	\ifnum#1=1
+\ifx&#1&
+	
+	\ifnum#2=1
 		\node at (\theMX*0.5,-\theMY*2+0.52) 
 		{\resizebox{0.3cm}{0.15cm}{\GaPa}};
-	\fi\ifnum#1=2
+	\fi\ifnum#2=2
 		\node at (\theMX*0.5,-\theMY*2+0.42) 
 		{\resizebox{0.3cm}{0.15cm}{\HaPa}};
-	\fi\ifnum#1=4
+	\fi\ifnum#2=4
 		\node at (\theMX*0.5,-\theMY*2+0.4) 
 		{\resizebox{0.3cm}{0.7cm}{\ViPa}};
-	\fi\ifnum#1=8
+	\fi\ifnum#2=8
 		\node at (\theMX*0.5,-\theMY*2+0.32) 
 		{\resizebox{0.3cm}{0.45cm}{\AcPa}};
-	\fi\ifnum#1=16
+	\fi\ifnum#2=16
 		\node at (\theMX*0.5,-\theMY*2+0.3) 
 		{\resizebox{0.35cm}{0.525cm}{\SePa}};
-	\fi\ifnum#1=32
+	\fi\ifnum#2=32
 		\node at (\theMX*0.5,-\theMY*2+0.375) 
 		{\resizebox{0.4cm}{0.6cm}{\ZwPa}};
 	\fi
+	
+\else
+	\node at (\theMX*0.5+0.6,-\theMY*2+1.1) {\bf \MResize{#2}};
+	
+	\draw[line width=1.5mm] (\theMX*0.5,-\theMY*2+0.4) -- (\theMX*0.5+1.5,-\theMY*2+0.4);
+	\draw[line width=0.5mm] (\theMX*0.5,-\theMY*2+0.2) -- (\theMX*0.5,-\theMY*2+0.6);
+	\draw[line width=0.5mm] (\theMX*0.5+1.5,-\theMY*2+0.2) -- (\theMX*0.5+1.5,-\theMY*2+0.6);
+	\addtocounter{MX}{2}
+\fi
 	
 	\addtocounter{MX}{2}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newcommand{\MAcc}[3][-0.25]{
-	\ifnum#2=0
-	\node at (\theMX*0.5#1,-\theMY*2-0.2+0.1*#3)
-	{{\resizebox{0.15cm}{0.35cm}{\natural}}};
-	\fi\ifnum#2=1
-	\node at (\theMX*0.5#1,-\theMY*2-0.2+0.1*#3)
-	{{\resizebox{0.15cm}{0.35cm}{\sharp}}};
-	\fi\ifnum#2=-1
-	\node at (\theMX*0.5#1,-\theMY*2-0.1+0.1*#3) 
-	{{\resizebox{0.15cm}{0.35cm}{\flat}}};
-	\fi\ifnum#2=2
-	\node at (\theMX*0.5#1,-\theMY*2-0.205+0.1*#3)
-	{{\resizebox{0.15cm}{0.15cm}{\doublesharp}}};
-	\fi\ifnum#2=-2
-	\node at (\theMX*0.5#1,-\theMY*2-0.1+0.1*#3) 
-	{{\resizebox{0.2cm}{0.35cm}{\doubleflat}}};
+\newcommand{\MPlaceNR}[3][+0.15]{
+	\node at (0.1+\theMX*0.5#1,-\theMY*2-0.2+0.1*#2) 
+	{#3};
+}
+\newcommand{\MPlaceNL}[3][-0.25]{
+	\node at (\theMX*0.5#1,-\theMY*2-0.2+0.1*#2) 
+	{#3};
+}
+\newcommand{\MPlaceNU}[3][+0]{
+	\node at (\theMX*0.5#1,-\theMY*2+0.05+0.1*#2) 
+	{#3};
+}
+\newcommand{\MPlaceND}[3][+0]{
+\node at (\theMX*0.5#1,-\theMY*2-0.5+0.1*#2) 
+{#3};
+}
+
+\newcommand{\Artic}[2]{
+	\ifnum#2<6
+	\noswaptrue\else\noswapfalse\fi
+	\ifswap\Mswap\fi
+	
+	\ifnoswap
+	\MStringz{#1}{.}{\MPlaceND[-0.1]{#2+0.15}{\lpz{0}}}
+	\MStringz{#1}{'}{\MPlaceND[-0.1]{#2+0.1}{\lppz{0}}}
+	\MStringz{#1}{>}{\MPlaceND[-0.1]{#2+0.1}{\lsf{0}}}
+	\MStringz{#1}{-}{\MPlaceND[-0.1]{#2+0.15}{\lst{0}}}
+	\MStringz{#1}{^}{\MPlaceND[-0.1]{#2+0.05}{\lsfz{0}}}
+	\MStringz{#1}{(.)}{\MPlaceND[-0.1]{#2}{\fermatadown{0}}}
+	\MStringz{#1}{+}{\MPlaceND{#2-0.05}{\bf +}}
+	\MStringz{#1}{~}{\MPlaceND[-0.1]{#2-0.05}{\shake{0}}}
+	\MStringz{#1}{~|}{\MPlaceND[-0.1]{#2-0.05}{\mordent{0}}}
+	\MStringz{#1}{?}{\MPlaceND[-0.1]{#2-0.05}{\turn{0}}}
+	\else
+	\MStringz{#1}{.}{\MPlaceNU[-0.1]{#2-0.15}{\upz{0}}}
+	\MStringz{#1}{'}{\MPlaceNU[-0.1]{#2-0.1}{\uppz{0}}}
+	\MStringz{#1}{>}{\MPlaceNU[-0.1]{#2-0.1}{\usf{0}}}
+	\MStringz{#1}{-}{\MPlaceNU[-0.1]{#2-0.15}{\ust{0}}}
+	\MStringz{#1}{^}{\MPlaceNU[-0.1]{#2-0.05}{\usfz{0}}}
+	\MStringz{#1}{(.)}{\MPlaceNU[-0.1]{#2}{\fermataup{0}}}
+	\MStringz{#1}{+}{\MPlaceNU{#2+0.05}{\bf +}}
+	\MStringz{#1}{~}{\MPlaceNU[-0.1]{#2+0.05}{\shake{0}}}
+	\MStringz{#1}{~|}{\MPlaceNU[-0.1]{#2+0.05}{\mordent{0}}}
+	\MStringz{#1}{?}{\MPlaceNU[-0.1]{#2+0.05}{\turn{0}}}
 	\fi
+}
+
+\newcommand{\dflat}{\tikz [baseline] \node [anchor=base, inner sep=0pt] {\reflectbox{$\flat$}};}
+
+\newcommand{\sflat}{\tikz [baseline] \node [anchor=base, inner sep=0pt] {\reflectbox{$\flat$}$\flat$};}
+
+\newcommand{\dsharp}{\tikz [baseline] {%
+		\clip (-0.2em,-1ex) rectangle (-0.01em,2ex);
+		\node[anchor=base, inner sep=0pt] {$\sharp$};}
+}
+
+\newcommand{\ssharp}{\tikz[baseline] {%
+		\node[anchor=base,inner sep=0pt,name=leftsharp] at (0,0) {$\sharp$};
+		\node  at (leftsharp.east) [xshift=-0.25em, yshift=0.15ex, inner sep=0pt,anchor=west] {$\sharp$};}
+}
+
+\newcommand{\MAcc}[3][-0.25]{
+	\MString{#2}{-2}{\MPlaceNL[#1]{#3+0.1}{{\resizebox{0.2cm}{0.35cm}{\doubleflat}}}}
+	\MString{#2}{-1.5}{\MPlaceNL[#1]{#3+0.1}{{\resizebox{0.2cm}{0.35cm}{\sflat}}}}
+	\MString{#2}{-1}{\MPlaceNL[#1]{#3+0.1}{{\resizebox{0.15cm}{0.35cm}{\flat}}}}
+	\MString{#2}{-0.5}{\MPlaceNL[#1]{#3+0.1}{{\resizebox{0.15cm}{0.35cm}{\dflat}}}}
+	\MString{#2}{0}{\MPlaceNL[#1]{#3}{{\resizebox{0.15cm}{0.35cm}{\natural}}}}
+	\MString{#2}{0.5}{\MPlaceNL[#1+0.05]{#3}{{\resizebox{0.15cm}{0.35cm}{\dsharp}}}}
+	\MString{#2}{1}{\MPlaceNL[#1]{#3}{{\resizebox{0.15cm}{0.35cm}{\sharp}}}}
+	\MString{#2}{1.5}{\MPlaceNL[#1+0.05]{#3}{{\resizebox{0.2cm}{0.35cm}{\ssharp}}}}
+	\MString{#2}{2}{\MPlaceNL[#1]{#3}{{\resizebox{0.15cm}{0.15cm}{\doublesharp}}}}
 }
 \newcommand{\Acc}[2]{\MAcc{#1}{#2}}
 \newcommand{\Accs}[1]{
@@ -804,6 +940,8 @@
 	\fi
 	\MString{#1}{|}
 		{\draw (\theMX*0.5,-\theMY*2+0.8) -- (\theMX*0.5,-\theMY*2);}
+	\MString{#1}{:}
+		{\draw[dashed] (\theMX*0.5,-\theMY*2+0.8) -- (\theMX*0.5,-\theMY*2);}
 	\MString{#1}{||}
 		{\draw (\theMX*0.5-0.06,-\theMY*2+0.8) -- (\theMX*0.5-0.06,-\theMY*2);
 		\draw (\theMX*0.5+0.06,-\theMY*2+0.8) -- (\theMX*0.5+0.06,-\theMY*2);}
@@ -833,13 +971,22 @@
 		\addtocounter{MY}{1}
 		\setcounter{MX}{0}
 		\ifnum\theMclef=0\else
-		\Clef{\theMclef}
+		\Clef[\theMclef]
 		\fi
 		\ifnum\theMkey=0\else
 		\Key{\theMkey}
 		\fi
 	\fi
 	\addtocounter{Mlong}{1}
+}
+
+\newcommand{\Tempo}[3][+0]{
+	\ifnum#2=1
+	\Text[2.5#1]{\tikz[baseline]{\Note{#2}{3}}\Large\textbf{ = #3}}
+	\else
+	\Text[2.5#1]{\tikz{\Note{#2}{1}}\Large\textbf{ = #3}}
+	\fi
+	\Space[-2]
 }
 
 \newcounter{Mtied}
@@ -861,4 +1008,21 @@
 {\setcounter{Mslurred}{\theMX}\setcounter{MslurredA}{#1}\setcounter{MslurredB}{#2}}
 {\draw (\theMslurred*0.5,-\theMY*2+0.1*\theMslurredA) to[out=45,in=135] (-1+\theMX*0.5,-\theMY*2+0.1*\theMslurredB);}
 %{\draw (\theMslurred*0.5,-\theMY*2+0.1*\theMslurredA-0.35) to[out=-45,in=-135] (-1+\theMX*0.5,-\theMY*2+0.1*\theMslurredB-0.35);}
+
+\newcounter{Mcres}
+\newcounter{McresP}
+\newenvironment{Crescendo}[1][0]
+{\setcounter{Mcres}{\theMX}\setcounter{McresP}{#1}}
+{\draw (0.1+\theMcres*0.5,-\theMY*2+\theMcresP*0.1-0.5) 
+-- (-1.1+\theMX*0.5,-\theMY*2+0.1*\theMcresP+0.2-0.5);
+\draw (0.1+\theMcres*0.5,-\theMY*2+0.1*\theMcresP-0.5) 
+-- (-1.1+\theMX*0.5,-\theMY*2+0.1*\theMcresP-0.2-0.5);}
+
+
+\newenvironment{Decrescendo}[1][0]
+{\setcounter{Mcres}{\theMX}\setcounter{McresP}{#1}}
+{\draw (0.1+\theMcres*0.5,-\theMY*2+\theMcresP*0.1+0.2-0.5) 
+-- (-1.1+\theMX*0.5,-\theMY*2+0.1*\theMcresP-0.5);
+\draw (0.1+\theMcres*0.5,-\theMY*2+0.1*\theMcresP-0.2-0.5) 
+-- (-1.1+\theMX*0.5,-\theMY*2+0.1*\theMcresP-0.5);}
 
