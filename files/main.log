@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2018.11.4)  8 JUL 2020 23:57
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2018.11.4)  10 JUL 2020 00:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -217,6 +217,10 @@ Package: multicol 2016/04/07 v1.8p multicolumn formatting (FMi)
 \colbreak@box=\box53
 \mc@col@check@num=\count113
 )
+(/usr/share/texlive/texmf-dist/tex/latex/tools/enumerate.sty
+Package: enumerate 2015/07/23 v3.00 enumerate extensions (DPC)
+\@enLab=\toks16
+)
 (/usr/share/texlive/texmf-dist/tex/latex/parskip/parskip.sty
 Package: parskip 2001/04/09 non-zero parskip adjustments
 )
@@ -232,8 +236,8 @@ Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
 
 (/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex
 (/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkvutils.tex
-\XKV@toks=\toks16
-\XKV@tempa@toks=\toks17
+\XKV@toks=\toks17
+\XKV@tempa@toks=\toks18
 )
 \XKV@depth=\count114
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
@@ -264,7 +268,7 @@ Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
 (/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
 (/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
-\pgfutil@everybye=\toks18
+\pgfutil@everybye=\toks19
 \pgfutil@tempdima=\dimen120
 \pgfutil@tempdimb=\dimen121
 
@@ -302,12 +306,12 @@ Package graphics Info: Driver file: pdftex.def on input line 96.
 Package: pgfsys 2014/07/09 v3.0.1a (rcs-revision 1.48)
 
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
-\pgfkeys@pathtoks=\toks19
-\pgfkeys@temptoks=\toks20
+\pgfkeys@pathtoks=\toks20
+\pgfkeys@temptoks=\toks21
 
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeysfiltered.code.t
 ex
-\pgfkeys@tmptoks=\toks21
+\pgfkeys@tmptoks=\toks22
 ))
 \pgf@x=\dimen124
 \pgf@y=\dimen125
@@ -323,9 +327,9 @@ ex
 \c@pgf@countb=\count117
 \c@pgf@countc=\count118
 \c@pgf@countd=\count119
-\t@pgf@toka=\toks22
-\t@pgf@tokb=\toks23
-\t@pgf@tokc=\toks24
+\t@pgf@toka=\toks23
+\t@pgf@tokb=\toks24
+\t@pgf@tokc=\toks25
  (/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
 File: pgf.cfg 2008/05/14  (rcs-revision 1.7)
 )
@@ -358,9 +362,9 @@ Package: pgfcore 2010/04/11 v3.0.1a (rcs-revision 1.7)
 \pgfmath@dimen=\dimen132
 \pgfmath@count=\count122
 \pgfmath@box=\box55
-\pgfmath@toks=\toks25
-\pgfmath@stack@operand=\toks26
-\pgfmath@stack@operation=\toks27
+\pgfmath@toks=\toks26
+\pgfmath@stack@operand=\toks27
+\pgfmath@stack@operation=\toks28
 )
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code
@@ -499,8 +503,8 @@ Package: pgffor 2013/12/13 v3.0.1a (rcs-revision 1.25)
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)
 \pgffor@iter=\dimen159
 \pgffor@skip=\dimen160
-\pgffor@stack=\toks28
-\pgffor@toks=\toks29
+\pgffor@stack=\toks29
+\pgffor@toks=\toks30
 ))
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
 Package: tikz 2015/08/07 v3.0.1a (rcs-revision 1.151)
@@ -696,8 +700,8 @@ Package: cnltx-base 2015/08/17 v0.13 LaTeX tools and documenting facilities (CN
 
 (/usr/share/texlive/texmf-dist/tex/latex/pgfopts/pgfopts.sty
 Package: pgfopts 2014/07/10 v2.1a LaTeX package options with pgfkeys
-\pgfopts@list@add@a@toks=\toks30
-\pgfopts@list@add@b@toks=\toks31
+\pgfopts@list@add@a@toks=\toks31
+\pgfopts@list@add@b@toks=\toks32
 )
 (/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2015/08/02 v2.2a e-TeX tools for LaTeX (JAW)
@@ -768,7 +772,7 @@ Package: amssymb 2013/01/14 v3.01 AMS font symbols
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
-\@emptytoks=\toks32
+\@emptytoks=\toks33
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
@@ -861,7 +865,7 @@ MusiXTeX(c) 1.25 <2017-07-25>
 \lastbarpos=\skip70
 \ut@ref=\count197
 \meterskip=\skip71
-\t@c=\toks33
+\t@c=\toks34
 \clef@skip=\skip72
 \noteskip=\dimen291
 \transpose=\count198
@@ -888,7 +892,7 @@ MusiXTeX(c) 1.25 <2017-07-25>
 \@itrillevi=\skip80
 \tr@number=\count267
 \tr@nspose=\count268
-\o@swz=\toks34
+\o@swz=\toks35
 \o@number=\count269
 \y@vii=\dimen302
 \y@viii=\dimen303
@@ -910,9 +914,9 @@ MusiXTeX(c) 1.25 <2017-07-25>
 \n@pi=\count273
 \a@si=\count274
 \o@si=\count275
-\a@ci=\toks35
-\o@ci=\toks36
-\m@ti=\toks37
+\a@ci=\toks36
+\o@ci=\toks37
+\m@ti=\toks38
 \k@iii=\skip85
 \i@nii=\dimen311
 \b@xii=\dimen312
@@ -928,9 +932,9 @@ MusiXTeX(c) 1.25 <2017-07-25>
 \n@pii=\count278
 \a@sii=\count279
 \o@sii=\count280
-\a@cii=\toks38
-\o@cii=\toks39
-\m@tii=\toks40
+\a@cii=\toks39
+\o@cii=\toks40
+\m@tii=\toks41
 \k@iiii=\skip89
 \i@niii=\dimen317
 \b@xiii=\dimen318
@@ -946,9 +950,9 @@ MusiXTeX(c) 1.25 <2017-07-25>
 \n@piii=\count283
 \a@siii=\count284
 \o@siii=\count285
-\a@ciii=\toks41
-\o@ciii=\toks42
-\m@tiii=\toks43
+\a@ciii=\toks42
+\o@ciii=\toks43
+\m@tiii=\toks44
 \k@iiv=\skip93
 \i@niv=\dimen323
 \b@xiv=\dimen324
@@ -964,9 +968,9 @@ MusiXTeX(c) 1.25 <2017-07-25>
 \n@piv=\count288
 \a@siv=\count289
 \o@siv=\count290
-\a@civ=\toks44
-\o@civ=\toks45
-\m@tiv=\toks46
+\a@civ=\toks45
+\o@civ=\toks46
+\m@tiv=\toks47
 \k@iv=\skip97
 \i@nv=\dimen329
 \b@xv=\dimen330
@@ -982,9 +986,9 @@ MusiXTeX(c) 1.25 <2017-07-25>
 \n@pv=\count293
 \a@sv=\count294
 \o@sv=\count295
-\a@cv=\toks47
-\o@cv=\toks48
-\m@tv=\toks49
+\a@cv=\toks48
+\o@cv=\toks49
+\m@tv=\toks50
 \k@ivi=\skip101
 \i@nvi=\dimen335
 \b@xvi=\dimen336
@@ -1000,9 +1004,9 @@ MusiXTeX(c) 1.25 <2017-07-25>
 \n@pvi=\count298
 \a@svi=\count299
 \o@svi=\count300
-\a@cvi=\toks50
-\o@cvi=\toks51
-\m@tvi=\toks52
+\a@cvi=\toks51
+\o@cvi=\toks52
+\m@tvi=\toks53
 maxinstruments=6
 \f@xi=\dimen341
 \f@zi=\skip105
@@ -1025,91 +1029,91 @@ maxinstruments=6
 \g@hiii=\skip116
  maxgroups=3
 \s@xi=\dimen347
-\s@si=\toks53
+\s@si=\toks54
 \s@Yi=\dimen348
 \s@ai=\skip117
 \s@yi=\count301
 \s@Ni=\count302
 \s@zi=\count303
-\s@di=\toks54
+\s@di=\toks55
 \s@xii=\dimen349
-\s@sii=\toks55
+\s@sii=\toks56
 \s@Yii=\dimen350
 \s@aii=\skip118
 \s@yii=\count304
 \s@Nii=\count305
 \s@zii=\count306
-\s@dii=\toks56
+\s@dii=\toks57
 \s@xiii=\dimen351
-\s@siii=\toks57
+\s@siii=\toks58
 \s@Yiii=\dimen352
 \s@aiii=\skip119
 \s@yiii=\count307
 \s@Niii=\count308
 \s@ziii=\count309
-\s@diii=\toks58
+\s@diii=\toks59
 \s@xiv=\dimen353
-\s@siv=\toks59
+\s@siv=\toks60
 \s@Yiv=\dimen354
 \s@aiv=\skip120
 \s@yiv=\count310
 \s@Niv=\count311
 \s@ziv=\count312
-\s@div=\toks60
+\s@div=\toks61
 \s@xv=\dimen355
-\s@sv=\toks61
+\s@sv=\toks62
 \s@Yv=\dimen356
 \s@av=\skip121
 \s@yv=\count313
 \s@Nv=\count314
 \s@zv=\count315
-\s@dv=\toks62
+\s@dv=\toks63
 \s@xvi=\dimen357
-\s@svi=\toks63
+\s@svi=\toks64
 \s@Yvi=\dimen358
 \s@avi=\skip122
 \s@yvi=\count316
 \s@Nvi=\count317
 \s@zvi=\count318
-\s@dvi=\toks64
+\s@dvi=\toks65
  maxslurs=6
 \tr@xi=\skip123
-\tr@swi=\toks65
+\tr@swi=\toks66
 \tr@yi=\skip124
 \tr@xii=\skip125
-\tr@swii=\toks66
+\tr@swii=\toks67
 \tr@yii=\skip126
 \tr@xiii=\skip127
-\tr@swiii=\toks67
+\tr@swiii=\toks68
 \tr@yiii=\skip128
 \tr@xiv=\skip129
-\tr@swiv=\toks68
+\tr@swiv=\toks69
 \tr@yiv=\skip130
 \tr@xv=\skip131
-\tr@swv=\toks69
+\tr@swv=\toks70
 \tr@yv=\skip132
 \tr@xvi=\skip133
-\tr@swvi=\toks70
+\tr@swvi=\toks71
 \tr@yvi=\skip134
  maxtrills=6
 \o@xi=\skip135
 \o@yi=\skip136
-\o@swi=\toks71
+\o@swi=\toks72
 \o@xii=\skip137
 \o@yii=\skip138
-\o@swii=\toks72
+\o@swii=\toks73
 \o@xiii=\skip139
 \o@yiii=\skip140
-\o@swiii=\toks73
+\o@swiii=\toks74
 \o@xiv=\skip141
 \o@yiv=\skip142
-\o@swiv=\toks74
+\o@swiv=\toks75
 \o@xv=\skip143
 \o@yv=\skip144
-\o@swv=\toks75
+\o@swv=\toks76
 \o@xvi=\skip145
 \o@yvi=\skip146
-\o@swvi=\toks76
+\o@swvi=\toks77
 
 maxoctlines=6
 \outmux=\write4
@@ -1130,45 +1134,43 @@ MusiXLaTeX T.125 <8 April 2017>
 \c@MY=\count328
 \c@Mclef=\count329
 \c@Mkey=\count330
-\c@Mindent=\count331
-\c@Mlong=\count332
 \MWidth=\skip147
 \MHeight=\skip148
-\c@Maux=\count333
-\c@MauxB=\count334
-\c@Mduration=\count335
-\c@MMdur=\count336
-\c@Mtied=\count337
-\c@MtiedA=\count338
-\c@MtiedB=\count339
-\c@Mslurred=\count340
-\c@MslurredA=\count341
-\c@MslurredB=\count342
-\c@Mcres=\count343
-\c@McresP=\count344
+\c@Maux=\count331
+\c@MauxB=\count332
+\c@Mduration=\count333
+\c@MMdur=\count334
+\c@Mtied=\count335
+\c@MtiedA=\count336
+\c@MtiedB=\count337
+\c@Mslurred=\count338
+\c@MslurredA=\count339
+\c@MslurredB=\count340
+\c@Mcres=\count341
+\c@McresP=\count342
 )
 Package translations Info: No language package found. I am going to use `englis
-h' as default language. on input line 32.
+h' as default language. on input line 33.
  (files/main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-\c@lstlisting=\count345
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+\c@lstlisting=\count343
 \AtBeginShipoutBox=\box99
-Package hyperref Info: Link coloring OFF on input line 32.
+Package hyperref Info: Link coloring OFF on input line 33.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -1176,11 +1178,11 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count346
+\c@section@level=\count344
 )
-LaTeX Info: Redefining \ref on input line 32.
-LaTeX Info: Redefining \pageref on input line 32.
-LaTeX Info: Redefining \nameref on input line 32.
+LaTeX Info: Redefining \ref on input line 33.
+LaTeX Info: Redefining \pageref on input line 33.
+LaTeX Info: Redefining \nameref on input line 33.
 
 (files/main.out) (files/main.out)
 \@outlinefile=\write5
@@ -1189,17 +1191,17 @@ LaTeX Info: Redefining \nameref on input line 32.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count347
+\scratchcounter=\count345
 \scratchdimen=\dimen359
 \scratchbox=\box100
-\nofMPsegments=\count348
-\nofMParguments=\count349
-\everyMPshowfont=\toks77
-\MPscratchCnt=\count350
+\nofMPsegments=\count346
+\nofMParguments=\count347
+\everyMPshowfont=\toks78
+\MPscratchCnt=\count348
 \MPscratchDim=\dimen360
-\MPnumerator=\count351
-\makeMPintoPDFobject=\count352
-\everyMPtoPDFconversion=\toks78
+\MPnumerator=\count349
+\makeMPintoPDFobject=\count350
+\everyMPtoPDFconversion=\toks79
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
@@ -1224,7 +1226,7 @@ File: translations-basic-dictionary-english.trsl (english translation file `tra
 nslations-basic-dictionary')
 )
 Package translations Info: loading dictionary `translations-basic-dictionary' f
-or `english'. on input line 32.
+or `english'. on input line 33.
 \openout4 = `main.mx1'.
 
  (files/main.tdo
@@ -1244,18 +1246,18 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
  [1
 
 {/usr/share/texlive/texmf-dist/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 38.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 39.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 38.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 39.
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <8> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 38.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 39.
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <6> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 38.
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 38.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 39.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 39.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
@@ -1271,9 +1273,9 @@ LaTeX Font Info:    Font shape `OMS/pcr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 5.
 
 Underfull \hbox (badness 10000) in paragraph at lines 20--20
- [][] [][]\tenrm The \OT1/pcr/m/n/10 slurred 
+ [][] [][]\tenrm The \OT1/pcr/m/n/10 Slurred 
 
-\hbox(6.94444+0.12494)x167.5, glue set 5.6666 []
+\hbox(6.94444+0.18994)x167.5, glue set 5.6666 []
 
 
 Overfull \hbox (1.44461pt too wide) in paragraph at lines 21--21
@@ -1287,102 +1289,99 @@ Overfull \hbox (12.33353pt too wide) in paragraph at lines 21--21
 
 \hbox(6.94444+0.12494)x167.5, glue set - 1.0 []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 22--22
+ [][] [][]\OMS/cmsy/m/n/10 n\OT1/pcr/m/n/10 Artic \tenrm and 
+
+\hbox(7.5+2.5)x167.5, glue set 10.53326 []
+
 )
 \tf@toc=\write7
 \openout7 = `main.toc'.
 
  [2]
 LaTeX Font Info:    Font shape `OT1/pcr/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/pcr/b/n' tried instead on input line 61.
+(Font)              Font shape `OT1/pcr/b/n' tried instead on input line 62.
 LaTeX Font Info:    Font shape `U/musix/m/n' will be
-(Font)              scaled to size 15.0pt on input line 67.
+(Font)              scaled to size 15.0pt on input line 68.
+
+
+LaTeX Warning: The counter will not be printed.
+             The label is: - on input line 103.
+
 Package hyperref Info: bookmark level for unknown todo defaults to 0 on input l
-ine 106.
-
-
-LaTeX Warning: Marginpar on page 3 moved.
-
+ine 107.
 
 LaTeX Warning: Marginpar on page 3 moved.
 
-
-LaTeX Warning: Marginpar on page 3 moved.
-
-[3]
 LaTeX Font Info:    Font shape `OT1/pcr/bx/n' in size <12> not available
-(Font)              Font shape `OT1/pcr/b/n' tried instead on input line 115.
-
+(Font)              Font shape `OT1/pcr/b/n' tried instead on input line 112.
 
 LaTeX Font Warning: Font shape `OMS/pcr/bx/n' undefined
 (Font)              using `OMS/pcr/m/n' instead
-(Font)              for symbol `textbackslash' on input line 115.
+(Font)              for symbol `textbackslash' on input line 112.
 
 LaTeX Font Info:    Font shape `OMS/pcr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 115.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 112.
+[3]
 LaTeX Font Info:    Font shape `OMS/pcr/bx/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 155.
-[4]
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 152.
+ [4]
 LaTeX Font Info:    Font shape `OMS/pcr/bx/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 246.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 236.
 
 
-LaTeX Warning: Marginpar on page 5 moved.
+LaTeX Warning: The counter will not be printed.
+             The label is: - on input line 238.
 
 [5]
 
 LaTeX Warning: Marginpar on page 6 moved.
 
-[6] [7] [8]
+[6] [7]
+
+LaTeX Warning: Marginpar on page 8 moved.
+
+[8]
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
- [9]
-
-LaTeX Warning: Marginpar on page 10 moved.
-
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 637.
-
-Underfull \hbox (badness 10000) in paragraph at lines 646--649
-
-
-\hbox(0.0+0.0)x319.99997 []
-
-[10] [11]
-Overfull \hbox (5.12044pt too wide) in paragraph at lines 798--810
+ [9] [10] [11]
+Overfull \hbox (5.12044pt too wide) in paragraph at lines 778--790
 [][][][] 
 
 \hbox(98.57143+0.0)x345.0 []
 
+[12]
 Missing character: There is no ; in font nullfont!
 
-Overfull \hbox (62.02592pt too wide) in paragraph at lines 845--887
+Overfull \hbox (62.02592pt too wide) in paragraph at lines 824--866
 [] 
 
 \hbox(162.33159+0.0)x345.0 []
 
-[12] [13]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 911.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 911.
+[13]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 890.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 890.
  (files/main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 911.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 911.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 890.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 890.
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: <no file>.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 911.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 890.
  ) 
 Here is how much of TeX's memory you used:
- 28691 strings out of 494923
- 529511 string characters out of 6180163
- 676995 words of memory out of 5000000
- 31424 multiletter control sequences out of 15000+600000
+ 28797 strings out of 494923
+ 531471 string characters out of 6180163
+ 657591 words of memory out of 5000000
+ 31528 multiletter control sequences out of 15000+600000
  52087 words of font info for 188 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 62i,11n,80p,10359b,1172s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,11n,76p,10359b,1194s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist
@@ -1394,24 +1393,25 @@ nts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
 cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb
 ></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/s
 hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/tex
-live/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmss17.pfb></usr/share/texlive/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmss9.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmt
-i10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/public/musixtex-fonts/musix11.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/public/musixtex-fonts/musix13.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/public/musixtex-fonts/musix20.pfb></usr
-/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
-Output written on files/main.pdf (13 pages, 333376 bytes).
+live/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb></usr/share/texlive/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmss17.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmss9.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+sy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/public/musixtex-fonts/musix11.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/musixtex-fonts/musix13.pfb></usr/sha
+re/texlive/texmf-dist/fonts/type1/public/musixtex-fonts/musix20.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/urw/courier/ucrr8a.pfb>
+Output written on files/main.pdf (13 pages, 347554 bytes).
 PDF statistics:
- 420 PDF objects out of 1000 (max. 8388607)
- 375 compressed objects within 4 object streams
+ 424 PDF objects out of 1000 (max. 8388607)
+ 378 compressed objects within 4 object streams
  103 named destinations out of 1000 (max. 500000)
  221 words of extra memory for PDF output out of 10000 (max. 10000000)
 
