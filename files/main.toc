@@ -1,6 +1,5 @@
 \contentsline {section}{\numberline {1}Introduction}{3}{section.1}
 \contentsline {section}{\numberline {2}The \texttt {mousik} environment}{3}{section.2}
-\contentsline {subsection}{\numberline {2.1}Options}{3}{subsection.2.1}
 \contentsline {section}{\numberline {3}Available commands}{4}{section.3}
 \contentsline {subsection}{\numberline {3.1}\texttt {\textbackslash Bar}}{4}{subsection.3.1}
 \contentsline {subsection}{\numberline {3.2}\texttt {\textbackslash Space}}{4}{subsection.3.2}
@@ -10,13 +9,13 @@
 \contentsline {subsubsection}{\numberline {3.5.1}\texttt {\textbackslash Note}}{5}{subsubsection.3.5.1}
 \contentsline {subsubsection}{\numberline {3.5.2}\texttt {\textbackslash Rest}}{6}{subsubsection.3.5.2}
 \contentsline {subsubsection}{\numberline {3.5.3}\texttt {\textbackslash Chord}}{7}{subsubsection.3.5.3}
-\contentsline {subsection}{\numberline {3.6}Keys and accidentals}{8}{subsection.3.6}
-\contentsline {subsubsection}{\numberline {3.6.1}\texttt {\textbackslash Acc}}{8}{subsubsection.3.6.1}
+\contentsline {subsection}{\numberline {3.6}Keys and accidentals}{7}{subsection.3.6}
+\contentsline {subsubsection}{\numberline {3.6.1}\texttt {\textbackslash Acc}}{7}{subsubsection.3.6.1}
 \contentsline {subsubsection}{\numberline {3.6.2}\texttt {\textbackslash Key}}{8}{subsubsection.3.6.2}
-\contentsline {subsubsection}{\numberline {3.6.3}\texttt {\textbackslash NoKey}}{9}{subsubsection.3.6.3}
+\contentsline {subsubsection}{\numberline {3.6.3}\texttt {\textbackslash NoKey}}{8}{subsubsection.3.6.3}
 \contentsline {subsection}{\numberline {3.7}Other symbols}{9}{subsection.3.7}
 \contentsline {subsubsection}{\numberline {3.7.1}\texttt {\textbackslash Dot}}{9}{subsubsection.3.7.1}
-\contentsline {subsubsection}{\numberline {3.7.2}\texttt {\textbackslash Tie}}{10}{subsubsection.3.7.2}
+\contentsline {subsubsection}{\numberline {3.7.2}\texttt {\textbackslash Tie}}{9}{subsubsection.3.7.2}
 \contentsline {subsubsection}{\numberline {3.7.3}The \texttt {Slurred} environment}{10}{subsubsection.3.7.3}
 \contentsline {subsubsection}{\numberline {3.7.4}The \texttt {Crescendo} and \texttt {Decrescendo} environments}{10}{subsubsection.3.7.4}
 \contentsline {subsubsection}{\numberline {3.7.5}\texttt {\textbackslash Artic} and \texttt {\textbackslash Symbol}}{10}{subsubsection.3.7.5}

@@ -65,27 +65,34 @@
 	\begin{center}
 		\begin{mousik}
 			\Clef
-			\Key{-3}
+			\Key{4}
 			\TimeSig{4}{4}
 			
-			\Rest{8}
-			\Note{16}{7,6}
-			\Note{|=,-,=|}{5,2,5}			
+			\Dot{3}	\Space	\Dot{5}	\Space[-2]
+			\Note[swap]{|-,=|,|-,=|}{3,4,5,6}
+			\Note{4}{4}
+			\Note{8}{2,3}
+			\Tie[3]{3}
 			\Bar
 			
-			\Note{1}{5}
-			\Chord			
-			\Acc{0}{9}
-			\Note{1}{9}
+%			\Rest{8}
+%			\Note{16}{7,6}
+%			\Note{|=,-,=|}{5,2,5}			
+%			\Bar
+%			
+			\Note{1}{3}
+%			\Chord			
+%			\Acc{0}{8}
+%			\Note{1}{8}
 			
 			\Bar[|.]
 		\end{mousik}
-	\end{center}
+	\end{center}\todo{the lick}
 	
 	\begin{lstlisting}[basicstyle=\ttfamily]
 		  \begin{mousik}
 		     \Clef
-		     \Key{-3}
+		     \Key{2}
 		     \TimeSig{4}{4}		  
 		     \Rest{8}
 		     \Note{16}{7,6}
@@ -99,12 +106,14 @@
 		  \end{mousik}
 	\end{lstlisting}
 	
-	\subsection{Options}
+%	\subsection{Options}
+It has some options:
 	\begin{enumerate}[-]
 		\item \textsl{indent} indents the first line. Default is 0.
 		\item \textsl{long} changes the maximum width of the score. Default is 24.
 	\end{enumerate}
 \todo[color=green]{piano scores}
+\todo[color=green]{single staff}
 \todo[color=yellow]{space between notes}
 	
 	\section{Available commands}
@@ -181,34 +190,38 @@
 
 	
 	\subsection{\texttt{\textbackslash Clef}}
-	Clefs might be used at any moment on the score, although they are automatically printed if an overflow happens (see subsection \ref{overflow}). The \verb|\Clef| command has an optional argument which corresponds to its type; the Treble Clef is the default (\verb|\Clef| = \verb|\Clef[2]|).	
+	The \verb|\Clef| command might be used at any moment on the score, although they are automatically printed if an overflow happens (see subsection \ref{overflow}). It has some options:
+	\begin{enumerate}[-]
+		\item \textsl{octave} prints an octave eight on the clef. If it is an 8, it prints it above the clef; if it is a -8, it prints it below the clef. Default is 0.
+		\item \textsl{t} (type) is the type of clef. Default is 2 (the Treble Clef).
+	\end{enumerate}
 	\begin{center}
 		\begin{mousik}
-			\Text{\quad\texttt{[1]}}
-			\Clef[1]
-			\Text{\quad\texttt{[2]}}
-			\Clef
-			\Text{\quad\texttt{[3]}}
-			\Clef[3]
-			\Text{\quad\texttt{[4]}}
-			\Clef[4]
-			\Text{\quad\texttt{[11]}}
-			\Clef[11]
-			\Text{\quad\texttt{[12]}}
-			\Clef[12]
-			\Text{\quad\texttt{[13]}}
-			\Clef[13]
-			\Text{\quad\texttt{[14]}}
-			\Clef[14]
-			\Text{\quad\texttt{[15]}}
-			\Clef[15]
-			\Text{\quad\texttt{[0]}}
-			\Clef[0]
+			\Text{\quad\texttt{1}}
+			\Clef[t=1]
+			\Text{\quad\texttt{2}}
+			\Clef[t=2]
+			\Text{\quad\texttt{3}}
+			\Clef[t=3]
+			\Text{\quad\texttt{4}}
+			\Clef[t=4]
+			\Text{\quad\texttt{11}}
+			\Clef[t=11]
+			\Text{\quad\texttt{12}}
+			\Clef[t=12]
+			\Text{\quad\texttt{13}}
+			\Clef[t=13]
+			\Text{\quad\texttt{14}}
+			\Clef[t=14]
+			\Text{\quad\texttt{15}}
+			\Clef[t=15]
+			\Text{\quad\texttt{0}}
+			\Clef[t=0]
 			\Bar[|.]
 		\end{mousik}
 	\end{center}
-
-	The \verb|\Octave| command prints an eight on a previous clef. It has one argument: if it is an 8, it prints it above the clef; if it is a -8, it prints it below the clef.
+	
+%	The \verb|\Octave| command prints an eight on a previous clef. It has one argument: if it is an 8, it prints it above the clef; if it is a -8, it prints it below the clef.
 	
 	\subsection{\texttt{\textbackslash TimeSig}}
 	Time signatures might be used at any moment. \verb|\TimeSig{2}{4}| will draw a 2 by 4 time signature. Any number or symbol can be written inside the brackets.
@@ -237,9 +250,12 @@
 	The \verb|\Note| command prints a note on the score. It accepts 2 compulsory arguments, as well as some options:
 	\begin{enumerate}[-]
 		\item \textsl{beam} chooses the width of the beam. Default is 1 (mm).
+		\item \textsl{head} chooses the type of head. Default is . (round), but also x (cross) and o (hollow) are possible.
 		\item \textsl{stem} chooses the height of the stem. Default is 0.3.
-		\item \textsl{head} chooses the type of head. Default is ``." (round), but also ``x" (cross) and ``o" (hollow) are possible.
-	\end{enumerate}\todo[color=red]{type of head}
+		\item \textsl{swap} prints the note upside down. Default is false, which means up if the height is less than 6, down otherwise.
+%		\item \textsl{tuplet} prints the number of a tuplet. %It has two arguments, an optional one and a compulsory one. The optional one is the written number, which is automatically calculated by default. The compulsory one is the height.
+%		\todo[color=red]{bar on tuplet, fix height}
+	\end{enumerate}
 	
 	The first compulsory argument is the duration of the note.%, from one of these:% 1 (whole note / semibreve), 2 (half note / minim), 4 (quarter note / crotchet), 8 (eighth note / quaver), 16 (sixteenth note / semiquaver), 32 (thirty second note / demisemiquaver).
 	
@@ -250,7 +266,7 @@
 				\Text[-0.5]{\i}
 				\Note{\i}{5}
 				\Chord
-				\Swap\Note{\i}{2}
+				\Note[swap]{\i}{2}
 			}
 			\Bar[|.]
 		\end{mousik}
@@ -267,13 +283,12 @@
 			}
 			\Bar[|.]
 		\end{mousik}
-	\end{center}
+	\end{center}\todo{fix circle}
 	
-	The \verb|\Note| command might also print several notes tied together with a beam. Two notes will be tied together with an oblique beam, but three or more will have a straight beam.\todo[color=green]{monotone triplets sliding beam}
+	The \verb|\Note| command might also print several notes tied together with a beam, if the second argument is a list of durations separated by commas. Two notes will be tied together with an oblique beam, but three or more will have a straight beam.\todo[color=cyan]{monotone triplets sliding beam}
 	
-	The notes go upside down when their height (or maximum height) is bigger than 6. However, for manual control, the \verb|\Swap| command might be used \textit{before} the note.
+%	The notes go upside down when their height (or maximum height) is bigger than 6. However, for manual control, the \verb|\Swap| command might be used \textit{before} the note.
 	
-	To write the number of a tuplet, the \verb|\Tuplet| command might be used \textit{after} the note. It has two arguments, an optional one and a compulsory one. The optional one is the written number, which is automatically calculated by default. The compulsory one is the height.\todo[color=red]{bar on tuplet, fix height}
 	
 	\begin{center}
 		\begin{mousik}
@@ -283,14 +298,14 @@
 			\Note{16}{5,6}
 			\Space[3]
 			
-			\Space[1]\TTT[0.25]{Swap\textbackslash Note\{32\}\{5,6\}}\Space[-1]
-			\Swap\Note{32}{5,6}
+			\Space[1]\TTT[0.25]{Note[swap]\{32\}\{5,6\}}\Space[-1]
+			\Note[swap]{32}{5,6}
 			\Space[3]
 			
 			\Space[1]\TTT[-0.5]{Note\{8\}\{7,8,9\}}
-			\TTT[-1]{Tuplet\{-5\}}\Space[-1]
+%			\TTT[-1]{Tuplet\{-5\}}\Space[-1]
 			\Note{8}{7,8,9}
-			\Tuplet{-5}
+%			\Tuplet{-5}
 			
 			\Bar[|.]
 		\end{mousik}
@@ -329,7 +344,7 @@
 		\end{mousik}
 	\end{center}
 
-	If a multimeasure rest is needed \textemdash where the rest lasts an arbitrary amount of bars\textemdash~an optional argument accepts a \texttt{*}.
+	If a multimeasure rest is needed \textemdash where the rest lasts an arbitrary amount of bars\textemdash~an optional argument accepts a \texttt{[-]}.
 	
 	\begin{center}
 		\begin{mousik}\ttfamily
@@ -339,8 +354,8 @@
 			\Note{1}{4}	\Chord	\Note{1}{8}	\Chord	\Note{1}{-1}
 			\Bar
 			
-			\Space[1]\Text{\quad\texttt{\textbackslash Rest[*]\{17\}}}\Space[-1]
-			\Rest[*]{17}
+			\Space[1]\TTT{Rest[-]\{17\}}\Space[-1]
+			\Rest[-]{17}
 			
 			\Bar
 			\Note{1}{4}	\Chord	\Note{1}{9}	\Chord	\Note{1}{0}
@@ -350,12 +365,12 @@
 	\end{center}
 	
 	\subsubsection{\texttt{\textbackslash Chord}}
-	
+	\todo[color=cyan]{maybe fix chord}
 	Chords may be obtained by means of the \verb|\Chord| command. It accepts an optional argument: the number of notes to step backwards \textemdash mostly for the \verb|\Note| command\textemdash\ with 1 as default.
 	
 	The best way to use it is to call the \verb|\Note| command with the highest notes; then call the \verb|\Chord| command; then call the \verb|\Note| command with the duration 4 of a quarter note, to print them on top.
 	
-	If the stem needs to be longer, the user may need the \verb|\Enlarge| command, which accepts as arguments the 2 heights of both notes.
+%	If the stem needs to be longer, the user may need the \verb|\Enlarge| command, which accepts as arguments the 2 heights of both notes. \todo[color=yellow]{option as enlarge or swap in enlarge}
 	
 	\begin{center}
 		\begin{mousik}
@@ -370,14 +385,14 @@
 			
 			\Space[5]	
 			
-			\TTT{Swap\textbackslash Note\{16\}\{7\}}
+			\TTT{Note[swap]\{16\}\{7\}}
 			\TTT[-0.5]{Chord}
-			\TTT[-1]{Swap\textbackslash Enlarge\{7\}\{0\}}
-			\TTT[-1.5]{Note\{4\}\{0\}}
-			\Swap\Note{16}{7}
+%			\TTT[-1]{Swap\textbackslash Enlarge\{7\}\{0\}}
+			\TTT[-1]{Note[stem=0.5]\{4\}\{0\}}
+			\Note[swap]{16}{7}
 			\Chord
-			\Swap\Enlarge{7}{0}
-			\Note{4}{0}
+%			\Swap\Enlarge{7}{0}
+			\Note[stem=0.5]{4}{0}
 			
 			\Bar[|.]
 		\end{mousik}
@@ -510,7 +525,7 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 	\begin{multicols}{2}
 		\begin{center}
 			\begin{mousik}
-				\Clef[4]
+				\Clef[t=4]
 				\Key{1}
 				\TimeSig{C|}{}
 				
@@ -523,7 +538,7 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 		
 	\begin{lstlisting}[basicstyle=\ttfamily]
   \begin{mousik}
-	\Clef[4]
+	\Clef[t=4]
 	\Key{1}
 	\TimeSig{C|}{}
 	
@@ -538,7 +553,7 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 	
 	\subsubsection{\texttt{\textbackslash Dot}}
 	
-	The \verb|\Dot| command prints any amount of dots in front of a note or rest. It accepts an optional argument and a compulsory argument.
+	The \verb|\Dot| command prints any amount of dots in front of a note or rest. It accepts an optional argument and a compulsory argument. \todo{as an option}
 	
 	The default number of dots is 1, but it may be any whole number bigger than one. The second, compulsory argument is the height of the dot: \verb|\Dot[2]{7}|.
 	
@@ -564,7 +579,7 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 	
 	\subsubsection{\texttt{\textbackslash Tie}}
 	
-	The \verb|\Tie| command draws a tie between two notes. It has a compulsory argument, the height of both notes, and an optional one: the separation between the two notes. The default value is 2.
+	The \verb|\Tie| command draws a tie between two notes. It has a compulsory argument, the height of both notes, and an optional one: the separation between the two notes. The default value is 1.
 	
 	\begin{center}
 		\begin{mousik}		
@@ -605,7 +620,7 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 
 			\Bar[|.]
 		\end{mousik}
-	\end{center}
+	\end{center}\todo[color=red]{fixxxxmx}
 
 	\subsubsection{The \texttt{Crescendo} and \texttt{Decrescendo} environments}
 	
@@ -773,9 +788,11 @@ The \verb|\Tempo| command prints a metronome tempo indicator. It has two argumen
 	\section{Tips and observations} \label{errors}
 	\newcommand{\sbs}[1]{\refstepcounter{subsection}\phantomsection\label{#1}\thesubsection\quad}
 	\subsection*{\sbs{overflow}Overflow of lines}
+	The \textsf{mousik} package is thought to be used for small fragments of music. The environment has a maximum length allowed, and whenever it is exceeded an overflow happens. The line is broken at that exact point and, if it does not coincide with a bar, something like this may happen:
 	
 	\begin{mousik}
 		\Clef
+		\Key{-3}
 		\TimeSig{2}{4}
 		\Note{8}{0,1}
 		\Bar
@@ -786,7 +803,9 @@ The \verb|\Tempo| command prints a metronome tempo indicator. It has two argumen
 		\Note{8}{6,7}
 		\Bar
 		\Note{8}{8,9}
-	\end{mousik}\todo[color=yellow]{explain overflow}
+	\end{mousik}%\todo[color=yellow]{explain overflow}
+
+	The best way to avoid the error is by introducing extra spaces manually. The overflow will also automatically print the previous clef and key.
 	
 	\subsection*{\sbs{space}How do spaces work?}
 	
