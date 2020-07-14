@@ -65,25 +65,15 @@
 	\begin{center}
 		\begin{mousik}
 			\Clef
-			\Key{4}
 			\TimeSig{4}{4}
 			
-			\Dot{3}	\Space	\Dot{5}	\Space[-2]
-			\Note[swap]{|-,=|,|-,=|}{3,4,5,6}
-			\Note{4}{4}
-			\Note{8}{2,3}
-			\Tie[3]{3}
+			\Dots{*/1, , */3, }
+			\Note{|-,=|,|-,=|}{1,2,3,4}
+			\Note{4}{2}
+			\Note{8}{0,1}
+			\Tie[3]{1}
 			\Bar
-			
-%			\Rest{8}
-%			\Note{16}{7,6}
-%			\Note{|=,-,=|}{5,2,5}			
-%			\Bar
-%			
-			\Note{1}{3}
-%			\Chord			
-%			\Acc{0}{8}
-%			\Note{1}{8}
+			\Note{1}{1}
 			
 			\Bar[|.]
 		\end{mousik}
@@ -110,7 +100,7 @@
 It has some options:
 	\begin{enumerate}[-]
 		\item \textsl{indent} indents the first line. Default is 0.
-		\item \textsl{long} changes the maximum width of the score. Default is 24.
+		\item \textsl{long} changes the maximum width of the score. Default is 100.
 	\end{enumerate}
 \todo[color=green]{piano scores}
 \todo[color=green]{single staff}
@@ -283,19 +273,21 @@ It has some options:
 			}
 			\Bar[|.]
 		\end{mousik}
-	\end{center}\todo{fix circle}
+	\end{center}\todo[color=orange]{\href{https://tex.stackexchange.com/questions/12010/how-can-i-invert-a-clip-selection-within-tikz}{remove white}}
 	
-	The \verb|\Note| command might also print several notes tied together with a beam, if the second argument is a list of durations separated by commas. Two notes will be tied together with an oblique beam, but three or more will have a straight beam.\todo[color=cyan]{monotone triplets sliding beam}
+	The \verb|\Note| command might also print several notes tied together with a beam, if the second argument is a list of durations separated by commas. Two notes will be tied together with an oblique beam, but three or more will have a straight beam.%\todo[color=cyan]{monotone triplets sliding beam}
 	
 %	The notes go upside down when their height (or maximum height) is bigger than 6. However, for manual control, the \verb|\Swap| command might be used \textit{before} the note.
+
+\todo{tuplet}
 	
 	
 	\begin{center}
 		\begin{mousik}
 			\Clef
 			
-			\TTT[-0.5]{Note\{16\}\{5,6\}}
-			\Note{16}{5,6}
+			\TTT[-0.5]{Note[stem=0.4]\{16\}\{5,6\}}
+			\Note[stem=0.4]{16}{5,6}
 			\Space[3]
 			
 			\Space[1]\TTT[0.25]{Note[swap]\{32\}\{5,6\}}\Space[-1]
@@ -313,7 +305,6 @@ It has some options:
 	
 	Notes with different durations that are tied together have a different syntax. Instead of using 8, 16 and 32 for the duration, each note has to be referenced with a \texttt{-}, a \texttt{=} or a $\equiv$, respectively, and additional \texttt{|} might be needed for half the beam.
 	\todo[color=green]{explain better}
-	\todo[color=red]{bigger space , ,}
 	
 	\begin{center}
 		\begin{mousik}
@@ -344,7 +335,7 @@ It has some options:
 		\end{mousik}
 	\end{center}
 
-	If a multimeasure rest is needed \textemdash where the rest lasts an arbitrary amount of bars\textemdash~an optional argument accepts a \texttt{[-]}.
+	If a multimeasure rest is needed \textemdash where the rest lasts an arbitrary amount of bars\textemdash~an optional argument \textsl{multi} might be used.
 	
 	\begin{center}
 		\begin{mousik}\ttfamily
@@ -354,8 +345,8 @@ It has some options:
 			\Note{1}{4}	\Chord	\Note{1}{8}	\Chord	\Note{1}{-1}
 			\Bar
 			
-			\Space[1]\TTT{Rest[-]\{17\}}\Space[-1]
-			\Rest[-]{17}
+			\Space[1]\TTT{Rest[multi]\{17\}}\Space[-1]
+			\Rest[multi]{17}
 			
 			\Bar
 			\Note{1}{4}	\Chord	\Note{1}{9}	\Chord	\Note{1}{0}
@@ -463,6 +454,7 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 \begin{center}
 	\begin{mousik}
 		\Clef
+		
 		\Space[1]
 		\TTT{Accs\{-2/5, ,-1/0\}}
 		\TTT[-0.5]{Note\{5,3,0\}}
@@ -553,9 +545,11 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 	
 	\subsubsection{\texttt{\textbackslash Dot}}
 	
-	The \verb|\Dot| command prints any amount of dots in front of a note or rest. It accepts an optional argument and a compulsory argument. \todo{as an option}
+	The \verb|\Dot| command prints any amount of dots in front of a note or rest. It accepts an optional argument and a compulsory argument. %\todo{as an option}
 	
-	The default number of dots is 1, but it may be any whole number bigger than one. The second, compulsory argument is the height of the dot: \verb|\Dot[2]{7}|.
+	The default number of dots is 1, but, as an optional argument, $**$ will produce 2 dots. The second, compulsory argument is the height of the dot.
+	
+	When there are several notes, the \verb|\Dots| command might be useful. It accepts as an argument a list of pairs: symbols/height, where symbols might be $*$ or $**$. Where there are no dots, the spot shall be left empty.
 	
 	\begin{center}
 		\begin{mousik}		
@@ -568,10 +562,22 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 			
 			\Space[3]
 			
-			\TTT{Dot[2]\{7\}}
+			\TTT{Dot[**]\{7\}}
 			\TTT[-0.5]{Rest\{8\}}
-			\Dot[2]{7}
+			\Dot[**]{7}
 			\Rest{8}
+			
+			\Space[5]
+			
+			\TTT{Dots\{*/5, , **/3\}}
+			\TTT[-0.5]{Note\{|=,-,=|\}\{5,2,3\}}
+			
+			\Space[-1]
+			
+			\Dots{*/5, , **/3}
+			\Note{|=,-,=|}{5,2,3}
+			
+			\Space[1]
 			
 			\Bar[|.]
 		\end{mousik}
@@ -620,7 +626,7 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 
 			\Bar[|.]
 		\end{mousik}
-	\end{center}\todo[color=red]{fixxxxmx}
+	\end{center}
 
 	\subsubsection{The \texttt{Crescendo} and \texttt{Decrescendo} environments}
 	
@@ -695,7 +701,10 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 
 The second one is the height of the symbol, which might or might not be the height of the corresponding note.
 
-The \verb|\Symbol| is similar to the \verb|\Artic| command, but it only accepts the type of symbol and not the height. These are symbols that have a fixed position on the score.
+When there are several notes, the \verb|\Artics| command might be useful. It accepts as an argument a list of pairs: symbols/height. Where there are no symbols, the spot shall be left empty.
+
+
+The \verb|\Symbol| command is similar to the \verb|\Artic| command, but it only accepts the type of symbol and not the height. These are symbols that have a fixed position on the score.
 
 \begin{center}
 	\begin{mousik}
@@ -703,23 +712,23 @@ The \verb|\Symbol| is similar to the \verb|\Artic| command, but it only accepts 
 		
 		\Text[-0.65]{Breath}
 		\Text[-0.15]{\texttt{\{,\}}}
-		\Symbol{,}\Space
+		\Symbol{,}\Space[3]
 		
-		\Text[2.75]{Caesura}
-		\Text[2.25]{\texttt{\{/\}}}
-		\Symbol{/}\Space
+		\Text[-0.65]{Caesura}
+		\Text[-0.15]{\texttt{\{/\}}}
+		\Symbol{/}\Space[3]
 		
 		\Text[-0.65]{Segno}
 		\Text[-0.15]{\texttt{\{s\textbackslash\%\}}}
-		\Symbol{s\%}\Space
+		\Symbol{s\%}\Space[3]
 		
-		\Text[2.75]{Simile}
-		\Text[2.25]{\texttt{\{\textbackslash\%\}}}
-		\Symbol{\%}\Space
+		\Text[-0.65]{Simile}
+		\Text[-0.15]{\texttt{\{\textbackslash\%\}}}
+		\Symbol{\%}\Space[3]
 		
 		\Text[-0.65]{Coda}
 		\Text[-0.15]{\texttt{\{o+\}}}
-		\Symbol{o+}\Space
+		\Symbol{o+}\Space[3]
 		
 		\Text[2.75]{Pedal}
 		\Text[2.25]{\texttt{\{Ped\}}}
@@ -817,69 +826,59 @@ The \verb|\Tempo| command prints a metronome tempo indicator. It has two argumen
 	\subsection*{\sbs{tikz}On your own: working with the \textsf{tikz} package} \todo[color=green]{explain tikz}
 	
 	\section{A very long and complete example}\label{example} \todo[color=green]{choose example}
-%	\begin{mousik}[4]
-%	\Clef
-%	\Key{-1}
-%	\TimeSig{6}{8}
-%		\Note{8}{12}
-%	\Bar
-%		\Note{8}{12,11,12}
-%		\Note{8}{10,9,10}
-%	\Bar
-%		\Space[2]\Acc{1}{7}\Space[-1]
-%		\Note{8}{8,7,8}
-%		\Note{8}{5,8,10}
-%	\Bar
-%		\Note{8}{4,9,11}
-%		\Note{8}{5,10,9}
-%		\Bar
-%		\Note{8}{10,11,9}
-%		\Dot{9}
-%		\Note{4}{8}
-%		
-%		\Bar[|.]
-%	\end{mousik}
+	\begin{center}
+		\begin{mousik}[long=83.4,indent=4]
+			\Clef
+			\Key{-1}
+			\TimeSig{6}{8}
+			\Note{8}{12}
+		\Bar
+			\Note{8}{12,11,12}
+			\Note{8}{10,9,10}
+		\Bar
+			\Accs{,1/7,}
+			\Note{8}{8,7,8}
+			\Note{8}{5,8,10}
+		\Bar
+			\Note{8}{4,9,11}
+			\Note{8}{5,10,9}
+		\Bar
+			\Note{8}{10,11,9}
+			\Dot{9}
+			\Note{4}{8}
+		\Bar[|.]
+		\end{mousik}
+	\end{center}
 
-	\begin{mousik}[long=27,indent=2]
+	\begin{mousik}
 		\Clef
 		\TimeSig{6}{4}
 		\Tempo{4}{62}
 		
-	\Dynamics[0.25]{pp}
-	\Dot{11}
-	\Note{2}{11}
-	\Tie{11}
-	\Accs{,,,-1/9}
-	\Note{16}{11,12,11,9,8}
-	\Tuplet{-5}
-	
-	\Accs{,1/7,,,-1/2}
-	\Swap\Note{16}{5,7,5,4,2}
-	\Tuplet{15}
-	
-	\Accs{0/1,-1/2,,1/4,0/5,1/7}
-	\Swap\Note{16}{1,2,4,4,5,7}
-	\Tuplet{15}
-	\Tie[2]{7}
-	
+		\Dynamics[0.25]{pp}
+		\Dot{11}
+		\Note{2}{11}
+		\Tie{11}
+		\Accs{,,,-1/9}
+		\Note[tuplet]{16}{11,12,11,9,8}
+		
+		\Accs{,1/7,,,-1/2}
+		\Note[swap,tuplet]{16}{5,7,5,4,2}
+		
+		\Accs{0/1,-1/2,,1/4,0/5,1/7}
+		\Note[swap,tuplet]{16}{1,2,4,4,5,7}
+		\Tie[2]{7}
+		
 	\Bar
-	
-	\Space[1]\Dynamics[-0.5]{f}\Space[-1]
-	
-	\Space[1]\Tie[-0.5]{7}\Space[-1]
-%	\PolyAcc[2]{0}{11}
-	% tenuto
-%	\PolyAcc[3]{-1}{5}
-	\Note{8}{7,11,5}
-	\Tuplet{-7}
-	\Tie{5}
-	
-	\Note{2}{5}
-	
-	\
-	
-	
-	
+		
+		\Space[1]\Dynamics[-0.5]{f}\Space[-1]
+		
+		\Space[1]\Tie[-0.5]{7}\Space[-1]
+		\Accs{,0/11,-1/5}
+		\Artics{,-/11}
+		\Note[tuplet]{8}{7,11,5}
+		\Tie{5}		
+		\Note{2}{5}
 			
 	\end{mousik}
 

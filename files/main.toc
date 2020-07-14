@@ -15,7 +15,7 @@
 \contentsline {subsubsection}{\numberline {3.6.3}\texttt {\textbackslash NoKey}}{8}{subsubsection.3.6.3}
 \contentsline {subsection}{\numberline {3.7}Other symbols}{9}{subsection.3.7}
 \contentsline {subsubsection}{\numberline {3.7.1}\texttt {\textbackslash Dot}}{9}{subsubsection.3.7.1}
-\contentsline {subsubsection}{\numberline {3.7.2}\texttt {\textbackslash Tie}}{9}{subsubsection.3.7.2}
+\contentsline {subsubsection}{\numberline {3.7.2}\texttt {\textbackslash Tie}}{10}{subsubsection.3.7.2}
 \contentsline {subsubsection}{\numberline {3.7.3}The \texttt {Slurred} environment}{10}{subsubsection.3.7.3}
 \contentsline {subsubsection}{\numberline {3.7.4}The \texttt {Crescendo} and \texttt {Decrescendo} environments}{10}{subsubsection.3.7.4}
 \contentsline {subsubsection}{\numberline {3.7.5}\texttt {\textbackslash Artic} and \texttt {\textbackslash Symbol}}{10}{subsubsection.3.7.5}
