@@ -60,16 +60,17 @@
 	The \textsf{mousik} package is perfect for short, one line music fragments. It may be used for longer scores, but there are more adaptable and lighter packages than this one. However, in spite of its compactness, the package is quite complete and versatile, but easy to learn and use.
 	
 	\section{The \texttt{mousik} environment}
-	The way to draw a score is by means of the \texttt{mousik} environment. For a longer example, see section \ref{example}.
+	The way to draw a score is by means of the \texttt{mousik} environment. For longer examples, see section \ref{example}.
 	
 	\begin{center}
 		\begin{mousik}
-			\Clef
+			\Clef[octave=8]
 			\TimeSig{4}{4}
 			
 			\Dots{*/1, , */3, }
 			\Note{|-,=|,|-,=|}{1,2,3,4}
 			\Note{4}{2}
+			\Artic{^}{0}
 			\Note{8}{0,1}
 			\Tie[3]{1}
 			\Bar
@@ -77,21 +78,38 @@
 			
 			\Bar[|.]
 		\end{mousik}
-	\end{center}\todo{the lick}
+		\begin{mousik}
+			\Clef[t=4]
+			\TimeSig{4}{4}
+			
+			\Note{2}{13}	\Chord	\Note{2}{10}	\Chord	\Note{2}{8}
+			\Space[3]
+			
+			\Dot{13}\Note{4}{13}	\Chord	\Dot{9}\Note{4}{9}	\Chord	\Dot{7}\Note{4}{7}			
+			\Space[1]
+			
+			\Note{4}{12}\Tie[3]{12}	\Chord	\Note{4}{10}\Tie[2.5]{10}	\Chord	\Note[back]{4}{9}\Swap\Tie[2.5]{9}	\Chord	\Note{8}{7}\Swap\Tie[3]{7}
+			
+			\Bar
+			
+			\Note{1}{12}	\Chord	\Note{1}{10}	\Chord	\Note[back]{1}{9}	\Chord	\Note{1}{7}
+
+			\Bar[|.]
+		\end{mousik}
+	\end{center}
 	
 	\begin{lstlisting}[basicstyle=\ttfamily]
 		  \begin{mousik}
 		     \Clef
-		     \Key{2}
-		     \TimeSig{4}{4}		  
-		     \Rest{8}
-		     \Note{16}{7,6}
-		     \Note{|=,-,=|}{5,2,5}			
-		     \Bar		  
-		     \Note{1}{5}
-		     \Chord			
-		     \Acc{0}{9}
-		     \Note{1}{9}		  
+		     \TimeSig{2}{4}
+		     
+		     \Dots{*/1, , */3, }
+		     \Note{|-,=|,|-,=|}{1,2,3,4}
+		     \Bar
+		     
+		     \Note{4}{2}
+		     \Artic{^}{0}
+		     \Note{8}{0,1}
 		     \Bar[|.]
 		  \end{mousik}
 	\end{lstlisting}
@@ -177,7 +195,7 @@ It has some options:
 		\end{mousik}
 	\end{center}
 
-
+\todo[color=yellow]{xshift yshift}
 	
 	\subsection{\texttt{\textbackslash Clef}}
 	The \verb|\Clef| command might be used at any moment on the score, although they are automatically printed if an overflow happens (see subsection \ref{overflow}). It has some options:
@@ -275,7 +293,7 @@ It has some options:
 		\end{mousik}
 	\end{center}\todo[color=orange]{\href{https://tex.stackexchange.com/questions/12010/how-can-i-invert-a-clip-selection-within-tikz}{remove white}}
 	
-	The \verb|\Note| command might also print several notes tied together with a beam, if the second argument is a list of durations separated by commas. Two notes will be tied together with an oblique beam, but three or more will have a straight beam.%\todo[color=cyan]{monotone triplets sliding beam}
+	The \verb|\Note| command might also print several notes tied together with a beam, if the second argument is a list of heights separated by commas. Two notes will be tied together with an oblique beam, but three or more will have a straight beam.%\todo[color=cyan]{monotone triplets sliding beam}
 	
 %	The notes go upside down when their height (or maximum height) is bigger than 6. However, for manual control, the \verb|\Swap| command might be used \textit{before} the note.
 
@@ -321,6 +339,26 @@ It has some options:
 
 	To be able to write the $\equiv$ as a symbol on the .tex file, I usually copy and paste it wherever I need it. Nonetheless, an alternative keyboard-friendly input that is equally valid is using \texttt{/$\!$/$\!$/} instead of $\equiv$.
 	
+	Additionally, spaces between notes from the same group might be useful \textemdash the default space is 1. A space of 1.5 is obtained when a \texttt{!} is placed on both lists. A space of 2 is obtained when a space is placed on both lists.
+	
+	\begin{center}
+		\begin{mousik}
+			\Clef
+			
+			\Space[4]
+			\TTT{Accs\{,,!,-2/3\}}
+			\TTT[-0.5]{Note\{|=,=|,!,-, ,=|\}\{3,3,!,3, ,3\}}
+			\TTT[-1]{Space[-3]\string\Rest\{16\}\string\Space[1]}
+			\Space[-4]
+			
+			\Accs{,,!,-2/3,!,-2/3}
+			\Note{|=,=,!,=,!,=,=|}{3,3,!,3,!,3,3}
+%			\Space[-3]\Rest{16}\Space[1]
+			
+			\Bar[|.]
+		\end{mousik}
+	\end{center}\todo{fix beam =}
+
 	\subsubsection{\texttt{\textbackslash Rest}}
 	The \verb|\Rest| command prints a rest. It accepts its duration as an argument: 1, 2, 4, 8, 16 or 32.
 	
@@ -333,10 +371,13 @@ It has some options:
 			}
 			\Bar[|.]
 		\end{mousik}
-	\end{center}
+	\end{center}\todo[color=yellow]{common height units}
 
-	If a multimeasure rest is needed \textemdash where the rest lasts an arbitrary amount of bars\textemdash~an optional argument \textsl{multi} might be used.
-	
+	It also has some options:
+	\begin{enumerate}[-]
+		\item \textsl{height} moves the rest up and down. Default is 0.
+		\item \textsl{multi} transforms the rest into a multimeasure rest \textemdash where the rest lasts an arbitrary amount of bars.
+	\end{enumerate}
 	\begin{center}
 		\begin{mousik}\ttfamily
 			\Clef
@@ -431,7 +472,7 @@ It has some options:
 	\subsubsection{\texttt{\textbackslash Acc}}
 	The \verb|Acc| command prints an accidental before a note. It accepts 2 arguments.
 	
-	The first argument is the type of accidental: a number ranging from -2 to 2. The flat $\flat$ symbol might also be called with a \texttt{b} and the sharp $\sharp$ symbol might be called with \texttt{\textbackslash\#}.\todo[color=yellow]{only \# ?} \todo[color=orange]{weird width bb}
+	The first argument is the type of accidental: a number ranging from -2 to 2. The flat $\flat$ symbol might also be called with a \texttt{b} and the sharp $\sharp$ symbol might be called with \texttt{\textbackslash\#}.\todo[color=yellow]{only \# ?}
 	
 	\begin{center}
 		\begin{mousik}
@@ -459,7 +500,6 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 		\TTT{Accs\{-2/5, ,-1/0\}}
 		\TTT[-0.5]{Note\{5,3,0\}}
 		\Space[-1]
-		
 		\Accs{-2/5, ,-1/0}
 		\Note{8}{5,3,0}
 		

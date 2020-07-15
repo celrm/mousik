@@ -7,19 +7,19 @@
 \contentsline {subsection}{\numberline {3.4}\texttt {\textbackslash TimeSig}}{5}{subsection.3.4}
 \contentsline {subsection}{\numberline {3.5}Notes and rests}{5}{subsection.3.5}
 \contentsline {subsubsection}{\numberline {3.5.1}\texttt {\textbackslash Note}}{5}{subsubsection.3.5.1}
-\contentsline {subsubsection}{\numberline {3.5.2}\texttt {\textbackslash Rest}}{6}{subsubsection.3.5.2}
+\contentsline {subsubsection}{\numberline {3.5.2}\texttt {\textbackslash Rest}}{7}{subsubsection.3.5.2}
 \contentsline {subsubsection}{\numberline {3.5.3}\texttt {\textbackslash Chord}}{7}{subsubsection.3.5.3}
-\contentsline {subsection}{\numberline {3.6}Keys and accidentals}{7}{subsection.3.6}
-\contentsline {subsubsection}{\numberline {3.6.1}\texttt {\textbackslash Acc}}{7}{subsubsection.3.6.1}
+\contentsline {subsection}{\numberline {3.6}Keys and accidentals}{8}{subsection.3.6}
+\contentsline {subsubsection}{\numberline {3.6.1}\texttt {\textbackslash Acc}}{8}{subsubsection.3.6.1}
 \contentsline {subsubsection}{\numberline {3.6.2}\texttt {\textbackslash Key}}{8}{subsubsection.3.6.2}
-\contentsline {subsubsection}{\numberline {3.6.3}\texttt {\textbackslash NoKey}}{8}{subsubsection.3.6.3}
-\contentsline {subsection}{\numberline {3.7}Other symbols}{9}{subsection.3.7}
-\contentsline {subsubsection}{\numberline {3.7.1}\texttt {\textbackslash Dot}}{9}{subsubsection.3.7.1}
+\contentsline {subsubsection}{\numberline {3.6.3}\texttt {\textbackslash NoKey}}{9}{subsubsection.3.6.3}
+\contentsline {subsection}{\numberline {3.7}Other symbols}{10}{subsection.3.7}
+\contentsline {subsubsection}{\numberline {3.7.1}\texttt {\textbackslash Dot}}{10}{subsubsection.3.7.1}
 \contentsline {subsubsection}{\numberline {3.7.2}\texttt {\textbackslash Tie}}{10}{subsubsection.3.7.2}
 \contentsline {subsubsection}{\numberline {3.7.3}The \texttt {Slurred} environment}{10}{subsubsection.3.7.3}
-\contentsline {subsubsection}{\numberline {3.7.4}The \texttt {Crescendo} and \texttt {Decrescendo} environments}{10}{subsubsection.3.7.4}
-\contentsline {subsubsection}{\numberline {3.7.5}\texttt {\textbackslash Artic} and \texttt {\textbackslash Symbol}}{10}{subsubsection.3.7.5}
-\contentsline {subsection}{\numberline {3.8}\texttt {\textbackslash Text} and \texttt {\textbackslash Dynamics}}{11}{subsection.3.8}
+\contentsline {subsubsection}{\numberline {3.7.4}The \texttt {Crescendo} and \texttt {Decrescendo} environments}{11}{subsubsection.3.7.4}
+\contentsline {subsubsection}{\numberline {3.7.5}\texttt {\textbackslash Artic} and \texttt {\textbackslash Symbol}}{11}{subsubsection.3.7.5}
+\contentsline {subsection}{\numberline {3.8}\texttt {\textbackslash Text} and \texttt {\textbackslash Dynamics}}{12}{subsection.3.8}
 \contentsline {subsection}{\numberline {3.9}\texttt {\textbackslash Tempo}}{12}{subsection.3.9}
-\contentsline {section}{\numberline {4}Tips and observations}{12}{section.4}
+\contentsline {section}{\numberline {4}Tips and observations}{13}{section.4}
 \contentsline {section}{\numberline {5}A very long and complete example}{13}{section.5}

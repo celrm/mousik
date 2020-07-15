@@ -45,7 +45,7 @@
 \newcounter{Mcount}
 \newcommand{\MCount}[1]{
 	\setcounter{Mcount}{0}
-	\foreach\IND in {#1} {\stepcounter{Mcount}}
+	\foreach\IND in {#1} {\ifthenelse{\equal{\IND}{!}}{}{\stepcounter{Mcount}}}
 }
 
 \newcommand{\MStringz}[3]{
@@ -269,11 +269,12 @@
 	\Adv
 	\setcounter{Maux}{\theMX}
 	\foreach\INDp/\INDh in {#1} {
+		\ifthenelse{\equal{\INDp}{!}}{\addtocounter{MX}{\XM/4}}{
 		\MNEmpty{\INDp}{
 			\Dot[\INDp]{\INDh}
 		}
 		\addtocounter{MX}{\XM/2}
-	}
+	}}
 	\setcounter{MX}{\theMaux}
 }
 
@@ -298,20 +299,39 @@
 	\MStringz{x}{\Mhead}{\CrossHead{#1}}}
 
 \newcommand{\RoundHead}[1]{
-	\node [opacity=0.0] (tmp) at (\theMX*\MX,-\theMY*2-0.2+#1*0.1) {};
-	\fill[rotate around={16:(tmp.center)}] (\theMX*\MX-0.01,-\theMY*2-0.195+#1*0.1) ellipse (4pt and 2.75pt);}
+	\ifMnoteBack
+		\node [opacity=0.0] (tmp) at (\theMX*\MX-0.265,-\theMY*2-0.2+#1*0.1) {};
+		\fill[rotate around={16:(tmp.center)}] (\theMX*\MX-0.01-0.265,-\theMY*2-0.195+#1*0.1) ellipse (4pt and 2.75pt);
+	\else 
+		\node [opacity=0.0] (tmp) at (\theMX*\MX,-\theMY*2-0.2+#1*0.1) {};
+		\fill[rotate around={16:(tmp.center)}] (\theMX*\MX-0.01,-\theMY*2-0.195+#1*0.1) ellipse (4pt and 2.75pt);
+	\fi
+}
 
 \newcommand{\CrossHead}[1]{
-	\draw (\theMX*\MX -0.125,-\theMY*2+#1*0.1 -0.1) --
-	(\theMX*\MX +0.1,-\theMY*2+#1*0.1 -0.3);
-	\draw (\theMX*\MX +0.1,-\theMY*2+#1*0.1 -0.1) --
-	(\theMX*\MX -0.125,-\theMY*2+#1*0.1 -0.3);
+	\ifMnoteBack
+		\draw (\theMX*\MX -0.125-0.265,-\theMY*2+#1*0.1 -0.1) --
+		(\theMX*\MX +0.1-0.265,-\theMY*2+#1*0.1 -0.3);
+		\draw (\theMX*\MX +0.1-0.265,-\theMY*2+#1*0.1 -0.1) --
+		(\theMX*\MX -0.125-0.265,-\theMY*2+#1*0.1 -0.3);
+	\else 
+		\draw (\theMX*\MX -0.125,-\theMY*2+#1*0.1 -0.1) --
+		(\theMX*\MX +0.1,-\theMY*2+#1*0.1 -0.3);
+		\draw (\theMX*\MX +0.1,-\theMY*2+#1*0.1 -0.1) --
+		(\theMX*\MX -0.125,-\theMY*2+#1*0.1 -0.3);
+	\fi
 }
 
 \newcommand{\HollowHead}[1]{
-	\node [opacity=0.0] (tmp) at (\theMX*\MX,-\theMY*2-0.2+#1*0.1) {};
-	\fill[black,rotate around={16:(tmp.center)}] (\theMX*\MX-0.01,-\theMY*2-0.195+#1*0.1) ellipse (4pt and 2.75pt);
-	\fill[white,rotate around={19:(tmp.center)}] (\theMX*\MX-0.01,-\theMY*2-0.195+#1*0.1) ellipse (3.2pt and 1.35pt);
+	\ifMnoteBack
+		\node [opacity=0.0] (tmp) at (\theMX*\MX-0.265,-\theMY*2-0.2+#1*0.1) {};
+		\fill[black,rotate around={16:(tmp.center)}] (\theMX*\MX-0.01-0.265,-\theMY*2-0.195+#1*0.1) ellipse (4pt and 2.75pt);
+		\fill[white,rotate around={19:(tmp.center)}] (\theMX*\MX-0.01-0.265,-\theMY*2-0.195+#1*0.1) ellipse (3.2pt and 1.35pt);
+	\else 
+		\node [opacity=0.0] (tmp) at (\theMX*\MX,-\theMY*2-0.2+#1*0.1) {};
+		\fill[black,rotate around={16:(tmp.center)}] (\theMX*\MX-0.01,-\theMY*2-0.195+#1*0.1) ellipse (4pt and 2.75pt);
+		\fill[white,rotate around={19:(tmp.center)}] (\theMX*\MX-0.01,-\theMY*2-0.195+#1*0.1) ellipse (3.2pt and 1.35pt);
+	\fi
 }
 
 \newcommand{\Menlarge}[3][\Mstem]{
@@ -408,7 +428,11 @@
 }
 
 \newcommand{\Semibreve}[1]{
-	\node at (\theMX*\MX,-\theMY*2-0.2+#1*0.1) {\resizebox{0.3cm}{0.2cm}{\Ganz}};
+	\ifMnoteBack
+		\node at (\theMX*\MX-0.265,-\theMY*2-0.2+#1*0.1) {\resizebox{0.3cm}{0.2cm}{\Ganz}};
+	\else
+		\node at (\theMX*\MX,-\theMY*2-0.2+#1*0.1) {\resizebox{0.3cm}{0.2cm}{\Ganz}};
+	\fi
 }
 \newcommand{\Minim}[1]{
 	\HollowHead{#1}
@@ -466,28 +490,32 @@
 	\setcounter{Mmax}{-50}
 	\setcounter{Mmin}{50}
 	\foreach\IND in {#1} {
+		\ifthenelse{\equal{\IND}{!}}{\addtocounter{MX}{\XM/4}}{
 		\MNEmpty{\IND}{
-			\Head{\IND} 
+			\Head{\IND}
 			\MMax{\IND}\MMin{\IND} % max, min, first
 			\ifnum\theMfirst=-50\setcounter{Mfirst}{\IND}\fi
 		}
 		\addtocounter{MX}{\XM/2}
-	}
+	}}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Notes : everything together
 
+\newif\ifMnoteBack
 \pgfkeys{
 	/Mnote/.is family
 	, /Mnote
 	, default/.style = 
-	{	beam = 1
+	{	back = false
+		, beam = 1
 		, stem = 0.3
 		, head = .
 		, swap = false
 		, tuplet = 0
 	}
+	, back/.is if=MnoteBack
 	, beam/.estore in=\Mbeam
 	, stem/.estore in=\Mstem
 	, head/.estore in=\Mhead
@@ -521,14 +549,15 @@
 		\fi\fi\fi
 	\fi\fi\fi
 	
-\else\MCount{#3}\ifnum\theMduration=\theMcount
+\else%\MCount{#3}\ifnum\theMduration=\theMcount
 	\MMixedNote{#2}{#3}
-\fi\fi
+\fi%\fi
 
 	\setcounter{MX}{\theMaux}
 	\foreach \IND in {#3} {
+		\ifthenelse{\equal{\IND}{!}}{\addtocounter{MX}{\XM/4}}{
 		\MNEmpty{\IND}{\Ledger{\IND}}
-		\addtocounter{MX}{\XM/2}
+		\addtocounter{MX}{\XM/2}}
 	}
 	\addtocounter{MX}{\XM/2}
 	\swapfalse
@@ -570,6 +599,7 @@
 	
 	\setcounter{MX}{\theMaux}
 	\foreach\IND in {#2} {
+		\ifthenelse{\equal{\IND}{!}}{\addtocounter{MX}{\XM/4}}{
 		\MNEmpty{\IND}{
 			\ifnum\theMduration<16
 			\pgfmathsetmacro\Sstem{\Mstem+0.1}
@@ -580,7 +610,7 @@
 			\fi
 			\Menlarge[\Sstem]{\IND}{\theMevaluate}
 		}
-		\addtocounter{MX}{\XM/2}
+		\addtocounter{MX}{\XM/2}}
 	}
 	
 	\ifnum\theMduration<16
@@ -594,6 +624,7 @@
 		\setcounter{Mfirst}{-50}
 		\pgfmathsetmacro\Sstem{\Mstem+0.05}
 		\foreach\INDd in {#1} {
+			\ifthenelse{\equal{\INDd}{!}}{\addtocounter{MX}{\XM/4}}{
 			\addtocounter{MX}{\XM/2}
 			\MStringz{\INDd}{=}{\Beam[-0.275+\theMX]{-0.247+\theMX}{\theMevaluate}{\theMevaluate}{+\Sstem}}
 			\MStringz{\INDd}{=|}{\Beam[-0.275+\theMX]{-0.5+\theMX}{\theMevaluate}{\theMevaluate}{+\Sstem}}
@@ -601,7 +632,7 @@
 			\MStringz{\INDd}{//}{\Beam[-0.275+\theMX]{-0.247+\theMX}{\theMevaluate}{\theMevaluate}{+\Sstem}}
 			\MStringz{\INDd}{//|}{\Beam[-0.275+\theMX]{-0.5+\theMX}{\theMevaluate}{\theMevaluate}{+\Sstem}}
 			\MStringz{\INDd}{|//}{\Beam[\theMX]{-0.247+\theMX}{\theMevaluate}{\theMevaluate}{+\Sstem}}
-		}
+		}}
 	
 	\fi\ifnum\theMduration=32
 		\pgfmathsetmacro\Sstem{\Mstem+0.3}
@@ -611,6 +642,7 @@
 		\setcounter{Mfirst}{-50}
 		\pgfmathsetmacro\Sstem{\Mstem+0.15}
 		\foreach\INDd in {#1} {
+			\ifthenelse{\equal{\INDd}{!}}{\addtocounter{MX}{\XM/4}}{
 			\addtocounter{MX}{\XM/2}
 			\MStringz{\INDd}{=}{\Beam[-0.275+\theMX]{-0.247+\theMX}{\theMevaluate}{\theMevaluate}{+\Sstem}}
 			\MStringz{\INDd}{=|}{\Beam[-0.275+\theMX]{-0.5+\theMX}{\theMevaluate}{\theMevaluate}{+\Sstem}}
@@ -637,7 +669,7 @@
 			\MStringz{\INDd}{|///}
 				{\Beam[\theMX]{-0.247+\theMX}{\theMevaluate}{\theMevaluate}{+\Sstem}
 				\Beam[\theMX]{-0.247+\theMX}{\theMevaluate}{\theMevaluate}{+\Mstem}}
-		}
+		}}
 	\fi
 }
 
@@ -645,7 +677,7 @@
 	\MHeads{#2}
 	\ifnum\theMmax<6\else\Mswap\fi
 	\setcounter{MX}{\theMaux}
-	\foreach\IND in {#2} {
+	\foreach\IND in {#2} {\ifthenelse{\equal{\IND}{!}}{\addtocounter{MX}{\XM/4}}{
 		\ifnum#1<16
 		\pgfmathsetmacro\Sstems{\Mstem+0.1}
 		\Menlarge[\Sstems]{\IND}{\IND}
@@ -656,7 +688,7 @@
 		\pgfmathsetmacro\Sstems{\Mstem+0.3}
 		\Menlarge[\Sstems]{\IND}{\IND}
 		\fi
-		\addtocounter{MX}{\XM/2}
+		\addtocounter{MX}{\XM/2}}
 	}
 	\addtocounter{MX}{-\XM/2}
 	\ifnum#1=8
@@ -688,7 +720,7 @@
 	\fi
 	
 	\setcounter{MX}{\theMaux}
-	\foreach\IND in {#2} {
+	\foreach\IND in {#2} {\ifthenelse{\equal{\IND}{!}}{\addtocounter{MX}{\XM/4}}{
 		\ifnum#1<16
 		\pgfmathsetmacro\Sstem{\Mstem+0.1}
 		\fi\ifnum#1=16
@@ -697,7 +729,7 @@
 		\pgfmathsetmacro\Sstem{\Mstem+0.3}
 		\fi
 		\Menlarge[\Sstem]{\IND}{\theMevaluate}
-		\addtocounter{MX}{\XM/2}
+		\addtocounter{MX}{\XM/2}}
 	}
 	\ifnum#1=8
 		\pgfmathsetmacro\Sstem{\Mstem+0.1}
@@ -722,8 +754,10 @@
 	, /Mrest
 	, default/.style = 
 	{	multi = false
+		, height = 0
 	}
 	, multi/.is if=MrestMulti
+	, height/.estore in=\MrestH
 }
 \newcommand{\Rest}[2][]{
 	\pgfkeys{/Mrest, default, #1}%
@@ -740,22 +774,22 @@
 \else
 
 	\ifnum#2=1
-		\node at (\theMX*\MX,-\theMY*2+0.52) 
+		\node at (\theMX*\MX,-\theMY*2+0.52+\MrestH) 
 		{\resizebox{0.3cm}{0.15cm}{\GaPa}};
 	\fi\ifnum#2=2
-		\node at (\theMX*\MX,-\theMY*2+0.42) 
+		\node at (\theMX*\MX,-\theMY*2+0.42+\MrestH) 
 		{\resizebox{0.3cm}{0.15cm}{\HaPa}};
 	\fi\ifnum#2=4
-		\node at (\theMX*\MX,-\theMY*2+0.4) 
+		\node at (\theMX*\MX,-\theMY*2+0.4+\MrestH) 
 		{\resizebox{0.3cm}{0.7cm}{\ViPa}};
 	\fi\ifnum#2=8
-		\node at (\theMX*\MX,-\theMY*2+0.32) 
+		\node at (\theMX*\MX,-\theMY*2+0.32+\MrestH) 
 		{\resizebox{0.3cm}{0.45cm}{\AcPa}};
 	\fi\ifnum#2=16
-		\node at (\theMX*\MX,-\theMY*2+0.3) 
+		\node at (\theMX*\MX,-\theMY*2+0.3+\MrestH) 
 		{\resizebox{0.35cm}{0.525cm}{\SePa}};
 	\fi\ifnum#2=32
-		\node at (\theMX*\MX,-\theMY*2+0.375) 
+		\node at (\theMX*\MX,-\theMY*2+0.375+\MrestH) 
 		{\resizebox{0.4cm}{0.6cm}{\ZwPa}};
 	\fi
 
@@ -787,11 +821,12 @@
 	\Adv
 	\setcounter{Maux}{\theMX}
 	\foreach\INDp/\INDh in {#1} {
+		\ifthenelse{\equal{\INDp}{!}}{\addtocounter{MX}{\XM/4}}{
 		\MNEmpty{\INDp}{
 			\Artic{\INDp}{\INDh}
 		}
 		\addtocounter{MX}{\XM/2}
-	}
+	}}
 	\setcounter{MX}{\theMaux}
 }
 \newcommand{\Artic}[2]{
@@ -875,11 +910,12 @@
 	\Adv
 	\setcounter{Maux}{\theMX}
 	\foreach\INDi/\INDj in {#1} {
+		\ifthenelse{\equal{\INDi}{!}}{\addtocounter{MX}{\XM/4}}{
 		\MNEmpty{\INDi}{
 			\MAcc{\INDi}{\INDj}
 		}
 		\addtocounter{MX}{\XM/2}
-	}
+	}}
 	\setcounter{MX}{\theMaux}
 }
 
@@ -1055,7 +1091,7 @@
 	\noswaptrue\else\noswapfalse\fi
 	\ifswap\Mswap\fi
 	\ifnoswap
-		\draw (-1+\theMX*\MX,-\theMY*2+0.1*#2-0.35) to[out=-30,in=-150] (-0.5+#1+\theMX*\MX,-\theMY*2+0.1*#3-0.35);
+		\draw (-1+\theMX*\MX,-\theMY*2+0.1*#2-0.35) to[out=-20,in=-160] (-0.5+#1+\theMX*\MX,-\theMY*2+0.1*#3-0.35);
 	\else
 		\draw (-1+\theMX*\MX,-\theMY*2+0.1*#2-0.05) to[out=20,in=160] (-0.5+#1+\theMX*\MX,-\theMY*2+0.1*#3-0.05);
 	\fi
