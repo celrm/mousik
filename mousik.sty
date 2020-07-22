@@ -4,8 +4,11 @@
 \RequirePackage{musixtex}
 
 \RequirePackage{tikz}
+\usetikzlibrary{backgrounds}
+
 \RequirePackage{pgf}
 \RequirePackage{pgfkeys}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Tools
@@ -81,9 +84,11 @@
 	, default/.style = 
 	{	indent = 0
 		, long = 100
+		, color = white
 	}
 	, indent/.estore in=\Mindent
 	, long/.estore in=\Mlong
+	, color/.estore in=\Mcolor
 }
 
 \newenvironment{mousik}[1][]{
@@ -93,7 +98,10 @@
 \setcounter{Mclef}{-1}%
 \setcounter{Mkey}{0}%
 %%%%%%
-\noindent\begin{tikzpicture}\Space[\Mindent]}
+\noindent\begin{tikzpicture}[
+background rectangle/.style={fill=\Mcolor},
+show background rectangle]
+\Space[\Mindent]}
 {\addtocounter{MX}{-1*\XM}\MStaff
 \setcounter{MX}{0}
 \setcounter{MY}{0}
@@ -120,14 +128,14 @@
 		\foreach\INDj in {0,...,4} {
 			\ifnum\INDi=\theMY
 				\ifnum\INDi=0
-					\draw (-0.25+\Mindent*0.5,-\INDi*2+\INDj*0.2)
+					\draw (-0.25+\Mindent,-\INDi*2+\INDj*0.2)
 					-- (\theMX*\MX,-\INDi*2+\INDj*0.2);
 				\else
 					\draw (-0.25,-\INDi*2+\INDj*0.2)
 					-- (\theMX*\MX,-\INDi*2+\INDj*0.2);
 				\fi
 			\else\ifnum\INDi=0
-				\draw (-0.25+\Mindent*0.5,-\INDi*2+\INDj*0.2)
+				\draw (-0.25+\Mindent,-\INDi*2+\INDj*0.2)
 				-- (\Mlong*0.12,-\INDi*2+\INDj*0.2);
 				\else
 				\draw (-0.25,-\INDi*2+\INDj*0.2)
@@ -186,14 +194,19 @@
 	, default/.style = 
 	{	t = 2
 		, octave = 0
+		, xshift = 0
+		, yshift = 0
 	}
 	, t/.estore in=\MclefT
 	, octave/.estore in=\MclefOct
+	, xshift/.estore in=\MshiftX
+	, yshift/.estore in=\MshiftY
 }
 \newcommand{\Clef}[1][]{
 	\pgfkeys{/MClef, default, #1}%
 	\setcounter{Mclef}{\MclefT}
 	\Adv
+\begin{scope}[xshift=\MshiftX cm,yshift=\MshiftY cm]
 	
 	\Octave{\MclefOct}
 	
@@ -229,6 +242,7 @@
 		\draw[line width=1.5mm] (\theMX*\MX+0.3,-\theMY*2+0.2) -- (\theMX*\MX+0.3,-\theMY*2+0.6);
 	\fi
 	\addtocounter{MX}{\XM}
+\end{scope}
 }
 
 \newlength{\MWidth}
@@ -238,44 +252,87 @@
 	\settoheight{\MHeight}{#1}
 	\resizebox{1.5\MWidth}{1.5\MHeight}{#1}
 }
-\newcommand{\TimeSig}[2]{
+\pgfkeys{
+	/MTimeSig/.is family
+	, /MTimeSig
+	, default/.style = 
+	{	xshift = 0
+		, yshift = 0
+	}
+	, xshift/.estore in=\MshiftX
+	, yshift/.estore in=\MshiftY
+}
+\newcommand{\TimeSig}[3][]{
+	\pgfkeys{/MTimeSig, default, #1}%
 	\Adv
-	\ifx&#2&
-		\ifthenelse{\equal{#1}{C}}%
+	\begin{scope}[xshift=\MshiftX cm,yshift=\MshiftY cm]
+	\normalsize
+	\ifx&#3&
+		\ifthenelse{\equal{#2}{C}}%
 			{\node at (\theMX*\MX-0.25,-\theMY*2+0.5) {\meterC};}%
-		{\ifthenelse{\equal{#1}{C|}}%
+		{\ifthenelse{\equal{#2}{C|}}%
 			{\node at (\theMX*\MX-0.25,-\theMY*2+0.575) {\allabreve};}%
-		{\node at (\theMX*\MX-0.25,-\theMY*2+0.4) {\bf \MResize{#1}};}%
+		{\node at (\theMX*\MX-0.25,-\theMY*2+0.4) {\bf \MResize{#2}};}%
 		}
 	\else
-		\node at (\theMX*\MX-0.25,-\theMY*2+0.6) {\bf \MResize{#1}};
-		\node at (\theMX*\MX-0.25,-\theMY*2+0.2) {\bf \MResize{#2}};
+		\node at (\theMX*\MX-0.25,-\theMY*2+0.6) {\bf \MResize{#2}};
+		\node at (\theMX*\MX-0.25,-\theMY*2+0.2) {\bf \MResize{#3}};
 	\fi
 	\addtocounter{MX}{\XM}
+	\end{scope}
 }
 
 \newcommand{\MDot}[2][1]{
 	\foreach \IND in {1,...,#1}
 	{\MPlaceNR[+0.15*\IND]{#2}{\resizebox{0.1cm}{0.1cm}{$\bullet$}};}
 }
-	
-\newcommand{\Dot}[2][*]{
-	\MStringz{#1}{*}{\MDot[1]{#2}}
-	\MStringz{#1}{.}{\MDot[1]{#2}}
-	\MStringz{#1}{**}{\MDot[2]{#2}}
-	\MStringz{#1}{..}{\MDot[2]{#2}}
+
+\pgfkeys{
+	/MDot/.is family
+	, /MDot
+	, default/.style = 
+	{	t = *
+		, xshift = 0
+		, yshift = 0
+	}
+	, t/.estore in=\MDotT
+	, xshift/.estore in=\MshiftX
+	, yshift/.estore in=\MshiftY
 }
-\newcommand{\Dots}[1]{
+\newcommand{\Dot}[2][]{
+	\pgfkeys{/MDot, default, #1}%
+	\begin{scope}[xshift=\MshiftX cm,yshift=\MshiftY cm]
+	\MStringz{\MDotT}{*}{\MDot[1]{#2}}
+	\MStringz{\MDotT}{.}{\MDot[1]{#2}}
+	\MStringz{\MDotT}{**}{\MDot[2]{#2}}
+	\MStringz{\MDotT}{..}{\MDot[2]{#2}}
+	\end{scope}
+}
+
+\pgfkeys{
+	/MDots/.is family
+	, /MDots
+	, default/.style = 
+	{	xshift = 0
+		, yshift = 0
+	}
+	, xshift/.estore in=\MshiftX
+	, yshift/.estore in=\MshiftY
+}
+\newcommand{\Dots}[2][]{
+	\pgfkeys{/MDots, default, #1}%
 	\Adv
+	\begin{scope}[xshift=\MshiftX cm,yshift=\MshiftY cm]
 	\setcounter{Maux}{\theMX}
-	\foreach\INDp/\INDh in {#1} {
+	\foreach\INDp/\INDh in {#2} {
 		\ifthenelse{\equal{\INDp}{!}}{\addtocounter{MX}{\XM/4}}{
 		\MNEmpty{\INDp}{
-			\Dot[\INDp]{\INDh}
+			\Dot[t=\INDp]{\INDh}
 		}
 		\addtocounter{MX}{\XM/2}
 	}}
 	\setcounter{MX}{\theMaux}
+	\end{scope}
 }
 
 \newcounter{Maux}
@@ -326,11 +383,11 @@
 	\ifMnoteBack
 		\node [opacity=0.0] (tmp) at (\theMX*\MX-0.265,-\theMY*2-0.2+#1*0.1) {};
 		\fill[black,rotate around={16:(tmp.center)}] (\theMX*\MX-0.01-0.265,-\theMY*2-0.195+#1*0.1) ellipse (4pt and 2.75pt);
-		\fill[white,rotate around={19:(tmp.center)}] (\theMX*\MX-0.01-0.265,-\theMY*2-0.195+#1*0.1) ellipse (3.2pt and 1.35pt);
+		\fill[\Mcolor,rotate around={19:(tmp.center)}] (\theMX*\MX-0.01-0.265,-\theMY*2-0.195+#1*0.1) ellipse (3.2pt and 1.35pt);
 	\else 
 		\node [opacity=0.0] (tmp) at (\theMX*\MX,-\theMY*2-0.2+#1*0.1) {};
 		\fill[black,rotate around={16:(tmp.center)}] (\theMX*\MX-0.01,-\theMY*2-0.195+#1*0.1) ellipse (4pt and 2.75pt);
-		\fill[white,rotate around={19:(tmp.center)}] (\theMX*\MX-0.01,-\theMY*2-0.195+#1*0.1) ellipse (3.2pt and 1.35pt);
+		\fill[\Mcolor,rotate around={19:(tmp.center)}] (\theMX*\MX-0.01,-\theMY*2-0.195+#1*0.1) ellipse (3.2pt and 1.35pt);
 	\fi
 }
 
@@ -338,10 +395,10 @@
 	\ifswap\Mswap\fi
 	\ifnoswap
 		\draw[line width=0.25mm]  (\theMX*\MX+0.115,-\theMY*2+#2*0.1-0.2) --
-			(\theMX*\MX+0.115,-\theMY*2+#3*0.1+#1);
+			(\theMX*\MX+0.115,-\theMY*2+#3*0.1+#1-0.2);
 	\else
 		\draw[line width=0.25mm]  (\theMX*\MX-0.14,-\theMY*2+#2*0.1-0.2) --
-			(\theMX*\MX-0.14,-\theMY*2+#3*0.1-0.4-#1);
+			(\theMX*\MX-0.14,-\theMY*2+#3*0.1-0.4-#1+0.2);
 	\fi
 	\ifswap\Mswap\fi
 }
@@ -369,10 +426,10 @@
 \newcommand{\Beam}[5][\theMX]{
 	\ifswap\Mswap\fi
 	\ifnoswap
-		\draw[line width=\Mbeam mm] (#2*\MX+0.103,-\theMY*2+#3*0.1#5) -- (#1*\MX-0.372,-\theMY*2+#4*0.1#5);
+		\draw[line width=\Mbeam mm] (#2*\MX+0.103,-\theMY*2-0.2+#3*0.1#5) -- (#1*\MX-0.372,-\theMY*2-0.2+#4*0.1#5);
 		\setcounter{MbeamP}{#4}
 	\else
-		\draw[line width=\Mbeam mm] (#2*\MX-0.153,-\theMY*2+#3*0.1-0.4-#5) -- (#1*\MX-0.625,-\theMY*2+#4*0.1-0.4-#5);
+		\draw[line width=\Mbeam mm] (#2*\MX-0.153,-\theMY*2-0.2+#3*0.1-#5) -- (#1*\MX-0.625,-\theMY*2-0.2+#4*0.1-#5);
 		\setcounter{MbeamP}{#4-4}
 	\fi	
 	\ifswap\Mswap\fi
@@ -383,25 +440,25 @@
 	\ifnoswap
 		\ifnum\theMfirst=\theMmin
 		\begin{scope}
-			\clip (\theMX*\MX-0.4,-\theMY*2+\theMmin*0.1-0.3) rectangle (\theMX*\MX+0.125,-\theMY*2+0.05+\theMmax*0.1#1);
-			\draw[line width=\Mbeam mm] (\theMX*\MX-0.411,-\theMY*2+\theMmin*0.1#1) -- (\theMX*\MX+0.147,-\theMY*2+\theMmax*0.1#1);
+			\clip (\theMX*\MX-0.4,-\theMY*2+\theMmin*0.1-0.5) rectangle (\theMX*\MX+0.125,-\theMY*2-0.15+\theMmax*0.1#1);
+			\draw[line width=\Mbeam mm] (\theMX*\MX-0.411,-\theMY*2-0.2+\theMmin*0.1#1) -- (\theMX*\MX+0.147,-\theMY*2-0.2+\theMmax*0.1#1);
 		\end{scope}
 		\else
 		\begin{scope}
-			\clip (\theMX*\MX-0.4,-\theMY*2+0.05+\theMmax*0.1#1) rectangle (\theMX*\MX+0.125,-\theMY*2+0.05+\theMmin*0.1-0.3);
-			\draw[line width=\Mbeam mm] (\theMX*\MX-0.411,-\theMY*2+\theMmax*0.1#1) -- (\theMX*\MX+0.147,-\theMY*2+\theMmin*0.1#1);
+			\clip (\theMX*\MX-0.4,-\theMY*2-0.15+\theMmax*0.1#1) rectangle (\theMX*\MX+0.125,-\theMY*2+0.05+\theMmin*0.1-0.5);
+			\draw[line width=\Mbeam mm] (\theMX*\MX-0.411,-\theMY*2-0.2+\theMmax*0.1#1) -- (\theMX*\MX+0.147,-\theMY*2-0.2+\theMmin*0.1#1);
 		\end{scope}
 		\fi
 	\else
 		\ifnum\theMfirst=\theMmin
 		\begin{scope}
-			\clip (\theMX*\MX-0.645,-\theMY*2+\theMmin*0.1-0.45-#1) rectangle (\theMX*\MX-0.129,-\theMY*2+\theMmax*0.1);
-			\draw[line width=\Mbeam mm] (\theMX*\MX-0.7,-\theMY*2+\theMmin*0.1-#1-0.38) -- (\theMX*\MX-0.1,-\theMY*2+\theMmax*0.1-#1-0.38);
+			\clip (\theMX*\MX-0.645,-\theMY*2+\theMmin*0.1-0.25-#1) rectangle (\theMX*\MX-0.129,-\theMY*2+0.2+\theMmax*0.1);
+			\draw[line width=\Mbeam mm] (\theMX*\MX-0.7,-\theMY*2+\theMmin*0.1-#1-0.18) -- (\theMX*\MX-0.1,-\theMY*2+\theMmax*0.1-#1-0.18);
 		\end{scope}
 		\else
 		\begin{scope}
-			\clip (\theMX*\MX-0.65,-\theMY*2+\theMmin*0.1-0.45-#1) rectangle (\theMX*\MX-0.129,-\theMY*2+\theMmax*0.1);
-			\draw[line width=\Mbeam mm] (\theMX*\MX-0.7,-\theMY*2+\theMmax*0.1-#1-0.38) -- (\theMX*\MX-0.1,-\theMY*2+\theMmin*0.1-#1-0.38);
+			\clip (\theMX*\MX-0.65,-\theMY*2+\theMmin*0.1-0.25-#1) rectangle (\theMX*\MX-0.129,-\theMY*2+0.2+\theMmax*0.1);
+			\draw[line width=\Mbeam mm] (\theMX*\MX-0.7,-\theMY*2+\theMmax*0.1-#1-0.18) -- (\theMX*\MX-0.1,-\theMY*2+\theMmin*0.1-#1-0.18);
 		\end{scope}
 		\fi
 	\fi
@@ -412,17 +469,17 @@
 	\ifswap\Mswap\fi
 	\ifnoswap
 	\begin{scope}
-		\clip (\theMX*\MX+0.13,-\theMY*2+#2*0.1-0.75+#1) rectangle (\theMX*\MX+0.35,-\theMY*2+#2*0.1+0.05+#1);
-		\node at (\theMX*\MX+0.05,-\theMY*2-0.3+#2*0.1+#1) {\resizebox{0.55cm}{0.65cm}{\Acht}};
+		\clip (\theMX*\MX+0.13,-\theMY*2+#2*0.1-0.95+#1) rectangle (\theMX*\MX+0.35,-\theMY*2+#2*0.1-0.15+#1);
+		\node at (\theMX*\MX+0.05,-\theMY*2-0.5+#2*0.1+#1) {\resizebox{0.55cm}{0.65cm}{\Acht}};
 	\end{scope}
-	\fill[white] (\theMX*\MX+0.205,-\theMY*2-0.308+#2*0.1+#1) circle (1.75pt);
+	\fill[\Mcolor] (\theMX*\MX+0.205,-\theMY*2-0.508+#2*0.1+#1) circle (1.75pt);
 	\else
 	\begin{scope}
-		\node [opacity=0.0] (tmp) at (\theMX*\MX,-\theMY*2+#2*0.1) {};
-		\clip (\theMX*\MX-0.125,-\theMY*2+#2*0.1-0.45-#1) rectangle (\theMX*\MX+0.09,-\theMY*2+#2*0.1+0.15-#1);
-		\node[rotate around={180:(tmp.center)}] at (\theMX*\MX+0.175,-\theMY*2+0.065+#2*0.1+#1) {\reflectbox{\resizebox{0.55cm}{0.65cm}{\Acht}}};
+		\node [opacity=0.0] (tmp) at (\theMX*\MX,-\theMY*2+0.2+#2*0.1) {};
+		\clip (\theMX*\MX-0.125,-\theMY*2+#2*0.1-0.25-#1) rectangle (\theMX*\MX+0.09,-\theMY*2+#2*0.1+0.35-#1);
+		\node[rotate around={180:(tmp.center)}] at (\theMX*\MX+0.175,-\theMY*2+0.265+#2*0.1+#1) {\reflectbox{\resizebox{0.55cm}{0.65cm}{\Acht}}};
 	\end{scope}
-	\fill[white] (\theMX*\MX-0.035,-\theMY*2-0.061+#2*0.1-#1) circle (2pt);
+	\fill[\Mcolor] (\theMX*\MX-0.035,-\theMY*2+0.139+#2*0.1-#1) circle (2pt);
 	\fi
 	\ifswap\Mswap\fi
 }
@@ -510,10 +567,12 @@
 	, default/.style = 
 	{	back = false
 		, beam = 1
-		, stem = 0.3
+		, stem = 0.5
 		, head = .
 		, swap = false
 		, tuplet = 0
+		, xshift = 0
+		, yshift = 0
 	}
 	, back/.is if=MnoteBack
 	, beam/.estore in=\Mbeam
@@ -521,6 +580,8 @@
 	, head/.estore in=\Mhead
 	, tuplet/.estore in=\Mtuplet
 	, swap/.is if=swap
+	, xshift/.estore in=\MshiftX
+	, yshift/.estore in=\MshiftY
 }
 \newcounter{Mduration}
 \newcommand{\Note}[3][]{
@@ -528,6 +589,7 @@
 	\Adv\noswaptrue
 	\setcounter{Maux}{\theMX}
 	
+	\begin{scope}[xshift=\MshiftX cm,yshift=\MshiftY cm]
 	\MCount{#2}\setcounter{Mduration}{\theMcount}
 	\MCount{#3}
 \ifnum\theMduration=1
@@ -565,6 +627,7 @@
 	\ifthenelse{\equal{\Mtuplet}{0}}{}{
 		\Tuplet[\Mtuplet]{15}%\theMmax
 	}
+	\end{scope}
 }
 
 \newcounter{MMdur}
@@ -754,15 +817,18 @@
 	, /Mrest
 	, default/.style = 
 	{	multi = false
-		, height = 0
+		, xshift = 0
+		, yshift = 0
 	}
 	, multi/.is if=MrestMulti
-	, height/.estore in=\MrestH
+	, xshift/.estore in=\MshiftX
+	, yshift/.estore in=\MshiftY
 }
 \newcommand{\Rest}[2][]{
 	\pgfkeys{/Mrest, default, #1}%
 	\Adv
 	
+	\begin{scope}[xshift=\MshiftX cm,yshift=\MshiftY cm]
 \ifMrestMulti
 	\node at (\theMX*\MX+0.3,-\theMY*2+1.1) {\bf \MResize{#2}};
 	
@@ -774,28 +840,29 @@
 \else
 
 	\ifnum#2=1
-		\node at (\theMX*\MX,-\theMY*2+0.52+\MrestH) 
+		\node at (\theMX*\MX,-\theMY*2+0.52) 
 		{\resizebox{0.3cm}{0.15cm}{\GaPa}};
 	\fi\ifnum#2=2
-		\node at (\theMX*\MX,-\theMY*2+0.42+\MrestH) 
+		\node at (\theMX*\MX,-\theMY*2+0.42) 
 		{\resizebox{0.3cm}{0.15cm}{\HaPa}};
 	\fi\ifnum#2=4
-		\node at (\theMX*\MX,-\theMY*2+0.4+\MrestH) 
+		\node at (\theMX*\MX,-\theMY*2+0.4) 
 		{\resizebox{0.3cm}{0.7cm}{\ViPa}};
 	\fi\ifnum#2=8
-		\node at (\theMX*\MX,-\theMY*2+0.32+\MrestH) 
+		\node at (\theMX*\MX,-\theMY*2+0.32) 
 		{\resizebox{0.3cm}{0.45cm}{\AcPa}};
 	\fi\ifnum#2=16
-		\node at (\theMX*\MX,-\theMY*2+0.3+\MrestH) 
+		\node at (\theMX*\MX,-\theMY*2+0.3) 
 		{\resizebox{0.35cm}{0.525cm}{\SePa}};
 	\fi\ifnum#2=32
-		\node at (\theMX*\MX,-\theMY*2+0.375+\MrestH) 
+		\node at (\theMX*\MX,-\theMY*2+0.375) 
 		{\resizebox{0.4cm}{0.6cm}{\ZwPa}};
 	\fi
 
 \fi
 	
 	\addtocounter{MX}{\XM}
+	\end{scope}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -817,10 +884,22 @@
 {#3};
 }
 
-\newcommand{\Artics}[1]{
+\pgfkeys{
+	/Martics/.is family
+	, /Martics
+	, default/.style = 
+	{	xshift = 0
+		, yshift = 0
+	}
+	, xshift/.estore in=\MshiftX
+	, yshift/.estore in=\MshiftY
+}	
+\newcommand{\Artics}[2][]{
+	\pgfkeys{/Martics, default, #1}%
 	\Adv
+	\begin{scope}[xshift=\MshiftX cm,yshift=\MshiftY cm]
 	\setcounter{Maux}{\theMX}
-	\foreach\INDp/\INDh in {#1} {
+	\foreach\INDp/\INDh in {#2} {
 		\ifthenelse{\equal{\INDp}{!}}{\addtocounter{MX}{\XM/4}}{
 		\MNEmpty{\INDp}{
 			\Artic{\INDp}{\INDh}
@@ -828,54 +907,83 @@
 		\addtocounter{MX}{\XM/2}
 	}}
 	\setcounter{MX}{\theMaux}
+	\end{scope}
 }
-\newcommand{\Artic}[2]{
-	\ifnum#2<6
+
+\pgfkeys{
+	/Martic/.is family
+	, /Martic
+	, default/.style = 
+	{	xshift = 0
+		, yshift = 0
+	}
+	, xshift/.estore in=\MshiftX
+	, yshift/.estore in=\MshiftY
+}	
+\newcommand{\Artic}[3][]{
+	\pgfkeys{/Martic, default, #1}%
+	\begin{scope}[xshift=\MshiftX cm,yshift=\MshiftY cm]
+	\ifnum#3<6
 	\noswaptrue\else\noswapfalse\fi
 	\ifswap\Mswap\fi
 	
 	\ifnoswap
-	\MStringz{#1}{.}{\MPlaceND[-0.125]{#2+0.15}{\lpz{0}}}
-	\MStringz{#1}{'}{\MPlaceND[-0.125]{#2+0.1}{\lppz{0}}}
-	\MStringz{#1}{>}{\MPlaceND[-0.1]{#2+0.1}{\lsf{0}}}
-	\MStringz{#1}{-}{\MPlaceND[-0.125]{#2+0.15}{\lst{0}}}
-	\MStringz{#1}{^}{\MPlaceND[-0.125]{#2+0.05}{\lsfz{0}}}
-	\MStringz{#1}{(.)}{\MPlaceND[-0.105]{#2}{\fermatadown{0}}}
-	\MStringz{#1}{+}{\MPlaceND[-0.025]{#2-0.05}{\bf +}}
-	\MStringz{#1}{~}{\MPlaceND[-0.125]{#2-0.05}{\shake{0}}}
-	\MStringz{#1}{~|}{\MPlaceND[-0.125]{#2-0.05}{\mordent{0}}}
-	\MStringz{#1}{?}{\MPlaceND[-0.125]{#2-0.05}{\turn{0}}}
+	\MStringz{#2}{.}{\MPlaceND[-0.125]{#3+0.15}{\lpz{0}}}
+	\MStringz{#2}{'}{\MPlaceND[-0.125]{#3+0.1}{\lppz{0}}}
+	\MStringz{#2}{>}{\MPlaceND[-0.1]{#3+0.1}{\lsf{0}}}
+	\MStringz{#2}{-}{\MPlaceND[-0.125]{#3+0.15}{\lst{0}}}
+	\MStringz{#2}{^}{\MPlaceND[-0.125]{#3+0.05}{\lsfz{0}}}
+	\MStringz{#2}{(.)}{\MPlaceND[-0.105]{#3}{\fermatadown{0}}}
+	\MStringz{#2}{+}{\MPlaceND[-0.025]{#3-0.05}{\bf +}}
+	\MStringz{#2}{~}{\MPlaceND[-0.125]{#3-0.05}{\shake{0}}}
+	\MStringz{#2}{~|}{\MPlaceND[-0.125]{#3-0.05}{\mordent{0}}}
+	\MStringz{#2}{?}{\MPlaceND[-0.125]{#3-0.05}{\turn{0}}}
 	%%%%%%%%%%%%
-	\MStringz{#1}{o}{\MPlaceND[-0.1]{#2-0.05}{\flageolett{0}}}
-	\MStringz{#1}{v}{\MPlaceND[-0.1]{#2-0.05}{\upbow}}
-	\MStringz{#1}{n}{\MPlaceND[-0.1]{#2-0.05}{\downbow}}
+	\MStringz{#2}{o}{\MPlaceND[-0.1]{#3-0.05}{\flageolett{0}}}
+	\MStringz{#2}{v}{\MPlaceND[-0.1]{#3-0.05}{\upbow}}
+	\MStringz{#2}{n}{\MPlaceND[-0.1]{#3-0.05}{\downbow}}
 	
 \else
-	\MStringz{#1}{.}{\MPlaceNU[-0.1]{#2-0.15}{\upz{0}}}
-	\MStringz{#1}{'}{\MPlaceNU[-0.1]{#2-0.1}{\uppz{0}}}
-	\MStringz{#1}{>}{\MPlaceNU[-0.1]{#2-0.1}{\usf{0}}}
-	\MStringz{#1}{-}{\MPlaceNU[-0.1]{#2-0.15}{\ust{0}}}
-	\MStringz{#1}{^}{\MPlaceNU[-0.1]{#2-0.05}{\usfz{0}}}
-	\MStringz{#1}{(.)}{\MPlaceNU[-0.1]{#2}{\fermataup{0}}}
-	\MStringz{#1}{+}{\MPlaceNU{#2+0.05}{\bf +}}
-	\MStringz{#1}{~}{\MPlaceNU[-0.1]{#2+0.05}{\shake{0}}}
-	\MStringz{#1}{~|}{\MPlaceNU[-0.1]{#2+0.05}{\mordent{0}}}
-	\MStringz{#1}{?}{\MPlaceNU[-0.1]{#2+0.05}{\turn{0}}}
+	\MStringz{#2}{.}{\MPlaceNU[-0.1]{#3-0.15}{\upz{0}}}
+	\MStringz{#2}{'}{\MPlaceNU[-0.1]{#3-0.1}{\uppz{0}}}
+	\MStringz{#2}{>}{\MPlaceNU[-0.1]{#3-0.1}{\usf{0}}}
+	\MStringz{#2}{-}{\MPlaceNU[-0.1]{#3-0.15}{\ust{0}}}
+	\MStringz{#2}{^}{\MPlaceNU[-0.1]{#3-0.05}{\usfz{0}}}
+	\MStringz{#2}{(.)}{\MPlaceNU[-0.1]{#3}{\fermataup{0}}}
+	\MStringz{#2}{+}{\MPlaceNU{#3+0.05}{\bf +}}
+	\MStringz{#2}{~}{\MPlaceNU[-0.1]{#3+0.05}{\shake{0}}}
+	\MStringz{#2}{~|}{\MPlaceNU[-0.1]{#3+0.05}{\mordent{0}}}
+	\MStringz{#2}{?}{\MPlaceNU[-0.1]{#3+0.05}{\turn{0}}}
 	%%%%%%%%%%%%%
-	\MStringz{#1}{o}{\MPlaceNU[-0.1]{#2-0.1}{\flageolett{0}}}
-	\MStringz{#1}{v}{\MPlaceNU[-0.1]{#2+0.05}{\upbow}}
-	\MStringz{#1}{n}{\MPlaceNU[-0.1]{#2-0.05}{\downbow}}
+	\MStringz{#2}{o}{\MPlaceNU[-0.1]{#3-0.1}{\flageolett{0}}}
+	\MStringz{#2}{v}{\MPlaceNU[-0.1]{#3+0.05}{\upbow}}
+	\MStringz{#2}{n}{\MPlaceNU[-0.1]{#3-0.05}{\downbow}}
 	\fi
 	\swapfalse
+	\end{scope}
+}
+
+\pgfkeys{
+	/Msymbol/.is family
+	, /Msymbol
+	, default/.style = 
+	{	xshift = 0
+		, yshift = 0
+	}
+	, xshift/.estore in=\MshiftX
+	, yshift/.estore in=\MshiftY
 }
 \newcommand{\Symbol}[2][]{
-	\MStringz{#2}{,}{\MPlaceNU[-0.1]{7#1}{\cbreath}}
-	\MStringz{#2}{/}{\MPlaceNU[-0.1]{4#1}{\caesura}}
-	\MStringz{#2}{\%}{\MPlaceNU[-0.1]{3+0.04#1}{\duevolte}}
-	\MStringz{#2}{s\%}{\MPlaceNU[-0.1]{11#1}{\segno{0}}}
-	\MStringz{#2}{o+}{\MPlaceNU[+0.3]{11#1}{\coda{0}}}
-	\MStringz{#2}{Ped}{\MPlaceNU[-0.1]{-5#1}{\PED}}
-	\MStringz{#2}{*}{\MPlaceNU[-0.1]{-5#1}{\sDEP}}
+	\pgfkeys{/Msymbol, default, #1}%
+	\begin{scope}[xshift=\MshiftX cm,yshift=\MshiftY cm]
+	\MStringz{#2}{,}{\MPlaceNU[-0.1]{7}{\cbreath}}
+	\MStringz{#2}{/}{\MPlaceNU[-0.1]{4}{\caesura}}
+	\MStringz{#2}{\%}{\MPlaceNU[-0.1]{3+0.04}{\duevolte}}
+	\MStringz{#2}{s\%}{\MPlaceNU[-0.1]{11}{\segno{0}}}
+	\MStringz{#2}{o+}{\MPlaceNU[+0.3]{11}{\coda{0}}}
+	\MStringz{#2}{Ped}{\MPlaceNU[-0.1]{-5}{\PED}}
+	\MStringz{#2}{*}{\MPlaceNU[-0.1]{-5}{\sDEP}}
+	\end{scope}
 }
 
 \newcommand{\dflat}{\tikz [baseline] \node [anchor=base, inner sep=0pt] {\reflectbox{$\flat$}};}
@@ -905,11 +1013,38 @@
 	\MString{#2}{1.5}{\MPlaceNL[#1+0.02]{#3}{{\resizebox{0.3cm}{0.35cm}{\ssharp}}}}
 	\MString{#2}{2}{\MPlaceNL[#1]{#3}{{\resizebox{0.15cm}{0.15cm}{\doublesharp}}}}
 }
-\newcommand{\Acc}[2]{\MAcc{#1}{#2}}
-\newcommand{\Accs}[1]{
+\pgfkeys{
+	/MAcc/.is family
+	, /MAcc
+	, default/.style = 
+	{	xshift = 0
+		, yshift = 0
+	}
+	, xshift/.estore in=\MshiftX
+	, yshift/.estore in=\MshiftY
+}
+\newcommand{\Acc}[3][]{
+	\pgfkeys{/MAcc, default, #1}%
+	\begin{scope}[xshift=\MshiftX cm,yshift=\MshiftY cm]
+	\MAcc{#2}{#3}
+	\end{scope}
+}
+\pgfkeys{
+/MAccs/.is family
+, /MAccs
+, default/.style = 
+{	xshift = 0
+	, yshift = 0
+}
+, xshift/.estore in=\MshiftX
+, yshift/.estore in=\MshiftY
+}
+\newcommand{\Accs}[2][]{
+	\pgfkeys{/MAccs, default, #1}%
+	\begin{scope}[xshift=\MshiftX cm,yshift=\MshiftY cm]
 	\Adv
 	\setcounter{Maux}{\theMX}
-	\foreach\INDi/\INDj in {#1} {
+	\foreach\INDi/\INDj in {#2} {
 		\ifthenelse{\equal{\INDi}{!}}{\addtocounter{MX}{\XM/4}}{
 		\MNEmpty{\INDi}{
 			\MAcc{\INDi}{\INDj}
@@ -917,6 +1052,7 @@
 		\addtocounter{MX}{\XM/2}
 	}}
 	\setcounter{MX}{\theMaux}
+	\end{scope}
 }
 
 \newcommand{\KB}[2]{
@@ -1007,8 +1143,21 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newcommand{\Text}[2][0]{
-\node at (\theMX*\MX,-\theMY*2-0.7+#1) {#2};
+\pgfkeys{
+	/Mtext/.is family
+	, /Mtext
+	, default/.style = 
+	{	xshift = 0
+		, yshift = 0
+	}
+	, xshift/.estore in=\MshiftX
+	, yshift/.estore in=\MshiftY
+}
+\newcommand{\Text}[2][]{
+	\pgfkeys{/Mtext, default, #1}%
+	\begin{scope}[xshift=\MshiftX cm,yshift=\MshiftY cm]
+	\node at (\theMX*\MX,-\theMY*2-0.7) {#2};
+	\end{scope}
 }
 
 \newcommand{\muskern}{\kern-.15ex }
@@ -1023,40 +1172,56 @@
 	\addtocounter{MX}{-\XM/2}
 	\addtocounter{MX}{-#1*\XM/2}}
 
-\newcommand{\Space}[1][2]{\Adv\addtocounter{MX}{#1*\XM/2}}
+\newcommand{\Space}[1][1]{
+	\Adv
+	\pgfmathsetmacro\SPac{int((#1) * \XM)}
+	\addtocounter{MX}{\SPac}}
 
-
-
-\newcommand{\Bar}[1][|]{
+\pgfkeys{
+	/MBar/.is family
+	, /MBar
+	, default/.style = 
+	{	t = |
+		, xshift = 0
+		, yshift = 0
+	}
+	, t/.estore in=\MBarT
+	, xshift/.estore in=\MshiftX
+	, yshift/.estore in=\MshiftY
+}
+\newcommand{\Bar}[1][]{
 	\pgfmathsetmacro\COmp{int(\theMX*\MX*100-\Mlong*12)}
 	\ifnum\COmp>0
 		\addtocounter{MX}{-\XM/2}
 	\fi
-	\MString{#1}{|}
+	\pgfkeys{/MBar, default, #1}%
+	\begin{scope}[xshift=\MshiftX cm,yshift=\MshiftY cm]
+	\MString{\MBarT}{|}
 		{\draw (\theMX*\MX,-\theMY*2+0.8) -- (\theMX*\MX,-\theMY*2);}
-	\MString{#1}{:}
+	\MString{\MBarT}{:}
 		{\draw[dashed] (\theMX*\MX,-\theMY*2+0.8) -- (\theMX*\MX,-\theMY*2);}
-	\MString{#1}{||}
+	\MString{\MBarT}{||}
 		{\draw (\theMX*\MX-0.06,-\theMY*2+0.8) -- (\theMX*\MX-0.06,-\theMY*2);
 		\draw (\theMX*\MX+0.06,-\theMY*2+0.8) -- (\theMX*\MX+0.06,-\theMY*2);}
-	\MString{#1}{|.}
+	\MString{\MBarT}{|.}
 		{\draw (\theMX*\MX-0.12,-\theMY*2+0.8) -- (\theMX*\MX-0.12,-\theMY*2);
 		\draw[line width=1mm] (\theMX*\MX,-\theMY*2+0.807) -- (\theMX*\MX,-\theMY*2-0.007);}
-	\MString{#1}{:|}
+	\MString{\MBarT}{:|}
 		{\node at (\theMX*\MX-0.24,0.4-\theMY*2) {\resizebox{0.175cm}{0.25cm}{:}};
 		\draw (\theMX*\MX-0.12,-\theMY*2+0.8) -- (\theMX*\MX-0.12,-\theMY*2);
 		\draw[line width=1mm] (\theMX*\MX,-\theMY*2+0.807) -- (\theMX*\MX,-\theMY*2-0.007);}
-	\MString{#1}{|:}
+	\MString{\MBarT}{|:}
 		{\draw[line width=1mm] (\theMX*\MX,-\theMY*2+0.807) -- (\theMX*\MX,-\theMY*2-0.007);
 		\node at (\theMX*\MX+0.24,0.4-\theMY*2) {\resizebox{0.175cm}{0.25cm}{:}};
 		\draw (\theMX*\MX+0.12,-\theMY*2+0.8) -- (\theMX*\MX+0.12,-\theMY*2);}
-	\MString{#1}{:|:}
+	\MString{\MBarT}{:|:}
 		{\node at (\theMX*\MX-0.24,0.4-\theMY*2) {\resizebox{0.175cm}{0.25cm}{:}};
 		\draw (\theMX*\MX-0.12,-\theMY*2+0.8) -- (\theMX*\MX-0.12,-\theMY*2);
 		\draw[line width=1mm] (\theMX*\MX,-\theMY*2+0.807) -- (\theMX*\MX,-\theMY*2-0.007);
 		\node at (\theMX*\MX+0.24,0.4-\theMY*2) {\resizebox{0.175cm}{0.25cm}{:}};
 		\draw (\theMX*\MX+0.12,-\theMY*2+0.8) -- (\theMX*\MX+0.12,-\theMY*2);}
 	\addtocounter{MX}{\XM}
+	\end{scope}
 }
 
 \newcommand{\Adv}{
@@ -1074,13 +1239,13 @@
 	\fi
 }
 
-\newcommand{\Tempo}[3][+0]{
+\newcommand{\Tempo}[3][]{
 	\ifnum#2=1
-	\Text[2.5#1]{\tikz[baseline]{\Note{#2}{3}}\Large\textbf{ = #3}}
+	\Text[yshift=2.5,#1]{\tikz[baseline]{\Note{#2}{3}}\Large\textbf{ = #3}}
 	\else
-	\Text[2.5#1]{\tikz{\Note{#2}{1}}\Large\textbf{ = #3}}
+	\Text[yshift=2.5,#1]{\tikz{\Note{#2}{1}}\Large\textbf{ = #3}}
 	\fi
-	\Space[-2]
+	\Space[-1]
 }
 
 \newcommand{\Tie}[2][1]{

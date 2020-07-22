@@ -1,0 +1,81 @@
+\documentclass[]{article}
+
+\usepackage{listings}\usepackage{courier}
+\lstset{
+	literate={≡}{{$\equiv$}}1
+}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{enumerate}
+\usepackage{parskip}
+
+\usepackage{mousik}
+
+\title{Usage examples for the \textsf{mousik} package\footnote{This
+		document corresponds to \textsf{mousik} v0.1, dated 2020/07/01.}}
+\author{Celia Rubio Madrigal\footnote{Email: \href{mailto:celirubio.m@gmail.com}{\texttt{celirubio.m@gmail.com}}}}
+\date{July 1, 2020}
+
+\usepackage{multicol}
+
+\begin{document}
+	\maketitle
+	
+	\section{Allegro, Fantasie in d-moll / D minor nach TWV 40:4, Georg Philipp Telemann}
+	\url{https://www.youtube.com/watch?v=hpjV962DLWs}
+	\begin{center}
+		\begin{mousik}[long=83.4,indent=4]
+			\Clef
+			\Key{-1}
+			\TimeSig{6}{8}
+			\Note{8}{12}
+		\Bar
+			\Note{8}{12,11,12}
+			\Note{8}{10,9,10}
+		\Bar
+			\Accs{,1/7,}
+			\Note{8}{8,7,8}
+			\Note{8}{5,8,10}
+		\Bar
+			\Note{8}{4,9,11}
+			\Note{8}{5,10,9}
+		\Bar
+			\Note{8}{10,11,9}
+			\Dot{9}
+			\Note{4}{8}
+		\Bar[t=|.]
+		\end{mousik}
+	\end{center}
+
+	\begin{mousik}
+		\Clef
+		\TimeSig{6}{4}
+		\Tempo{4}{62}
+		
+		\Dynamics[0.25]{pp}
+		\Dot{11}
+		\Note{2}{11}
+		\Tie{11}
+		\Accs{,,,-1/9}
+		\Note[tuplet]{16}{11,12,11,9,8}
+		
+		\Accs{,1/7,,,-1/2}
+		\Note[swap,tuplet]{16}{5,7,5,4,2}
+		
+		\Accs{0/1,-1/2,,1/4,0/5,1/7}
+		\Note[swap,tuplet]{16}{1,2,4,4,5,7}
+		\Tie[2]{7}
+		
+	\Bar
+		
+		\Space[0.5]\Dynamics[-0.5]{f}\Space[-0.5]
+		
+		\Space[0.5]\Tie[-0.5]{7}\Space[-0.5]
+		\Accs{,0/11,-1/5}
+		\Artics{,-/11}
+		\Note[tuplet]{8}{7,11,5}
+		\Tie{5}		
+		\Note{2}{5}
+			
+	\end{mousik}
+\end{document}

@@ -26,7 +26,7 @@
 \author{Celia Rubio Madrigal\footnote{Email: \href{mailto:celirubio.m@gmail.com}{\texttt{celirubio.m@gmail.com}}}}
 \date{July 1, 2020}
 
-\newcommand{\TTT}[2][0]{\Text[#1]{\texttt{\textbackslash #2}}}
+\newcommand{\TTT}[2][0]{\Text[yshift=#1]{\texttt{\textbackslash #2}}}
 
 \usepackage{multicol}
 
@@ -54,13 +54,13 @@
 	\vfill
 	
 	\section{Introduction}
-	There are already several ways to set music using \LaTeX. As stated by the \textsf{abc} package, ``\textit{notably MusixTEX and Lilypond}'', as well as \textsf{abc} per se.
+	There are already several ways to set music using \LaTeX: \textsf{musixtex}, \textsf{lilypond} or \textsf{abc}, among others.
 	Some of them are too difficult to use for not too complicated music; others do not work at all.
 	
 	The \textsf{mousik} package is perfect for short, one line music fragments. It may be used for longer scores, but there are more adaptable and lighter packages than this one. However, in spite of its compactness, the package is quite complete and versatile, but easy to learn and use.
 	
 	\section{The \texttt{mousik} environment}
-	The way to draw a score is by means of the \texttt{mousik} environment. For longer examples, see section \ref{example}.
+	The way to draw a score is by means of the \texttt{mousik} environment. For longer examples, open the \href{run:examples.pdf}{\textit{examples}} document.
 	
 	\begin{center}
 		\begin{mousik}
@@ -76,132 +76,142 @@
 			\Bar
 			\Note{1}{1}
 			
-			\Bar[|.]
+			\Bar[t=|.]
 		\end{mousik}
-		\begin{mousik}
-			\Clef[t=4]
-			\TimeSig{4}{4}
-			
-			\Note{2}{13}	\Chord	\Note{2}{10}	\Chord	\Note{2}{8}
-			\Space[3]
-			
-			\Dot{13}\Note{4}{13}	\Chord	\Dot{9}\Note{4}{9}	\Chord	\Dot{7}\Note{4}{7}			
-			\Space[1]
-			
-			\Note{4}{12}\Tie[3]{12}	\Chord	\Note{4}{10}\Tie[2.5]{10}	\Chord	\Note[back]{4}{9}\Swap\Tie[2.5]{9}	\Chord	\Note{8}{7}\Swap\Tie[3]{7}
-			
-			\Bar
-			
-			\Note{1}{12}	\Chord	\Note{1}{10}	\Chord	\Note[back]{1}{9}	\Chord	\Note{1}{7}
-
-			\Bar[|.]
-		\end{mousik}
+%		\begin{mousik}
+%			\Clef[t=4]
+%			\TimeSig{4}{4}
+%			
+%			\Note{2}{13}	\Chord	\Note{2}{10}	\Chord	\Note{2}{8}
+%			\Space[1.5]
+%			
+%			\Dot{13}\Note{4}{13}	\Chord	\Dot{9}\Note{4}{9}	\Chord	\Dot{7}\Note{4}{7}
+%			\Space[0.5]
+%			
+%			\Note{4}{12}\Tie[3]{12}	\Chord	\Note{4}{10}\Tie[2.5]{10}	\Chord	\Note[back]{4}{9}\Swap\Tie[2.5]{9}	\Chord	\Note{8}{7}\Swap\Tie[3]{7}
+%			
+%			\Bar
+%			
+%			\Note{1}{12}	\Chord	\Note{1}{10}	\Chord	\Note[back]{1}{9}	\Chord	\Note{1}{7}
+%
+%			\Bar[t=|.]
+%		\end{mousik}
 	\end{center}
 	
-	\begin{lstlisting}[basicstyle=\ttfamily]
+	\begin{lstlisting}[basicstyle=\ttfamily\small]
 		  \begin{mousik}
-		     \Clef
-		     \TimeSig{2}{4}
+		     \Clef[octave=8]
+		     \TimeSig{4}{4}
 		     
 		     \Dots{*/1, , */3, }
-		     \Note{|-,=|,|-,=|}{1,2,3,4}
-		     \Bar
-		     
+		     \Note{|-,=|,|-,=|}{1,2,3,4}		     
 		     \Note{4}{2}
 		     \Artic{^}{0}
-		     \Note{8}{0,1}
-		     \Bar[|.]
+		     \Note{8}{0,1}		     
+		     \Tie[3]{1}
+		     \Bar
+		     \Note{1}{1}
+		     
+		     \Bar[t= |.]
 		  \end{mousik}
 	\end{lstlisting}
 	
 %	\subsection{Options}
 It has some options:
 	\begin{enumerate}[-]
-		\item \textsl{indent} indents the first line. Default is 0.
+		\item \textsl{color} changes the background color. Default is white.
+		\item \textsl{indent} indents the first line. Default is 0, in cm.
 		\item \textsl{long} changes the maximum width of the score. Default is 100.
 	\end{enumerate}
 \todo[color=green]{piano scores}
 \todo[color=green]{single staff}
-\todo[color=yellow]{space between notes}
-	
+\todo[color=yellow]{resize}
+\todo[color=yellow]{tikz option}
+
 	\section{Available commands}
 	
 	\subsection{\texttt{\textbackslash Bar}}
-	The \verb|\Bar| command prints a bar on the score. It has an optional argument depending on the type of bar, with default \texttt{|}, the single bar (\verb+\Bar+ = \verb+\Bar[|]+).
+	The \verb|\Bar| command prints a bar on the score. It has some options:
 	
-	\begin{center}
-		\begin{mousik}
-			\Text{\ttfamily[|]}
-			\Bar
-			\Space[1]
-			
-			\Text{\ttfamily[||]}
-			\Bar[||]
-			\Space[1]
-			
-			\Text{\ttfamily[|.]}
-			\Bar[|.]
-			\Space[1]
-			
-			\Text{\ttfamily[|:]}
-			\Bar[|:]
-			\Space[1]
-			
-			\Text{\ttfamily[:|:]}
-			\Bar[:|:]
-			\Space[1]
-			
-			\Text{\ttfamily[:|]}
-			\Bar[:|]
-			\Space[1]
-			
-			\Text{\ttfamily[:]}
-			\Bar[:]
-			\Space[1]
-			
-			\TTT{Space}
-			\Space
-		\end{mousik}
-	\end{center}
+	\begin{enumerate}[-]
+		\item \textsl{t} (type) is the type of bar. Default is \texttt{|}, the single bar.
+		
+		\begin{center}
+			\begin{mousik}
+				\Text{\ttfamily|}
+				\Bar
+				\Space[0.5]
+				
+				\Text{\ttfamily||}
+				\Bar[t= ||]
+				\Space[0.5]
+				
+				\Text{\ttfamily|.}
+				\Bar[t= |.]
+				\Space[0.5]
+				
+				\Text{\ttfamily|:}
+				\Bar[t= |:]
+				\Space[0.5]
+				
+				\Text{\ttfamily:|:}
+				\Bar[t= :|:]
+				\Space[0.5]
+				
+				\Text{\ttfamily:|}
+				\Bar[t= :|]
+				\Space[0.5]
+				
+				\Text{\ttfamily:}
+				\Bar[t= :]
+				\Space[0.5]
+				
+				\Text{\ttfamily(\string\Space)}
+				\Space
+			\end{mousik}
+		\end{center}
+		\item \textsl{xshift} moves the element horizontally (x axis). Default is 0, in cm.
+		\item \textsl{yshift} moves the element vertically (y axis). Default is 0, in cm.
+	\end{enumerate}
 	
 	The only way to end a line in the score is with a bar or a space. Any other way may cause visual errors (see subsection \ref{overflow}).
 	
 	\subsection{\texttt{\textbackslash Space}}
-	The \verb|\Space| command is not only used when no bar is needed. It may also be used to input \textit{extra} space between symbols. The default space is 2 (which is the default space between symbols in general), but it may be any whole number (see subsection \ref{space}).
+	The \verb|\Space| command is not only used when no bar is needed. It may also be used to input \textit{extra} space between symbols. The default space is 1, in centimeters, \textemdash which is the default space between symbols in general, so it gets added\textemdash~but it may be any number (see subsection \ref{space}).
 	
 	\begin{center}
 		\begin{mousik}
 			\Bar
-			\Text{\hspace*{-41pt}\texttt{[-1]}}
-			\Space[-1]
+			\Text{\hspace*{-55pt}\texttt{[-0.5]}}
+			\Space[-0.5]
 			
 			\Bar
-			\Text{\hspace*{-27.5pt}\texttt{[0]}}
+			\Text{\hspace*{-25pt}\texttt{[0]}}
 			\Space[0]
 			
 			\Bar
-			\Text{\hspace*{-14pt}\texttt{[1]}}
+			\Text{\hspace*{-14pt}\texttt{[0.5]}}
+			\Space[0.5]
+			
+			\Bar
+			\Text{\hspace*{-0.5pt}\texttt{[1]}}
 			\Space[1]
 			
 			\Bar
-			\Text{\hspace*{-0.5pt}\texttt{[2]}}
-			\Space
+			\Text{\hspace*{13pt}\texttt{[1.5]}}
+			\Space[1.5]
 			
-			\Bar
-			\Text{\hspace*{13pt}\texttt{[3]}}
-			\Space[3]
-			
-			\Bar[|.]
+			\Bar[t=|.]
 		\end{mousik}
 	\end{center}
-
-\todo[color=yellow]{xshift yshift}
 	
 	\subsection{\texttt{\textbackslash Clef}}
 	The \verb|\Clef| command might be used at any moment on the score, although they are automatically printed if an overflow happens (see subsection \ref{overflow}). It has some options:
 	\begin{enumerate}[-]
 		\item \textsl{octave} prints an octave eight on the clef. If it is an 8, it prints it above the clef; if it is a -8, it prints it below the clef. Default is 0.
 		\item \textsl{t} (type) is the type of clef. Default is 2 (the Treble Clef).
+		\item \textsl{xshift} moves the element horizontally (x axis). Default is 0, in cm.
+		\item \textsl{yshift} moves the element vertically (y axis). Default is 0, in cm.
 	\end{enumerate}
 	\begin{center}
 		\begin{mousik}
@@ -225,7 +235,7 @@ It has some options:
 			\Clef[t=15]
 			\Text{\quad\texttt{0}}
 			\Clef[t=0]
-			\Bar[|.]
+			\Bar[t=|.]
 		\end{mousik}
 	\end{center}
 	
@@ -239,31 +249,39 @@ It has some options:
 			\Clef
 			
 			\TimeSig{2}{4}
-			\Space[1]
+			\Space[0.5]
 			\TimeSig{12}{8}
-			\Space[2]
+			\Space
 			\TimeSig{2+3}{8}
-			\Space[2]
+			\Space
 			
 			\TimeSig{C}{}
-			\Space[1]
+			\Space[0.5]
 			\TimeSig{C|}{}
 			
-			\Bar[|.]
+			\Bar[t=|.]
 		\end{mousik}
 	\end{center}
+
+	It has some options:
+	\begin{enumerate}[-]
+	\item \textsl{xshift} moves the element horizontally (x axis). Default is 0, in cm.
+	\item \textsl{yshift} moves the element vertically (y axis). Default is 0, in cm.
+	\end{enumerate}
 	
 	\subsection{Notes and rests}
 	\subsubsection{\texttt{\textbackslash Note}}
 	The \verb|\Note| command prints a note on the score. It accepts 2 compulsory arguments, as well as some options:
 	\begin{enumerate}[-]
-		\item \textsl{beam} chooses the width of the beam. Default is 1 (mm).
+		\item \textsl{beam} chooses the width of the beam. Default is 1, in mm.
 		\item \textsl{head} chooses the type of head. Default is . (round), but also x (cross) and o (hollow) are possible.
-		\item \textsl{stem} chooses the height of the stem. Default is 0.3.
+		\item \textsl{stem} chooses the height of the stem. Default is 0.5, in cm.
 		\item \textsl{swap} prints the note upside down. Default is false, which means up if the height is less than 6, down otherwise.
 %		\item \textsl{tuplet} prints the number of a tuplet. %It has two arguments, an optional one and a compulsory one. The optional one is the written number, which is automatically calculated by default. The compulsory one is the height.
 %		\todo[color=red]{bar on tuplet, fix height}
-	\end{enumerate}
+		\item \textsl{xshift} moves the element horizontally (x axis). Default is 0, in cm.
+		\item \textsl{yshift} moves the element vertically (y axis). Default is 0, in cm.
+	\end{enumerate}\todo[color=yellow]{stem in mm}
 	
 	The first compulsory argument is the duration of the note.%, from one of these:% 1 (whole note / semibreve), 2 (half note / minim), 4 (quarter note / crotchet), 8 (eighth note / quaver), 16 (sixteenth note / semiquaver), 32 (thirty second note / demisemiquaver).
 	
@@ -271,16 +289,16 @@ It has some options:
 		\begin{mousik}\ttfamily
 			\Clef
 			\foreach \i in {1,2,4,8,16,32} {
-				\Text[-0.5]{\i}
+				\Text[yshift=-0.5]{\i}
 				\Note{\i}{5}
 				\Chord
 				\Note[swap]{\i}{2}
 			}
-			\Bar[|.]
+			\Bar[t=|.]
 		\end{mousik}
 	\end{center}
 	
-	The second argument is the absolute height. For example, these are the notes from 0 to 9:
+	The second argument is the absolute height. Note that the scale is in milimeters. For example, these are the notes from 0 to 9:
 	
 	\begin{center}
 		\begin{mousik}\ttfamily
@@ -289,9 +307,9 @@ It has some options:
 				\Text{\n}
 				\Note{4}{\n}
 			}
-			\Bar[|.]
+			\Bar[t=|.]
 		\end{mousik}
-	\end{center}\todo[color=orange]{\href{https://tex.stackexchange.com/questions/12010/how-can-i-invert-a-clip-selection-within-tikz}{remove white}}
+	\end{center}
 	
 	The \verb|\Note| command might also print several notes tied together with a beam, if the second argument is a list of heights separated by commas. Two notes will be tied together with an oblique beam, but three or more will have a straight beam.%\todo[color=cyan]{monotone triplets sliding beam}
 	
@@ -304,62 +322,93 @@ It has some options:
 		\begin{mousik}
 			\Clef
 			
-			\TTT[-0.5]{Note[stem=0.4]\{16\}\{5,6\}}
-			\Note[stem=0.4]{16}{5,6}
-			\Space[3]
+			\TTT[-0.5]{Note[stem=0.6]\{16\}\{5,6\}}
+			\Note[stem=0.6]{16}{5,6}
+			\Space[1.5]
 			
-			\Space[1]\TTT[0.25]{Note[swap]\{32\}\{5,6\}}\Space[-1]
+			\Space[0.5]\TTT[0.25]{Note[swap]\{32\}\{5,6\}}\Space[-0.5]
 			\Note[swap]{32}{5,6}
-			\Space[3]
+			\Space[1.5]
 			
-			\Space[1]\TTT[-0.5]{Note\{8\}\{7,8,9\}}
-%			\TTT[-1]{Tuplet\{-5\}}\Space[-1]
+			\Space[0.5]\TTT[-0.5]{Note\{8\}\{7,8,9\}}
+%			\TTT[-1]{Tuplet\{-5\}}\Space[-0.5]
 			\Note{8}{7,8,9}
 %			\Tuplet{-5}
 			
-			\Bar[|.]
+			\Bar[t=|.]
 		\end{mousik}
 	\end{center}
 	
 	Notes with different durations that are tied together have a different syntax. Instead of using 8, 16 and 32 for the duration, each note has to be referenced with a \texttt{-}, a \texttt{=} or a $\equiv$, respectively, and additional \texttt{|} might be needed for half the beam.
-	\todo[color=green]{explain better}
 	
 	\begin{center}
 		\begin{mousik}
 			\Clef
 			
-			\Space[4]
+			\Space[2]
 			\TTT{Note\{|$\equiv$,-,|=,=,=|,-,|=,$\equiv$|\}\{0,1,2,3,4,3,2,1\}}
-			\Space[-4]
+			\Space[-2]
 			\Note{|≡,-,|=,=,=|,-,|=,≡|}{0,1,2,3,4,3,2,1}
 			
-			\Bar[|.]
+			\Bar[t=|.]
 		\end{mousik}
 	\end{center}
 
-	To be able to write the $\equiv$ as a symbol on the .tex file, I usually copy and paste it wherever I need it. Nonetheless, an alternative keyboard-friendly input that is equally valid is using \texttt{/$\!$/$\!$/} instead of $\equiv$.
+	To be able to write the $\equiv$ (which is the Unicode character U+2261) as a symbol on the .tex file, I usually copy and paste it wherever I need it. Nonetheless, an alternative keyboard-friendly input that is equally valid is using \texttt{/$\!$/$\!$/} instead.
 	
-	Additionally, spaces between notes from the same group might be useful \textemdash the default space is 1. A space of 1.5 is obtained when a \texttt{!} is placed on both lists. A space of 2 is obtained when a space is placed on both lists.
+	Additionally, spaces between notes from the same group might be useful \textemdash the default space is 0.5 (in cm). 
+	
+	A space of 0.75 is obtained when a \texttt{!} is placed on both lists. A possible usage is when dealing with wide accidentals (see section \ref{acc}) or double dots (see section \ref{dot}).
 	
 	\begin{center}
 		\begin{mousik}
 			\Clef
 			
-			\Space[4]
-			\TTT{Accs\{,,!,-2/3\}}
-			\TTT[-0.5]{Note\{|=,=|,!,-, ,=|\}\{3,3,!,3, ,3\}}
-			\TTT[-1]{Space[-3]\string\Rest\{16\}\string\Space[1]}
-			\Space[-4]
+			\Accs{,!,-2/3,}
+			\Note{|-,!,-,-|}{3,!,3,3}
 			
-			\Accs{,,!,-2/3,!,-2/3}
-			\Note{|=,=,!,=,!,=,=|}{3,3,!,3,!,3,3}
-%			\Space[-3]\Rest{16}\Space[1]
+			\Accs{,!,-2/3,}
+			\Note{|=,!,=,=|}{3,!,3,3}
 			
-			\Bar[|.]
+			\Accs{,!,-2/3,}
+			\Note{|≡,!,≡,≡|}{3,!,3,3}
+			
+			\Bar[t=|.]
+		\end{mousik}
+		\begin{mousik}
+			\Clef
+			
+			\Dots{,**/3,!,*/3}
+			\Note{|-,-,!,-|}{3,3,!,3}
+			
+			\Dots{,**/3,!,*/3}
+			\Note{|=,=,!,=|}{3,3,!,3}
+			
+			\Dots{,**/3,!,*/3}
+			\Note{|≡,≡,!,≡|}{3,3,!,3}
+			
+			\Bar[t=|.]
+		\end{mousik}
+	\end{center}
+	A space of 1 is obtained when a space is placed on both lists. A possible usage is when dealing with rests (see section \ref{rest}).
+	\begin{center}
+		\begin{mousik}
+			\Clef
+			
+			\Note{|-, ,-,-|}{3, ,3,3}
+			\Space[-2]\Rest[yshift=-0.2]{8}\Space[1]
+			
+			\Note{|=, ,=,=|}{3, ,3,3}
+			\Space[-2]\Rest[yshift=-0.2]{16}\Space[1]
+			
+			\Note{|≡, ,≡,≡|}{3, ,3,3}
+			\Space[-2]\Rest[yshift=-0.4]{32}\Space[1]
+			
+			\Bar[t=|.]
 		\end{mousik}
 	\end{center}\todo{fix beam =}
 
-	\subsubsection{\texttt{\textbackslash Rest}}
+	\subsubsection{\texttt{\textbackslash Rest}}\label{rest}
 	The \verb|\Rest| command prints a rest. It accepts its duration as an argument: 1, 2, 4, 8, 16 or 32.
 	
 	\begin{center}
@@ -369,32 +418,35 @@ It has some options:
 				\Text{\i}
 				\Rest{\i}
 			}
-			\Bar[|.]
-		\end{mousik}
-	\end{center}\todo[color=yellow]{common height units}
-
-	It also has some options:
-	\begin{enumerate}[-]
-		\item \textsl{height} moves the rest up and down. Default is 0.
-		\item \textsl{multi} transforms the rest into a multimeasure rest \textemdash where the rest lasts an arbitrary amount of bars.
-	\end{enumerate}
-	\begin{center}
-		\begin{mousik}\ttfamily
-			\Clef
-			\TimeSig{C}{}
-			
-			\Note{1}{4}	\Chord	\Note{1}{8}	\Chord	\Note{1}{-1}
-			\Bar
-			
-			\Space[1]\TTT{Rest[multi]\{17\}}\Space[-1]
-			\Rest[multi]{17}
-			
-			\Bar
-			\Note{1}{4}	\Chord	\Note{1}{9}	\Chord	\Note{1}{0}
-			
-			\Bar[|.]
+			\Bar[t=|.]
 		\end{mousik}
 	\end{center}
+
+	It has some options:
+	\begin{enumerate}[-]
+		\item \textsl{multi} transforms the rest into a multimeasure rest \textemdash where the rest lasts an arbitrary amount of bars.
+		
+		\begin{center}
+			\begin{mousik}\ttfamily
+				\Clef
+				\TimeSig{C}{}
+				
+				\Note{1}{4}	\Chord	\Note{1}{8}	\Chord	\Note{1}{-1}
+				\Bar
+				
+				\Space[0.5]\TTT{Rest[multi]\{17\}}\Space[-0.5]
+				\Rest[multi]{17}
+				
+				\Bar
+				\Note{1}{4}	\Chord	\Note{1}{9}	\Chord	\Note{1}{0}
+				
+				\Bar[t=|.]
+			\end{mousik}
+		\end{center}
+		
+		\item \textsl{xshift} moves the element horizontally (x axis). Default is 0, in cm.
+		\item \textsl{yshift} moves the element vertically (y axis). Default is 0, in cm.
+	\end{enumerate}
 	
 	\subsubsection{\texttt{\textbackslash Chord}}
 	\todo[color=cyan]{maybe fix chord}
@@ -415,18 +467,18 @@ It has some options:
 			\Chord
 			\Note{1}{4}
 			
-			\Space[5]	
+			\Space[2.5]	
 			
 			\TTT{Note[swap]\{16\}\{7\}}
 			\TTT[-0.5]{Chord}
 %			\TTT[-1]{Swap\textbackslash Enlarge\{7\}\{0\}}
-			\TTT[-1]{Note[stem=0.5]\{4\}\{0\}}
+			\TTT[-1]{Note[stem=0.7]\{4\}\{0\}}
 			\Note[swap]{16}{7}
 			\Chord
 %			\Swap\Enlarge{7}{0}
-			\Note[stem=0.5]{4}{0}
+			\Note[stem=0.7]{4}{0}
 			
-			\Bar[|.]
+			\Bar[t=|.]
 		\end{mousik}
 	\end{center}
 		
@@ -443,7 +495,7 @@ It has some options:
 			\Chord[2]
 			\Note{4}{1,2}
 			
-			\Space[4]
+			\Space[2]
 			
 			\TTT{Note\{8\}\{5,4\}}
 			\TTT[-0.5]{Chord}
@@ -452,7 +504,7 @@ It has some options:
 			\Chord
 			\Note{4}{2}
 			
-			\Space[4]
+			\Space[2]
 			
 			\TTT{Note\{8\}\{5,4\}}
 			\TTT[-0.5]{Chord[2]}
@@ -461,15 +513,15 @@ It has some options:
 			\Note{8}{5,4}
 			\Chord[2]
 			\Note{4}{1}
-			\Space[1]
+			\Space[0.5]
 			
-			\Bar[|.]
+			\Bar[t=|.]
 		\end{mousik}
 	\end{center}\todo[color=green]{maybe fix chord+space}
 
 	\subsection{Keys and accidentals}
 	
-	\subsubsection{\texttt{\textbackslash Acc}}
+	\subsubsection{\texttt{\textbackslash Acc}}\label{acc}
 	The \verb|Acc| command prints an accidental before a note. It accepts 2 arguments.
 	
 	The first argument is the type of accidental: a number ranging from -2 to 2. The flat $\flat$ symbol might also be called with a \texttt{b} and the sharp $\sharp$ symbol might be called with \texttt{\textbackslash\#}.\todo[color=yellow]{only \# ?}
@@ -479,16 +531,22 @@ It has some options:
 			\Clef	
 			\foreach \a in {-2,-1.5,...,2} {
 				\Text{\texttt{\a}}
-				\MString{\a}{-1}{\Text[-0.5]{\texttt{b}}}
-				\MString{\a}{1}{\Text[-0.5]{\texttt{\textbackslash\#}}}
+				\MString{\a}{-1}{\Text[yshift=-0.5]{\texttt{b}}}
+				\MString{\a}{1}{\Text[yshift=-0.5]{\texttt{\textbackslash\#}}}
 				\Acc{\a}{5}
 				\Note{4}{5}
 			}
-			\Bar[|.]
+			\Bar[t=|.]
 		\end{mousik}
 	\end{center}
 
-The second argument is the height of the symbol.
+The second argument is the height of the symbol, which correspond to those of the notes.
+
+It also has some options:
+\begin{enumerate}[-]
+	\item \textsl{xshift} moves the element horizontally (x axis). Default is 0, in cm.
+	\item \textsl{yshift} moves the element vertically (y axis). Default is 0, in cm.
+\end{enumerate}
 
 When there are several notes, the \verb|\Accs| command might be useful. It accepts as an argument a list of pairs: type/height. Where there is no accidental, the spot shall be left empty.
 	
@@ -496,14 +554,14 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 	\begin{mousik}
 		\Clef
 		
-		\Space[1]
+		\Space[0.5]
 		\TTT{Accs\{-2/5, ,-1/0\}}
 		\TTT[-0.5]{Note\{5,3,0\}}
-		\Space[-1]
+		\Space[-0.5]
 		\Accs{-2/5, ,-1/0}
 		\Note{8}{5,3,0}
 		
-		\Bar[|.]
+		\Bar[t=|.]
 	\end{mousik}
 \end{center}
 	
@@ -563,7 +621,7 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 				
 				\Acc{0}{8}
 				\Note{1}{8}
-				\Bar[|.]
+				\Bar[t=|.]
 			\end{mousik}
 		\end{center}
 		\columnbreak
@@ -576,18 +634,23 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 	
 	\Acc{0}{8}
 	\Note{1}{8}
-	\Bar[|.]
+	\Bar[t=|.]
   \end{mousik}
 \end{lstlisting}
 	\end{multicols}
 	
 	\subsection{Other symbols}
 	
-	\subsubsection{\texttt{\textbackslash Dot}}
+	\subsubsection{\texttt{\textbackslash Dot}}\label{dot}
+	The \verb|\Dot| command prints any amount of dots in front of a note or rest. It accepts a compulsory argument: the height of the dot, which corresponds to those of the notes. %\todo{as an option}
 	
-	The \verb|\Dot| command prints any amount of dots in front of a note or rest. It accepts an optional argument and a compulsory argument. %\todo{as an option}
 	
-	The default number of dots is 1, but, as an optional argument, $**$ will produce 2 dots. The second, compulsory argument is the height of the dot.
+	It has some options:
+	\begin{enumerate}[-]
+		\item \textsl{t} (type) accepts $**$ or $..$ to produce 2 dots. The default is $*$.
+		\item \textsl{xshift} moves the element horizontally (x axis). Default is 0, in cm.
+		\item \textsl{yshift} moves the element vertically (y axis). Default is 0, in cm.
+	\end{enumerate}
 	
 	When there are several notes, the \verb|\Dots| command might be useful. It accepts as an argument a list of pairs: symbols/height, where symbols might be $*$ or $**$. Where there are no dots, the spot shall be left empty.
 	
@@ -600,26 +663,26 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 			\Dot{5}
 			\Note{4}{5}
 			
-			\Space[3]
+			\Space[1.5]
 			
-			\TTT{Dot[**]\{7\}}
+			\TTT{Dot[t= **]\{7\}}
 			\TTT[-0.5]{Rest\{8\}}
-			\Dot[**]{7}
+			\Dot[t= **]{7}
 			\Rest{8}
 			
-			\Space[5]
+			\Space[2.5]
 			
 			\TTT{Dots\{*/5, , **/3\}}
 			\TTT[-0.5]{Note\{|=,-,=|\}\{5,2,3\}}
 			
-			\Space[-1]
+			\Space[-0.5]
 			
 			\Dots{*/5, , **/3}
 			\Note{|=,-,=|}{5,2,3}
 			
-			\Space[1]
+			\Space[0.5]
 			
-			\Bar[|.]
+			\Bar[t=|.]
 		\end{mousik}
 	\end{center}
 	
@@ -648,9 +711,16 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 			\Tie{4}			
 			\Note{4}{4}
 			
-			\Bar[|.]
+			\Bar[t=|.]
 		\end{mousik}
 	\end{center}
+
+	It has some options:
+	\begin{enumerate}[-]
+	\item 
+%\textsl{xshift} moves the element horizontally (x axis). Default is 0, in cm.
+%	\item \textsl{yshift} moves the element vertically (y axis). Default is 0, in cm.
+	\end{enumerate}\todo{options}
 
 	\subsubsection{The \texttt{Slurred} environment}
 	
@@ -664,7 +734,7 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 				\foreach\i in {6,...,11}{\Note{4}{\i}}
 			\end{Slurred}
 
-			\Bar[|.]
+			\Bar[t=|.]
 		\end{mousik}
 	\end{center}
 
@@ -686,17 +756,17 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 				\foreach\i in {6,...,3}{\Note{4}{\i}}
 			\end{Decrescendo}
 
-			\Bar[|.]
+			\Bar[t=|.]
 		\end{mousik}
 	\end{center}
 	
 	\newcommand{\ARTC}[2][]{
-		\Text[-0.15]{\texttt{\{\ifx&#1&#2\else#1\fi\}}}
+		\Text[yshift=-0.15]{\texttt{\{\ifx&#1&#2\else#1\fi\}}}
 		\Artic{#2}{3}
 		\Note{4}{3}
 	}
 	\newcommand{\ARTIC}[2][]{
-		\Text[2.25]{\texttt{\{\ifx&#1&#2\else#1\fi\}}}
+		\Text[yshift=2.25]{\texttt{\{\ifx&#1&#2\else#1\fi\}}}
 		\Artic{#2}{9}
 		\Note{4}{9}
 	}
@@ -706,40 +776,46 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 %	volta 1---2
 
 	\subsubsection{\texttt{\textbackslash Artic} and \texttt{\textbackslash Symbol}}	
-	The \verb|\Artic| command prints an articulation symbol on a successive note. It accepts two arguments. The first one is the type of articulation.\todo[color=yellow]{Articsss}
+	The \verb|\Artic| command prints an articulation symbol on a successive note. It accepts two arguments. The first one is the type of articulation.
 
 	\begin{center}
 	\begin{mousik}
 		\Clef
 		
-		\Text[-0.65]{Staccato}\ARTC{.}
-		\Text[2.75]{Staccatissimo}\ARTIC{'}
-		\Text[-0.65]{Accent}\ARTC{>}
-		\Text[2.75]{Marcato}\ARTIC[\textasciicircum]{^}
-		\Text[-0.65]{Tenuto}\ARTC{-}
-		\Text[2.75]{Fermata}\ARTIC{(.)}
-		\Text[-0.65]{Trill}\ARTC{+}
-		\Text[2.75]{Mordent}\ARTIC[$\sim$]{~}
-		\Text[-0.65]{Lower mordent}\ARTC[$\sim\!|$]{~|}
-		\Text[2.75]{Turn}\ARTIC{?}
+		\Text[yshift=-0.65]{Staccato}\ARTC{.}
+		\Text[yshift=2.75]{Staccatissimo}\ARTIC{'}
+		\Text[yshift=-0.65]{Accent}\ARTC{>}
+		\Text[yshift=2.75]{Marcato}\ARTIC[\textasciicircum]{^}
+		\Text[yshift=-0.65]{Tenuto}\ARTC{-}
+		\Text[yshift=2.75]{Fermata}\ARTIC{(.)}
+		\Text[yshift=-0.65]{Trill}\ARTC{+}
+		\Text[yshift=2.75]{Mordent}\ARTIC[$\sim$]{~}
+		\Text[yshift=-0.65]{Lower mordent}\ARTC[$\sim\!|$]{~|}
+		\Text[yshift=2.75]{Turn}\ARTIC{?}
 		
-		\Bar[|.]
+		\Bar[t=|.]
 	\end{mousik}
 	
 	\begin{mousik}
 		\Clef
 		
-		\Text[2.75]{Harmonic}\ARTIC{o}
+		\Text[yshift=2.75]{Harmonic}\ARTIC{o}
 		\Space
-		\Text[2.75]{Up bow}\ARTIC{v}
+		\Text[yshift=2.75]{Up bow}\ARTIC{v}
 		\Space
-		\Text[2.75]{Down bow}\ARTIC{n}
+		\Text[yshift=2.75]{Down bow}\ARTIC{n}
 		
-		\Bar[|.]
+		\Bar[t=|.]
 	\end{mousik}
 \end{center}
 
-The second one is the height of the symbol, which might or might not be the height of the corresponding note.
+The second one is the height of the symbol, which corresponds to those of the notes \textemdash but it might or might not be the height of the corresponding note.
+
+It has some options:
+\begin{enumerate}[-]
+	\item \textsl{xshift} moves the element horizontally (x axis). Default is 0, in cm.
+	\item \textsl{yshift} moves the element vertically (y axis). Default is 0, in cm.
+\end{enumerate}
 
 When there are several notes, the \verb|\Artics| command might be useful. It accepts as an argument a list of pairs: symbols/height. Where there are no symbols, the spot shall be left empty.
 
@@ -750,44 +826,54 @@ The \verb|\Symbol| command is similar to the \verb|\Artic| command, but it only 
 	\begin{mousik}
 		\Clef
 		
-		\Text[-0.65]{Breath}
-		\Text[-0.15]{\texttt{\{,\}}}
-		\Symbol{,}\Space[3]
+		\Text[yshift=-0.65]{Breath}
+		\Text[yshift=-0.15]{\texttt{\{,\}}}
+		\Symbol{,}\Space[1.5]
 		
-		\Text[-0.65]{Caesura}
-		\Text[-0.15]{\texttt{\{/\}}}
-		\Symbol{/}\Space[3]
+		\Text[yshift=-0.65]{Caesura}
+		\Text[yshift=-0.15]{\texttt{\{/\}}}
+		\Symbol{/}\Space[1.5]
 		
-		\Text[-0.65]{Segno}
-		\Text[-0.15]{\texttt{\{s\textbackslash\%\}}}
-		\Symbol{s\%}\Space[3]
+		\Text[yshift=-0.65]{Segno}
+		\Text[yshift=-0.15]{\texttt{\{s\textbackslash\%\}}}
+		\Symbol{s\%}\Space[1.5]
 		
-		\Text[-0.65]{Simile}
-		\Text[-0.15]{\texttt{\{\textbackslash\%\}}}
-		\Symbol{\%}\Space[3]
+		\Text[yshift=-0.65]{Simile}
+		\Text[yshift=-0.15]{\texttt{\{\textbackslash\%\}}}
+		\Symbol{\%}\Space[1.5]
 		
-		\Text[-0.65]{Coda}
-		\Text[-0.15]{\texttt{\{o+\}}}
-		\Symbol{o+}\Space[3]
+		\Text[yshift=-0.65]{Coda}
+		\Text[yshift=-0.15]{\texttt{\{o+\}}}
+		\Symbol{o+}\Space[1.5]
 		
-		\Text[2.75]{Pedal}
-		\Text[2.25]{\texttt{\{Ped\}}}
-		\Symbol{Ped}\Space[3]
+		\Text[yshift=2.75]{Pedal}
+		\Text[yshift=2.25]{\texttt{\{Ped\}}}
+		\Symbol{Ped}\Space[1.5]
 		
-		\Text[2.75]{Lift Pedal}
-		\Text[2.25]{\texttt{\{*\}}}
+		\Text[yshift=2.75]{Lift Pedal}
+		\Text[yshift=2.25]{\texttt{\{*\}}}
 		\Symbol{*}\Space
 		
-		\Bar[|.]
+		\Bar[t=|.]
 	\end{mousik}
 	\end{center}
 
+It also has some options:
+\begin{enumerate}[-]
+	\item \textsl{xshift} moves the element horizontally (x axis). Default is 0, in cm.
+	\item \textsl{yshift} moves the element vertically (y axis). Default is 0, in cm.
+\end{enumerate}
 
 
 	\subsection{\texttt{\textbackslash Text} and \texttt{\textbackslash Dynamics}}
-	The \verb|\Text| command allows the printing of any text string. It has a compulsory argument, but also an optional one where the user may choose the height of the string: \verb|\Text[2]{\it rit.}|.
+	The \verb|\Text| command allows the printing of any text string. It has a compulsory argument: the text to be shown. 
+	It also has some options:
+	\begin{enumerate}[-]
+		\item \textsl{xshift} moves the element horizontally (x axis). Default is 0, in cm.
+		\item \textsl{yshift} moves the element vertically (y axis). Default is 0, in cm.
+	\end{enumerate}
 	
-	To write anything in the usual font of dynamics, the \verb|\Dynamics| command will work the same: \verb|\Dynamics[-0.5]{pp}|.
+	To write anything in the usual font of dynamics, the \verb|\Dynamics| command will work the same: \verb|\Dynamics[yshift=-0.5]{pp}|.
 	\begin{center}
 		\begin{mousik}
 			\Clef
@@ -804,18 +890,18 @@ The \verb|\Symbol| command is similar to the \verb|\Artic| command, but it only 
 			
 			\Bar
 			
-			\Text[2]{\it rit.}
+			\Text[yshift=2]{\it rit.}
 			\Note{8}{3,4}
 			
-			\Dynamics[-0.5]{pp}
+			\Dynamics[yshift=-0.5]{pp}
 			\Note{4}{-3}
 			
-			\Bar[|.]
+			\Bar[t=|.]
 		\end{mousik}
 	\end{center}
 
 \subsection{\texttt{\textbackslash Tempo}}
-The \verb|\Tempo| command prints a metronome tempo indicator. It has two arguments: the duration of the note and the numerical tempo which will be printed.
+The \verb|\Tempo| command prints a metronome tempo indicator. It has two arguments: the duration of the note and the numerical tempo which will be printed. It has the same options as the \verb|\Text| command.
 
 \begin{center}
 \begin{mousik}
@@ -824,20 +910,19 @@ The \verb|\Tempo| command prints a metronome tempo indicator. It has two argumen
 	\Note{4}{2}
 	\Note{4}{3}
 	\Bar
-	\Tempo[-0.1]{2}{60}
+	\Tempo[yshift=2.4]{2}{60}
 	\Note{4}{4}
 	\Rest{4}
 	
-	\Bar[|.]
+	\Bar[t=|.]
 \end{mousik}
 \end{center}
-	
 
 	
 	\section{Tips and observations} \label{errors}
 	\newcommand{\sbs}[1]{\refstepcounter{subsection}\phantomsection\label{#1}\thesubsection\quad}
 	\subsection*{\sbs{overflow}Overflow of lines}
-	The \textsf{mousik} package is thought to be used for small fragments of music. The environment has a maximum length allowed, and whenever it is exceeded an overflow happens. The line is broken at that exact point and, if it does not coincide with a bar, something like this may happen:
+	The \textsf{mousik} package is thought to be used for small fragments of music. The environment has a maximum length allowed \textemdash which might be changed with the \textsl{length} option\textemdash~and whenever it is exceeded an overflow happens. The line is broken at that exact point and, if it does not coincide with a bar, something like this may happen:
 	
 	\begin{mousik}
 		\Clef
@@ -858,69 +943,43 @@ The \verb|\Tempo| command prints a metronome tempo indicator. It has two argumen
 	
 	\subsection*{\sbs{space}How do spaces work?}
 	
-	Spaces serve as the manual progression of an invisible cursor during the printing. A negative \todo[color=orange]{explain spaces}
+	Spaces serve as the manual progression of an invisible cursor during the printing.
 	
-	\subsection*{\sbs{command}What if it becomes too cumbersome: your own commands}
-	If a concrete rhythm is constantly used on a music piece. \todo[color=yellow]{explain}
+	Most elements are separated by a distance of 1 cm, so a \verb|\Space| command that has an argument smaller than -1 will actually step backwards. A \verb|\Space| with a 0 as the argument does nothing.
 	
-	\subsection*{\sbs{tikz}On your own: working with the \textsf{tikz} package} \todo[color=green]{explain tikz}
+	The \verb|\Space| command is truly relevant in this package. Not a lot of logic is internally implemented, so the user is supposed to adjust everything at their convenience.
 	
-	\section{A very long and complete example}\label{example} \todo[color=green]{choose example}
-	\begin{center}
-		\begin{mousik}[long=83.4,indent=4]
+	This is not to say that the package becomes too cumbersome to manage. For the general use I would say it is extremely user-friendly.
+	
+	\subsection*{\sbs{command}What if it does become too cumbersome: your own commands}
+	\begin{multicols}{2}
+		If a concrete rhythm is constantly used on a music piece, but the commands become increasingly long and tedious, the user might want to summarize it by creating their own vocabulary.
+		
+		\newcommand{\ttc}[2][]{\Note[#1]{|-,|=,=|}{#2}}
+		\newcommand{\tct}[2][]{\Note[#1]{|=,=|,-|}{#2}}
+		\begin{mousik}
 			\Clef
-			\Key{-1}
-			\TimeSig{6}{8}
-			\Note{8}{12}
-		\Bar
-			\Note{8}{12,11,12}
-			\Note{8}{10,9,10}
-		\Bar
-			\Accs{,1/7,}
-			\Note{8}{8,7,8}
-			\Note{8}{5,8,10}
-		\Bar
-			\Note{8}{4,9,11}
-			\Note{8}{5,10,9}
-		\Bar
-			\Note{8}{10,11,9}
-			\Dot{9}
-			\Note{4}{8}
-		\Bar[|.]
+			\ttc{7,8,9}
+			\tct{10,9,8}
+			\Bar[t= |.]
 		\end{mousik}
-	\end{center}
-
+	\end{multicols}
+	
+	
+	\begin{lstlisting}
+	\newcommand{\ttc}[2][]{\Note[#1]{|-,|=,=|}{#2}}
+	\newcommand{\tct}[2][]{\Note[#1]{|=,=|,-|}{#2}}
+	
 	\begin{mousik}
 		\Clef
-		\TimeSig{6}{4}
-		\Tempo{4}{62}
-		
-		\Dynamics[0.25]{pp}
-		\Dot{11}
-		\Note{2}{11}
-		\Tie{11}
-		\Accs{,,,-1/9}
-		\Note[tuplet]{16}{11,12,11,9,8}
-		
-		\Accs{,1/7,,,-1/2}
-		\Note[swap,tuplet]{16}{5,7,5,4,2}
-		
-		\Accs{0/1,-1/2,,1/4,0/5,1/7}
-		\Note[swap,tuplet]{16}{1,2,4,4,5,7}
-		\Tie[2]{7}
-		
-	\Bar
-		
-		\Space[1]\Dynamics[-0.5]{f}\Space[-1]
-		
-		\Space[1]\Tie[-0.5]{7}\Space[-1]
-		\Accs{,0/11,-1/5}
-		\Artics{,-/11}
-		\Note[tuplet]{8}{7,11,5}
-		\Tie{5}		
-		\Note{2}{5}
-			
+		\ttc{7,8,9}
+		\tct{10,9,8}
+		\Bar[t= |.]
 	\end{mousik}
+	\end{lstlisting}
+	
+	\subsection*{\sbs{tikz}On your own: working with the \textsf{tikz} package} \todo[color=orange!50]{explain tikz}
+	
 
 %
 %	\section{The package code}	\todo[color=green]{beautiful code}

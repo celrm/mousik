@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2018.11.4)  15 JUL 2020 16:00
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2018.11.4)  22 JUL 2020 17:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1124,6 +1124,12 @@ maxoctlines=6
 ) (/usr/share/texlive/texmf-dist/tex/latex/musixtex/musixltx.tex
 MusiXLaTeX T.125 <8 April 2017>
 ))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibrarybackgrounds.code.tex
+File: tikzlibrarybackgrounds.code.tex 2013/07/18 v3.0.1a (rcs-revision 1.3)
+\pgf@layerbox@background=\box99
+\pgf@layerboxsaved@background=\box100
+)
 \c@Mevaluate=\count321
 \c@Mmodulo=\count322
 \c@Mmax=\count323
@@ -1167,7 +1173,7 @@ LaTeX Font Info:    ... okay on input line 33.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 33.
 LaTeX Font Info:    ... okay on input line 33.
 \c@lstlisting=\count341
-\AtBeginShipoutBox=\box99
+\AtBeginShipoutBox=\box101
 Package hyperref Info: Link coloring OFF on input line 33.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
@@ -1191,7 +1197,7 @@ LaTeX Info: Redefining \nameref on input line 33.
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count343
 \scratchdimen=\dimen359
-\scratchbox=\box100
+\scratchbox=\box102
 \nofMPsegments=\count344
 \nofMParguments=\count345
 \everyMPshowfont=\toks78
@@ -1302,140 +1308,178 @@ LaTeX Font Info:    Font shape `OT1/pcr/bx/n' in size <14.4> not available
 (Font)              Font shape `OT1/pcr/b/n' tried instead on input line 62.
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
 
 
 LaTeX Warning: The counter will not be printed.
-             The label is: - on input line 119.
+             The label is: - on input line 121.
 
 Package hyperref Info: bookmark level for unknown todo defaults to 0 on input l
-ine 123.
-[3]
+ine 126.
 
-LaTeX Warning: Marginpar on page 4 moved.
-
-
-LaTeX Warning: Marginpar on page 4 moved.
+LaTeX Warning: Marginpar on page 3 moved.
 
 
-LaTeX Warning: Marginpar on page 4 moved.
+LaTeX Warning: Marginpar on page 3 moved.
+
+
+LaTeX Warning: Marginpar on page 3 moved.
 
 LaTeX Font Info:    Font shape `OT1/pcr/bx/n' in size <12> not available
-(Font)              Font shape `OT1/pcr/b/n' tried instead on input line 129.
+(Font)              Font shape `OT1/pcr/b/n' tried instead on input line 133.
 
 LaTeX Font Warning: Font shape `OMS/pcr/bx/n' undefined
 (Font)              using `OMS/pcr/m/n' instead
-(Font)              for symbol `textbackslash' on input line 129.
+(Font)              for symbol `textbackslash' on input line 133.
 
 LaTeX Font Info:    Font shape `OMS/pcr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 129.
-LaTeX Font Info:    Font shape `OMS/pcr/bx/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 169.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 133.
 
 LaTeX Warning: The counter will not be printed.
-             The label is: - on input line 202.
+             The label is: - on input line 136.
+
+[3]
+Overfull \hbox (5.34436pt too wide) in paragraph at lines 141--172
+ [] 
+
+\hbox(61.24506+0.0)x336.66667 []
+
+LaTeX Font Info:    Font shape `OMS/pcr/bx/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 179.
+
+LaTeX Warning: The counter will not be printed.
+             The label is: - on input line 210.
 
 [4]
-LaTeX Font Info:    Font shape `OMS/pcr/bx/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 257.
-
 
 LaTeX Warning: The counter will not be printed.
-             The label is: - on input line 259.
+             The label is: - on input line 267.
+
+LaTeX Font Info:    Font shape `OMS/pcr/bx/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 273.
+
+LaTeX Warning: The counter will not be printed.
+             The label is: - on input line 275.
 
 [5]
-LaTeX Font Info:    Font shape `U/musix/m/n' will be
-(Font)              scaled to size 15.0pt on input line 354.
- [6]
 
-LaTeX Warning: Marginpar on page 7 moved.
+LaTeX Warning: Marginpar on page 6 moved.
+
+[6]
+LaTeX Font Info:    Font shape `U/musix/m/n' will be
+(Font)              scaled to size 15.0pt on input line 367.
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
 
 
 LaTeX Warning: The counter will not be printed.
-             The label is: - on input line 377.
+             The label is: - on input line 426.
 
-[7] [8] [9]
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
- [10] [11] [12]
-Missing character: There is no 2 in font nullfont!
+[7] [8]
 
-Overfull \hbox (5.10654pt too wide) in paragraph at lines 843--856
-[] 
+LaTeX Warning: The counter will not be printed.
+             The label is: - on input line 546.
 
-\hbox(98.85667+0.0)x345.0 []
+[9] [10]
 
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no 2 in font nullfont!
+LaTeX Warning: The counter will not be printed.
+             The label is: - on input line 649.
+
 Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+
+LaTeX Warning: The counter will not be printed.
+             The label is: - on input line 719.
+
+[11] [12]
+
+LaTeX Warning: The counter will not be printed.
+             The label is: - on input line 815.
+
+
+LaTeX Warning: The counter will not be printed.
+             The label is: - on input line 862.
+
+
+LaTeX Warning: The counter will not be printed.
+             The label is: - on input line 871.
+
 [13]
-Missing character: There is no ; in font nullfont!
 Missing character: There is no 2 in font nullfont!
 
-Overfull \hbox (33.57318pt too wide) in paragraph at lines 894--924
+Overfull \hbox (13.71762pt too wide) in paragraph at lines 928--941
 [] 
 
-\hbox(163.7543+0.0)x345.0 []
+\hbox(107.46776+0.0)x345.0 []
 
 [14]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 948.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 948.
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 970.
+ [15] [16]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1007.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1007.
  (files/main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 948.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 948.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1007.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1007.
+
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: <no file>.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 948.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1007.
  ) 
 Here is how much of TeX's memory you used:
- 28905 strings out of 494923
- 533733 string characters out of 6180163
- 717843 words of memory out of 5000000
- 31631 multiletter control sequences out of 15000+600000
- 52087 words of font info for 188 fonts, out of 8000000 for 9000
+ 29113 strings out of 494923
+ 538266 string characters out of 6180163
+ 707306 words of memory out of 5000000
+ 31804 multiletter control sequences out of 15000+600000
+ 52602 words of font info for 190 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 62i,14n,76p,10359b,1678s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,14n,76p,10359b,1787s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist
 /fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texlive/texmf-dist/fonts/
 type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
 ublic/amsfonts/cm/cmbxti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pf
-b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/te
-xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmss17.pfb></usr/share/texlive/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmss8.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmss9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-sy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr
-/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/musixtex-fonts/musix11.pfb></usr/share/te
-xlive/texmf-dist/fonts/type1/public/musixtex-fonts/musix13.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/musixtex-fonts/musix20.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/urw/courier/ucrr8a.pfb>
-Output written on files/main.pdf (14 pages, 365034 bytes).
+c/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmsl10.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmss17.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmss8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmss9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+sy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/musixtex-fonts/musix11.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/public/musixtex-fonts/musix13.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/musixtex-fonts/musix20.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/urw/courier/ucrr8a.pfb>
+Output written on files/main.pdf (16 pages, 366165 bytes).
 PDF statistics:
- 440 PDF objects out of 1000 (max. 8388607)
- 390 compressed objects within 4 object streams
- 108 named destinations out of 1000 (max. 500000)
- 213 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 475 PDF objects out of 1000 (max. 8388607)
+ 423 compressed objects within 5 object streams
+ 139 named destinations out of 1000 (max. 500000)
+ 205 words of extra memory for PDF output out of 10000 (max. 10000000)
 
