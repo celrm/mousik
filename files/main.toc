@@ -8,7 +8,7 @@
 \contentsline {subsection}{\numberline {3.5}Notes and rests}{5}{subsection.3.5}
 \contentsline {subsubsection}{\numberline {3.5.1}\texttt {\textbackslash Note}}{5}{subsubsection.3.5.1}
 \contentsline {subsubsection}{\numberline {3.5.2}\texttt {\textbackslash Rest}}{7}{subsubsection.3.5.2}
-\contentsline {subsubsection}{\numberline {3.5.3}\texttt {\textbackslash Chord}}{8}{subsubsection.3.5.3}
+\contentsline {subsubsection}{\numberline {3.5.3}\texttt {\textbackslash Back}}{8}{subsubsection.3.5.3}
 \contentsline {subsection}{\numberline {3.6}Keys and accidentals}{9}{subsection.3.6}
 \contentsline {subsubsection}{\numberline {3.6.1}\texttt {\textbackslash Acc}}{9}{subsubsection.3.6.1}
 \contentsline {subsubsection}{\numberline {3.6.2}\texttt {\textbackslash Key}}{9}{subsubsection.3.6.2}

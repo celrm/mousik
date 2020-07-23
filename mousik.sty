@@ -337,10 +337,12 @@ show background rectangle]
 
 \newcounter{Maux}
 \newcounter{MauxB}
-\newcommand{\Tuplet}[2][]{
+\newcounter{Mheight}
+\newcommand{\Tuplet}[1][]{
 	\addtocounter{MX}{-\XM/2}
-	\setcounter{Mevaluate}{\theMX}\addtocounter{Mevaluate}{-\theMaux}
-	\node at (\theMaux*\MX+\theMevaluate*\MX/2-0.3,-\theMY*2+#2*0.1)
+	\setcounter{MauxB}{\theMX}\addtocounter{MauxB}{-\theMaux-\XM/2}
+	\node at (\theMaux*\MX+\theMauxB*\MX*0.5+0.1*\ifnoswap 1 \else -1\fi,
+	-\theMY*2+\theMheight*0.1+0.3*\ifnoswap 1 \else -1\fi)
 	{\ifthenelse{\equal{#1}{}}%
 		{\theMcount}{#1}%
 	};
@@ -422,15 +424,12 @@ show background rectangle]
 	}
 	\fi
 }
-\newcounter{MbeamP}
 \newcommand{\Beam}[5][\theMX]{
 	\ifswap\Mswap\fi
 	\ifnoswap
 		\draw[line width=\Mbeam mm] (#2*\MX+0.103,-\theMY*2-0.2+#3*0.1#5) -- (#1*\MX-0.372,-\theMY*2-0.2+#4*0.1#5);
-		\setcounter{MbeamP}{#4}
 	\else
 		\draw[line width=\Mbeam mm] (#2*\MX-0.153,-\theMY*2-0.2+#3*0.1-#5) -- (#1*\MX-0.625,-\theMY*2-0.2+#4*0.1-#5);
-		\setcounter{MbeamP}{#4-4}
 	\fi	
 	\ifswap\Mswap\fi
 }
@@ -498,6 +497,9 @@ show background rectangle]
 	\fi
 	\pgfmathsetmacro\Sstem{\Mstem+0.1}
 	\Menlarge[\Sstem]{#1}{#1}
+	
+\pgfmathsetmacro\MHigh{int(\ifnoswap 1 \else -1 \fi * 10*\Sstem + #1*\MX*10)}
+\setcounter{Mheight}{\MHigh}
 }
 \newcommand{\Crotchet}[1]{
 	\Head{#1}
@@ -506,6 +508,9 @@ show background rectangle]
 	\fi
 	\pgfmathsetmacro\Sstem{\Mstem+0.1}
 	\Menlarge[\Sstem]{#1}{#1}
+	
+	\pgfmathsetmacro\MHigh{int(\ifnoswap 1 \else -1 \fi * 10*\Sstem + #1*\MX*10)}
+	\setcounter{Mheight}{\MHigh}
 }
 
 \newcommand{\Quaver}[1]{
@@ -516,6 +521,9 @@ show background rectangle]
 	\pgfmathsetmacro\Sstem{\Mstem+0.2}
 	\Menlarge[\Sstem]{#1}{#1}
 	\Flag[\Sstem]{#1}
+	
+	\pgfmathsetmacro\MHigh{int(\ifnoswap 1 \else -1 \fi * 10*\Sstem + #1*\MX*10)}
+	\setcounter{Mheight}{\MHigh}
 }
 \newcommand{\Semiquaver}[1]{
 	\Head{#1}
@@ -524,6 +532,10 @@ show background rectangle]
 	\fi	
 	\pgfmathsetmacro\Sstem{\Mstem+0.3}
 	\Menlarge[\Sstem]{#1}{#1}
+	
+	\pgfmathsetmacro\MHigh{int(\ifnoswap 1 \else -1 \fi * 10*\Sstem + #1*\MX*10)}
+	\setcounter{Mheight}{\MHigh}
+	
 	\Flag[\Sstem]{#1}
 	\pgfmathsetmacro\Sstem{\Mstem+0.15}
 	\Flag[\Sstem]{#1}
@@ -535,6 +547,10 @@ show background rectangle]
 	\fi	
 	\pgfmathsetmacro\Sstem{\Mstem+0.4}
 	\Menlarge[\Sstem]{#1}{#1}
+	
+	\pgfmathsetmacro\MHigh{int(\ifnoswap 1 \else -1 \fi * 10*\Sstem + #1*\MX*10)}
+	\setcounter{Mheight}{\MHigh}
+	
 	\Flag[\Sstem]{#1}
 	\pgfmathsetmacro\Sstem{\Mstem+0.25}
 	\Flag[\Sstem]{#1}
@@ -622,11 +638,13 @@ show background rectangle]
 		\addtocounter{MX}{\XM/2}}
 	}
 	\addtocounter{MX}{\XM/2}
+	
+	\ifswap\Mswap\fi
+	\ifthenelse{\equal{\Mtuplet}{0}}{}{
+		\Tuplet[\Mtuplet]
+	}
 	\swapfalse
 	
-	\ifthenelse{\equal{\Mtuplet}{0}}{}{
-		\Tuplet[\Mtuplet]{15}%\theMmax
-	}
 	\end{scope}
 }
 
@@ -661,20 +679,23 @@ show background rectangle]
 	\fi
 	
 	\setcounter{MX}{\theMaux}
+	\ifnum\theMduration<16
+	\pgfmathsetmacro\Sstem{\Mstem+0.1}
+	\fi\ifnum\theMduration=16
+	\pgfmathsetmacro\Sstem{\Mstem+0.2}
+	\fi\ifnum\theMduration=32
+	\pgfmathsetmacro\Sstem{\Mstem+0.3}
+	\fi
 	\foreach\IND in {#2} {
 		\ifthenelse{\equal{\IND}{!}}{\addtocounter{MX}{\XM/4}}{
 		\MNEmpty{\IND}{
-			\ifnum\theMduration<16
-			\pgfmathsetmacro\Sstem{\Mstem+0.1}
-			\fi\ifnum\theMduration=16
-			\pgfmathsetmacro\Sstem{\Mstem+0.2}
-			\fi\ifnum\theMduration=32
-			\pgfmathsetmacro\Sstem{\Mstem+0.3}
-			\fi
 			\Menlarge[\Sstem]{\IND}{\theMevaluate}
 		}
 		\addtocounter{MX}{\XM/2}}
 	}
+
+\pgfmathsetmacro\MHigh{int(\ifnoswap 1 \else -1 \fi * 10*\Sstem + \theMevaluate*\MX*10)}
+\setcounter{Mheight}{\MHigh}
 	
 	\ifnum\theMduration<16
 		\pgfmathsetmacro\Sstem{\Mstem+0.1}
@@ -738,21 +759,31 @@ show background rectangle]
 
 \newcommand{\MTwoNote}[2]{
 	\MHeads{#2}
-	\ifnum\theMmax<6\else\Mswap\fi
+\ifnum\theMmax<6
+	\ifswap\setcounter{Mevaluate}{\theMmin}
+	\else\setcounter{Mevaluate}{\theMmax}
+	\fi
+\else\Mswap
+	\ifswap\setcounter{Mevaluate}{\theMmax}
+	\else\setcounter{Mevaluate}{\theMmin}
+	\fi
+\fi
 	\setcounter{MX}{\theMaux}
-	\foreach\IND in {#2} {\ifthenelse{\equal{\IND}{!}}{\addtocounter{MX}{\XM/4}}{
-		\ifnum#1<16
+	\ifnum#1<16
 		\pgfmathsetmacro\Sstems{\Mstem+0.1}
-		\Menlarge[\Sstems]{\IND}{\IND}
-		\fi\ifnum#1=16
-		\pgfmathsetmacro\Sstems{\Mstem+0.2}
-		\Menlarge[\Sstems]{\IND}{\IND}
-		\fi\ifnum#1=32
+	\fi\ifnum#1=16
+		\pgfmathsetmacro\Sstems{\Mstem+0.2}	
+	\fi\ifnum#1=32
 		\pgfmathsetmacro\Sstems{\Mstem+0.3}
+	\fi
+	\foreach\IND in {#2} {\ifthenelse{\equal{\IND}{!}}{\addtocounter{MX}{\XM/4}}{
 		\Menlarge[\Sstems]{\IND}{\IND}
-		\fi
 		\addtocounter{MX}{\XM/2}}
 	}
+
+\pgfmathsetmacro\MHigh{int(\ifnoswap 1 \else -1 \fi * 10*\Sstems + \theMevaluate*\MX*10)}
+\setcounter{Mheight}{\MHigh}
+
 	\addtocounter{MX}{-\XM/2}
 	\ifnum#1=8
 		\pgfmathsetmacro\Sstem{\Mstem+0.1}
@@ -783,17 +814,21 @@ show background rectangle]
 	\fi
 	
 	\setcounter{MX}{\theMaux}
+	\ifnum#1<16
+	\pgfmathsetmacro\Sstem{\Mstem+0.1}
+	\fi\ifnum#1=16
+	\pgfmathsetmacro\Sstem{\Mstem+0.2}
+	\fi\ifnum#1=32
+	\pgfmathsetmacro\Sstem{\Mstem+0.3}
+	\fi
 	\foreach\IND in {#2} {\ifthenelse{\equal{\IND}{!}}{\addtocounter{MX}{\XM/4}}{
-		\ifnum#1<16
-		\pgfmathsetmacro\Sstem{\Mstem+0.1}
-		\fi\ifnum#1=16
-		\pgfmathsetmacro\Sstem{\Mstem+0.2}
-		\fi\ifnum#1=32
-		\pgfmathsetmacro\Sstem{\Mstem+0.3}
-		\fi
 		\Menlarge[\Sstem]{\IND}{\theMevaluate}
 		\addtocounter{MX}{\XM/2}}
 	}
+
+\pgfmathsetmacro\MHigh{int(\ifnoswap 1 \else -1 \fi * 10*\Sstem + \theMevaluate*\MX*10)}
+\setcounter{Mheight}{\MHigh}
+
 	\ifnum#1=8
 		\pgfmathsetmacro\Sstem{\Mstem+0.1}
 		\Beam{\theMaux}{\theMevaluate}{\theMevaluate}{+\Sstem}
@@ -1168,7 +1203,7 @@ show background rectangle]
 \makeatother
 \newcommand{\Dynamics}[2][0]{\Text[#1]{\dynmark{#2}}}
 
-\newcommand{\Chord}[1][1]{
+\newcommand{\Back}[1][1]{
 	\addtocounter{MX}{-\XM/2}
 	\addtocounter{MX}{-#1*\XM/2}}
 

@@ -2,14 +2,16 @@
 \contentsline {todo}{\color@fb@x {}{black}{}{green}{\leavevmode {\color {green}o}}\ single staff}{3}{section*.4}
 \contentsline {todo}{\color@fb@x {}{black}{}{yellow}{\leavevmode {\color {yellow}o}}\ resize}{3}{section*.5}
 \contentsline {todo}{\color@fb@x {}{black}{}{yellow}{\leavevmode {\color {yellow}o}}\ tikz option}{3}{section*.6}
-\contentsline {todo}{\color@fb@x {}{black}{}{yellow}{\leavevmode {\color {yellow}o}}\ stem in mm}{6}{section*.7}
-\contentsline {todo}{\color@fb@x {}{black}{}{orange}{\leavevmode {\color {orange}o}}\ tuplet}{6}{section*.8}
-\contentsline {todo}{\color@fb@x {}{black}{}{orange}{\leavevmode {\color {orange}o}}\ fix beam =}{7}{section*.9}
-\contentsline {todo}{\color@fb@x {}{black}{}{cyan}{\leavevmode {\color {cyan}o}}\ maybe fix chord}{8}{section*.10}
-\contentsline {todo}{\color@fb@x {}{black}{}{green}{\leavevmode {\color {green}o}}\ maybe fix chord+space}{8}{section*.11}
-\contentsline {todo}{\color@fb@x {}{black}{}{yellow}{\leavevmode {\color {yellow}o}}\ only \# ?}{9}{section*.12}
-\contentsline {todo}{\color@fb@x {}{black}{}{green}{\leavevmode {\color {green}o}}\ Mixed Keys}{10}{section*.13}
-\contentsline {todo}{\color@fb@x {}{black}{}{orange}{\leavevmode {\color {orange}o}}\ options}{11}{section*.14}
-\contentsline {todo}{\color@fb@x {}{black}{}{orange!50}{\leavevmode {\color {orange!50}o}}\ Fix angle}{12}{section*.15}
-\contentsline {todo}{\color@fb@x {}{black}{}{orange!50}{\leavevmode {\color {orange!50}o}}\ Half line}{12}{section*.16}
-\contentsline {todo}{\color@fb@x {}{black}{}{orange!50}{\leavevmode {\color {orange!50}o}}\ explain tikz}{16}{section*.25}
+\contentsline {todo}{\color@fb@x {}{black}{}{orange}{\leavevmode {\color {orange}o}}\ vertical separation}{3}{section*.7}
+\contentsline {todo}{\color@fb@x {}{black}{}{yellow}{\leavevmode {\color {yellow}o}}\ stem in mm}{6}{section*.8}
+\contentsline {todo}{\color@fb@x {}{black}{}{green}{\leavevmode {\color {green}o}}\ tuplet options: little bar, shifts}{6}{section*.9}
+\contentsline {todo}{\color@fb@x {}{black}{}{orange}{\leavevmode {\color {orange}o}}\ fix beam =}{7}{section*.10}
+\contentsline {todo}{\color@fb@x {}{black}{}{cyan}{\leavevmode {\color {cyan}o}}\ maybe fix chord}{8}{section*.11}
+\contentsline {todo}{\color@fb@x {}{black}{}{green}{\leavevmode {\color {green}o}}\ maybe fix chord+space}{9}{section*.12}
+\contentsline {todo}{\color@fb@x {}{black}{}{yellow}{\leavevmode {\color {yellow}o}}\ only \# ?}{9}{section*.13}
+\contentsline {todo}{\color@fb@x {}{black}{}{green}{\leavevmode {\color {green}o}}\ Mixed Keys}{10}{section*.14}
+\contentsline {todo}{\color@fb@x {}{black}{}{orange}{\leavevmode {\color {orange}o}}\ options}{11}{section*.15}
+\contentsline {todo}{\color@fb@x {}{black}{}{orange!50}{\leavevmode {\color {orange!50}o}}\ Fix angle}{12}{section*.16}
+\contentsline {todo}{\color@fb@x {}{black}{}{orange!50}{\leavevmode {\color {orange!50}o}}\ Half line}{12}{section*.17}
+\contentsline {todo}{\color@fb@x {}{black}{}{orange}{\leavevmode {\color {orange}o}}\ up option: 2.2}{14}{section*.18}
+\contentsline {todo}{\color@fb@x {}{black}{}{orange}{\leavevmode {\color {orange}o}}\ explain tikz}{16}{section*.27}

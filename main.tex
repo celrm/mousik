@@ -82,17 +82,17 @@
 %			\Clef[t=4]
 %			\TimeSig{4}{4}
 %			
-%			\Note{2}{13}	\Chord	\Note{2}{10}	\Chord	\Note{2}{8}
+%			\Note{2}{13}	\Back	\Note{2}{10}	\Back	\Note{2}{8}
 %			\Space[1.5]
 %			
-%			\Dot{13}\Note{4}{13}	\Chord	\Dot{9}\Note{4}{9}	\Chord	\Dot{7}\Note{4}{7}
+%			\Dot{13}\Note{4}{13}	\Back	\Dot{9}\Note{4}{9}	\Back	\Dot{7}\Note{4}{7}
 %			\Space[0.5]
 %			
-%			\Note{4}{12}\Tie[3]{12}	\Chord	\Note{4}{10}\Tie[2.5]{10}	\Chord	\Note[back]{4}{9}\Swap\Tie[2.5]{9}	\Chord	\Note{8}{7}\Swap\Tie[3]{7}
+%			\Note{4}{12}\Tie[3]{12}	\Back	\Note{4}{10}\Tie[2.5]{10}	\Back	\Note[back]{4}{9}\Swap\Tie[2.5]{9}	\Back	\Note{8}{7}\Swap\Tie[3]{7}
 %			
 %			\Bar
 %			
-%			\Note{1}{12}	\Chord	\Note{1}{10}	\Chord	\Note[back]{1}{9}	\Chord	\Note{1}{7}
+%			\Note{1}{12}	\Back	\Note{1}{10}	\Back	\Note[back]{1}{9}	\Back	\Note{1}{7}
 %
 %			\Bar[t=|.]
 %		\end{mousik}
@@ -127,6 +127,7 @@ It has some options:
 \todo[color=green]{single staff}
 \todo[color=yellow]{resize}
 \todo[color=yellow]{tikz option}
+\todo[color=orange]{vertical separation}
 
 	\section{Available commands}
 	
@@ -277,7 +278,7 @@ It has some options:
 		\item \textsl{head} chooses the type of head. Default is . (round), but also x (cross) and o (hollow) are possible.
 		\item \textsl{stem} chooses the height of the stem. Default is 0.5, in cm.
 		\item \textsl{swap} prints the note upside down. Default is false, which means up if the height is less than 6, down otherwise.
-%		\item \textsl{tuplet} prints the number of a tuplet. %It has two arguments, an optional one and a compulsory one. The optional one is the written number, which is automatically calculated by default. The compulsory one is the height.
+		\item \textsl{tuplet} prints the number of a tuplet. The written number is calculated by default, but optionally it can be assigned: \texttt{tuplet=5}. %It has two arguments, an optional one and a compulsory one. The optional one is the written number, which is automatically calculated by default. The compulsory one is the height.
 %		\todo[color=red]{bar on tuplet, fix height}
 		\item \textsl{xshift} moves the element horizontally (x axis). Default is 0, in cm.
 		\item \textsl{yshift} moves the element vertically (y axis). Default is 0, in cm.
@@ -291,7 +292,7 @@ It has some options:
 			\foreach \i in {1,2,4,8,16,32} {
 				\Text[yshift=-0.5]{\i}
 				\Note{\i}{5}
-				\Chord
+				\Back
 				\Note[swap]{\i}{2}
 			}
 			\Bar[t=|.]
@@ -315,7 +316,7 @@ It has some options:
 	
 %	The notes go upside down when their height (or maximum height) is bigger than 6. However, for manual control, the \verb|\Swap| command might be used \textit{before} the note.
 
-\todo{tuplet}
+\todo[color=green]{tuplet options: little bar, shifts}
 	
 	
 	\begin{center}
@@ -330,10 +331,8 @@ It has some options:
 			\Note[swap]{32}{5,6}
 			\Space[1.5]
 			
-			\Space[0.5]\TTT[-0.5]{Note\{8\}\{7,8,9\}}
-%			\TTT[-1]{Tuplet\{-5\}}\Space[-0.5]
-			\Note{8}{7,8,9}
-%			\Tuplet{-5}
+			\Space[0.5]\TTT[-0.5]{Note[tuplet]\{8\}\{7,8,9\}}
+			\Note[tuplet]{8}{7,8,9}
 			
 			\Bar[t=|.]
 		\end{mousik}
@@ -431,14 +430,14 @@ It has some options:
 				\Clef
 				\TimeSig{C}{}
 				
-				\Note{1}{4}	\Chord	\Note{1}{8}	\Chord	\Note{1}{-1}
+				\Note{1}{4}	\Back	\Note{1}{8}	\Back	\Note{1}{-1}
 				\Bar
 				
 				\Space[0.5]\TTT{Rest[multi]\{17\}}\Space[-0.5]
 				\Rest[multi]{17}
 				
 				\Bar
-				\Note{1}{4}	\Chord	\Note{1}{9}	\Chord	\Note{1}{0}
+				\Note{1}{4}	\Back	\Note{1}{9}	\Back	\Note{1}{0}
 				
 				\Bar[t=|.]
 			\end{mousik}
@@ -448,11 +447,11 @@ It has some options:
 		\item \textsl{yshift} moves the element vertically (y axis). Default is 0, in cm.
 	\end{enumerate}
 	
-	\subsubsection{\texttt{\textbackslash Chord}}
+	\subsubsection{\texttt{\textbackslash Back}}
 	\todo[color=cyan]{maybe fix chord}
-	Chords may be obtained by means of the \verb|\Chord| command. It accepts an optional argument: the number of notes to step backwards \textemdash mostly for the \verb|\Note| command\textemdash\ with 1 as default.
+	Chords may be obtained by means of the \verb|\Back| command. It accepts an optional argument: the number of notes to step backwards \textemdash mostly for the \verb|\Note| command\textemdash\ with 1 as default.
 	
-	The best way to use it is to call the \verb|\Note| command with the highest notes; then call the \verb|\Chord| command; then call the \verb|\Note| command with the duration 4 of a quarter note, to print them on top.
+	The best way to use it is to call the \verb|\Note| command with the highest notes; then call the \verb|\Back| command; then call the \verb|\Note| command with the duration 4 of a quarter note, to print them on top.
 	
 %	If the stem needs to be longer, the user may need the \verb|\Enlarge| command, which accepts as arguments the 2 heights of both notes. \todo[color=yellow]{option as enlarge or swap in enlarge}
 	
@@ -461,20 +460,20 @@ It has some options:
 			\Clef
 			
 			\TTT{Note\{1\}\{6\}}
-			\TTT[-0.5]{Chord}
+			\TTT[-0.5]{Back}
 			\TTT[-1]{Note\{1\}\{4\}}
 			\Note{1}{6}
-			\Chord
+			\Back
 			\Note{1}{4}
 			
 			\Space[2.5]	
 			
 			\TTT{Note[swap]\{16\}\{7\}}
-			\TTT[-0.5]{Chord}
+			\TTT[-0.5]{Back}
 %			\TTT[-1]{Swap\textbackslash Enlarge\{7\}\{0\}}
 			\TTT[-1]{Note[stem=0.7]\{4\}\{0\}}
 			\Note[swap]{16}{7}
-			\Chord
+			\Back
 %			\Swap\Enlarge{7}{0}
 			\Note[stem=0.7]{4}{0}
 			
@@ -489,29 +488,29 @@ It has some options:
 			\Clef
 			
 			\TTT{Note\{8\}\{5,4\}}
-			\TTT[-0.5]{Chord[2]}
+			\TTT[-0.5]{Back[2]}
 			\TTT[-1]{Note\{4\}\{1,2\}}
 			\Note{8}{5,4}
-			\Chord[2]
+			\Back[2]
 			\Note{4}{1,2}
 			
 			\Space[2]
 			
 			\TTT{Note\{8\}\{5,4\}}
-			\TTT[-0.5]{Chord}
+			\TTT[-0.5]{Back}
 			\TTT[-1]{Note\{4\}\{2\}}
 			\Note{8}{5,4}
-			\Chord
+			\Back
 			\Note{4}{2}
 			
 			\Space[2]
 			
 			\TTT{Note\{8\}\{5,4\}}
-			\TTT[-0.5]{Chord[2]}
+			\TTT[-0.5]{Back[2]}
 			\TTT[-1]{Note\{4\}\{1\}}
 			\TTT[-1.5]{Space[1]}
 			\Note{8}{5,4}
-			\Chord[2]
+			\Back[2]
 			\Note{4}{1}
 			\Space[0.5]
 			
@@ -871,7 +870,7 @@ It also has some options:
 	\begin{enumerate}[-]
 		\item \textsl{xshift} moves the element horizontally (x axis). Default is 0, in cm.
 		\item \textsl{yshift} moves the element vertically (y axis). Default is 0, in cm.
-	\end{enumerate}
+	\end{enumerate}\todo{up option: 2.2}
 	
 	To write anything in the usual font of dynamics, the \verb|\Dynamics| command will work the same: \verb|\Dynamics[yshift=-0.5]{pp}|.
 	\begin{center}
@@ -884,13 +883,13 @@ It also has some options:
 			\Note{4}{0}
 			
 			\Note{8}{1,2}		
-			\Chord
+			\Back
 			\Text{E}
 			\Space
 			
 			\Bar
 			
-			\Text[yshift=2]{\it rit.}
+			\Text[yshift=2.2]{\it rit.}
 			\Note{8}{3,4}
 			
 			\Dynamics[yshift=-0.5]{pp}
@@ -901,7 +900,7 @@ It also has some options:
 	\end{center}
 
 \subsection{\texttt{\textbackslash Tempo}}
-The \verb|\Tempo| command prints a metronome tempo indicator. It has two arguments: the duration of the note and the numerical tempo which will be printed. It has the same options as the \verb|\Text| command.
+The \verb|\Tempo| command prints a metronome tempo indicator. It has two arguments: the duration of the note and the numerical tempo which will be printed. It has the same options as the \verb|\Text| command, but it has the option \textsl{up} by default.
 
 \begin{center}
 \begin{mousik}
@@ -978,7 +977,7 @@ The \verb|\Tempo| command prints a metronome tempo indicator. It has two argumen
 	\end{mousik}
 	\end{lstlisting}
 	
-	\subsection*{\sbs{tikz}On your own: working with the \textsf{tikz} package} \todo[color=orange!50]{explain tikz}
+	\subsection*{\sbs{tikz}On your own: working with the \textsf{tikz} package} \todo[color=orange]{explain tikz}
 	
 
 %

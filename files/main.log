@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2018.11.4)  22 JUL 2020 17:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2018.11.4)  24 JUL 2020 00:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1144,7 +1144,7 @@ File: tikzlibrarybackgrounds.code.tex 2013/07/18 v3.0.1a (rcs-revision 1.3)
 \MHeight=\skip148
 \c@Maux=\count331
 \c@MauxB=\count332
-\c@MbeamP=\count333
+\c@Mheight=\count333
 \c@Mduration=\count334
 \c@MMdur=\count335
 \c@Mslurred=\count336
@@ -1324,49 +1324,48 @@ LaTeX Warning: Marginpar on page 3 moved.
 
 LaTeX Warning: Marginpar on page 3 moved.
 
+
+LaTeX Warning: Marginpar on page 3 moved.
+
 LaTeX Font Info:    Font shape `OT1/pcr/bx/n' in size <12> not available
-(Font)              Font shape `OT1/pcr/b/n' tried instead on input line 133.
+(Font)              Font shape `OT1/pcr/b/n' tried instead on input line 134.
 
 LaTeX Font Warning: Font shape `OMS/pcr/bx/n' undefined
 (Font)              using `OMS/pcr/m/n' instead
-(Font)              for symbol `textbackslash' on input line 133.
+(Font)              for symbol `textbackslash' on input line 134.
 
 LaTeX Font Info:    Font shape `OMS/pcr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 133.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 134.
 
 LaTeX Warning: The counter will not be printed.
-             The label is: - on input line 136.
+             The label is: - on input line 137.
 
 [3]
-Overfull \hbox (5.34436pt too wide) in paragraph at lines 141--172
+Overfull \hbox (5.34436pt too wide) in paragraph at lines 142--173
  [] 
 
 \hbox(61.24506+0.0)x336.66667 []
 
 LaTeX Font Info:    Font shape `OMS/pcr/bx/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 179.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 180.
 
 LaTeX Warning: The counter will not be printed.
-             The label is: - on input line 210.
+             The label is: - on input line 211.
 
 [4]
 
 LaTeX Warning: The counter will not be printed.
-             The label is: - on input line 267.
+             The label is: - on input line 268.
 
 LaTeX Font Info:    Font shape `OMS/pcr/bx/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 273.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 274.
 
 LaTeX Warning: The counter will not be printed.
-             The label is: - on input line 275.
+             The label is: - on input line 276.
 
-[5]
-
-LaTeX Warning: Marginpar on page 6 moved.
-
-[6]
+[5] [6]
 LaTeX Font Info:    Font shape `U/musix/m/n' will be
-(Font)              scaled to size 15.0pt on input line 367.
+(Font)              scaled to size 15.0pt on input line 366.
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
@@ -1379,17 +1378,20 @@ Missing character: There is no ; in font nullfont!
 
 
 LaTeX Warning: The counter will not be printed.
-             The label is: - on input line 426.
+             The label is: - on input line 425.
 
 [7] [8]
 
+LaTeX Warning: Marginpar on page 9 moved.
+
+
 LaTeX Warning: The counter will not be printed.
-             The label is: - on input line 546.
+             The label is: - on input line 545.
 
 [9] [10]
 
 LaTeX Warning: The counter will not be printed.
-             The label is: - on input line 649.
+             The label is: - on input line 648.
 
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
@@ -1399,38 +1401,41 @@ Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 
 LaTeX Warning: The counter will not be printed.
-             The label is: - on input line 719.
+             The label is: - on input line 718.
 
 [11] [12]
 
 LaTeX Warning: The counter will not be printed.
-             The label is: - on input line 815.
+             The label is: - on input line 814.
 
 
 LaTeX Warning: The counter will not be printed.
-             The label is: - on input line 862.
+             The label is: - on input line 861.
 
 
 LaTeX Warning: The counter will not be printed.
-             The label is: - on input line 871.
+             The label is: - on input line 870.
 
 [13]
+
+LaTeX Warning: Marginpar on page 14 moved.
+
 Missing character: There is no 2 in font nullfont!
 
-Overfull \hbox (13.71762pt too wide) in paragraph at lines 928--941
+Overfull \hbox (13.71762pt too wide) in paragraph at lines 927--940
 [] 
 
 \hbox(107.46776+0.0)x345.0 []
 
 [14]
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 970.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 969.
  [15] [16]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1007.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1007.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1006.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1006.
  (files/main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1007.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1007.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1006.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1006.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: <no file>.
@@ -1438,13 +1443,13 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1007.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1006.
  ) 
 Here is how much of TeX's memory you used:
- 29113 strings out of 494923
- 538266 string characters out of 6180163
- 707306 words of memory out of 5000000
- 31804 multiletter control sequences out of 15000+600000
+ 29135 strings out of 494923
+ 538720 string characters out of 6180163
+ 710827 words of memory out of 5000000
+ 31823 multiletter control sequences out of 15000+600000
  52602 words of font info for 190 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  62i,14n,76p,10359b,1787s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1476,10 +1481,10 @@ texmf-dist/fonts/type1/public/musixtex-fonts/musix13.pfb></usr/share/texlive/te
 xmf-dist/fonts/type1/public/musixtex-fonts/musix20.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/share/texlive/texmf-dist/fonts/
 type1/urw/courier/ucrr8a.pfb>
-Output written on files/main.pdf (16 pages, 366165 bytes).
+Output written on files/main.pdf (16 pages, 367046 bytes).
 PDF statistics:
- 475 PDF objects out of 1000 (max. 8388607)
- 423 compressed objects within 5 object streams
- 139 named destinations out of 1000 (max. 500000)
+ 480 PDF objects out of 1000 (max. 8388607)
+ 428 compressed objects within 5 object streams
+ 142 named destinations out of 1000 (max. 500000)
  205 words of extra memory for PDF output out of 10000 (max. 10000000)
 
