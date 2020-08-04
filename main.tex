@@ -1,23 +1,16 @@
-\documentclass[]{article}
+\documentclass[final]{article}
 
 \usepackage{listings}\usepackage{courier}
 \lstset{
 	literate={≡}{{$\equiv$}}1
+	, basicstyle=\ttfamily\small
+	, columns=fullflexible
 }
 \usepackage{hyperref}
 \usepackage{multicol}
 \usepackage{enumerate}
 \usepackage{parskip}
-\usepackage[obeyFinal,colorinlistoftodos]{todonotes}
-
-\newcounter{todoListItems}
-\newcommand{\todos}[2][ ]{
-	\addtocounter{todoListItems}{1}
-	\todo[caption={\protect\hypertarget{todo\thetodoListItems}{}\thesection. #2}, #1]
-	{
-		\hyperlink{todo\thetodoListItems}{#2}
-	}
-}
+\usepackage{easy-todo}
 
 \usepackage{mousik}
 
@@ -29,10 +22,12 @@
 \newcommand{\TTT}[2][0]{\Text[yshift=#1]{\texttt{\textbackslash #2}}}
 
 \usepackage{multicol}
+\usetikzlibrary{decorations.fractals,lindenmayersystems}
 
 \begin{document}
 	\listoftodos
 	
+%	The main reason for considering other packages is that the todonotes package is quite large and relies heavily on tikz. This can slow down compilation of large	documents significantly. The mentioned alternatives have a different feature set and does not rely on tikz, which makes them require less ressoureces.
 	
 	
 	\maketitle
@@ -53,11 +48,11 @@
 	\end{multicols}
 	\vfill
 	
-	\section{Introduction}
+	\section{Introduction}\label{intro}
 	There are already several ways to set music using \LaTeX: \textsf{musixtex}, \textsf{lilypond} or \textsf{abc}, among others.
 	Some of them are too difficult to use for not too complicated music; others do not work at all.
 	
-	The \textsf{mousik} package is perfect for short, one line music fragments. It may be used for longer scores, but there are more adaptable and lighter packages than this one. However, in spite of its compactness, the package is quite complete and versatile, but easy to learn and use.
+	Based on the \textsf{tikz} package, the \textsf{mousik} package is perfect for short, one line music fragments. It may be used for longer scores, but there are more adaptable and lighter packages than this one. However, in spite of its compactness, the package is quite complete and versatile, but easy to learn and use.
 	
 	\section{The \texttt{mousik} environment}
 	The way to draw a score is by means of the \texttt{mousik} environment. For longer examples, open the \href{run:examples.pdf}{\textit{examples}} document.
@@ -72,7 +67,7 @@
 			\Note{4}{2}
 			\Artic{^}{0}
 			\Note{8}{0,1}
-			\Tie[3]{1}
+			\Tie[e=2]{1}
 			\Bar
 			\Note{1}{1}
 			
@@ -88,8 +83,8 @@
 %			\Dot{13}\Note{4}{13}	\Back	\Dot{9}\Note{4}{9}	\Back	\Dot{7}\Note{4}{7}
 %			\Space[0.5]
 %			
-%			\Note{4}{12}\Tie[3]{12}	\Back	\Note{4}{10}\Tie[2.5]{10}	\Back	\Note[back]{4}{9}\Swap\Tie[2.5]{9}	\Back	\Note{8}{7}\Swap\Tie[3]{7}
-%			
+%			\Note{4}{12}\Tie[e=2]{12}	\Back	\Note{4}{10}\Tie[e=1.75]{10}	\Back	\Note[back]{4}{9}\Swap\Tie[e=1.75]{9}	\Back	\Note{8}{7}\Swap\Tie[e=2]{7}
+%		
 %			\Bar
 %			
 %			\Note{1}{12}	\Back	\Note{1}{10}	\Back	\Note[back]{1}{9}	\Back	\Note{1}{7}
@@ -108,7 +103,7 @@
 		     \Note{4}{2}
 		     \Artic{^}{0}
 		     \Note{8}{0,1}		     
-		     \Tie[3]{1}
+		     \Tie[e=2]{1}
 		     \Bar
 		     \Note{1}{1}
 		     
@@ -122,12 +117,13 @@ It has some options:
 		\item \textsl{color} changes the background color. Default is white.
 		\item \textsl{indent} indents the first line. Default is 0, in cm.
 		\item \textsl{long} changes the maximum width of the score. Default is 100.
+		\item \textsl{hsep} changes the horizontal separation. Default is 8.
+		\item \textsl{vsep} changes the vertical separation in case of an overflow. Default is 2, in cm.
 	\end{enumerate}
-\todo[color=green]{piano scores}
-\todo[color=green]{single staff}
-\todo[color=yellow]{resize}
-\todo[color=yellow]{tikz option}
-\todo[color=orange]{vertical separation}
+\todo{piano scores}
+\todo{single staff}
+\todo{resize}
+\todo{tikz option}
 
 	\section{Available commands}
 	
@@ -272,17 +268,17 @@ It has some options:
 	
 	\subsection{Notes and rests}
 	\subsubsection{\texttt{\textbackslash Note}}
-	The \verb|\Note| command prints a note on the score. It accepts 2 compulsory arguments, as well as some options:
+	The \verb|\Note| command prints a note on the score. It accepts 2 compulsory arguments, as well as some options:\todo{tuplet fucking sucks}
 	\begin{enumerate}[-]
 		\item \textsl{beam} chooses the width of the beam. Default is 1, in mm.
 		\item \textsl{head} chooses the type of head. Default is . (round), but also x (cross) and o (hollow) are possible.
 		\item \textsl{stem} chooses the height of the stem. Default is 0.5, in cm.
-		\item \textsl{swap} prints the note upside down. Default is false, which means up if the height is less than 6, down otherwise.
-		\item \textsl{tuplet} prints the number of a tuplet. The written number is calculated by default, but optionally it can be assigned: \texttt{tuplet=5}. %It has two arguments, an optional one and a compulsory one. The optional one is the written number, which is automatically calculated by default. The compulsory one is the height.
-%		\todo[color=red]{bar on tuplet, fix height}
+		\item \textsl{swap} prints the element upside down. Default is false, which means up if the height is less than 6, down otherwise.
+		\item \textsl{tuplet} prints the number of a tuplet. The written number is calculated by default, but it can be assigned optionally: \texttt{tuplet=5}. %It has two arguments, an optional one and a compulsory one. The optional one is the written number, which is automatically calculated by default. The compulsory one is the height.
+%		\todo{bar on tuplet, fix height}
 		\item \textsl{xshift} moves the element horizontally (x axis). Default is 0, in cm.
 		\item \textsl{yshift} moves the element vertically (y axis). Default is 0, in cm.
-	\end{enumerate}\todo[color=yellow]{stem in mm}
+	\end{enumerate}\todo{stem in mm}
 	
 	The first compulsory argument is the duration of the note.%, from one of these:% 1 (whole note / semibreve), 2 (half note / minim), 4 (quarter note / crotchet), 8 (eighth note / quaver), 16 (sixteenth note / semiquaver), 32 (thirty second note / demisemiquaver).
 	
@@ -312,11 +308,11 @@ It has some options:
 		\end{mousik}
 	\end{center}
 	
-	The \verb|\Note| command might also print several notes tied together with a beam, if the second argument is a list of heights separated by commas. Two notes will be tied together with an oblique beam, but three or more will have a straight beam.%\todo[color=cyan]{monotone triplets sliding beam}
+	The \verb|\Note| command might also print several notes tied together with a beam, if the second argument is a list of heights separated by commas. Two notes will be tied together with an oblique beam, but three or more will have a straight beam.%\todo{monotone triplets sliding beam}
 	
 %	The notes go upside down when their height (or maximum height) is bigger than 6. However, for manual control, the \verb|\Swap| command might be used \textit{before} the note.
 
-\todo[color=green]{tuplet options: little bar, shifts}
+\todo{tuplet options: little bar, shifts}
 	
 	
 	\begin{center}
@@ -355,7 +351,7 @@ It has some options:
 
 	To be able to write the $\equiv$ (which is the Unicode character U+2261) as a symbol on the .tex file, I usually copy and paste it wherever I need it. Nonetheless, an alternative keyboard-friendly input that is equally valid is using \texttt{/$\!$/$\!$/} instead.
 	
-	Additionally, spaces between notes from the same group might be useful \textemdash the default space is 0.5 (in cm). 
+	Additionally, spaces between notes from the same group might be useful \textemdash the default space is 0.5, in cm. 
 	
 	A space of 0.75 is obtained when a \texttt{!} is placed on both lists. A possible usage is when dealing with wide accidentals (see section \ref{acc}) or double dots (see section \ref{dot}).
 	
@@ -364,7 +360,7 @@ It has some options:
 			\Clef
 			
 			\Accs{,!,-2/3,}
-			\Note{|-,!,-,-|}{3,!,3,3}
+			\Note{|-,!,=,=|}{3,!,3,3}
 			
 			\Accs{,!,-2/3,}
 			\Note{|=,!,=,=|}{3,!,3,3}
@@ -378,13 +374,13 @@ It has some options:
 			\Clef
 			
 			\Dots{,**/3,!,*/3}
-			\Note{|-,-,!,-|}{3,3,!,3}
+			\Note{|-,|=,!,-|}{3,3,!,3}
 			
 			\Dots{,**/3,!,*/3}
-			\Note{|=,=,!,=|}{3,3,!,3}
+			\Note{|=,|≡,!,=|}{3,3,!,3}
 			
 			\Dots{,**/3,!,*/3}
-			\Note{|≡,≡,!,≡|}{3,3,!,3}
+			\Note{|≡,|=,!,≡|}{3,3,!,3}
 			
 			\Bar[t=|.]
 		\end{mousik}
@@ -448,12 +444,12 @@ It has some options:
 	\end{enumerate}
 	
 	\subsubsection{\texttt{\textbackslash Back}}
-	\todo[color=cyan]{maybe fix chord}
+	\todo{maybe fix chord}
 	Chords may be obtained by means of the \verb|\Back| command. It accepts an optional argument: the number of notes to step backwards \textemdash mostly for the \verb|\Note| command\textemdash\ with 1 as default.
 	
 	The best way to use it is to call the \verb|\Note| command with the highest notes; then call the \verb|\Back| command; then call the \verb|\Note| command with the duration 4 of a quarter note, to print them on top.
 	
-%	If the stem needs to be longer, the user may need the \verb|\Enlarge| command, which accepts as arguments the 2 heights of both notes. \todo[color=yellow]{option as enlarge or swap in enlarge}
+%	If the stem needs to be longer, the user may need the \verb|\Enlarge| command, which accepts as arguments the 2 heights of both notes. \todo{option as enlarge or swap in enlarge}
 	
 	\begin{center}
 		\begin{mousik}
@@ -516,14 +512,14 @@ It has some options:
 			
 			\Bar[t=|.]
 		\end{mousik}
-	\end{center}\todo[color=green]{maybe fix chord+space}
+	\end{center}
 
 	\subsection{Keys and accidentals}
 	
 	\subsubsection{\texttt{\textbackslash Acc}}\label{acc}
 	The \verb|Acc| command prints an accidental before a note. It accepts 2 arguments.
 	
-	The first argument is the type of accidental: a number ranging from -2 to 2. The flat $\flat$ symbol might also be called with a \texttt{b} and the sharp $\sharp$ symbol might be called with \texttt{\textbackslash\#}.\todo[color=yellow]{only \# ?}
+	The first argument is the type of accidental: a number ranging from -2 to 2. The flat $\flat$ symbol might also be called with a \texttt{b} and the sharp $\sharp$ symbol might be called with \texttt{\textbackslash\#}.\todo{only \# ?}
 	
 	\begin{center}
 		\begin{mousik}
@@ -588,7 +584,7 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 	\end{center}
 	
 	\subsubsection{\texttt{\textbackslash NoKey}}
-	\todo[color=green]{Mixed Keys}
+	\todo{Mixed Keys}
 	The \verb|\NoKey| command is the same as the \verb|\Key| command, but it prints naturals \natural\ instead of sharps or flats.
 	
 	\begin{center}
@@ -687,7 +683,12 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 	
 	\subsubsection{\texttt{\textbackslash Tie}}
 	
-	The \verb|\Tie| command draws a tie between two notes. It has a compulsory argument, the height of both notes, and an optional one: the separation between the two notes. The default value is 1.
+	The \verb|\Tie| command draws a tie between two notes. It has a compulsory argument, the height of both notes, and some options:
+	
+	\begin{enumerate}[-]
+		\item \textsl{angle} changes the angle in which it is drawn. Default is 20, in degrees.
+		\item \textsl{b} (beginning) changes the starting point. Default is 0, in cm.
+		\item \textsl{e} (end) changes the ending point. Default is 1, in cm.
 	
 	\begin{center}
 		\begin{mousik}		
@@ -696,9 +697,9 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 			
 			\Rest{4}
 			\Note{2}{6}
-			\Tie[3]{6}
+			\Tie[e=2]{6}
 			
-			\TTT{Tie[3]\{6\}}
+			\TTT{Tie[e=2]\{6\}}
 			\Bar
 			\Note{4}{6}
 		
@@ -707,30 +708,29 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 			
 			\Text{\qquad\quad\texttt{\textbackslash Tie\{4\}}}
 			\Note{8}{4}
-			\Tie{4}			
+			\Tie{4}	
 			\Note{4}{4}
 			
 			\Bar[t=|.]
 		\end{mousik}
 	\end{center}
 
-	It has some options:
-	\begin{enumerate}[-]
-	\item 
-%\textsl{xshift} moves the element horizontally (x axis). Default is 0, in cm.
-%	\item \textsl{yshift} moves the element vertically (y axis). Default is 0, in cm.
-	\end{enumerate}\todo{options}
+	\item \textsl{swap} prints the element upside down. Default is false, which means like a \textit{u} if the height is less than 6, and like an \textit{n} otherwise.
+	\item \textsl{width} changes the line width. Default is 0.15, in mm.
+	\item \textsl{xshift} moves the element horizontally (x axis). Default is 0, in cm.
+	\item \textsl{yshift} moves the element vertically (y axis). Default is 0, in cm.
+	\end{enumerate}
 
 	\subsubsection{The \texttt{Slurred} environment}
 	
 	The \verb|Slurred| environment draws a slur between the notes placed inside. It has two arguments: the heights of both beginning and end notes.
 	
-	\begin{center}\todo[color=orange!50]{Fix angle}
+	\begin{center}\todo{Fix angle}
 		\begin{mousik}
 			\Clef
-			
+			\Note{4}{6}
 			\begin{Slurred}{6}{11}
-				\foreach\i in {6,...,11}{\Note{4}{\i}}
+				\foreach\i in {7,...,11}{\Note{4}{\i}}
 			\end{Slurred}
 
 			\Bar[t=|.]
@@ -741,7 +741,10 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 	
 	The \verb|Crescendo| and \verb|Decrescendo| environments draws a crescendo or decrescendo symbols, respectively, between the notes placed inside. It has an optional argument: the height of the symbol. The default value is 0.
 	
-	\todo[color=orange!50]{Half line}
+	\todo{Half line}
+	\todo{obertura}
+	\todo{shifts}
+	\todo{weird spaces}
 
 	\begin{center}
 		\begin{mousik}
@@ -870,9 +873,9 @@ It also has some options:
 	\begin{enumerate}[-]
 		\item \textsl{xshift} moves the element horizontally (x axis). Default is 0, in cm.
 		\item \textsl{yshift} moves the element vertically (y axis). Default is 0, in cm.
-	\end{enumerate}\todo{up option: 2.2}
+	\end{enumerate}
 	
-	To write anything in the usual font of dynamics, the \verb|\Dynamics| command will work the same: \verb|\Dynamics[yshift=-0.5]{pp}|.
+	To write anything in the usual font of dynamics, the \verb|\Dynamics| command will work the same: \verb|\Dynamics[yshift=-0.5]{pp}|. \todo{dynamics wout yshift peta}
 	\begin{center}
 		\begin{mousik}
 			\Clef
@@ -900,12 +903,11 @@ It also has some options:
 	\end{center}
 
 \subsection{\texttt{\textbackslash Tempo}}
-The \verb|\Tempo| command prints a metronome tempo indicator. It has two arguments: the duration of the note and the numerical tempo which will be printed. It has the same options as the \verb|\Text| command, but it has the option \textsl{up} by default.
-
+The \verb|\Tempo| command prints a metronome tempo indicator. It has two arguments: the duration of the note and the numerical tempo which will be printed. It has the same options as the \verb|\Text| command. An optional \textsl{yshift} of 2.5 is recommended.
 \begin{center}
 \begin{mousik}
 	\Clef
-	\Tempo{8}{120}
+	\Tempo[yshift=2.5]{8}{120}
 	\Note{4}{2}
 	\Note{4}{3}
 	\Bar
@@ -936,7 +938,7 @@ The \verb|\Tempo| command prints a metronome tempo indicator. It has two argumen
 		\Note{8}{6,7}
 		\Bar
 		\Note{8}{8,9}
-	\end{mousik}%\todo[color=yellow]{explain overflow}
+	\end{mousik}%\todo{explain overflow}
 
 	The best way to avoid the error is by introducing extra spaces manually. The overflow will also automatically print the previous clef and key.
 	
@@ -977,11 +979,59 @@ The \verb|\Tempo| command prints a metronome tempo indicator. It has two argumen
 	\end{mousik}
 	\end{lstlisting}
 	
-	\subsection*{\sbs{tikz}On your own: working with the \textsf{tikz} package} \todo[color=orange]{explain tikz}
+	\subsection*{\sbs{tikz}On your own: working with the \textsf{tikz} package}
+	As stated in the introduction (section \ref{intro}), the \textsf{mousik} package is based on the \textsf{tikz} package. In fact, the \texttt{mousik} environment is a disguised version of a \texttt{tikzpicture} environment, but with some variables and a printed staff.
+	
+	This implies two separate things:
+	\begin{enumerate}
+		\item The mousik environment admits other commands inside, not just the commands explained in this text. For example, I might draw nodes, lines, or even a fractal behind my score:
+	
+	\begin{mousik}
+		\Clef
+		\Key{-3}
+		\TimeSig[xshift=0.25]{C}{}
+		
+		\Rest{8}
+		\Accs{,0/6}
+		\Note{16}{7,6}
+		\Note{8}{7,4}
+		\Note{-,|=,=|}{5,7,6}
+		\Note{8}{7,8}
+		
+		\Bar
+		\Accs{,,0/6}
+		\Note{-,|=,=|}{4,7,6}
+		
+		\begin{scope}[xshift=9cm,rotate=180]
+			\draw [l-system={rule set={F -> F-F++F-F}, step=2pt, angle=60,
+				axiom=F, order=4}] lindenmayer system;
+		\end{scope}
+	\end{mousik}
 	
 
+	\item The commands explained here might be used in a \texttt{tikzpicture} environment, and will appear with no staff. However, the command \verb|\Init| should be used at the beginning to avoid initialization errors.
+	
+	\begin{tikzpicture}
+		\Init
+		\Clef
+		\Key{-3}
+		\TimeSig[xshift=0.25]{C}{}
+		
+		\Rest{8}
+		\Accs{,0/6}
+		\Note{16}{7,6}
+		\Note{8}{7,4}
+		\Note{-,|=,=|}{5,7,6}
+		\Note{8}{7,8}
+		
+		\Bar
+		\Accs{,,0/6}
+		\Note{-,|=,=|}{4,7,6}
+	\end{tikzpicture}
+	\end{enumerate}
+
 %
-%	\section{The package code}	\todo[color=green]{beautiful code}
+%	\section{The package code}	\todo{beautiful code}
 %	\lstset{
 %		language=[Latex]Tex,
 %		%

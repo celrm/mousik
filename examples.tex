@@ -1,13 +1,16 @@
-\documentclass[]{article}
+\documentclass{article}
 
 \usepackage{listings}\usepackage{courier}
 \lstset{
 	literate={≡}{{$\equiv$}}1
+	, basicstyle=\ttfamily\small
+	, columns=fullflexible
 }
 \usepackage{hyperref}
 \usepackage{multicol}
 \usepackage{enumerate}
 \usepackage{parskip}
+\usepackage[a4paper]{geometry}
 
 \usepackage{mousik}
 
@@ -16,66 +19,234 @@
 \author{Celia Rubio Madrigal\footnote{Email: \href{mailto:celirubio.m@gmail.com}{\texttt{celirubio.m@gmail.com}}}}
 \date{July 1, 2020}
 
-\usepackage{multicol}
+
 
 \begin{document}
 	\maketitle
 	
-	\section{Allegro, Fantasie in d-moll / D minor nach TWV 40:4, Georg Philipp Telemann}
+	\vfill
+%	\begin{multicols}{2}
+		\tableofcontents
+%	\end{multicols}
+	\vfill
+	
+	\newpage
+	\section{Allegro, Fantasie 3 in d-moll nach TWV 40:4, Georg Philipp Telemann}
 	\url{https://www.youtube.com/watch?v=hpjV962DLWs}
+	
 	\begin{center}
-		\begin{mousik}[long=83.4,indent=4]
+		\begin{mousik}[long=83.33,indent=2]
 			\Clef
 			\Key{-1}
 			\TimeSig{6}{8}
 			\Note{8}{12}
-		\Bar
+			\Bar
 			\Note{8}{12,11,12}
 			\Note{8}{10,9,10}
-		\Bar
-			\Accs{,1/7,}
+			\Bar
+			\Accs{,1/7}
 			\Note{8}{8,7,8}
 			\Note{8}{5,8,10}
-		\Bar
+			\Bar
 			\Note{8}{4,9,11}
 			\Note{8}{5,10,9}
-		\Bar
+			\Bar
 			\Note{8}{10,11,9}
 			\Dot{9}
 			\Note{4}{8}
-		\Bar[t=|.]
+			\Bar[t=|.]
 		\end{mousik}
 	\end{center}
-
-	\begin{mousik}
+	
+\begin{lstlisting}
+\begin{mousik}[long=83.33,indent=2]
+		\Clef
+		\Key{-1}
+		\TimeSig{6}{8}
+		
+		\Note{8}{12}
+	\Bar
+		\Note{8}{12,11,12}
+		\Note{8}{10,9,10}
+	\Bar
+		\Accs{,1/7}
+		\Note{8}{8,7,8}
+		\Note{8}{5,8,10}
+	\Bar
+		\Note{8}{4,9,11}
+		\Note{8}{5,10,9}
+	\Bar
+		\Note{8}{10,11,9}
+		\Dot{9}
+		\Note{4}{8}
+	\Bar[t=|.]
+\end{mousik}
+\end{lstlisting}
+	
+	
+	\newpage
+	\section{The Woodthrush for E$\flat$ Alto Saxophone, Heath Mathews}
+	\url{https://www.youtube.com/watch?v=M-bhskY1xGs}
+	
+	
+\begin{mousik}[long=108.4,vsep=3]
 		\Clef
 		\TimeSig{6}{4}
-		\Tempo{4}{62}
+		\Tempo[yshift=2.5]{4}{62}		
 		
-		\Dynamics[0.25]{pp}
+	\begin{Slurred}[angle=10]{12}{14}
+		\Dynamics[yshift=0.25]{pp}
 		\Dot{11}
 		\Note{2}{11}
-		\Tie{11}
+		\Tie[e=1.5]{11}
+		
+		\Space[0.5]
+		
 		\Accs{,,,-1/9}
 		\Note[tuplet]{16}{11,12,11,9,8}
 		
+	\Space[-1.5]\begin{Crescendo}
+	\Space[1.5]
 		\Accs{,1/7,,,-1/2}
 		\Note[swap,tuplet]{16}{5,7,5,4,2}
-		
+			
 		\Accs{0/1,-1/2,,1/4,0/5,1/7}
 		\Note[swap,tuplet]{16}{1,2,4,4,5,7}
-		\Tie[2]{7}
-		
+		\Tie{7}
+	\end{Crescendo}
+	\end{Slurred}
+			
 	\Bar
-		
-		\Space[0.5]\Dynamics[-0.5]{f}\Space[-0.5]
-		
-		\Space[0.5]\Tie[-0.5]{7}\Space[-0.5]
+	\Space[0.5]
+			
+	\Space[0.75]\begin{Decrescendo}[-4]
+	\Space[-0.75]
+		\Dynamics[xshift=0.5,yshift=-0.4]{f}
+		\Tie[b=0.5]{7}
 		\Accs{,0/11,-1/5}
 		\Artics{,-/11}
 		\Note[tuplet]{8}{7,11,5}
-		\Tie{5}		
+		
+		\Tie[swap]{5}
 		\Note{2}{5}
+		
+		\Space[0.5]
+	\Space[0.5]\end{Decrescendo}
+	\Space[-0.5]	
+	
+	\begin{Slurred}[swap,angle=50]{4}{8}	
+	\Space[0.2]\begin{Crescendo}
+	\Space[-0.2]
+		\Dynamics[yshift=0]{p}
+		\Accs{,1/4,0/5,0/8,-1/8}
+		\Note[swap,tuplet]{16}{4,4,5,8,8}
+		\Dynamics[xshift=-1,yshift=0]{f}
+	\Space[-0.2]\end{Crescendo}
+	\Space[0.2]
+	\end{Slurred}
+
+	\begin{Slurred}[swap,angle=50]{4}{8}	
+	\Space[0.2]\begin{Crescendo}
+		\Space[-0.2]
+		\Dynamics[yshift=0]{p}
+		\Accs{0/4,1/4,0/5,0/8,-1/8}
+		\Note[swap,tuplet]{16}{4,4,5,8,8}
+	\Space[0.5]\end{Crescendo}
+	\Space[-0.5]
+	\end{Slurred}
+		
+		\Dynamics[yshift=0]{f}
+		\Artics{-/12}
+		\Accs{-1/12,0/8,-1/8}
+		\Note[tuplet]{8}{12,8,8}			
+		\Tie[angle=30]{8}
+		
+	\begin{Slurred}[swap,angle=50,b=-2.5,xshift=1]{9}{10}
+	\end{Slurred}
+			
+		\Bar
+		\Space[0.5]
+
+	\begin{Slurred}[swap,angle=50,b=-1.5,xshift=1]{11}{10}
+	\end{Slurred}
+			
+		\Tie[b=0.5,angle=50]{8}
+		\Dot{9}
+		\Note{4}{8}
+			
+		\Rest{8}
+			
+		\Dynamics[yshift=0]{f}
+		\Artics{-/12}
+		\Accs{-1/12,0/8,-1/8}
+		\Note[tuplet]{8}{12,8,8}
+		\Tie[angle=30]{8}
+			
+	\begin{Slurred}[swap,angle=10,b=-1.5]{9}{10}
+	\begin{Decrescendo}[-4]
+		\Accs{,-1/6,0/5,-1/5,0/5}
+		\Note[tuplet]{16}{8,6,5,5,5}
+			
+		\Space[-0.25]
+		
+		\Accs{,,-1/2,0/1,-1/2}
+		\Note[tuplet]{16}{4,2,2,1,2}
+		\Dynamics[xshift=-1,yshift=-0.4]{p}
+	\Space[-0.5]\end{Decrescendo}
+	\Space[0.5]
+	\end{Slurred}
+		
+	\Space[0.2]\begin{Decrescendo}
+	\Space[-0.2]
+		\Dynamics[yshift=0]{f}
+		\Artics{-/12}
+		\Accs{-1/12,0/8,-1/8}
+		\Note[tuplet]{8}{12,8,8}			
+		\Tie[angle=30]{8}
+	\end{Decrescendo}
+	
+	\begin{Slurred}[swap,angle=50,b=-2,xshift=0.5]{9}{10}
+	\end{Slurred}
+
+	\Bar
+	\Space[0.5]
+	
+	
+%	\Dynamics[yshift=0]{f}
+%		\Space[0.5]
+%		\begin{Decrescendo}
+%			\Space[-0.5]
+%		\Artics{-/12}
+%		\Accs{-1/12,0/8,-1/8}
+%		\Note[tuplet]{8}{12,8,8}
+%		\addtocounter{MX}{8}
+%		\end{Decrescendo}
+%	\addtocounter{MX}{-8}
+%		
+%		\Tie[angle=30]{8}
+%		
+%		\addtocounter{MX}{-8}
+%		\begin{Slurred}[swap,angle=50]{9}{10}
+%			\addtocounter{MX}{24}
+%		\end{Slurred}
+%		\addtocounter{MX}{-16}
+%		
+%		\Bar\Space[0]
+%		
+%		\Space[1]
+		
+		
+	\begin{Slurred}[swap,angle=50,b=-1.5,xshift=1]{11}{10}
+	\end{Slurred}
+		
+		\Tie[b=0.5,angle=50]{8}
+		\Dynamics[yshift=0]{p}
+		
+		\Note{4}{8}
+		\Rest{4}
+		\Rest{1}
+		
+		\Bar[t=|.]
 			
 	\end{mousik}
 \end{document}
