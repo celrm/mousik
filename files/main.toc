@@ -11,7 +11,7 @@
 \contentsline {subsubsection}{\numberline {3.5.3}\texttt {\textbackslash Back}}{8}{subsubsection.3.5.3}
 \contentsline {subsection}{\numberline {3.6}Keys and accidentals}{9}{subsection.3.6}
 \contentsline {subsubsection}{\numberline {3.6.1}\texttt {\textbackslash Acc}}{9}{subsubsection.3.6.1}
-\contentsline {subsubsection}{\numberline {3.6.2}\texttt {\textbackslash Key}}{9}{subsubsection.3.6.2}
+\contentsline {subsubsection}{\numberline {3.6.2}\texttt {\textbackslash Key}}{10}{subsubsection.3.6.2}
 \contentsline {subsubsection}{\numberline {3.6.3}\texttt {\textbackslash NoKey}}{10}{subsubsection.3.6.3}
 \contentsline {subsection}{\numberline {3.7}Other symbols}{11}{subsection.3.7}
 \contentsline {subsubsection}{\numberline {3.7.1}\texttt {\textbackslash Dot}}{11}{subsubsection.3.7.1}

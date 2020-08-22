@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2018.11.4)  4 AUG 2020 13:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2018.11.4)  15 AUG 2020 20:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -291,6 +291,8 @@ Package: ifdraft 2016/05/16 v1.4 Detect class options draft and final (HO)
 \cftbeforelodtitleskip=\skip80
 \cftafterlodtitleskip=\skip81
 ) (./mousik.sty
+Package: mousik 2020/07/01
+
 (/usr/share/texlive/texmf-dist/tex/latex/leadsheets/leadsheets.sty
 (/usr/share/texlive/texmf-dist/tex/latex/l3kernel/expl3.sty
 Package: expl3 2016/05/18 v6512 L3 programming layer (loader) 
@@ -1154,30 +1156,25 @@ File: tikzlibrarybackgrounds.code.tex 2013/07/18 v3.0.1a (rcs-revision 1.3)
 \pgf@layerbox@background=\box99
 \pgf@layerboxsaved@background=\box100
 )
-\c@Mevaluate=\count319
-\c@Mmodulo=\count320
-\c@Mmax=\count321
-\c@Mmin=\count322
-\c@Mcount=\count323
-\c@Mfirst=\count324
+\c@@evaluate=\count319
+\c@@modulo=\count320
+\c@@max=\count321
+\c@@min=\count322
+\c@@count=\count323
+\c@@Mfirst=\count324
 \c@MX=\count325
 \c@MY=\count326
 \c@Mclef=\count327
 \c@Mkey=\count328
-\MWidth=\skip180
-\MHeight=\skip181
+\@MWidth=\skip180
+\@MHeight=\skip181
 \c@Maux=\count329
-\c@MauxB=\count330
-\c@Mheight=\count331
-\c@Mduration=\count332
-\c@MMdur=\count333
-\c@Mlast=\count334
-\c@Mlasted=\count335
-\c@Mslurred=\count336
-\c@MslurredA=\count337
-\c@MslurredB=\count338
-\c@Mcres=\count339
-\c@McresP=\count340
+\c@@Mheight=\count330
+\c@@Mduration=\count331
+\c@Mlast=\count332
+\c@Mlasted=\count333
+\c@Mcres=\count334
+\c@McresP=\count335
 )
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
 zlibrarydecorations.fractals.code.tex
@@ -1190,7 +1187,7 @@ e.tex
 \pgfdecoratedinputsegmentcompleteddistance=\dimen359
 \pgfdecoratedinputsegmentremainingdistance=\dimen360
 \pgf@decorate@distancetomove=\dimen361
-\pgf@decorate@repeatstate=\count341
+\pgf@decorate@repeatstate=\count336
 \pgfdecorationsegmentamplitude=\dimen362
 \pgfdecorationsegmentlength=\dimen363
 )
@@ -1203,7 +1200,7 @@ zlibrarylindenmayersystems.code.tex
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibrarylindenmayers
 ystems.code.tex
 \pgflsystemstep=\dimen364
-\c@pgf@lsystem@iteration=\count342
+\c@pgf@lsystem@iteration=\count337
 ))
 Package translations Info: No language package found. I am going to use `englis
 h' as default language. on input line 27.
@@ -1224,7 +1221,7 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 27.
 LaTeX Font Info:    ... okay on input line 27.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 27.
 LaTeX Font Info:    ... okay on input line 27.
-\c@lstlisting=\count343
+\c@lstlisting=\count338
 \AtBeginShipoutBox=\box102
 Package hyperref Info: Link coloring OFF on input line 27.
 
@@ -1234,7 +1231,7 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count344
+\c@section@level=\count339
 )
 LaTeX Info: Redefining \ref on input line 27.
 LaTeX Info: Redefining \pageref on input line 27.
@@ -1247,16 +1244,16 @@ LaTeX Info: Redefining \nameref on input line 27.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count345
+\scratchcounter=\count340
 \scratchdimen=\dimen365
 \scratchbox=\box103
-\nofMPsegments=\count346
-\nofMParguments=\count347
+\nofMPsegments=\count341
+\nofMParguments=\count342
 \everyMPshowfont=\toks76
-\MPscratchCnt=\count348
+\MPscratchCnt=\count343
 \MPscratchDim=\dimen366
-\MPnumerator=\count349
-\makeMPintoPDFobject=\count350
+\MPnumerator=\count344
+\makeMPintoPDFobject=\count345
 \everyMPtoPDFconversion=\toks77
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
@@ -1469,18 +1466,18 @@ LaTeX Warning: The counter will not be printed.
 
 [3]
 LaTeX Font Info:    Font shape `OT1/pcr/bx/n' in size <12> not available
-(Font)              Font shape `OT1/pcr/b/n' tried instead on input line 130.
+(Font)              Font shape `OT1/pcr/b/n' tried instead on input line 132.
 
 
 LaTeX Font Warning: Font shape `OMS/pcr/bx/n' undefined
 (Font)              using `OMS/pcr/m/n' instead
-(Font)              for symbol `textbackslash' on input line 130.
+(Font)              for symbol `textbackslash' on input line 132.
 
 LaTeX Font Info:    Font shape `OMS/pcr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 130.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 132.
 
 LaTeX Warning: The counter will not be printed.
-             The label is: - on input line 133.
+             The label is: - on input line 135.
 
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
@@ -1519,17 +1516,13 @@ Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 
-Overfull \hbox (5.34436pt too wide) in paragraph at lines 138--169
+Overfull \hbox (5.34436pt too wide) in paragraph at lines 140--171
  [] 
 
 \hbox(61.24506+0.0)x336.66667 []
 
 LaTeX Font Info:    Font shape `OMS/pcr/bx/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 176.
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 178.
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
@@ -1552,7 +1545,7 @@ Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 
 LaTeX Warning: The counter will not be printed.
-             The label is: - on input line 207.
+             The label is: - on input line 209.
 
 [4]
 Missing character: There is no / in font nullfont!
@@ -1646,13 +1639,13 @@ Missing character: There is no 2 in font nullfont!
 
 
 LaTeX Warning: The counter will not be printed.
-             The label is: - on input line 264.
+             The label is: - on input line 266.
 
 LaTeX Font Info:    Font shape `OMS/pcr/bx/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 270.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 272.
 
 LaTeX Warning: The counter will not be printed.
-             The label is: - on input line 272.
+             The label is: - on input line 274.
 
 [5]
 Missing character: There is no / in font nullfont!
@@ -1967,105 +1960,89 @@ Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no - in font nullfont!
-Missing character: There is no 8 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
  [6]
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
@@ -2083,7 +2060,7 @@ Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
 Missing character: There is no 4 in font nullfont!
 LaTeX Font Info:    Font shape `U/musix/m/n' will be
-(Font)              scaled to size 15.0pt on input line 362.
+(Font)              scaled to size 15.0pt on input line 364.
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
@@ -2389,10 +2366,6 @@ Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
 Missing character: There is no 4 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
@@ -2516,10 +2489,6 @@ Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
 Missing character: There is no * in font nullfont!
 Missing character: There is no 3 in font nullfont!
 Missing character: There is no 2 in font nullfont!
@@ -2577,16 +2546,11 @@ Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-
+ [7]
 
 LaTeX Warning: The counter will not be printed.
-             The label is: - on input line 421.
+             The label is: - on input line 423.
 
-[7]
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
@@ -2831,11 +2795,7 @@ Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
- [8]
+[8]
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
@@ -2937,34 +2897,8 @@ Missing character: There is no 2 in font nullfont!
 
 
 LaTeX Warning: The counter will not be printed.
-             The label is: - on input line 541.
+             The label is: - on input line 543.
 
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
@@ -3102,10 +3036,37 @@ Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
- [10]
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no 2 in font nullfont!
+
+Overfull \vbox (9.89532pt too high) has occurred while \output is active
+\vbox(103.70471+0.0)x167.5, glue set - 1.0 []
+
+
+[10]
 
 LaTeX Warning: The counter will not be printed.
-             The label is: - on input line 644.
+             The label is: - on input line 646.
 
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
@@ -3132,10 +3093,6 @@ Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
@@ -3193,7 +3150,7 @@ Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 
 LaTeX Warning: The counter will not be printed.
-             The label is: - on input line 688.
+             The label is: - on input line 690.
 
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
@@ -3567,7 +3524,7 @@ Missing character: There is no 2 in font nullfont!
  [12]
 
 LaTeX Warning: The counter will not be printed.
-             The label is: - on input line 817.
+             The label is: - on input line 819.
 
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
@@ -3607,11 +3564,11 @@ Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 
 LaTeX Warning: The counter will not be printed.
-             The label is: - on input line 864.
+             The label is: - on input line 866.
 
 
 LaTeX Warning: The counter will not be printed.
-             The label is: - on input line 873.
+             The label is: - on input line 875.
 
 [13]
 Missing character: There is no / in font nullfont!
@@ -3870,16 +3827,8 @@ Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
 
-Overfull \hbox (13.71762pt too wide) in paragraph at lines 929--942
+Overfull \hbox (13.71762pt too wide) in paragraph at lines 931--944
 [] 
 
 \hbox(107.46776+0.0)x345.0 []
@@ -4111,7 +4060,7 @@ Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 
-Overfull \hbox (42.48273pt too wide) in paragraph at lines 990--1010
+Overfull \hbox (42.48273pt too wide) in paragraph at lines 992--1012
 [] 
 
 \hbox(71.2247+0.0)x319.99997 []
@@ -4269,17 +4218,17 @@ Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 
-Overfull \hbox (33.87164pt too wide) in paragraph at lines 1030--1031
+Overfull \hbox (33.87164pt too wide) in paragraph at lines 1032--1033
 [][] 
 
 \hbox(46.72498+0.0)x319.99997 []
 
 [16]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1056.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1056.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1058.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1058.
  (files/main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1056.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1056.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1058.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1058.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: <no file>.
@@ -4287,16 +4236,16 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1056.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1058.
  ) 
 Here is how much of TeX's memory you used:
- 29485 strings out of 494923
- 550636 string characters out of 6180163
- 688556 words of memory out of 5000000
- 32149 multiletter control sequences out of 15000+600000
+ 29433 strings out of 494923
+ 549810 string characters out of 6180163
+ 666949 words of memory out of 5000000
+ 32095 multiletter control sequences out of 15000+600000
  52602 words of font info for 190 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 68i,14n,71p,10359b,1748s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 68i,14n,68p,10359b,1749s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist
@@ -4325,10 +4274,10 @@ texmf-dist/fonts/type1/public/musixtex-fonts/musix13.pfb></usr/share/texlive/te
 xmf-dist/fonts/type1/public/musixtex-fonts/musix20.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/share/texlive/texmf-dist/fonts/
 type1/urw/courier/ucrr8a.pfb>
-Output written on files/main.pdf (16 pages, 377234 bytes).
+Output written on files/main.pdf (16 pages, 377718 bytes).
 PDF statistics:
- 493 PDF objects out of 1000 (max. 8388607)
- 441 compressed objects within 5 object streams
- 151 named destinations out of 1000 (max. 500000)
+ 496 PDF objects out of 1000 (max. 8388607)
+ 444 compressed objects within 5 object streams
+ 153 named destinations out of 1000 (max. 500000)
  205 words of extra memory for PDF output out of 10000 (max. 10000000)
 

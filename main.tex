@@ -119,11 +119,13 @@ It has some options:
 		\item \textsl{long} changes the maximum width of the score. Default is 100.
 		\item \textsl{hsep} changes the horizontal separation. Default is 8.
 		\item \textsl{vsep} changes the vertical separation in case of an overflow. Default is 2, in cm.
+		\item \textsl{tikz} allows extra options for the outside \texttt{tikz} environment.
 	\end{enumerate}
 \todo{piano scores}
 \todo{single staff}
 \todo{resize}
-\todo{tikz option}
+\todo{hsep with beams n dots}
+\todo{compatibility issues}
 
 	\section{Available commands}
 	
@@ -526,8 +528,8 @@ It has some options:
 			\Clef	
 			\foreach \a in {-2,-1.5,...,2} {
 				\Text{\texttt{\a}}
-				\MString{\a}{-1}{\Text[yshift=-0.5]{\texttt{b}}}
-				\MString{\a}{1}{\Text[yshift=-0.5]{\texttt{\textbackslash\#}}}
+				\ifthenelse{\equal{\a}{-1}}{\Text[yshift=-0.5]{\texttt{b}}}{}
+				\ifthenelse{\equal{\a}{1}}{\Text[yshift=-0.5]{\texttt{\textbackslash\#}}}{}
 				\Acc{\a}{5}
 				\Note{4}{5}
 			}

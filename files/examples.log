@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2018.11.4)  4 AUG 2020 17:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2018.11.4)  15 AUG 2020 17:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -239,6 +239,8 @@ Package: geometry 2010/09/12 v5.6 Page Geometry
 \Gm@layoutvoffset=\dimen127
 \Gm@dimlist=\toks17
 ) (./mousik.sty
+Package: mousik 2020/07/01
+
 (/usr/share/texlive/texmf-dist/tex/latex/leadsheets/leadsheets.sty
 (/usr/share/texlive/texmf-dist/tex/latex/l3kernel/expl3.sty
 Package: expl3 2016/05/18 v6512 L3 programming layer (loader) 
@@ -1109,53 +1111,63 @@ File: tikzlibrarybackgrounds.code.tex 2013/07/18 v3.0.1a (rcs-revision 1.3)
 \pgf@layerbox@background=\box99
 \pgf@layerboxsaved@background=\box100
 )
-\c@Mevaluate=\count318
-\c@Mmodulo=\count319
-\c@Mmax=\count320
-\c@Mmin=\count321
-\c@Mcount=\count322
-\c@Mfirst=\count323
+\c@@evaluate=\count318
+\c@@modulo=\count319
+\c@@max=\count320
+\c@@min=\count321
+\c@@count=\count322
+\c@@Mfirst=\count323
 \c@MX=\count324
 \c@MY=\count325
 \c@Mclef=\count326
 \c@Mkey=\count327
-\MWidth=\skip144
-\MHeight=\skip145
+\@MWidth=\skip144
+\@MHeight=\skip145
 \c@Maux=\count328
-\c@MauxB=\count329
-\c@Mheight=\count330
-\c@Mduration=\count331
-\c@MMdur=\count332
-\c@Mlast=\count333
-\c@Mlasted=\count334
-\c@Mslurred=\count335
-\c@MslurredB=\count336
-\c@MslurredE=\count337
-\c@Mcres=\count338
-\c@McresP=\count339
+\c@@Mheight=\count329
+\c@@Mduration=\count330
+\c@Mlast=\count331
+\c@Mlasted=\count332
+\c@Mcres=\count333
+\c@McresP=\count334
 )
+(/usr/share/texlive/texmf-dist/tex/latex/fancybox/fancybox.sty
+Package: fancybox 2010/05/15 1.4
+
+Style option: `fancybox' v1.4 <2010/05/15> (tvz)
+\@fancybox=\box101
+\shadowsize=\dimen365
+\@Sbox=\box102
+\do@VerbBox=\toks77
+\the@fancyput=\toks78
+\this@fancyput=\toks79
+\EndVerbatimTokens=\toks80
+\Verbatim@Outfile=\write5
+\Verbatim@Infile=\read4
+)
+\c@last=\count335
 Package translations Info: No language package found. I am going to use `englis
-h' as default language. on input line 24.
+h' as default language. on input line 52.
  (files/examples.aux)
 \openout1 = `examples.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-\c@lstlisting=\count340
-\AtBeginShipoutBox=\box101
-Package hyperref Info: Link coloring OFF on input line 24.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+\c@lstlisting=\count336
+\AtBeginShipoutBox=\box103
+Package hyperref Info: Link coloring OFF on input line 52.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -1163,15 +1175,15 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count341
+\c@section@level=\count337
 )
-LaTeX Info: Redefining \ref on input line 24.
-LaTeX Info: Redefining \pageref on input line 24.
-LaTeX Info: Redefining \nameref on input line 24.
+LaTeX Info: Redefining \ref on input line 52.
+LaTeX Info: Redefining \pageref on input line 52.
+LaTeX Info: Redefining \nameref on input line 52.
 
 (files/examples.out) (files/examples.out)
-\@outlinefile=\write5
-\openout5 = `examples.out'.
+\@outlinefile=\write6
+\openout6 = `examples.out'.
 
 
 *geometry* driver: auto-detecting
@@ -1210,17 +1222,17 @@ LaTeX Info: Redefining \nameref on input line 24.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count342
-\scratchdimen=\dimen365
-\scratchbox=\box102
-\nofMPsegments=\count343
-\nofMParguments=\count344
-\everyMPshowfont=\toks77
-\MPscratchCnt=\count345
-\MPscratchDim=\dimen366
-\MPnumerator=\count346
-\makeMPintoPDFobject=\count347
-\everyMPtoPDFconversion=\toks78
+\scratchcounter=\count338
+\scratchdimen=\dimen366
+\scratchbox=\box104
+\nofMPsegments=\count339
+\nofMParguments=\count340
+\everyMPshowfont=\toks81
+\MPscratchCnt=\count341
+\MPscratchDim=\dimen367
+\MPnumerator=\count342
+\makeMPintoPDFobject=\count343
+\everyMPtoPDFconversion=\toks82
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
@@ -1244,32 +1256,32 @@ File: translations-basic-dictionary-english.trsl (english translation file `tra
 nslations-basic-dictionary')
 )
 Package translations Info: loading dictionary `translations-basic-dictionary' f
-or `english'. on input line 24.
+or `english'. on input line 52.
  ABD: EveryShipout initializing macros
 \openout3 = `examples.mx1'.
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 26.
+LaTeX Font Info:    Try loading font information for U+msa on input line 54.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 26.
+LaTeX Font Info:    Try loading font information for U+msb on input line 54.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 26.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 54.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 26.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 54.
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <8> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 26.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 54.
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <6> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 26.
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 26.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 54.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 54.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
@@ -1277,12 +1289,13 @@ File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 LaTeX Font Info:    Font shape `U/musix/m/n' will be
 (Font)              scaled to size 15.0pt on input line 2.
 )
-\tf@toc=\write6
-\openout6 = `examples.toc'.
+\tf@toc=\write7
+\openout7 = `examples.toc'.
 
 [1
 
 {/usr/share/texlive/texmf-dist/fonts/map/pdftex/updmap/pdftex.map}]
+(./examples/TWV40:4.tex
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
@@ -1504,22 +1517,23 @@ Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
- [2]
+) (./examples/TWV40:4.tex) [2]
 LaTeX Font Info:    Font shape `U/musix/m/n' will be
-(Font)              scaled to size 21.59999pt on input line 88.
+(Font)              scaled to size 21.59999pt on input line 65.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 88.
+(hyperref)                removing `math shift' on input line 65.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\flat' on input line 88.
+(hyperref)                removing `\flat' on input line 65.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 88.
+(hyperref)                removing `math shift' on input line 65.
 
+(./examples/Woodthrush.tex
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
@@ -1607,8 +1621,6 @@ Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
-Missing character: There is no - in font nullfont!
-Missing character: There is no 8 in font nullfont!
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
@@ -1669,8 +1681,6 @@ Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
-Missing character: There is no - in font nullfont!
-Missing character: There is no 8 in font nullfont!
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
@@ -1735,8 +1745,6 @@ Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
-Missing character: There is no - in font nullfont!
-Missing character: There is no 8 in font nullfont!
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
@@ -1795,8 +1803,6 @@ Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
-Missing character: There is no - in font nullfont!
-Missing character: There is no 8 in font nullfont!
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
@@ -1875,8 +1881,6 @@ Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
-Missing character: There is no - in font nullfont!
-Missing character: There is no 8 in font nullfont!
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
@@ -1941,8 +1945,6 @@ Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
-Missing character: There is no - in font nullfont!
-Missing character: There is no 8 in font nullfont!
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
@@ -1951,50 +1953,6 @@ Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no - in font nullfont!
-Missing character: There is no 8 in font nullfont!
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
@@ -2062,8 +2020,6 @@ Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
-Missing character: There is no - in font nullfont!
-Missing character: There is no 8 in font nullfont!
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
@@ -2120,8 +2076,6 @@ Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
-Missing character: There is no - in font nullfont!
-Missing character: There is no 8 in font nullfont!
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
@@ -2178,8 +2132,6 @@ Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
-Missing character: There is no - in font nullfont!
-Missing character: There is no 8 in font nullfont!
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
@@ -2234,56 +2186,37 @@ Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
-Missing character: There is no - in font nullfont!
-Missing character: There is no 8 in font nullfont!
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
 Missing character: There is no / in font nullfont!
 Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-Missing character: There is no / in font nullfont!
-Missing character: There is no 2 in font nullfont!
-[3]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 252.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 252.
+) (./examples/Woodthrush.tex)
+(./examples/Woodthrush.tex) [3] (./examples/Woodthrush.tex) [4]
+(./examples/Woodthrush.tex) [5] (./examples/Woodthrush.tex)
+(./examples/Woodthrush.tex) (./examples/Woodthrush.tex)
+(./examples/Woodthrush.tex) (./examples/Woodthrush.tex)
+(./examples/Woodthrush.tex) (./examples/Woodthrush.tex)
+(./examples/Woodthrush.tex) (./examples/Woodthrush.tex)
+(./examples/Woodthrush.tex) (./examples/Woodthrush.tex)
+(./examples/Woodthrush.tex) (./examples/Woodthrush.tex)
+(./examples/Woodthrush.tex) [6]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 67.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 67.
  (files/examples.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 252.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 252.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 67.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 67.
 Package rerunfilecheck Info: File `examples.out' has not changed.
 (rerunfilecheck)             Checksum: <no file>.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 252.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 67.
  ) 
 Here is how much of TeX's memory you used:
- 28861 strings out of 494923
- 532710 string characters out of 6180163
- 635480 words of memory out of 5000000
- 31692 multiletter control sequences out of 15000+600000
- 50452 words of font info for 182 fonts, out of 8000000 for 9000
+ 29184 strings out of 494923
+ 536914 string characters out of 6180163
+ 677240 words of memory out of 5000000
+ 31812 multiletter control sequences out of 15000+600000
+ 50153 words of font info for 181 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 68i,11n,61p,10363b,1172s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 68i,11n,61p,10363b,1225s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist
@@ -2300,10 +2233,10 @@ ve/texmf-dist/fonts/type1/public/musixtex-fonts/musix11.pfb></usr/share/texlive
 /texmf-dist/fonts/type1/public/musixtex-fonts/musix13.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/public/musixtex-fonts/musix20.pfb></usr/share/texlive/tex
 mf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
-Output written on files/examples.pdf (3 pages, 167713 bytes).
+Output written on files/examples.pdf (6 pages, 172527 bytes).
 PDF statistics:
- 133 PDF objects out of 1000 (max. 8388607)
- 110 compressed objects within 2 object streams
- 30 named destinations out of 1000 (max. 500000)
+ 333 PDF objects out of 1000 (max. 8388607)
+ 305 compressed objects within 4 object streams
+ 185 named destinations out of 1000 (max. 500000)
  29 words of extra memory for PDF output out of 10000 (max. 10000000)
 
