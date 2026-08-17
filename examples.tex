@@ -39,7 +39,7 @@
 \newcommand{\prts}[4][1000]{\nolst{#2}{#3}{#4}
 \bigskip\setcounter{last}{-1}
 \foreach\i in {0,#1,...,1001} {
-	\ifnum\thelast<0\else
+	\ifnum\thelast<0 \else
 	\stepcounter{last}
 	\begin{CenteredBox}
 		\lstinputlisting[firstline=\thelast,lastline=\i]{examples/#2}
@@ -55,7 +55,7 @@
 	\tableofcontents
 	\vfill
 	
-	\prts{TWV40:4}
+	\prts{TWV40-4}
 	{Allegro, Fantasie 3 in d-moll nach TWV 40:4, Georg Philipp Telemann}
 	{https://www.youtube.com/watch?v=hpjV962DLWs}
 

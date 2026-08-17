@@ -1,22 +1,23 @@
 \begin{mousik}[long=83.33,indent=2]
+% long depends on amount of notes per line
 		\Clef
 		\Key{-1}
 		\TimeSig{6}{8}
 		
 		\Note{8}{12}
-	\Bar
+	\Barline
 		\Note{8}{12,11,12}
 		\Note{8}{10,9,10}
-	\Bar
-		\Accs{,1/7}
+	\Barline
+		\Accs{,1/7} % ,: second note, 1: sharp, 7: pitch
 		\Note{8}{8,7,8}
 		\Note{8}{5,8,10}
-	\Bar
+	\Barline
 		\Note{8}{4,9,11}
 		\Note{8}{5,10,9}
-	\Bar
+	\Barline
 		\Note{8}{10,11,9}
-		\Dot{9}
+		\MDot{9} % Dot before note; 9 instead of 8
 		\Note{4}{8}
-	\Bar[t=|.]
+	\Barline[t=|.]
 \end{mousik}
