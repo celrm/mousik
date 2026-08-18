@@ -280,14 +280,16 @@ It has some options:
 	
 	\subsection{Notes and rests}
 	\subsubsection{\texttt{\textbackslash Note}}
-	The \verb|\Note| command prints a note on the score. It accepts 2 compulsory arguments, as well as some options:\todo{tuplet fucking sucks}
+	The \verb|\Note| command prints a note on the score. It accepts 2 compulsory arguments, as well as some options:
 	\begin{enumerate}[-]
 		\item \textsl{beam} chooses the width of the beam. Default is 1, in mm.
 		\item \textsl{head} chooses the type of head. Default is . (round), but also x (cross) and o (hollow) are possible.
 		\item \textsl{stem} chooses the height of the stem. Default is 0.5, in cm.
 		\item \textsl{swap} prints the element upside down. Default is false, which means up if the height is less than 6, down otherwise.
-		\item \textsl{tuplet} prints the number of a tuplet. The written number is calculated by default, but it can be assigned optionally: \texttt{tuplet=5}. %It has two arguments, an optional one and a compulsory one. The optional one is the written number, which is automatically calculated by default. The compulsory one is the height.
-%		\todo{bar on tuplet, fix height}
+		\item \textsl{tuplet} prints the number of a tuplet. The written number is calculated by default, but it can be assigned optionally: \texttt{tuplet=5}.
+		\item \textsl{tuplet-bracket} draws a bracket around the tuplet number. Default is false.
+		\item \textsl{tuplet-xshift} moves only the tuplet marking horizontally. Default is 0, in cm.
+		\item \textsl{tuplet-yshift} moves only the tuplet marking vertically. Default is 0, in cm.
 		\item \textsl{xshift} moves the element horizontally (x axis). Default is 0, in cm.
 		\item \textsl{yshift} moves the element vertically (y axis). Default is 0, in cm.
 	\end{enumerate}\todo{stem in mm}
@@ -324,7 +326,7 @@ It has some options:
 	
 %	The notes go upside down when their height (or maximum height) is bigger than 6. However, for manual control, the \verb|\Swap| command might be used \textit{before} the note.
 
-\todo{tuplet options: little bar, shifts}
+
 	
 	
 	\begin{center}
@@ -563,7 +565,7 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 		
 		\Space[0.5]
 		\TTT{Accs\{-2/5, ,-1/0\}}
-		\TTT[-0.5]{Note\{5,3,0\}}
+		\TTT[-0.5]{Note{8}{5,3,0}}
 		\Space[-0.5]
 		\Accs{-2/5, ,-1/0}
 		\Note{8}{5,3,0}

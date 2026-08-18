@@ -318,34 +318,48 @@
 }
 
 \newcounter{M@height}
+\newif\ifM@tupletBracket
 \newcommand{\Tuplet}[1][]{
-	\pgfmathsetmacro{\M@TupletMid}{int(\theMX-\theM@aux-\M@hsep*2)*0.0625*0.5}
-	\pgfmathsetmacro{\M@realX}{\theMX*0.0625}
-	\pgfmathsetmacro{\M@evMin}{-\theMY*\M@vsep+\theM@min*0.1}
-	\pgfmathsetmacro{\M@evMax}{-\theMY*\M@vsep+\theM@max*0.1}
-	\ifnoMswap
-		\ifnum\theM@max<6
-			% \clip (\M@realX-0.4,-0.5+\M@evMin) rectangle (\M@realX+0.125,-0.15+\M@evMax#1);
-			% \draw[line width=\M@beam mm] (\M@realX-0.411,-0.2+\M@evMin#1) -- (\M@realX+0.147,-0.2+\M@evMax#1);
-		\node at (\theM@aux*0.0625 + \M@TupletMid, -\theMY*\M@vsep+\theM@height*0.1+0.3){a\ifthenelse{\equal{#1}{}}{\theM@count}{#1}};
+	\pgfmathsetmacro{\M@TupletNoteMid}{\theM@aux*0.0625 + int(\theMX-\theM@aux-\M@hsep*2)*0.0625*0.5}
+	\ifnum\theM@count>2
+		\ifnoMswap
+			\pgfmathsetmacro{\M@TupletBeamLeft}{\theM@aux*0.0625 + 0.103}
+			\pgfmathsetmacro{\M@TupletBeamRight}{(\theMX-\M@hsep)*0.0625 - 0.372}
 		\else
-			% \clip (\M@realX-0.4,-0.15+\M@evMax#1) rectangle (\M@realX+0.125,-0.5+0.05+\M@evMin);
-			% \draw[line width=\M@beam mm] (\M@realX-0.411,-0.2+\M@evMax#1) -- (\M@realX+0.147,-0.2+\M@evMin#1);
-		\node at (\theM@aux*0.0625 + \M@TupletMid, -\theMY*\M@vsep+\theM@height*0.1+0.3){b\ifthenelse{\equal{#1}{}}{\theM@count}{#1}};
+			\pgfmathsetmacro{\M@TupletBeamLeft}{\theM@aux*0.0625 - 0.153}
+			\pgfmathsetmacro{\M@TupletBeamRight}{(\theMX-\M@hsep)*0.0625 - 0.625}
 		\fi
+		\pgfmathsetmacro{\M@TupletX}{0.5*(\M@TupletBeamLeft+\M@TupletBeamRight)}
+		\pgfmathsetmacro{\M@TupletLeft}{\M@TupletBeamLeft-0.08}
+		\pgfmathsetmacro{\M@TupletRight}{\M@TupletBeamRight+0.08}
 	\else
-		\ifnum\theM@max<6
-			% \clip (\M@realX-0.645,-0.25+\M@evMin-#1) rectangle (\M@realX-0.129,0.2+\M@evMax);
-			% \draw[line width=\M@beam mm] (\M@realX-0.7,-0.18+\M@evMin-#1) -- (\M@realX-0.1,-0.18+\M@evMax-#1);
-		\node at (\theM@aux*0.0625 + \M@TupletMid, -\theMY*\M@vsep+\theM@height*0.1-0.3){c\ifthenelse{\equal{#1}{}}{\theM@count}{#1}};
-		\else
-			% \clip (\M@realX-0.65,-0.25+\M@evMin-#1) rectangle (\M@realX-0.129,0.2+\M@evMax);
-			% \draw[line width=\M@beam mm] (\M@realX-0.7,-0.18+\M@evMax-#1) -- (\M@realX-0.1,-0.18+\M@evMin-#1);
-		\node at (\theM@aux*0.0625 + \M@TupletMid, -\theMY*\M@vsep+\theM@height*0.1-0.3){d\ifthenelse{\equal{#1}{}}{\theM@count}{#1}};
-		\fi
+		\pgfmathsetmacro{\M@TupletX}{\M@TupletNoteMid}
+		\pgfmathsetmacro{\M@TupletLeft}{\theM@aux*0.0625 - 0.08}
+		\pgfmathsetmacro{\M@TupletRight}{2*\M@TupletNoteMid-\theM@aux*0.0625 + 0.08}
 	\fi
-}
 
+	\pgfmathsetmacro{\M@TupletBeamY}{-\theMY*\M@vsep-0.2+\theM@height*0.1}
+	\ifnoMswap
+		\pgfmathsetmacro{\M@TupletY}{\M@TupletBeamY+0.35}
+	\else
+		\pgfmathsetmacro{\M@TupletY}{\M@TupletBeamY-0.35}
+	\fi
+
+	\begin{scope}[xshift=\M@tupletXshift cm,yshift=\M@tupletYshift cm]
+		\ifM@tupletBracket
+			\draw[line width=0.15mm] (\M@TupletLeft,\M@TupletY) -- (\M@TupletRight,\M@TupletY);
+			\ifnoMswap
+				\draw[line width=0.15mm] (\M@TupletLeft,\M@TupletY) -- +(0,-0.10);
+				\draw[line width=0.15mm] (\M@TupletRight,\M@TupletY) -- +(0,-0.10);
+			\else
+				\draw[line width=0.15mm] (\M@TupletLeft,\M@TupletY) -- +(0,0.10);
+				\draw[line width=0.15mm] (\M@TupletRight,\M@TupletY) -- +(0,0.10);
+			\fi
+		\fi
+		\node[fill=\M@color,inner sep=1pt] at (\M@TupletX,\M@TupletY)
+			{\ifthenelse{\equal{#1}{}}{\theM@count}{#1}};
+	\end{scope}
+}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Notes : bits
 
@@ -483,7 +497,7 @@
 	\ifnum#1>5 \Swap \fi
 	\M@enlarge[\M@Sstem]{#1}{#1}	
 	\ifnoMswap \pgfmathparse{1} \else \pgfmathparse{-1} \fi
-	\pgfmathsetmacro\M@High{int(\pgfmathresult * 10*\M@Sstem + #1*0.0625*10)}
+	\pgfmathsetmacro\M@High{int(#1 + \pgfmathresult * 10*\M@Sstem)}
 	\setcounter{M@height}{\M@High}
 }
 
@@ -555,6 +569,9 @@
 		, head = .
 		, swap = false
 		, tuplet = 0
+		, tuplet-bracket = false
+		, tuplet-xshift = 0
+		, tuplet-yshift = 0
 		, xshift = 0
 		, yshift = 0
 	}
@@ -563,6 +580,9 @@
 	, stem/.estore in=\M@stem
 	, head/.estore in=\M@head
 	, tuplet/.estore in=\M@tuplet
+	, tuplet-bracket/.is if=M@tupletBracket
+	, tuplet-xshift/.estore in=\M@tupletXshift
+	, tuplet-yshift/.estore in=\M@tupletYshift
 	, swap/.is if=Mswap
 	, xshift/.estore in=\M@shiftX
 	, yshift/.estore in=\MshiftY
@@ -650,7 +670,7 @@
 	}
 
 \ifnoMswap {\pgfmathparse{1}} \else {\pgfmathparse{-1}} \fi
-\pgfmathsetmacro\M@High{int(\pgfmathresult * 10*\M@Sstem + \M@heightBeam*0.0625*10)}
+\pgfmathsetmacro\M@High{int(\M@heightBeam + \pgfmathresult * 10*\M@Sstem)}
 \setcounter{M@height}{\M@High}
 	\setcounter{Mlast}{-1}
 	\ifnum\theM@duration<16
@@ -782,7 +802,7 @@
 	}
 
 	\ifnoMswap {\pgfmathparse{1}} \else {\pgfmathparse{-1}} \fi
-	\pgfmathsetmacro\M@High{int(\pgfmathresult *10*\M@Sstems + \M@heightBeam*0.0625*10)}
+	\pgfmathsetmacro\M@High{int(\M@heightBeam + \pgfmathresult * 10*\M@Sstems)}
 	\setcounter{M@height}{\M@High}
 	\M@remMX
 	\ifnum#1=8
@@ -806,12 +826,11 @@
 	\M@Heads{#2}
 	
 	\ifnum\theM@max<6
-		\ifnoMswap \pgfmathsetmacro{\M@heightBeam}{\theM@min}
-		\else \pgfmathsetmacro{\M@heightBeam}{\theM@max} \fi
-	\else 
+	\else
 		\Swap
-		\ifnoMswap \pgfmathsetmacro{\M@heightBeam}{\theM@max}
-		\else \pgfmathsetmacro{\M@heightBeam}{\theM@min} \fi
+	\fi
+	\ifnoMswap \pgfmathsetmacro{\M@heightBeam}{\theM@max}
+	\else \pgfmathsetmacro{\M@heightBeam}{\theM@min}
 	\fi
 	
 	\setcounter{MX}{\theM@aux}\pgfmathsetmacro{\M@realX}{\theMX*0.0625}
@@ -828,7 +847,7 @@
 	}
 
 	\ifnoMswap \pgfmathparse{1} \else \pgfmathparse{-1} \fi
-	\pgfmathsetmacro\M@High{int(\pgfmathresult * 10*\M@Sstem + #1*0.0625*10)}
+	\pgfmathsetmacro\M@High{int(\M@heightBeam + \pgfmathresult * 10*\M@Sstem)}
 	\setcounter{M@height}{\M@High}
 
 	\ifnum#1=8
