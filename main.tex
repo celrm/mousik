@@ -125,14 +125,29 @@ It has some options:
 		\item \textsl{color} changes the background color. Default is white.
 		\item \textsl{indent} indents the first line. Default is 0, in cm.
 		\item \textsl{long} changes the maximum width of the score. Default is 100.
-		\item \textsl{hsep} changes the horizontal separation. Default is 8.
+		\item \textsl{hsep} changes the horizontal separation. Default is 8. Beams and parallel dot lists follow the same separation.
 		\item \textsl{vsep} changes the vertical separation in case of an overflow. Default is 2, in cm.
+		\item \textsl{single} draws a one-line staff, useful for percussion examples. Notes keep the usual absolute height system; height 6 lies on the line.
+		\item \textsl{piano} draws an upper and a lower five-line staff. Use \verb|\UpperStaff| and \verb|\LowerStaff| to choose which one receives the following commands. Each staff keeps its own cursor, clef and key, so alignment remains manual.
+		\item \textsl{piano-sep} changes the distance between the two piano staves. Default is 1.6, in cm.
 		\item \textsl{tikz} allows extra options for the outside \texttt{tikz} environment.
 	\end{enumerate}
-\todo{piano scores}
-\todo{single staff}
+
+For example, this is a short piano fragment:
+	\begin{lstlisting}[basicstyle=\ttfamily\small]
+		  \begin{mousik}[piano]
+		     \Clef
+		     \TimeSig{4}{4}
+		     \Note{8}{5,6}
+		     \LowerStaff
+		     \Clef[t=4]
+		     \TimeSig{4}{4}
+		     \Note{8}{1,2}
+		     \UpperStaff
+		  \end{mousik}
+	\end{lstlisting}
+
 \todo{resize}
-\todo{hsep with beams n dots}
 \todo{compatibility issues}
 
 % \end{document}
@@ -739,7 +754,7 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 	
 	The \verb|Slurred| environment draws a slur between the notes placed inside. It has two arguments: the heights of both beginning and end notes.
 	
-	\begin{center}\todo{Fix angle}
+	\begin{center}
 		\begin{mousik}
 			\Clef
 			\Note{4}{6}
