@@ -268,7 +268,7 @@ It has some options:
 	\begin{enumerate}[-]
 		\item \textsl{beam} chooses the width of the beam. Default is 1, in mm.
 		\item \textsl{head} chooses the type of head. Default is . (round), but also x (cross) and o (hollow) are possible.
-		\item \textsl{stem} chooses the height of the stem. Default is 0.5, in cm.
+		\item \textsl{stem} chooses the height of the stem. Default is 5, in mm.
 		\item \textsl{swap} prints the element upside down. Default is false, which means up if the height is less than 6, down otherwise.
 		\item \textsl{tuplet} prints the number of a tuplet. The written number is calculated by default, but it can be assigned optionally: \texttt{tuplet=5}.
 		\item \textsl{tuplet-bracket} draws a bracket around the tuplet number. Default is false.
@@ -276,7 +276,7 @@ It has some options:
 		\item \textsl{tuplet-yshift} moves only the tuplet marking vertically. Default is 0, in cm.
 		\item \textsl{xshift} moves the element horizontally (x axis). Default is 0, in cm.
 		\item \textsl{yshift} moves the element vertically (y axis). Default is 0, in cm.
-	\end{enumerate}\todo{stem in mm}
+	\end{enumerate}
 	
 	The first compulsory argument is the duration of the note.%, from one of these:% 1 (whole note / semibreve), 2 (half note / minim), 4 (quarter note / crotchet), 8 (eighth note / quaver), 16 (sixteenth note / semiquaver), 32 (thirty second note / demisemiquaver).
 	
@@ -331,8 +331,8 @@ It has some options:
 		\begin{mousik}
 			\Clef
 			
-			\TTT[-0.5]{Note[stem=0.6]\{16\}\{5,6\}}
-			\Note[stem=0.6]{16}{5,6}
+			\TTT[-0.5]{Note[stem=6]\{16\}\{5,6\}}
+			\Note[stem=6]{16}{5,6}
 			\Space[1.5]
 			
 			\Space[0.5]\TTT[0.25]{Note[swap]\{32\}\{5,6\}}\Space[-0.5]
@@ -413,7 +413,7 @@ It has some options:
 			
 			\Barline[t=|.]
 		\end{mousik}
-	\end{center}\todo{fix beam =}
+	\end{center}
 
 	\subsubsection{\texttt{\textbackslash Rest}}\label{rest}
 	The \verb|\Rest| command prints a rest. It accepts its duration as an argument: 1, 2, 4, 8, 16 or 32.
@@ -694,7 +694,7 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 		\end{mousik}
 	\end{center}
 
-	\item \textsl{swap} prints the element upside down. Default is false, which means like a \textit{u} if the height is less than 6, and like an \textit{n} otherwise.
+	\item \textsl{swap} prints the element upside down. Default is false, which means like a \textit{u} if the height is less than 6, and like an \textit{n} otherwise. 
 	\item \textsl{width} changes the line width. Default is 0.15, in mm.
 	\item \textsl{xshift} moves the element horizontally (x axis). Default is 0, in cm.
 	\item \textsl{yshift} moves the element vertically (y axis). Default is 0, in cm.
@@ -718,18 +718,23 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 
 	\subsubsection{The \texttt{Crescendo} and \texttt{Decrescendo} environments}
 	
-	The \verb|Crescendo| and \verb|Decrescendo| environments draws a crescendo or decrescendo symbols, respectively, between the notes placed inside. It has an optional argument: the height of the symbol. The default value is 0.
+	The \verb|Crescendo| and \verb|Decrescendo| environments draw hairpins between the notes placed inside. Their options are:
+	\begin{enumerate}[-]
+		\item \textsl{height} moves the centre of the hairpin vertically. Default is 0. 
+		\item \textsl{begin} and \textsl{end} set the full opening of the hairpin at its beginning and end, in cm. A crescendo defaults to \texttt{begin=0,end=0.4}. A decrescendo defaults to \texttt{begin=0.4,end=0}.
+		\item \textsl{b} and \textsl{e} move the beginning and ending points horizontally from the first and last heads. Defaults are 0.1 and -0.1, in cm.
+		\item \textsl{width} changes the line width. Default is 0.15, in mm.
+		\item \textsl{xshift} moves the hairpin horizontally. Default is 0, in cm.
+		\item \textsl{yshift} moves the hairpin vertically. Default is 0, in cm.
+	\end{enumerate}
 	
-	\todo{Half line}
-	\todo{obertura}
-	\todo{shifts}
-	\todo{weird spaces}
+	A hairpin that continues after a line break should be written as two independent pieces. Give the first piece a chosen \textsl{end} opening and use the same value as \textsl{begin} on the next line.
 
 	\begin{center}
 		\begin{mousik}
 			\Clef
 
-			\begin{Crescendo}[-3]
+			\begin{Crescendo}[height=-3]
 				\foreach\i in {2,...,-1}{\Note{4}{\i}}
 			\end{Crescendo}			
 
@@ -738,6 +743,24 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 			\end{Decrescendo}
 
 			\Barline[t=|.]
+		\end{mousik}
+	\end{center}
+
+	\begin{center}
+		\begin{mousik}
+			\Clef
+			\begin{Crescendo}[end=0.24]
+				\Note{4}{2}\Note{4}{3}\Note{4}{4}
+			\end{Crescendo}
+			\Space
+		\end{mousik}
+		
+		\begin{mousik}
+			\Clef
+			\begin{Crescendo}[begin=0.24,end=0.4]
+				\Note{4}{4}\Note{4}{5}\Note{4}{6}
+			\end{Crescendo}
+			\Space
 		\end{mousik}
 	\end{center}
 	

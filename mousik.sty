@@ -613,7 +613,7 @@
       \pgfmathsetmacro{\M@BeamL}{-\M@BeamH-0.072}%
       \pgfmathsetmacro{\M@BeamR}{-0.5*\M@BeamH-0.025}%
     \else
-      \pgfmathsetmacro{\M@BeamL}{-\M@BeamH-0.272}%
+      \pgfmathsetmacro{\M@BeamL}{-1.5*\M@BeamH-0.022}%
       \pgfmathsetmacro{\M@BeamR}{-0.5*\M@BeamH-0.025}%
     \fi\fi\fi\fi
     \draw[line width=\M@beam mm]
@@ -635,7 +635,7 @@
       \pgfmathsetmacro{\M@BeamL}{-\M@BeamH-0.075}%
       \pgfmathsetmacro{\M@BeamR}{-0.5*\M@BeamH-0.025}%
     \else
-      \pgfmathsetmacro{\M@BeamL}{-\M@BeamH-0.275}%
+      \pgfmathsetmacro{\M@BeamL}{-1.5*\M@BeamH-0.025}%
       \pgfmathsetmacro{\M@BeamR}{-0.5*\M@BeamH-0.025}%
     \fi\fi\fi\fi
     \draw[line width=\M@beam mm]
@@ -899,7 +899,7 @@
 	, default/.style = 
 	{	back = false
 		, beam = 1
-		, stem = 0.5
+		, stem = 5
 		, head = .
 		, swap = false
 		, tuplet = 0
@@ -911,7 +911,7 @@
 	}
 	, back/.is if=MnoteBack
 	, beam/.estore in=\M@beam
-	, stem/.estore in=\M@stem
+	, stem/.code={\pgfmathsetmacro{\M@stem}{(#1)/10}}
 	, head/.estore in=\M@head
 	, tuplet/.estore in=\M@tuplet
 	, tuplet-bracket/.is if=M@tupletBracket
@@ -1749,23 +1749,76 @@
 }
 
 \newcounter{Mcres}
-\newcounter{McresP}
-\newenvironment{Crescendo}[1][0]
-{\setcounter{Mcres}{\theMX}\setcounter{McresP}{#1}}
-{\pgfmathsetmacro{\M@realX}{\theMX*0.0625}
-\draw (0.1+\theMcres*0.0625,-\theMY*\M@vsep+\theMcresP*0.1-0.7) 
--- (-1.1+\M@realX,-\theMY*\M@vsep+0.1*\theMcresP+0.2-0.7);
-\draw (0.1+\theMcres*0.0625,-\theMY*\M@vsep+0.1*\theMcresP-0.7) 
--- (-1.1+\M@realX,-\theMY*\M@vsep+0.1*\theMcresP-0.2-0.7);}
+\newcounter{McresMY}
+\pgfkeys{
+    /Mhairpin/.is family
+    , /Mhairpin
+    , common/.style = {
+        height = 0
+        , b = 0.1
+        , e = -0.1
+        , width = 0.15
+        , xshift = 0
+        , yshift = 0
+    }
+    , crescendo/.style = {common, begin = 0, end = 0.4}
+    , decrescendo/.style = {common, begin = 0.4, end = 0}
+    , height/.estore in=\M@HairpinHeight
+    , begin/.estore in=\M@HairpinBeginOpen
+    , end/.estore in=\M@HairpinEndOpen
+    , b/.estore in=\M@HairpinB
+    , e/.estore in=\M@HairpinE
+    , width/.estore in=\M@HairpinW
+    , xshift/.estore in=\M@HairpinX
+    , yshift/.estore in=\M@HairpinY
+}
 
+\newcommand{\M@HairpinOptions}[2]{%
+    \pgfkeys{/Mhairpin,#1}%
+    \def\M@HairpinRaw{#2}%
+    \ifx\M@HairpinRaw\@empty\else
+        \in@{=}{#2}%
+        \ifin@
+            \pgfkeys{/Mhairpin,#2}%
+        \else
+            \pgfkeys{/Mhairpin,height=#2}%
+        \fi
+    \fi
+}
 
-\newenvironment{Decrescendo}[1][0]
-{\setcounter{Mcres}{\theMX}\setcounter{McresP}{#1}}
-{\pgfmathsetmacro{\M@realX}{\theMX*0.0625}
-\draw (0.1+\theMcres*0.0625,-\theMY*\M@vsep+\theMcresP*0.1+0.2-0.7) 
--- (-1.1+\M@realX,-\theMY*\M@vsep+0.1*\theMcresP-0.7);
-\draw (0.1+\theMcres*0.0625,-\theMY*\M@vsep+0.1*\theMcresP-0.2-0.7) 
--- (-1.1+\M@realX,-\theMY*\M@vsep+0.1*\theMcresP-0.7);}
+\newcommand{\M@HairpinStartEnv}[2]{% #1 style, #2 options
+    \M@HairpinOptions{#1}{#2}%
+    \setcounter{Mcres}{\theMX}%
+    \setcounter{McresMY}{\theMY}%
+}
+
+\newcommand{\M@HairpinFinishEnv}{%
+    \ifnum\theMY=\theMcresMY\else
+        \PackageWarning{mousik}{Hairpin crossed a score line; split it into two environments and match end/begin apertures}%
+    \fi
+    \pgfmathsetmacro{\M@HairpinStartX}{\theMcres*0.0625 + \M@HairpinB}%
+    \pgfmathsetmacro{\M@HairpinLastNoteX}{(\theMX-2*\M@hsep)*0.0625}%
+    \pgfmathsetmacro{\M@HairpinEndX}{\M@HairpinLastNoteX + \M@HairpinE}%
+    \pgfmathsetmacro{\M@HairpinCenterY}{-\theMY*\M@vsep + 0.1*\M@HairpinHeight - 0.7}%
+    \pgfmathsetmacro{\M@HairpinBeginHalf}{0.5*\M@HairpinBeginOpen}%
+    \pgfmathsetmacro{\M@HairpinEndHalf}{0.5*\M@HairpinEndOpen}%
+    \begin{scope}[xshift=\M@HairpinX cm,yshift=\M@HairpinY cm]
+        \draw[line width=\M@HairpinW mm]
+            (\M@HairpinStartX,\M@HairpinCenterY+\M@HairpinBeginHalf) --
+            (\M@HairpinEndX,\M@HairpinCenterY+\M@HairpinEndHalf);
+        \draw[line width=\M@HairpinW mm]
+            (\M@HairpinStartX,\M@HairpinCenterY-\M@HairpinBeginHalf) --
+            (\M@HairpinEndX,\M@HairpinCenterY-\M@HairpinEndHalf);
+    \end{scope}%
+}
+
+\newenvironment{Crescendo}[1][]
+    {\M@HairpinStartEnv{crescendo}{#1}}
+    {\M@HairpinFinishEnv}
+
+\newenvironment{Decrescendo}[1][]
+    {\M@HairpinStartEnv{decrescendo}{#1}}
+    {\M@HairpinFinishEnv}
 
 
 \endinput
