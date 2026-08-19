@@ -83,11 +83,11 @@
 		\UpperStaff
 		\Clef[octave=8] \TimeSig{4}{4}
 		\MDots{*/1, , */3, } \Note{|-,=|,|-,=|}{1,2,3,4}
-		\Note{4}{2}
+		     \Note{4}{2}
 		\Artic{^}{0} \Note{8}{0,1}
-		\Tie[e=2]{1}
-		\Barline
-		\Note{1}{1}
+		     \Tie[e=2]{1}
+		     \Barline
+		     \Note{1}{1}
 		\Barline[t=|.]
 
 		\LowerStaff			
@@ -99,7 +99,7 @@
 		\Tie[swap,b=0.25,e=1.75]{9} \Tie[swap,e=2]{7}
 		\Barline
 		\Note{1}{12/10/<9/7}
-	\end{mousik}
+		  \end{mousik}
 	\end{lstlisting}
 
 It has some options:
@@ -118,8 +118,6 @@ It has some options:
 
 \todo{resize}
 \todo{compatibility issues}
-
-% \end{document}
 
 	\section{Available commands}
 	
@@ -563,7 +561,6 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 	\end{center}
 	
 	\subsubsection{\texttt{\textbackslash NoKey}}
-	\todo{Mixed Keys}
 	The \verb|\NoKey| command is the same as the \verb|\Key| command, but it prints naturals \natural\ instead of sharps or flats.
 	
 	\begin{center}
@@ -584,7 +581,26 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 		\end{mousik}
 	\end{center}
 	
-	Be careful: the \verb|\Key| and \verb|\NoKey| commands are affected by the current clef! Nonetheless, other commands such as \verb|\Note| or \verb|\Acc| are not affected and need absolute height values.
+	\subsubsection{\texttt{\textbackslash MixedKey}}
+	The \verb|\MixedKey| command prints a change of key signature. It accepts two arguments: the old key signature and the new one. For example, \verb|\MixedKey{5}{2}| changes from five sharps to two sharps, while \verb|\MixedKey{2}{-3}| changes from two sharps to three flats.	
+	Cancellation naturals are printed when needed. 
+	
+	\begin{center}
+		\begin{mousik}
+			\Clef
+			\Key{5}
+			\Note{4}{0}
+			\Barline
+			\MixedKey{5}{2}
+			\Note{4}{0}
+			\Barline
+			\MixedKey{2}{-3}
+			\Note{4}{0}
+			\Barline[t=|.]
+		\end{mousik}
+	\end{center}
+	
+	Be careful: the \verb|\Key|, \verb|\NoKey| and \verb|\MixedKey| commands are affected by the current clef! Nonetheless, other commands such as \verb|\Note| or \verb|\Acc| are not affected and need absolute height values.
 	
 	\begin{multicols}{2}
 		\begin{center}
@@ -877,7 +893,7 @@ It also has some options:
 		\item \textsl{yshift} moves the element vertically (y axis). Default is 0, in cm.
 	\end{enumerate}
 	
-	To write anything in the usual font of dynamics, the \verb|\Dynamics| command will work the same: \verb|\Dynamics[yshift=-0.5]{pp}|. \todo{dynamics wout yshift peta}
+	To write anything in the usual font of dynamics, the \verb|\Dynamics| command will work the same: \verb|\Dynamics{pp}|. It also accepts the \textsl{xshift} and \textsl{yshift} options.
 	\begin{center}
 		\begin{mousik}
 			\Clef
@@ -897,7 +913,7 @@ It also has some options:
 			\Text[yshift=2.2]{\it rit.}
 			\Note{8}{3,4}
 			
-			\Dynamics[yshift=-0.5]{pp}
+			\Dynamics{pp}
 			\Note{4}{-3}
 			
 			\Barline[t=|.]

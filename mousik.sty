@@ -1452,9 +1452,8 @@
 	\addtocounter{M@aux}{\theM@max}
 }
 
-\newcommand{\Key}[1]{
+\newcommand{\M@DrawKey}[1]{
 	\ifnum#1=0 \else
-	\setcounter{M@key}{#1}
 	\pgfmathparse{int(10*(abs(#1)-1)^(1/2)+20)}\setcounter{M@min}{\pgfmathresult}
 	\pgfmathsetmacro{\M@result}{int(abs(#1)*2-23)}
 	\ifnum#1>0
@@ -1467,17 +1466,17 @@
 	}
 	\else \ifnum#1<0
 	\foreach\IND [count=\INDi] in {6,9,5,8,4,7,3} {
-		\ifnum\INDi>-#1 \else		
+		\ifnum\INDi>-#1 \else
 		\M@KB{\IND}{#1}
 		\M@Acc[-0.01*\theM@min]{-1}{\theM@aux}
 		\addtocounter{M@min}{\M@result}
 		\fi
 	}
 	\fi\fi
-	\M@addMX \fi
+	\fi
 }
 
-\newcommand{\NoKey}[1]{
+\newcommand{\M@DrawNoKey}[1]{
 	\ifnum#1=0 \else
 	\pgfmathparse{int(10*(abs(#1)-1)^(1/2)+20)}\setcounter{M@min}{\pgfmathresult}
 	\pgfmathsetmacro{\M@result}{int(abs(#1)*2-23)}
@@ -1498,7 +1497,93 @@
 		\fi
 	}
 	\fi\fi
-	\M@addMX \fi
+	\fi
+}
+
+\newcommand{\M@DrawKeyCancellation}[2]{
+	\ifnum#1=0 \else
+	\pgfmathtruncatemacro{\M@oldkeyabs}{abs(#1)}
+	\pgfmathparse{int(10*(abs(#1)-1)^(1/2)+20)}\setcounter{M@min}{\pgfmathresult}
+	\pgfmathsetmacro{\M@result}{int(abs(#1)*2-23)}
+	\ifnum#1>0
+	\foreach\IND [count=\INDi] in {10,7,11,8,5,9,6} {
+		\ifnum\INDi>\M@oldkeyabs \else
+			\ifnum\INDi>#2
+				\M@KB{\IND}{1}
+				\M@Acc[-0.01*\theM@min]{0}{\theM@aux}
+			\fi
+			\addtocounter{M@min}{\M@result}
+		\fi
+	}
+	\else
+	\foreach\IND [count=\INDi] in {6,9,5,8,4,7,3} {
+		\ifnum\INDi>\M@oldkeyabs \else
+			\ifnum\INDi>#2
+				\M@KB{\IND}{-1}
+				\M@Acc[-0.01*\theM@min]{0}{\theM@aux}
+			\fi
+			\addtocounter{M@min}{\M@result}
+		\fi
+	}
+	\fi
+	\fi
+}
+
+\newcommand{\Key}[1]{
+	\setcounter{M@key}{#1}
+	\ifnum#1=0 \else
+		\M@DrawKey{#1}
+		\M@addMX
+	\fi
+}
+
+\newcommand{\NoKey}[1]{
+	\ifnum#1=0 \else
+		\M@DrawNoKey{#1}
+		\M@addMX
+	\fi
+}
+
+\newif\ifM@mixedCancel
+\newcommand{\MixedKey}[2]{
+	\M@mixedCancelfalse
+	\pgfmathtruncatemacro{\M@oldkeyabs}{abs(#1)}
+	\pgfmathtruncatemacro{\M@newkeyabs}{abs(#2)}
+	\def\M@mixedKeep{0}
+	\ifnum#1=0 \else
+		\ifnum#2=0
+			\M@mixedCanceltrue
+		\else
+			\ifnum#1>0
+				\ifnum#2<0
+					\M@mixedCanceltrue
+				\else
+					\ifnum\M@newkeyabs<\M@oldkeyabs
+						\M@mixedCanceltrue
+						\edef\M@mixedKeep{\M@newkeyabs}
+					\fi
+				\fi
+			\else
+				\ifnum#2>0
+					\M@mixedCanceltrue
+				\else
+					\ifnum\M@newkeyabs<\M@oldkeyabs
+						\M@mixedCanceltrue
+						\edef\M@mixedKeep{\M@newkeyabs}
+					\fi
+				\fi
+			\fi
+		\fi
+	\fi
+	\ifM@mixedCancel
+		\M@DrawKeyCancellation{#1}{\M@mixedKeep}
+		\M@addMX
+	\fi
+	\ifnum#2=0 \else
+		\M@DrawKey{#2}
+		\M@addMX
+	\fi
+	\setcounter{M@key}{#2}
 }
 
 
@@ -1527,7 +1612,7 @@
 		\@tfor\next:=#1\do{\put@muskern\next}\/}}
 \newcommand{\put@muskern}{\let\put@muskern\muskern}
 
-\newcommand{\Dynamics}[2][0]{\Text[#1]{\Large\dynmark{#2}}}
+\newcommand{\Dynamics}[2][]{\Text[#1]{\Large\dynmark{#2}}}
 
 \newcommand{\Back}[1][1]{
 	\pgfmathparse{int(-\M@hsep-#1*\M@hsep)}
@@ -1773,21 +1858,12 @@
     , yshift/.estore in=\M@HairpinY
 }
 
-\newcommand{\M@HairpinOptions}[2]{%
+\newcommand{\M@HairpinStartEnv}[2]{% #1 style, #2 key-value options
     \pgfkeys{/Mhairpin,#1}%
     \def\M@HairpinRaw{#2}%
     \ifx\M@HairpinRaw\@empty\else
-        \in@{=}{#2}%
-        \ifin@
-            \pgfkeys{/Mhairpin,#2}%
-        \else
-            \pgfkeys{/Mhairpin,height=#2}%
-        \fi
+        \pgfkeys{/Mhairpin,#2}%
     \fi
-}
-
-\newcommand{\M@HairpinStartEnv}[2]{% #1 style, #2 options
-    \M@HairpinOptions{#1}{#2}%
     \setcounter{Mcres}{\theMX}%
     \setcounter{McresMY}{\theMY}%
 }
