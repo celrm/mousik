@@ -334,7 +334,7 @@ It has some options:
 		\end{mousik}
 	\end{center}
 	
-	The \verb|\Note| command also prints several notes tied together with a beam, if the second argument is a list of heights separated by commas. Two notes will be tied together with an oblique beam, but three or more have a horizontal beam by default, which can be changed with \textsl{sloped}.
+	The \verb|\Note| command also prints several notes tied together with a beam, if the second argument is a list of heights separated by commas. Two notes will be tied together with an oblique beam, but three or more have a horizontal beam by default, which can be changed with \textsl{sloped}. Each item may itself be a chord.
 	
 	\begin{center}
 		\begin{mousik}
@@ -344,6 +344,9 @@ It has some options:
 			\Space[1.5]
 			\TTT[0.25]{Note[sloped,swap]\{16\}\{8,6,4\}}
 			\Note[sloped,swap]{16}{8,6,4}
+			\Space[1.5]
+			\TTT[-0.5]{Note\{8\}\{0/4,1/5,2/6\}}
+			\Note{8}{0/4,1/5,2/6}
 			\Barline[t=|.]
 		\end{mousik}
 	\end{center}

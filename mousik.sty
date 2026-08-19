@@ -889,6 +889,94 @@
     }{\Ledger{#1}}%
 }
 
+
+\newcounter{M@columnMin}
+\newcounter{M@columnMax}
+\newcounter{M@beamFound}
+\newcounter{M@beamFirstX}
+\newcounter{M@beamLastX}
+\newcounter{M@beamFirstH}
+\newcounter{M@beamLastH}
+
+
+\newcommand{\M@BeamColumnScanHead}[1]{%
+    \M@ParseChordHead{#1}%
+    \ifnum\M@ChordHeight<\theM@columnMin
+        \setcounter{M@columnMin}{\M@ChordHeight}%
+    \fi
+    \ifnum\M@ChordHeight>\theM@columnMax
+        \setcounter{M@columnMax}{\M@ChordHeight}%
+    \fi
+}
+
+\newcommand{\M@BeamColumnBounds}[1]{%
+    \setcounter{M@columnMin}{50}%
+    \setcounter{M@columnMax}{-50}%
+    \M@IfChord{#1}{%
+        \let\M@ChordAction\M@BeamColumnScanHead
+        \M@ChordForEach{#1}%
+    }{%
+        \setcounter{M@columnMin}{#1}%
+        \setcounter{M@columnMax}{#1}%
+    }%
+}
+
+\newcommand{\M@BeamDrawChordHead}[1]{\M@ChordDrawHead{8}{#1}}
+\newcommand{\M@BeamDrawColumnHeads}[1]{%
+    \M@IfChord{#1}{%
+        \let\M@ChordAction\M@BeamDrawChordHead
+        \M@ChordForEach{#1}%
+    }{\Head{#1}}%
+}
+
+\newcommand{\M@BeamColumnAnchor}[1]{%
+    \M@BeamColumnBounds{#1}%
+    \ifnoMswap
+        \pgfmathsetmacro{\M@columnAnchor}{\theM@columnMax}%
+        \pgfmathsetmacro{\M@columnStemStart}{\theM@columnMin}%
+    \else
+        \pgfmathsetmacro{\M@columnAnchor}{\theM@columnMin}%
+        \pgfmathsetmacro{\M@columnStemStart}{\theM@columnMax}%
+    \fi
+}
+
+\newcommand{\M@BeamHeads}[1]{%
+    \setcounter{M@max}{-50}%
+    \setcounter{M@min}{50}%
+    \setcounter{MX}{\theM@aux}%
+    \foreach\IND in {#1} {%
+        \ifthenelse{\equal{\IND}{!}}{\M@addhalfMX}{%
+            \M@NotEmpty{\IND}{%
+                \M@BeamColumnBounds{\IND}%
+                \M@ax{\theM@columnMax}%
+                \M@in{\theM@columnMin}%
+                \M@BeamDrawColumnHeads{\IND}%
+            }%
+            \M@addMX
+        }%
+    }%
+}
+
+\newcommand{\M@ScanBeamEndpoints}[1]{%
+    \setcounter{M@beamFound}{0}%
+    \setcounter{MX}{\theM@aux}%
+    \foreach\IND in {#1} {%
+        \ifthenelse{\equal{\IND}{!}}{\M@addhalfMX}{%
+            \M@NotEmpty{\IND}{%
+                \M@BeamColumnAnchor{\IND}%
+                \ifnum\theM@beamFound=0
+                    \setcounter{M@beamFirstX}{\theMX}%
+                    \setcounter{M@beamFirstH}{\M@columnAnchor}%
+                    \setcounter{M@beamFound}{1}%
+                \fi
+                \setcounter{M@beamLastX}{\theMX}%
+                \setcounter{M@beamLastH}{\M@columnAnchor}%
+            }%
+            \M@addMX
+        }%
+    }%
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Notes : everything together
 
@@ -983,7 +1071,7 @@
 		\fi
 	}
 	
-	\M@Heads{#2}
+	\M@BeamHeads{#2}
 	\ifnum\theM@max<6
 		\ifnoMswap \pgfmathsetmacro{\M@heightBeam}{\theM@max}
 		\else \pgfmathsetmacro{\M@heightBeam}{\theM@min} \fi
@@ -1003,7 +1091,10 @@
 	\fi
 	\foreach\IND in {#2} {
 		\ifthenelse{\equal{\IND}{!}}{\M@addhalfMX}{
-		\M@NotEmpty{\IND}{\M@enlarge[\M@Sstem]{\IND}{\M@heightBeam}}
+		\M@NotEmpty{\IND}{%
+			\M@BeamColumnAnchor{\IND}%
+			\M@enlarge[\M@Sstem]{\M@columnStemStart}{\M@heightBeam}%
+		}
 		\M@addMX}
 	}
 
@@ -1116,177 +1207,159 @@
 }
 
 \newcommand{\M@TwoNote}[2]{
-	\M@Heads{#2}
+    \M@BeamHeads{#2}%
 
-	\ifnum\theM@max<6
-		\ifnoMswap \pgfmathsetmacro{\M@heightBeam}{\theM@min}
-		\else \pgfmathsetmacro{\M@heightBeam}{\theM@max} \fi
-	\else 
-		\Swap
-		\ifnoMswap \pgfmathsetmacro{\M@heightBeam}{\theM@max}
-		\else \pgfmathsetmacro{\M@heightBeam}{\theM@min} \fi
-	\fi
+    \ifnum\theM@max<6
+    \else
+        \Swap
+    \fi
 
-	\setcounter{MX}{\theM@aux}\pgfmathsetmacro{\M@realX}{\theMX*0.0625}
-	\ifnum#1<16
-		\pgfmathsetmacro\M@Sstems{\M@stem+0.1}
-	\fi\ifnum#1=16
-		\pgfmathsetmacro\M@Sstems{\M@stem+0.2}	
-	\fi\ifnum#1=32
-		\pgfmathsetmacro\M@Sstems{\M@stem+0.3}
-	\fi
-	\foreach\IND in {#2} {\ifthenelse{\equal{\IND}{!}}{\M@addhalfMX}{
-		\M@enlarge[\M@Sstems]{\IND}{\IND}\M@addMX}
-	}
+    \M@ScanBeamEndpoints{#2}%
+    \setcounter{MX}{\theM@aux}\pgfmathsetmacro{\M@realX}{\theMX*0.0625}
+    \ifnum#1<16
+        \pgfmathsetmacro\M@Sstems{\M@stem+0.1}
+    \fi\ifnum#1=16
+        \pgfmathsetmacro\M@Sstems{\M@stem+0.2}
+    \fi\ifnum#1=32
+        \pgfmathsetmacro\M@Sstems{\M@stem+0.3}
+    \fi
+    \foreach\IND in {#2} {\ifthenelse{\equal{\IND}{!}}{\M@addhalfMX}{%
+        \M@NotEmpty{\IND}{%
+            \M@BeamColumnAnchor{\IND}%
+            \M@enlarge[\M@Sstems]{\M@columnStemStart}{\M@columnAnchor}%
+        }%
+        \M@addMX}
+    }
 
-	\ifnoMswap {\pgfmathparse{1}} \else {\pgfmathparse{-1}} \fi
-	\pgfmathsetmacro\M@High{int(\M@heightBeam + \pgfmathresult * 10*\M@Sstems)}
-	\setcounter{M@height}{\M@High}
-	\M@remMX
-	\ifnum#1=8
-		\pgfmathsetmacro\M@Sstem{\M@stem+0.1}
-		\Be@mS{+\M@Sstem}
-	\fi\ifnum#1=16
-		\pgfmathsetmacro\M@Sstem{\M@stem+0.2}
-		\Be@mS{+\M@Sstem}
-		\pgfmathsetmacro\M@Sstem{\M@stem+0.05}
-		\Be@mS{+\M@Sstem}
-	\fi\ifnum#1=32
-		\pgfmathsetmacro\M@Sstem{\M@stem+0.3}
-		\Be@mS{+\M@Sstem}
-		\pgfmathsetmacro\M@Sstem{\M@stem+0.15}
-		\Be@mS{+\M@Sstem}
-		\Be@mS{+\M@stem}
-	\fi
-}
+    \ifnoMswap
+        \pgfmathparse{int(max(\theM@beamFirstH,\theM@beamLastH)+10*\M@Sstems)}%
+    \else
+        \pgfmathparse{int(min(\theM@beamFirstH,\theM@beamLastH)-10*\M@Sstems)}%
+    \fi
+    \setcounter{M@height}{\pgfmathresult}%
 
-
-\newcounter{M@slopeFound}
-\newcounter{M@slopeFirstX}
-\newcounter{M@slopeLastX}
-\newcounter{M@slopeFirstH}
-\newcounter{M@slopeLastH}
-
-\newcommand{\M@ScanSlopedEndpoints}[1]{%
-	\setcounter{M@slopeFound}{0}%
-	\setcounter{MX}{\theM@aux}%
-	\foreach\IND in {#1} {%
-		\ifthenelse{\equal{\IND}{!}}{\M@addhalfMX}{%
-			\M@NotEmpty{\IND}{%
-				\ifnum\theM@slopeFound=0
-					\setcounter{M@slopeFirstX}{\theMX}%
-					\setcounter{M@slopeFirstH}{\IND}%
-					\setcounter{M@slopeFound}{1}%
-				\fi
-				\setcounter{M@slopeLastX}{\theMX}%
-				\setcounter{M@slopeLastH}{\IND}%
-			}%
-			\M@addMX
-		}%
-	}%
+    \ifnum#1=8
+        \pgfmathsetmacro\M@Sstem{\M@stem+0.1}
+        \Be@m[\theM@beamLastX+\M@hsep]{\theM@beamFirstX}{\theM@beamFirstH}{\theM@beamLastH}{+\M@Sstem}
+    \fi\ifnum#1=16
+        \pgfmathsetmacro\M@Sstem{\M@stem+0.2}
+        \Be@m[\theM@beamLastX+\M@hsep]{\theM@beamFirstX}{\theM@beamFirstH}{\theM@beamLastH}{+\M@Sstem}
+        \pgfmathsetmacro\M@Sstem{\M@stem+0.05}
+        \Be@m[\theM@beamLastX+\M@hsep]{\theM@beamFirstX}{\theM@beamFirstH}{\theM@beamLastH}{+\M@Sstem}
+    \fi\ifnum#1=32
+        \pgfmathsetmacro\M@Sstem{\M@stem+0.3}
+        \Be@m[\theM@beamLastX+\M@hsep]{\theM@beamFirstX}{\theM@beamFirstH}{\theM@beamLastH}{+\M@Sstem}
+        \pgfmathsetmacro\M@Sstem{\M@stem+0.15}
+        \Be@m[\theM@beamLastX+\M@hsep]{\theM@beamFirstX}{\theM@beamFirstH}{\theM@beamLastH}{+\M@Sstem}
+        \Be@m[\theM@beamLastX+\M@hsep]{\theM@beamFirstX}{\theM@beamFirstH}{\theM@beamLastH}{+\M@stem}
+    \fi
 }
 
 \newcommand{\M@SlopedNote}[2]{%
-	\M@Heads{#2}%
+    \M@BeamHeads{#2}%
 
-	\ifnum\theM@max<6
-	\else
-		\Swap
-	\fi
+    \ifnum\theM@max<6
+    \else
+        \Swap
+    \fi
 
-	\M@ScanSlopedEndpoints{#2}%
-	\setcounter{MX}{\theM@aux}\pgfmathsetmacro{\M@realX}{\theMX*0.0625}%
+    \M@ScanBeamEndpoints{#2}%
+    \setcounter{MX}{\theM@aux}\pgfmathsetmacro{\M@realX}{\theMX*0.0625}%
 
-	\ifnum#1<16
-		\pgfmathsetmacro\M@Sstem{\M@stem+0.1}%
-	\fi\ifnum#1=16
-		\pgfmathsetmacro\M@Sstem{\M@stem+0.2}%
-	\fi\ifnum#1=32
-		\pgfmathsetmacro\M@Sstem{\M@stem+0.3}%
-	\fi
+    \ifnum#1<16
+        \pgfmathsetmacro\M@Sstem{\M@stem+0.1}%
+    \fi\ifnum#1=16
+        \pgfmathsetmacro\M@Sstem{\M@stem+0.2}%
+    \fi\ifnum#1=32
+        \pgfmathsetmacro\M@Sstem{\M@stem+0.3}%
+    \fi
 
-	\foreach\IND in {#2} {%
-		\ifthenelse{\equal{\IND}{!}}{\M@addhalfMX}{%
-			\M@NotEmpty{\IND}{%
-				\pgfmathsetmacro{\M@SlopeH}{%
-				\theM@slopeFirstH +
-					(\theMX-\theM@slopeFirstX)/(\theM@slopeLastX-\theM@slopeFirstX)*
-					(\theM@slopeLastH-\theM@slopeFirstH)}%
-				\M@enlarge[\M@Sstem]{\IND}{\M@SlopeH}%
-			}%
-			\M@addMX
-		}%
-	}%
+    \foreach\IND in {#2} {%
+        \ifthenelse{\equal{\IND}{!}}{\M@addhalfMX}{%
+            \M@NotEmpty{\IND}{%
+                \M@BeamColumnAnchor{\IND}%
+                \pgfmathsetmacro{\M@SlopeH}{%
+                    \theM@beamFirstH +
+                        (\theMX-\theM@beamFirstX)/(\theM@beamLastX-\theM@beamFirstX)*
+                        (\theM@beamLastH-\theM@beamFirstH)}%
+                \M@enlarge[\M@Sstem]{\M@columnStemStart}{\M@SlopeH}%
+            }%
+            \M@addMX
+        }%
+    }%
 
-	\ifnoMswap
-		\pgfmathparse{int(max(\theM@slopeFirstH,\theM@slopeLastH)+10*\M@Sstem)}%
-	\else
-		\pgfmathparse{int(min(\theM@slopeFirstH,\theM@slopeLastH)-10*\M@Sstem)}%
-	\fi
-	\setcounter{M@height}{\pgfmathresult}%
+    \ifnoMswap
+        \pgfmathparse{int(max(\theM@beamFirstH,\theM@beamLastH)+10*\M@Sstem)}%
+    \else
+        \pgfmathparse{int(min(\theM@beamFirstH,\theM@beamLastH)-10*\M@Sstem)}%
+    \fi
+    \setcounter{M@height}{\pgfmathresult}%
 
-	\ifnum#1=8
-		\pgfmathsetmacro\M@Sstem{\M@stem+0.1}%
-		\Be@m[\theM@slopeLastX+\M@hsep]{\theM@slopeFirstX}{\theM@slopeFirstH}{\theM@slopeLastH}{+\M@Sstem}%
-	\fi\ifnum#1=16
-		\pgfmathsetmacro\M@Sstem{\M@stem+0.2}%
-		\Be@m[\theM@slopeLastX+\M@hsep]{\theM@slopeFirstX}{\theM@slopeFirstH}{\theM@slopeLastH}{+\M@Sstem}%
-		\pgfmathsetmacro\M@Sstem{\M@stem+0.05}%
-		\Be@m[\theM@slopeLastX+\M@hsep]{\theM@slopeFirstX}{\theM@slopeFirstH}{\theM@slopeLastH}{+\M@Sstem}%
-	\fi\ifnum#1=32
-		\pgfmathsetmacro\M@Sstem{\M@stem+0.3}%
-		\Be@m[\theM@slopeLastX+\M@hsep]{\theM@slopeFirstX}{\theM@slopeFirstH}{\theM@slopeLastH}{+\M@Sstem}%
-		\pgfmathsetmacro\M@Sstem{\M@stem+0.15}%
-		\Be@m[\theM@slopeLastX+\M@hsep]{\theM@slopeFirstX}{\theM@slopeFirstH}{\theM@slopeLastH}{+\M@Sstem}%
-		\Be@m[\theM@slopeLastX+\M@hsep]{\theM@slopeFirstX}{\theM@slopeFirstH}{\theM@slopeLastH}{+\M@stem}%
-	\fi
+    \ifnum#1=8
+        \pgfmathsetmacro\M@Sstem{\M@stem+0.1}%
+        \Be@m[\theM@beamLastX+\M@hsep]{\theM@beamFirstX}{\theM@beamFirstH}{\theM@beamLastH}{+\M@Sstem}%
+    \fi\ifnum#1=16
+        \pgfmathsetmacro\M@Sstem{\M@stem+0.2}%
+        \Be@m[\theM@beamLastX+\M@hsep]{\theM@beamFirstX}{\theM@beamFirstH}{\theM@beamLastH}{+\M@Sstem}%
+        \pgfmathsetmacro\M@Sstem{\M@stem+0.05}%
+        \Be@m[\theM@beamLastX+\M@hsep]{\theM@beamFirstX}{\theM@beamFirstH}{\theM@beamLastH}{+\M@Sstem}%
+    \fi\ifnum#1=32
+        \pgfmathsetmacro\M@Sstem{\M@stem+0.3}%
+        \Be@m[\theM@beamLastX+\M@hsep]{\theM@beamFirstX}{\theM@beamFirstH}{\theM@beamLastH}{+\M@Sstem}%
+        \pgfmathsetmacro\M@Sstem{\M@stem+0.15}%
+        \Be@m[\theM@beamLastX+\M@hsep]{\theM@beamFirstX}{\theM@beamFirstH}{\theM@beamLastH}{+\M@Sstem}%
+        \Be@m[\theM@beamLastX+\M@hsep]{\theM@beamFirstX}{\theM@beamFirstH}{\theM@beamLastH}{+\M@stem}%
+    \fi
 }
 
 \newcommand{\M@FlatNote}[2]{
-	\M@Heads{#2}
-	
-	\ifnum\theM@max<6
-	\else
-		\Swap
-	\fi
-	\ifnoMswap
-		\pgfmathsetmacro{\M@heightBeam}{\theM@max}
-	\else
-		\pgfmathsetmacro{\M@heightBeam}{\theM@min}
-	\fi
-	
-	\setcounter{MX}{\theM@aux}\pgfmathsetmacro{\M@realX}{\theMX*0.0625}
-	\ifnum#1<16
-	\pgfmathsetmacro\M@Sstem{\M@stem+0.1}
-	\fi\ifnum#1=16
-	\pgfmathsetmacro\M@Sstem{\M@stem+0.2}
-	\fi\ifnum#1=32
-	\pgfmathsetmacro\M@Sstem{\M@stem+0.3}
-	\fi
-	\foreach\IND in {#2} {\ifthenelse{\equal{\IND}{!}}{\M@addhalfMX}{
-		\M@enlarge[\M@Sstem]{\IND}{\M@heightBeam}
-		\M@addMX}
-	}
+    \M@BeamHeads{#2}%
 
-	\ifnoMswap \pgfmathparse{1} \else \pgfmathparse{-1} \fi
-	\pgfmathsetmacro\M@High{int(\M@heightBeam + \pgfmathresult * 10*\M@Sstem)}
-	\setcounter{M@height}{\M@High}
+    \ifnum\theM@max<6
+    \else
+        \Swap
+    \fi
+    \ifnoMswap
+        \pgfmathsetmacro{\M@heightBeam}{\theM@max}%
+    \else
+        \pgfmathsetmacro{\M@heightBeam}{\theM@min}%
+    \fi
 
-	\ifnum#1=8
-		\pgfmathsetmacro\M@Sstem{\M@stem+0.1}
-		\Be@m{\theM@aux}{\M@heightBeam}{\M@heightBeam}{+\M@Sstem}
-	\fi\ifnum#1=16
-		\pgfmathsetmacro\M@Sstem{\M@stem+0.2}
-		\Be@m{\theM@aux}{\M@heightBeam}{\M@heightBeam}{+\M@Sstem}
-		\pgfmathsetmacro\M@Sstem{\M@stem+0.05}
-		\Be@m{\theM@aux}{\M@heightBeam}{\M@heightBeam}{+\M@Sstem}
-	\fi\ifnum#1=32
-		\pgfmathsetmacro\M@Sstem{\M@stem+0.3}
-		\Be@m{\theM@aux}{\M@heightBeam}{\M@heightBeam}{+\M@Sstem}
-		\pgfmathsetmacro\M@Sstem{\M@stem+0.15}
-		\Be@m{\theM@aux}{\M@heightBeam}{\M@heightBeam}{+\M@Sstem}
-		\Be@m{\theM@aux}{\M@heightBeam}{\M@heightBeam}{+\M@stem}
-	\fi
+    \setcounter{MX}{\theM@aux}\pgfmathsetmacro{\M@realX}{\theMX*0.0625}
+    \ifnum#1<16
+        \pgfmathsetmacro\M@Sstem{\M@stem+0.1}
+    \fi\ifnum#1=16
+        \pgfmathsetmacro\M@Sstem{\M@stem+0.2}
+    \fi\ifnum#1=32
+        \pgfmathsetmacro\M@Sstem{\M@stem+0.3}
+    \fi
+    \foreach\IND in {#2} {\ifthenelse{\equal{\IND}{!}}{\M@addhalfMX}{%
+        \M@NotEmpty{\IND}{%
+            \M@BeamColumnAnchor{\IND}%
+            \M@enlarge[\M@Sstem]{\M@columnStemStart}{\M@heightBeam}%
+        }%
+        \M@addMX}
+    }
+
+    \ifnoMswap \pgfmathparse{1} \else \pgfmathparse{-1} \fi
+    \pgfmathsetmacro\M@High{int(\M@heightBeam + \pgfmathresult * 10*\M@Sstem)}
+    \setcounter{M@height}{\M@High}
+
+    \ifnum#1=8
+        \pgfmathsetmacro\M@Sstem{\M@stem+0.1}
+        \Be@m{\theM@aux}{\M@heightBeam}{\M@heightBeam}{+\M@Sstem}
+    \fi\ifnum#1=16
+        \pgfmathsetmacro\M@Sstem{\M@stem+0.2}
+        \Be@m{\theM@aux}{\M@heightBeam}{\M@heightBeam}{+\M@Sstem}
+        \pgfmathsetmacro\M@Sstem{\M@stem+0.05}
+        \Be@m{\theM@aux}{\M@heightBeam}{\M@heightBeam}{+\M@Sstem}
+    \fi\ifnum#1=32
+        \pgfmathsetmacro\M@Sstem{\M@stem+0.3}
+        \Be@m{\theM@aux}{\M@heightBeam}{\M@heightBeam}{+\M@Sstem}
+        \pgfmathsetmacro\M@Sstem{\M@stem+0.15}
+        \Be@m{\theM@aux}{\M@heightBeam}{\M@heightBeam}{+\M@Sstem}
+        \Be@m{\theM@aux}{\M@heightBeam}{\M@heightBeam}{+\M@stem}
+    \fi
 }
 
 \newif\ifM@restMulti
