@@ -893,12 +893,13 @@
 % Notes : everything together
 
 \newif\ifMnoteBack
+\newif\ifM@sloped
 \pgfkeys{
 	/Mnote/.is family
 	, /Mnote
 	, default/.style = 
-	{	back = false
-		, beam = 1
+	{	beam = 1
+		, sloped = false
 		, stem = 5
 		, head = .
 		, swap = false
@@ -909,8 +910,8 @@
 		, xshift = 0
 		, yshift = 0
 	}
-	, back/.is if=MnoteBack
 	, beam/.estore in=\M@beam
+	, sloped/.is if=M@sloped
 	, stem/.code={\pgfmathsetmacro{\M@stem}{(#1)/10}}
 	, head/.estore in=\M@head
 	, tuplet/.estore in=\M@tuplet
@@ -923,6 +924,7 @@
 }
 \newcounter{M@duration}
 \newcommand{\Note}[3][]{ % #1 = options, #2 = duration, #3 = note(s)
+	\MnoteBackfalse % internal: displaced chord heads set this only in a local group
 	\pgfkeys{/Mnote, default, #1}%
 	\Adv \noMswaptrue
 	\ifMswap \Swap \fi
@@ -939,7 +941,11 @@
 	\else \ifnum\theM@count=2 % two notes together
 			\M@TwoNote{#2}{#3}
 		\else \ifnum\theM@count>2 % more than two notes together
-			\M@FlatNote{#2}{#3}
+			\ifM@sloped
+				\M@SlopedNote{#2}{#3}
+			\else
+				\M@FlatNote{#2}{#3}
+			\fi
 		\fi\fi\fi
 	\fi\fi\fi
 	
@@ -1154,6 +1160,88 @@
 	\fi
 }
 
+
+\newcounter{M@slopeFound}
+\newcounter{M@slopeFirstX}
+\newcounter{M@slopeLastX}
+\newcounter{M@slopeFirstH}
+\newcounter{M@slopeLastH}
+
+\newcommand{\M@ScanSlopedEndpoints}[1]{%
+	\setcounter{M@slopeFound}{0}%
+	\setcounter{MX}{\theM@aux}%
+	\foreach\IND in {#1} {%
+		\ifthenelse{\equal{\IND}{!}}{\M@addhalfMX}{%
+			\M@NotEmpty{\IND}{%
+				\ifnum\theM@slopeFound=0
+					\setcounter{M@slopeFirstX}{\theMX}%
+					\setcounter{M@slopeFirstH}{\IND}%
+					\setcounter{M@slopeFound}{1}%
+				\fi
+				\setcounter{M@slopeLastX}{\theMX}%
+				\setcounter{M@slopeLastH}{\IND}%
+			}%
+			\M@addMX
+		}%
+	}%
+}
+
+\newcommand{\M@SlopedNote}[2]{%
+	\M@Heads{#2}%
+
+	\ifnum\theM@max<6
+	\else
+		\Swap
+	\fi
+
+	\M@ScanSlopedEndpoints{#2}%
+	\setcounter{MX}{\theM@aux}\pgfmathsetmacro{\M@realX}{\theMX*0.0625}%
+
+	\ifnum#1<16
+		\pgfmathsetmacro\M@Sstem{\M@stem+0.1}%
+	\fi\ifnum#1=16
+		\pgfmathsetmacro\M@Sstem{\M@stem+0.2}%
+	\fi\ifnum#1=32
+		\pgfmathsetmacro\M@Sstem{\M@stem+0.3}%
+	\fi
+
+	\foreach\IND in {#2} {%
+		\ifthenelse{\equal{\IND}{!}}{\M@addhalfMX}{%
+			\M@NotEmpty{\IND}{%
+				\pgfmathsetmacro{\M@SlopeH}{%
+				\theM@slopeFirstH +
+					(\theMX-\theM@slopeFirstX)/(\theM@slopeLastX-\theM@slopeFirstX)*
+					(\theM@slopeLastH-\theM@slopeFirstH)}%
+				\M@enlarge[\M@Sstem]{\IND}{\M@SlopeH}%
+			}%
+			\M@addMX
+		}%
+	}%
+
+	\ifnoMswap
+		\pgfmathparse{int(max(\theM@slopeFirstH,\theM@slopeLastH)+10*\M@Sstem)}%
+	\else
+		\pgfmathparse{int(min(\theM@slopeFirstH,\theM@slopeLastH)-10*\M@Sstem)}%
+	\fi
+	\setcounter{M@height}{\pgfmathresult}%
+
+	\ifnum#1=8
+		\pgfmathsetmacro\M@Sstem{\M@stem+0.1}%
+		\Be@m[\theM@slopeLastX+\M@hsep]{\theM@slopeFirstX}{\theM@slopeFirstH}{\theM@slopeLastH}{+\M@Sstem}%
+	\fi\ifnum#1=16
+		\pgfmathsetmacro\M@Sstem{\M@stem+0.2}%
+		\Be@m[\theM@slopeLastX+\M@hsep]{\theM@slopeFirstX}{\theM@slopeFirstH}{\theM@slopeLastH}{+\M@Sstem}%
+		\pgfmathsetmacro\M@Sstem{\M@stem+0.05}%
+		\Be@m[\theM@slopeLastX+\M@hsep]{\theM@slopeFirstX}{\theM@slopeFirstH}{\theM@slopeLastH}{+\M@Sstem}%
+	\fi\ifnum#1=32
+		\pgfmathsetmacro\M@Sstem{\M@stem+0.3}%
+		\Be@m[\theM@slopeLastX+\M@hsep]{\theM@slopeFirstX}{\theM@slopeFirstH}{\theM@slopeLastH}{+\M@Sstem}%
+		\pgfmathsetmacro\M@Sstem{\M@stem+0.15}%
+		\Be@m[\theM@slopeLastX+\M@hsep]{\theM@slopeFirstX}{\theM@slopeFirstH}{\theM@slopeLastH}{+\M@Sstem}%
+		\Be@m[\theM@slopeLastX+\M@hsep]{\theM@slopeFirstX}{\theM@slopeFirstH}{\theM@slopeLastH}{+\M@stem}%
+	\fi
+}
+
 \newcommand{\M@FlatNote}[2]{
 	\M@Heads{#2}
 	
@@ -1311,9 +1399,7 @@
 	\pgfkeys{/Martic, default, #1}%
 	\pgfmathsetmacro{\M@realX}{\theMX*0.0625}
 	\begin{scope}[xshift=\M@shiftX cm,yshift=\MshiftY cm]
-	\ifnum#3<6 \else \Swap \fi
-	\ifMswap \Swap \fi	
-	\ifnoMswap
+	\ifnum#3<6
 	\M@EqStr{#2}{.}{\M@PlaceND[-0.125]{#3+0.15}{\lpz{0}}}
 	\M@EqStr{#2}{'}{\M@PlaceND[-0.125]{#3+0.1}{\lppz{0}}}
 	\M@EqStr{#2}{>}{\M@PlaceND[-0.1]{#3+0.1}{\lsf{0}}}
@@ -1328,8 +1414,7 @@
 	\M@EqStr{#2}{o}{\M@PlaceND[-0.1]{#3-0.05}{\flageolett{0}}}
 	\M@EqStr{#2}{v}{\M@PlaceND[-0.1]{#3-0.05}{\upbow}}
 	\M@EqStr{#2}{n}{\M@PlaceND[-0.1]{#3-0.05}{\downbow}}
-	
-\else
+	\else
 	\M@EqStr{#2}{.}{\M@PlaceNU[-0.1]{#3-0.15}{\upz{0}}}
 	\M@EqStr{#2}{'}{\M@PlaceNU[-0.1]{#3-0.1}{\uppz{0}}}
 	\M@EqStr{#2}{>}{\M@PlaceNU[-0.1]{#3-0.1}{\usf{0}}}

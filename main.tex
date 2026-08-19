@@ -165,7 +165,7 @@ It has some options:
 		\item \textsl{yshift} moves the element vertically (y axis). Default is 0, in cm.
 	\end{enumerate}
 	
-	The only way to end a line in the score is with a bar or a space. Any other way may cause visual errors (see subsection \ref{overflow}).
+	Automatic overflow is the safest option after a bar or a space. Otherwise, visual errors may appear (see subsection \ref{overflow}). To start a new line explicitly, use \verb|\BreakLine|.
 	
 	\subsection{\texttt{\textbackslash Space}}
 	The \verb|\Space| command is not only used when no bar is needed. It may also be used to input \textit{extra} space between symbols. The default space is 1, in centimeters, \textemdash which is the default space between symbols in general, so it gets added\textemdash~but it may be any number (see subsection \ref{space}).
@@ -192,6 +192,21 @@ It has some options:
 			\Text{\hspace*{13pt}\texttt{[1.5]}}
 			\Space[1.5]
 			
+			\Barline[t=|.]
+		\end{mousik}
+	\end{center}
+	
+	\subsection{\texttt{\textbackslash BreakLine}}
+	The \verb|\BreakLine| command starts a new score line. It resets the horizontal cursor to the beginning of the next line. Unlike an automatic overflow, it does not print a clef or key. When \verb|\BreakLine| is used on the first line, it also determines the staff length of the following lines.
+	
+	\begin{center}
+		\begin{mousik}
+			\Clef
+			\Note{4}{2,3,4}
+			\Barline[t=|.]
+			\BreakLine
+			\Clef[t=4]
+			\Note{4}{5,4,3}
 			\Barline[t=|.]
 		\end{mousik}
 	\end{center}
@@ -265,6 +280,7 @@ It has some options:
 	The \verb|\Note| command prints a note on the score. It accepts 2 compulsory arguments, as well as some options:
 	\begin{enumerate}[-]
 		\item \textsl{beam} chooses the width of the beam. Default is 1, in mm.
+		\item \textsl{sloped} makes a beam of three or more notes follow a slope from the first note to the last, instead of being horizontal. Default is false.
 		\item \textsl{head} chooses the type of head. Default is . (round), but also x (cross) and o (hollow) are possible.
 		\item \textsl{stem} chooses the height of the stem. Default is 5, in mm.
 		\item \textsl{swap} prints the element upside down. Default is false, which means up if the height is less than 6, down otherwise.
@@ -318,9 +334,21 @@ It has some options:
 		\end{mousik}
 	\end{center}
 	
-	The \verb|\Note| command also prints several notes tied together with a beam, if the second argument is a list of heights separated by commas. Two notes will be tied together with an oblique beam, but three or more will have a straight beam.%\todo{monotone triplets sliding beam}
+	The \verb|\Note| command also prints several notes tied together with a beam, if the second argument is a list of heights separated by commas. Two notes will be tied together with an oblique beam, but three or more have a horizontal beam by default, which can be changed with \textsl{sloped}.
 	
-%	The notes go upside down when their height (or maximum height) is bigger than 6. However, for manual control, the \verb|\Swap| command might be used \textit{before} the note.
+	\begin{center}
+		\begin{mousik}
+			\Clef
+			\TTT[-0.5]{Note[sloped]\{8\}\{1,3,5\}}
+			\Note[sloped]{8}{1,3,5}
+			\Space[1.5]
+			\TTT[0.25]{Note[sloped,swap]\{16\}\{8,6,4\}}
+			\Note[sloped,swap]{16}{8,6,4}
+			\Barline[t=|.]
+		\end{mousik}
+	\end{center}
+	
+	The notes go upside down when their height (or maximum height) is bigger than 6. However, for manual control, the \verb|\Swap| command might be used \textit{before} the note.
 
 
 	
@@ -360,6 +388,7 @@ It has some options:
 	\end{center}
 
 	To be able to write the $\equiv$ (which is the Unicode character U+2261) as a symbol on the .tex file, I usually copy and paste it wherever I need it. Nonetheless, an alternative keyboard-friendly input that is equally valid is using \texttt{/$\!$/$\!$/} instead.
+	Similarly, \texttt{//} is equivalent to \texttt{=}.
 	
 	Additionally, spaces between notes from the same group might be useful \textemdash the default space is 0.5, in cm. 
 	
@@ -520,7 +549,7 @@ It also has some options:
 	\item \textsl{yshift} moves the element vertically (y axis). Default is 0, in cm.
 \end{enumerate}
 
-When there are several notes, the \verb|\Accs| command might be useful. It accepts as an argument a list of pairs: type/height. Where there is no accidental, the spot shall be left empty.
+When there are several notes, the \verb|\Accs| command might be useful. It accepts as an argument a list of pairs: type/height. Where there is no accidental, the spot shall be left empty. It also accepts the \textsl{xshift} and \textsl{yshift} options.
 	
 \begin{center}
 	\begin{mousik}
@@ -632,7 +661,7 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 	\subsection{Other symbols}
 	
 	\subsubsection{\texttt{\textbackslash MDot}}\label{dot}
-	The \verb|\MDot| command prints any amount of dots in front of a note or rest. It accepts a compulsory argument: the height of the dot, which corresponds to those of the notes. %\todo{as an option}
+	The \verb|\MDot| command prints one or two dots in front of a note or rest. It accepts a compulsory argument: the height of the dot, which corresponds to those of the notes.
 	
 	
 	It has some options:
@@ -642,7 +671,7 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 		\item \textsl{yshift} moves the element vertically (y axis). Default is 0, in cm.
 	\end{enumerate}
 	
-	When there are several notes, the \verb|\MDots| command might be useful. It accepts as an argument a list of pairs: symbols/height, where symbols might be $*$ or $**$. Where there are no dots, the spot shall be left empty.
+	When there are several notes, the \verb|\MDots| command might be useful. It accepts as an argument a list of pairs: symbols/height, where symbols might be $*$ or $**$. Where there are no dots, the spot shall be left empty. It also accepts the \textsl{xshift} and \textsl{yshift} options.
 	
 	\begin{center}
 		\begin{mousik}		
@@ -716,9 +745,22 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 	\item \textsl{yshift} moves the element vertically (y axis). Default is 0, in cm.
 	\end{enumerate}
 
+	\subsubsection{\texttt{\textbackslash Slur}}
+	The \verb|\Slur| command draws a slur directly. It accepts two compulsory arguments: the absolute heights of its beginning and end. It accepts the same options as \verb|\Tie|: \textsl{angle}, \textsl{b}, \textsl{e}, \textsl{swap}, \textsl{width}, \textsl{xshift} and \textsl{yshift}.
+	
+	\begin{center}
+		\begin{mousik}
+			\Clef
+			\Note{4}{4}
+			\Slur{4}{7}
+			\Note{4}{7}
+			\Barline[t=|.]
+		\end{mousik}
+	\end{center}
+	
 	\subsubsection{The \texttt{Slurred} environment}
 	
-	The \verb|Slurred| environment draws a slur between the notes placed inside. It has two arguments: the heights of both beginning and end notes.
+	The \verb|Slurred| environment draws a slur between the notes placed inside. It has two mandatory arguments: the heights of both beginning and end notes. It accepts the same options as \verb|\Slur|: \textsl{angle}, \textsl{b}, \textsl{e}, \textsl{swap}, \textsl{width}, \textsl{xshift} and \textsl{yshift}.
 	
 	\begin{center}
 		\begin{mousik}
@@ -837,7 +879,7 @@ It has some options:
 	\item \textsl{yshift} moves the element vertically (y axis). Default is 0, in cm.
 \end{enumerate}
 
-When there are several notes, the \verb|\Artics| command might be useful. It accepts as an argument a list of pairs: symbols/height. Where there are no symbols, the spot shall be left empty.
+When there are several notes, the \verb|\Artics| command might be useful. It accepts as an argument a list of pairs: symbols/height. Where there are no symbols, the spot shall be left empty. It also accepts the \textsl{xshift} and \textsl{yshift} options.
 
 
 The \verb|\Symbol| command is similar to the \verb|\Artic| command, but it only accepts the type of symbol and not the height. These are symbols that have a fixed position on the score.
@@ -913,7 +955,7 @@ It also has some options:
 			\Text[yshift=2.2]{\it rit.}
 			\Note{8}{3,4}
 			
-			\Dynamics{pp}
+			\Dynamics[yshift=-0.5]{pp}
 			\Note{4}{-3}
 			
 			\Barline[t=|.]
@@ -941,7 +983,10 @@ The \verb|\Tempo| command prints a metronome tempo indicator. It has two argumen
 	\section{Tips and observations} \label{errors}
 	\newcommand{\sbs}[1]{\refstepcounter{subsection}\phantomsection\label{#1}\thesubsection\quad}
 	\subsection*{\sbs{overflow}Overflow of lines}
-	The \textsf{mousik} package is thought to be used for small fragments of music. The environment has a maximum length allowed \textemdash which might be changed with the \textsl{length} option\textemdash~and whenever it is exceeded an overflow happens. The line is broken at that exact point and, if it does not coincide with a bar, something like this may happen:
+	The \textsf{mousik} package is thought to be used for small fragments of music. The environment has a maximum width, which may be changed with the \textsl{long} option. When the cursor reaches that width, the next element triggers an automatic overflow. This starts a new staff line and repeats the current clef and key signature.
+	
+	Sometimes relying on automatic overflow can produce awkward spacing. 
+	For a more predictable layout you may use \verb|\BreakLine|, and add or remove spaces for a more controlled positioning.
 	
 	\begin{mousik}
 		\Clef
@@ -956,9 +1001,8 @@ The \verb|\Tempo| command prints a metronome tempo indicator. It has two argumen
 		\Note{8}{6,7}
 		\Barline
 		\Note{8}{8,9}
-	\end{mousik}%\todo{explain overflow}
+	\end{mousik}
 
-	The best way to avoid the error is by introducing extra spaces manually. The overflow will also automatically print the previous clef and key.
 	
 	\subsection*{\sbs{space}How do spaces work?}
 	
@@ -967,8 +1011,6 @@ The \verb|\Tempo| command prints a metronome tempo indicator. It has two argumen
 	Most elements are separated by a distance of 1 cm, so a \verb|\Space| command that has an argument smaller than -1 will actually step backwards. A \verb|\Space| with a 0 as the argument does nothing.
 	
 	The \verb|\Space| command is truly relevant in this package. Not a lot of logic is internally implemented, so the user is supposed to adjust everything at their convenience.
-	
-	This is not to say that the package becomes too cumbersome to manage. For the general use I would say it is extremely user-friendly.
 	
 	\subsection*{\sbs{command}What if it does become too cumbersome: your own commands}
 	\begin{multicols}{2}
