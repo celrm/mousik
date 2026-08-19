@@ -30,7 +30,7 @@
 	\maketitle
 	
 	\begin{abstract}
-		This is a music-related package focused on writing music fragments. It works specially well with small examples, such as excerpts for theoretical articles. It is easier than other music writing methods in \LaTeX{} because it is based on the \textsf{tikz} package.
+    This is a music-related package for writing musical notation in \LaTeX{}. It is based on the \textsf{tikz} package and includes staves, clefs, key and time signatures, notes and chords, rests, beams and tuplets, accidentals, articulations, slurs and ties, dynamics and hairpins, and piano notation. It uses short commands and allows the user to control the position and shape of the musical elements. Everything is written directly in \LaTeX{} without extra languages or steps.
 		
 		\begin{center}
 			\textbf{Keywords}
@@ -46,10 +46,12 @@
 	\vfill
 	
 	\section{Introduction}\label{intro}
-	There are already several ways to set music using \LaTeX: \textsf{musixtex}, \textsf{lilypond} or \textsf{abc}, among others.
-	Some of them are too difficult to use for not too complicated music; others do not work at all.
 	
-	Based on the \textsf{tikz} package, the \textsf{mousik} package is perfect for short, one line music fragments. It may be used for longer scores, but there are more adaptable and lighter packages than this one. However, in spite of its compactness, the package is quite complete and versatile, but easy to learn and use.
+	The \textsf{mousik} package has a rather simple idea. It is based on the \textsf{tikz} package, and the score is treated mostly as a drawing. The package does not try to understand the music or decide how everything should be engraved. Instead, it is somewhat similar to ``what you see is what you get''. It provides short commands for notes, rests, beams, slurs, accidentals, articulations, etc., and lets the user change the position and shape of these elements directly. This makes it useful for small examples, such as those in articles or exercises.
+
+	There are several other ways to write music with \LaTeX. Some of them use a different program or a different notation language. \textsf{LilyPond} has its own input language and program, and tools such as \textsf{lilypond-book} or \textsf{LyLuaTeX} make it possible to include it in a \LaTeX{} document. The \textsf{abc} package works in a similar way, as the music is written in ABC notation and converted by an external program. \textsf{MusiXTeX} works directly with TeX, but it requires a detailed description of the score and uses a separate pass to calculate horizontal spacing. \textsf{PMX} makes MusiXTeX easier to write, but it uses its own notation and a conversion step.
+	
+	In comparison, \textsf{mousik} is meant to stay simple. The music is written directly in \LaTeX{}, with short commands and without extra steps.
 	
 	\section{The \texttt{mousik} environment}
 	The way to draw a score is by means of the \texttt{mousik} environment. For longer examples, open the \href{run:examples.pdf}{\textit{examples}} document.
@@ -572,7 +574,7 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 	\subsubsection{\texttt{\textbackslash Key}}
 	The \verb|\Key| command prints the key at any moment on the score, although they are automatically printed if an overflow happens (see subsection \ref{overflow}).
 	
-	It accepts an argument: a positive whole number from 1 to 7 for sharps \sharp, and a negative whole number from -1 to -7 for flats \flat.
+	It accepts an argument: a positive whole number from 1 to 7 for sharps $\sharp$, and a negative whole number from -1 to -7 for flats $\flat$.
 	
 	\begin{center}
 		\begin{mousik}
@@ -593,7 +595,7 @@ When there are several notes, the \verb|\Accs| command might be useful. It accep
 	\end{center}
 	
 	\subsubsection{\texttt{\textbackslash NoKey}}
-	The \verb|\NoKey| command is the same as the \verb|\Key| command, but it prints naturals \natural\ instead of sharps or flats.
+	The \verb|\NoKey| command is the same as the \verb|\Key| command, but it prints naturals $\natural$ instead of sharps or flats.
 	
 	\begin{center}
 		\begin{mousik}

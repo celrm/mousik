@@ -1,16 +1,29 @@
 \NeedsTeXFormat{LaTeX2e}[1994/06/01]
 \ProvidesPackage{mousik}[2020/07/01]
 
-\RequirePackage[minimal]{leadsheets}
-\useleadsheetslibraries{musicsymbols}
 \RequirePackage{harmony}
 \RequirePackage{musixtex}
-
 \RequirePackage{tikz}
 \usetikzlibrary{backgrounds}
 
-\RequirePackage{pgfmath}
-\RequirePackage{pgfkeys}
+\DeclareFontFamily{U}{musix}{}%
+\DeclareFontShape{U}{musix}{m}{n}{%
+  <-12>   s * [1.5] musix11
+  <12-15> s * [1.5] musix13
+  <15-18> s * [1.5] musix16
+  <18-23> s * [1.5] musix20
+  <23->   s * [1.5] musix29
+}{}%
+\DeclareRobustCommand*\M@musix{\usefont{U}{musix}{m}{n}\selectfont}%
+\DeclareTextFontCommand{\M@textmusix}{\M@musix}%
+\DeclareRobustCommand*\M@musicsymbol[2][0pt]{%
+  \raisebox{\dimexpr.45ex+(#1)\relax}{\M@textmusix{#2}}%
+}
+\DeclareRobustCommand*\M@sharpGlyph{\kern.05em\M@musicsymbol[.2ex]{4}\kern-.05em}%
+\DeclareRobustCommand*\M@flatGlyph{\kern-.05em\M@musicsymbol{2}\kern-.06em}%
+\DeclareRobustCommand*\M@naturalGlyph{\M@musicsymbol{6}\kern-.06em}%
+\DeclareRobustCommand*\M@doubleSharpGlyph{\kern.05em\M@musicsymbol{5}\kern-.05em}%
+\DeclareRobustCommand*\M@doubleFlatGlyph{\kern-.05em\M@musicsymbol{3}\kern-.06em}%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -54,12 +67,17 @@
 \newcommand{\M@EqStr}[3]{\ifthenelse{\equal{#1}{#2}}{#3}{}}
 \newcommand{\M@NotEmpty}[2]{\ifthenelse{\equal{#1}{}}{}{#2}}
 
-\newcommand{\M@addMX}{\pgfmathparse{int(\M@hsep)}\addtocounter{MX}{\pgfmathresult}\pgfmathsetmacro{\M@realX}{\theMX*0.0625}}
-\newcommand{\M@addhalfMX}{\pgfmathparse{int(\M@hsep/2)}\addtocounter{MX}{\pgfmathresult}\pgfmathsetmacro{\M@realX}{\theMX*0.0625}}
-\newcommand{\M@addquarterMX}{\pgfmathparse{int(\M@hsep/4)}\addtocounter{MX}{\pgfmathresult}\pgfmathsetmacro{\M@realX}{\theMX*0.0625}}
-\newcommand{\M@remMX}{\pgfmathparse{int(-\M@hsep)}\addtocounter{MX}{\pgfmathresult}\pgfmathsetmacro{\M@realX}{\theMX*0.0625}}
-\newcommand{\M@remhalfMX}{\pgfmathparse{int(-\M@hsep/2)}\addtocounter{MX}{\pgfmathresult}\pgfmathsetmacro{\M@realX}{\theMX*0.0625}}
-\newcommand{\M@remquarterMX}{\pgfmathparse{int(-\M@hsep/4)}\addtocounter{MX}{\pgfmathresult}\pgfmathsetmacro{\M@realX}{\theMX*0.0625}}
+\newcommand{\M@moveMX}[1]{%
+    \pgfmathparse{int((#1)*\M@hsep)}%
+    \addtocounter{MX}{\pgfmathresult}%
+    \pgfmathsetmacro{\M@realX}{\theMX*0.0625}%
+}
+\newcommand{\M@addMX}{\M@moveMX{1}}
+\newcommand{\M@addhalfMX}{\M@moveMX{0.5}}
+\newcommand{\M@addquarterMX}{\M@moveMX{0.25}}
+\newcommand{\M@remMX}{\M@moveMX{-1}}
+\newcommand{\M@remhalfMX}{\M@moveMX{-0.5}}
+\newcommand{\M@remquarterMX}{\M@moveMX{-0.25}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % The main environment
@@ -218,7 +236,6 @@
 \newif\ifMswap\Mswapfalse % the user defined
 \newif\ifnoMswap\noMswapfalse % the internal
 \newcommand{\Swap}{\ifnoMswap \noMswapfalse \else \noMswaptrue \fi}
-\newcommand{\M@outMswap}{\ifMswap \Mswapfalse \else \Mswaptrue \fi} %todo not sure slurred
 
 \newcommand{\M@DrawStaffAt}[2]{%
 \pgfmathsetmacro{\M@XcoordOne}{%
@@ -383,7 +400,7 @@
 
 \newcommand{\M@Dot}[2][1]{
 \foreach \IND in {1,...,#1}
-	{\M@PlaceNR[+0.15*\IND]{#2}{\resizebox{0.1cm}{0.1cm}{$\bullet$}};}}
+	{\M@PlaceNR[+0.15*\IND]{#2}{\resizebox{0.1cm}{0.1cm}{$\bullet$}}}}
 
 \pgfkeys{
 	/MDot/.is family
@@ -420,17 +437,22 @@
 }
 
 \newcounter{M@aux}
+\newcommand{\M@ParallelList}[2]{% #1 symbol/height list, #2 action(symbol,height)
+	\setcounter{M@aux}{\theMX}%
+	\foreach\INDp/\INDh in {#1} {%
+		\ifthenelse{\equal{\INDp}{!}}{\M@addhalfMX}{%
+			\M@NotEmpty{\INDp}{#2{\INDp}{\INDh}}%
+			\M@addMX
+		}%
+	}%
+	\setcounter{MX}{\theM@aux}\pgfmathsetmacro{\M@realX}{\theMX*0.0625}%
+}
+\newcommand{\M@ParallelDot}[2]{\MDot[t=#1]{#2}}
 \newcommand{\MDots}[2][]{
 	\pgfkeys{/MDots, default, #1}%
 	\Adv
 \begin{scope}[xshift=\M@shiftX cm,yshift=\MshiftY cm]
-	\setcounter{M@aux}{\theMX}
-	\foreach\INDp/\INDh in {#2} {
-		\ifthenelse{\equal{\INDp}{!}}{\M@addhalfMX}{
-		\M@NotEmpty{\INDp}{\MDot[t=\INDp]{\INDh}}
-		\M@addMX
-	}}
-	\setcounter{MX}{\theM@aux}\pgfmathsetmacro{\M@realX}{\theMX*0.0625}
+	\M@ParallelList{#2}{\M@ParallelDot}%
 \end{scope}
 }
 
@@ -568,28 +590,28 @@
   \fi
 }
 
-\newcommand{\Be@mS}[1]{
-  \ifnum\theM@first=\theM@min
-    \pgfmathsetmacro{\M@BeamFirstH}{\theM@min}%
-    \pgfmathsetmacro{\M@BeamSecondH}{\theM@max}%
-  \else
-    \pgfmathsetmacro{\M@BeamFirstH}{\theM@max}%
-    \pgfmathsetmacro{\M@BeamSecondH}{\theM@min}%
-  \fi
-  \pgfmathsetmacro{\M@BeamOffset}{#1}%
-  \pgfmathsetmacro{\M@BeamFirstX}{\theM@aux*0.0625}%
-  \pgfmathsetmacro{\M@BeamSecondX}{\theMX*0.0625}%
-  \pgfmathsetmacro{\M@BeamFirstY}{-\theMY*\M@vsep-0.2+\M@BeamFirstH*0.1}%
-  \pgfmathsetmacro{\M@BeamSecondY}{-\theMY*\M@vsep-0.2+\M@BeamSecondH*0.1}%
-  \ifnoMswap
-    \draw[line width=\M@beam mm]
-      (\M@BeamFirstX+0.103,\M@BeamFirstY+\M@BeamOffset) --
-      (\M@BeamSecondX+0.128,\M@BeamSecondY+\M@BeamOffset);
-  \else
-    \draw[line width=\M@beam mm]
-      (\M@BeamFirstX-0.153,\M@BeamFirstY-\M@BeamOffset) --
-      (\M@BeamSecondX-0.125,\M@BeamSecondY-\M@BeamOffset);
-  \fi
+\newcommand{\M@SetBeamStem}[1]{%
+    \ifnum#1<16
+        \pgfmathsetmacro\M@Sstem{\M@stem+0.1}%
+    \else\ifnum#1=16
+        \pgfmathsetmacro\M@Sstem{\M@stem+0.2}%
+    \else\ifnum#1=32
+        \pgfmathsetmacro\M@Sstem{\M@stem+0.3}%
+    \fi\fi\fi
+}
+
+\newcommand{\M@DrawBeamLevels}[5][\theMX]{% #1 right cursor, #2 duration, #3 left cursor, #4/#5 endpoint heights
+    \M@SetBeamStem{#2}%
+    \Be@m[#1]{#3}{#4}{#5}{+\M@Sstem}%
+    \ifnum#2=16
+        \pgfmathsetmacro\M@Sstem{\M@stem+0.05}%
+        \Be@m[#1]{#3}{#4}{#5}{+\M@Sstem}%
+    \fi
+    \ifnum#2=32
+        \pgfmathsetmacro\M@Sstem{\M@stem+0.15}%
+        \Be@m[#1]{#3}{#4}{#5}{+\M@Sstem}%
+        \Be@m[#1]{#3}{#4}{#5}{+\M@stem}%
+    \fi
 }
 
 \newcommand{\M@DrawMixedBeamPiece}[3]{%
@@ -647,7 +669,6 @@
 \def\M@beamLeft{left}
 \def\M@beamRight{right}
 \def\M@beamPrev{prev}
-\def\M@beamPrevLong{prevlong}
 \newcommand{\M@MixedBeamSegment}[3]{\M@DrawMixedBeamPiece{#1}{#2}{#3}}
 
 
@@ -698,47 +719,46 @@
 	\M@commonStem{#1}
 }
 
-\newcommand{\Quaver}[1]{
-	\Head{#1}
-	\pgfmathsetmacro\M@Sstem{\M@stem+0.2}
-	\M@commonStem{#1}
-	\Fl@g[\M@Sstem]{#1}
+\newcommand{\M@SetUnbeamedStem}[1]{%
+	\ifnum#1<8
+		\pgfmathsetmacro\M@Sstem{\M@stem+0.1}%
+	\else\ifnum#1=8
+		\pgfmathsetmacro\M@Sstem{\M@stem+0.2}%
+	\else\ifnum#1=16
+		\pgfmathsetmacro\M@Sstem{\M@stem+0.3}%
+	\else\ifnum#1=32
+		\pgfmathsetmacro\M@Sstem{\M@stem+0.4}%
+	\fi\fi\fi\fi
 }
 
-\newcommand{\Semiquaver}[1]{
-	\Head{#1}
-	\pgfmathsetmacro\M@Sstem{\M@stem+0.3}
-	\M@commonStem{#1}
-	\Fl@g[\M@Sstem]{#1}
-	\pgfmathsetmacro\M@Sstem{\M@stem+0.15}
-	\Fl@g[\M@Sstem]{#1}
+\newcommand{\M@DrawFlags}[2]{% #1 duration, #2 stem base
+	\ifnum#1=8
+		\Fl@g[\M@Sstem]{#2}%
+	\fi
+	\ifnum#1=16
+		\Fl@g[\M@Sstem]{#2}%
+		\pgfmathsetmacro\M@Sstem{\M@stem+0.15}%
+		\Fl@g[\M@Sstem]{#2}%
+	\fi
+	\ifnum#1=32
+		\Fl@g[\M@Sstem]{#2}%
+		\pgfmathsetmacro\M@Sstem{\M@stem+0.25}%
+		\Fl@g[\M@Sstem]{#2}%
+		\pgfmathsetmacro\M@Sstem{\M@stem+0.1}%
+		\Fl@g[\M@Sstem]{#2}%
+	\fi
 }
 
-\newcommand{\Demisemiquaver}[1]{
-	\Head{#1}
-	\pgfmathsetmacro\M@Sstem{\M@stem+0.4}
-	\M@commonStem{#1}
-	\Fl@g[\M@Sstem]{#1}
-	\pgfmathsetmacro\M@Sstem{\M@stem+0.25}
-	\Fl@g[\M@Sstem]{#1}
-	\pgfmathsetmacro\M@Sstem{\M@stem+0.1}
-	\Fl@g[\M@Sstem]{#1}
+\newcommand{\M@FlaggedNote}[2]{% #1 duration, #2 height
+	\Head{#2}%
+	\M@SetUnbeamedStem{#1}%
+	\M@commonStem{#2}%
+	\M@DrawFlags{#1}{#2}%
 }
 
-\newcommand{\M@Heads}[1]{
-	\setcounter{M@first}{-50}
-	\setcounter{M@max}{-50}
-	\setcounter{M@min}{50}
-	\foreach\IND in {#1} {
-		\ifthenelse{\equal{\IND}{!}}{\M@addhalfMX}{
-		\M@NotEmpty{\IND}{
-			\Head{\IND}
-			\M@ax{\IND}\M@in{\IND} % max, min, first
-			\ifnum\theM@first=-50 \setcounter{M@first}{\IND} \fi
-		}
-		\M@addMX
-	}}
-}
+\newcommand{\Quaver}[1]{\M@FlaggedNote{8}{#1}}
+\newcommand{\Semiquaver}[1]{\M@FlaggedNote{16}{#1}}
+\newcommand{\Demisemiquaver}[1]{\M@FlaggedNote{32}{#1}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Chords
@@ -830,15 +850,7 @@
     \else
         \ifnum\theM@max<6\else\Swap\fi
 
-        \ifnum#1<8
-            \pgfmathsetmacro\M@Sstem{\M@stem+0.1}%
-        \else\ifnum#1=8
-            \pgfmathsetmacro\M@Sstem{\M@stem+0.2}%
-        \else\ifnum#1=16
-            \pgfmathsetmacro\M@Sstem{\M@stem+0.3}%
-        \else\ifnum#1=32
-            \pgfmathsetmacro\M@Sstem{\M@stem+0.4}%
-        \fi\fi\fi\fi
+        \M@SetUnbeamedStem{#1}%
 
         \ifnoMswap
             \M@enlarge[\M@Sstem]{\theM@min}{\theM@max}%
@@ -851,21 +863,7 @@
         \fi
         \setcounter{M@height}{\M@High}%
 
-        \ifnum#1=8
-            \Fl@g[\M@Sstem]{\M@ChordStemBase}%
-        \fi
-        \ifnum#1=16
-            \Fl@g[\M@Sstem]{\M@ChordStemBase}%
-            \pgfmathsetmacro\M@ChordFlagStem{\M@stem+0.15}%
-            \Fl@g[\M@ChordFlagStem]{\M@ChordStemBase}%
-        \fi
-        \ifnum#1=32
-            \Fl@g[\M@Sstem]{\M@ChordStemBase}%
-            \pgfmathsetmacro\M@ChordFlagStem{\M@stem+0.25}%
-            \Fl@g[\M@ChordFlagStem]{\M@ChordStemBase}%
-            \pgfmathsetmacro\M@ChordFlagStem{\M@stem+0.1}%
-            \Fl@g[\M@ChordFlagStem]{\M@ChordStemBase}%
-        \fi
+        \M@DrawFlags{#1}{\M@ChordStemBase}%
     \fi
 }
 
@@ -921,7 +919,13 @@
     }%
 }
 
-\newcommand{\M@BeamDrawChordHead}[1]{\M@ChordDrawHead{8}{#1}}
+\newcommand{\M@BeamDrawChordHead}[1]{%
+    \M@ParseChordHead{#1}%
+    \begingroup
+        \ifM@ChordLeft \MnoteBacktrue\fi
+        \Head{\M@ChordHeight}%
+    \endgroup
+}
 \newcommand{\M@BeamDrawColumnHeads}[1]{%
     \M@IfChord{#1}{%
         \let\M@ChordAction\M@BeamDrawChordHead
@@ -1051,23 +1055,29 @@
 	\end{scope}
 }
 
+\newcommand{\M@NormalizeDurationToken}[1]{%
+	\def\M@DurationToken{#1}%
+	\M@EqStr{#1}{//}{\def\M@DurationToken{=}}%
+	\M@EqStr{#1}{//|}{\def\M@DurationToken{=|}}%
+	\M@EqStr{#1}{|//}{\def\M@DurationToken{|=}}%
+	\M@EqStr{#1}{///}{\def\M@DurationToken{≡}}%
+	\M@EqStr{#1}{///|}{\def\M@DurationToken{≡|}}%
+	\M@EqStr{#1}{|///}{\def\M@DurationToken{|≡}}%
+}
+
 \newcommand{\M@MixedNote}[2]{
 	\setcounter{M@duration}{8}
 	\foreach\INDd in {#1} {
+		\M@NormalizeDurationToken{\INDd}%
 		\ifnum\theM@duration<16
-			\M@EqStr{\INDd}{=}{\setcounter{M@duration}{16}}
-			\M@EqStr{\INDd}{=|}{\setcounter{M@duration}{16}}
-			\M@EqStr{\INDd}{|=}{\setcounter{M@duration}{16}}
-			\M@EqStr{\INDd}{//}{\setcounter{M@duration}{16}}
-			\M@EqStr{\INDd}{//|}{\setcounter{M@duration}{16}}
-			\M@EqStr{\INDd}{|//}{\setcounter{M@duration}{16}}
-		\fi\ifnum\theM@duration<32
-			\M@EqStr{\INDd}{≡}{\setcounter{M@duration}{32}}
-			\M@EqStr{\INDd}{≡|}{\setcounter{M@duration}{32}}
-			\M@EqStr{\INDd}{|≡}{\setcounter{M@duration}{32}}
-			\M@EqStr{\INDd}{///}{\setcounter{M@duration}{32}}
-			\M@EqStr{\INDd}{///|}{\setcounter{M@duration}{32}}
-			\M@EqStr{\INDd}{|///}{\setcounter{M@duration}{32}}
+			\M@EqStr{\M@DurationToken}{=}{\setcounter{M@duration}{16}}
+			\M@EqStr{\M@DurationToken}{=|}{\setcounter{M@duration}{16}}
+			\M@EqStr{\M@DurationToken}{|=}{\setcounter{M@duration}{16}}
+		\fi
+		\ifnum\theM@duration<32
+			\M@EqStr{\M@DurationToken}{≡}{\setcounter{M@duration}{32}}
+			\M@EqStr{\M@DurationToken}{≡|}{\setcounter{M@duration}{32}}
+			\M@EqStr{\M@DurationToken}{|≡}{\setcounter{M@duration}{32}}
 		\fi
 	}
 	
@@ -1082,13 +1092,7 @@
 	\fi
 	
 	\setcounter{MX}{\theM@aux}
-	\ifnum\theM@duration<16
-	\pgfmathsetmacro\M@Sstem{\M@stem+0.1}
-	\fi\ifnum\theM@duration=16
-	\pgfmathsetmacro\M@Sstem{\M@stem+0.2}
-	\fi\ifnum\theM@duration=32
-	\pgfmathsetmacro\M@Sstem{\M@stem+0.3}
-	\fi
+	\M@SetBeamStem{\theM@duration}%
 	\foreach\IND in {#2} {
 		\ifthenelse{\equal{\IND}{!}}{\M@addhalfMX}{
 		\M@NotEmpty{\IND}{%
@@ -1102,13 +1106,9 @@
 \pgfmathsetmacro\M@High{int(\M@heightBeam + \pgfmathresult * 10*\M@Sstem)}
 \setcounter{M@height}{\M@High}
 	\setcounter{Mlast}{-1}
-	\ifnum\theM@duration<16
-		\pgfmathsetmacro\M@Sstem{\M@stem+0.1}
-		\Be@m{\theM@aux}{\M@heightBeam}{\M@heightBeam}{+\M@Sstem}
-	\fi\ifnum\theM@duration=16
-		\pgfmathsetmacro\M@Sstem{\M@stem+0.2}
-		\Be@m{\theM@aux}{\M@heightBeam}{\M@heightBeam}{+\M@Sstem}
-	
+	\M@SetBeamStem{\theM@duration}%
+	\Be@m{\theM@aux}{\M@heightBeam}{\M@heightBeam}{+\M@Sstem}
+	\ifnum\theM@duration=16
 		\setcounter{MX}{\theM@aux}\pgfmathsetmacro{\M@realX}{\theMX*0.0625}
 		\setcounter{M@first}{-50}
 		\pgfmathsetmacro\M@Sstem{\M@stem+0.05}
@@ -1118,11 +1118,8 @@
 			{\M@addMX}
 			\MM@ixedBeam{\INDd}
 		}
-	
-	\fi\ifnum\theM@duration=32
-		\pgfmathsetmacro\M@Sstem{\M@stem+0.3}
-		\Be@m{\theM@aux}{\M@heightBeam}{\M@heightBeam}{+\M@Sstem}
-		
+	\fi
+	\ifnum\theM@duration=32
 		\setcounter{MX}{\theM@aux}\pgfmathsetmacro{\M@realX}{\theMX*0.0625}
 		\setcounter{M@first}{-50}
 		\pgfmathsetmacro\M@Sstem{\M@stem+0.15}
@@ -1137,50 +1134,30 @@
 \newcounter{Mlast}
 \newcounter{Mlasted}
 \newcommand{\MM@ixedBeam}[1]{
-	\M@EqStr{#1}{!}{\setcounter{Mlasted}{\theMlast}}
-	\M@EqStr{#1}{}{\setcounter{Mlasted}{-1*\theMlast}}
+	\M@NormalizeDurationToken{#1}%
+	\M@EqStr{\M@DurationToken}{!}{\setcounter{Mlasted}{\theMlast}}
+	\M@EqStr{\M@DurationToken}{}{\setcounter{Mlasted}{-1*\theMlast}}
 	%
 	\setcounter{Mlast}{8}
-	\M@EqStr{#1}{=}
+	\M@EqStr{\M@DurationToken}{=}
 		{\setcounter{Mlast}{16}
 		\M@MixedBeamSegment{full}{\M@heightBeam}{+\M@Sstem}}
-	\M@EqStr{#1}{//}
-		{\setcounter{Mlast}{16}
-		\M@MixedBeamSegment{full}{\M@heightBeam}{+\M@Sstem}}
-	\M@EqStr{#1}{=|}
+	\M@EqStr{\M@DurationToken}{=|}
 		{\setcounter{Mlast}{16}
 		\M@MixedBeamSegment{left}{\M@heightBeam}{+\M@Sstem}}
-	\M@EqStr{#1}{//|}
-		{\setcounter{Mlast}{16}
-		\M@MixedBeamSegment{left}{\M@heightBeam}{+\M@Sstem}}
-	\M@EqStr{#1}{|=}
-		{\setcounter{Mlast}{16}
-		\M@MixedBeamSegment{right}{\M@heightBeam}{+\M@Sstem}}
-	\M@EqStr{#1}{|//}
+	\M@EqStr{\M@DurationToken}{|=}
 		{\setcounter{Mlast}{16}
 		\M@MixedBeamSegment{right}{\M@heightBeam}{+\M@Sstem}}
 	%
-	\M@EqStr{#1}{≡}
+	\M@EqStr{\M@DurationToken}{≡}
 		{\setcounter{Mlast}{32}
 		\M@MixedBeamSegment{full}{\M@heightBeam}{+\M@Sstem}
 		\M@MixedBeamSegment{full}{\M@heightBeam}{+\M@stem}}
-	\M@EqStr{#1}{///}
-		{\setcounter{Mlast}{32}
-		\M@MixedBeamSegment{full}{\M@heightBeam}{+\M@Sstem}
-		\M@MixedBeamSegment{full}{\M@heightBeam}{+\M@stem}}
-	\M@EqStr{#1}{≡|}
+	\M@EqStr{\M@DurationToken}{≡|}
 		{\setcounter{Mlast}{32}
 		\M@MixedBeamSegment{left}{\M@heightBeam}{+\M@Sstem}
 		\M@MixedBeamSegment{left}{\M@heightBeam}{+\M@stem}}
-	\M@EqStr{#1}{///|}
-		{\setcounter{Mlast}{32}
-		\M@MixedBeamSegment{left}{\M@heightBeam}{+\M@Sstem}
-		\M@MixedBeamSegment{left}{\M@heightBeam}{+\M@stem}}
-	\M@EqStr{#1}{|≡}
-		{\setcounter{Mlast}{32}
-		\M@MixedBeamSegment{right}{\M@heightBeam}{+\M@Sstem}
-		\M@MixedBeamSegment{right}{\M@heightBeam}{+\M@stem}}
-	\M@EqStr{#1}{|///}
+	\M@EqStr{\M@DurationToken}{|≡}
 		{\setcounter{Mlast}{32}
 		\M@MixedBeamSegment{right}{\M@heightBeam}{+\M@Sstem}
 		\M@MixedBeamSegment{right}{\M@heightBeam}{+\M@stem}}
@@ -1203,7 +1180,7 @@
 			\M@MixedBeamSegment{prevlong}{\M@heightBeam}{+\M@stem}
 		\fi
 	\fi
-	\ifthenelse{\equal{#1}{}}{}{\ifthenelse{\equal{#1}{!}}{}{\setcounter{Mlasted}{-2}}}
+	\ifthenelse{\equal{\M@DurationToken}{}}{}{\ifthenelse{\equal{\M@DurationToken}{!}}{}{\setcounter{Mlasted}{-2}}}
 }
 
 \newcommand{\M@TwoNote}[2]{
@@ -1216,43 +1193,23 @@
 
     \M@ScanBeamEndpoints{#2}%
     \setcounter{MX}{\theM@aux}\pgfmathsetmacro{\M@realX}{\theMX*0.0625}
-    \ifnum#1<16
-        \pgfmathsetmacro\M@Sstems{\M@stem+0.1}
-    \fi\ifnum#1=16
-        \pgfmathsetmacro\M@Sstems{\M@stem+0.2}
-    \fi\ifnum#1=32
-        \pgfmathsetmacro\M@Sstems{\M@stem+0.3}
-    \fi
+    \M@SetBeamStem{#1}%
     \foreach\IND in {#2} {\ifthenelse{\equal{\IND}{!}}{\M@addhalfMX}{%
         \M@NotEmpty{\IND}{%
             \M@BeamColumnAnchor{\IND}%
-            \M@enlarge[\M@Sstems]{\M@columnStemStart}{\M@columnAnchor}%
+            \M@enlarge[\M@Sstem]{\M@columnStemStart}{\M@columnAnchor}%
         }%
         \M@addMX}
     }
 
     \ifnoMswap
-        \pgfmathparse{int(max(\theM@beamFirstH,\theM@beamLastH)+10*\M@Sstems)}%
+        \pgfmathparse{int(max(\theM@beamFirstH,\theM@beamLastH)+10*\M@Sstem)}%
     \else
-        \pgfmathparse{int(min(\theM@beamFirstH,\theM@beamLastH)-10*\M@Sstems)}%
+        \pgfmathparse{int(min(\theM@beamFirstH,\theM@beamLastH)-10*\M@Sstem)}%
     \fi
     \setcounter{M@height}{\pgfmathresult}%
 
-    \ifnum#1=8
-        \pgfmathsetmacro\M@Sstem{\M@stem+0.1}
-        \Be@m[\theM@beamLastX+\M@hsep]{\theM@beamFirstX}{\theM@beamFirstH}{\theM@beamLastH}{+\M@Sstem}
-    \fi\ifnum#1=16
-        \pgfmathsetmacro\M@Sstem{\M@stem+0.2}
-        \Be@m[\theM@beamLastX+\M@hsep]{\theM@beamFirstX}{\theM@beamFirstH}{\theM@beamLastH}{+\M@Sstem}
-        \pgfmathsetmacro\M@Sstem{\M@stem+0.05}
-        \Be@m[\theM@beamLastX+\M@hsep]{\theM@beamFirstX}{\theM@beamFirstH}{\theM@beamLastH}{+\M@Sstem}
-    \fi\ifnum#1=32
-        \pgfmathsetmacro\M@Sstem{\M@stem+0.3}
-        \Be@m[\theM@beamLastX+\M@hsep]{\theM@beamFirstX}{\theM@beamFirstH}{\theM@beamLastH}{+\M@Sstem}
-        \pgfmathsetmacro\M@Sstem{\M@stem+0.15}
-        \Be@m[\theM@beamLastX+\M@hsep]{\theM@beamFirstX}{\theM@beamFirstH}{\theM@beamLastH}{+\M@Sstem}
-        \Be@m[\theM@beamLastX+\M@hsep]{\theM@beamFirstX}{\theM@beamFirstH}{\theM@beamLastH}{+\M@stem}
-    \fi
+    \M@DrawBeamLevels[\theM@beamLastX+\M@hsep]{#1}{\theM@beamFirstX}{\theM@beamFirstH}{\theM@beamLastH}%
 }
 
 \newcommand{\M@SlopedNote}[2]{%
@@ -1266,13 +1223,7 @@
     \M@ScanBeamEndpoints{#2}%
     \setcounter{MX}{\theM@aux}\pgfmathsetmacro{\M@realX}{\theMX*0.0625}%
 
-    \ifnum#1<16
-        \pgfmathsetmacro\M@Sstem{\M@stem+0.1}%
-    \fi\ifnum#1=16
-        \pgfmathsetmacro\M@Sstem{\M@stem+0.2}%
-    \fi\ifnum#1=32
-        \pgfmathsetmacro\M@Sstem{\M@stem+0.3}%
-    \fi
+    \M@SetBeamStem{#1}%
 
     \foreach\IND in {#2} {%
         \ifthenelse{\equal{\IND}{!}}{\M@addhalfMX}{%
@@ -1295,21 +1246,7 @@
     \fi
     \setcounter{M@height}{\pgfmathresult}%
 
-    \ifnum#1=8
-        \pgfmathsetmacro\M@Sstem{\M@stem+0.1}%
-        \Be@m[\theM@beamLastX+\M@hsep]{\theM@beamFirstX}{\theM@beamFirstH}{\theM@beamLastH}{+\M@Sstem}%
-    \fi\ifnum#1=16
-        \pgfmathsetmacro\M@Sstem{\M@stem+0.2}%
-        \Be@m[\theM@beamLastX+\M@hsep]{\theM@beamFirstX}{\theM@beamFirstH}{\theM@beamLastH}{+\M@Sstem}%
-        \pgfmathsetmacro\M@Sstem{\M@stem+0.05}%
-        \Be@m[\theM@beamLastX+\M@hsep]{\theM@beamFirstX}{\theM@beamFirstH}{\theM@beamLastH}{+\M@Sstem}%
-    \fi\ifnum#1=32
-        \pgfmathsetmacro\M@Sstem{\M@stem+0.3}%
-        \Be@m[\theM@beamLastX+\M@hsep]{\theM@beamFirstX}{\theM@beamFirstH}{\theM@beamLastH}{+\M@Sstem}%
-        \pgfmathsetmacro\M@Sstem{\M@stem+0.15}%
-        \Be@m[\theM@beamLastX+\M@hsep]{\theM@beamFirstX}{\theM@beamFirstH}{\theM@beamLastH}{+\M@Sstem}%
-        \Be@m[\theM@beamLastX+\M@hsep]{\theM@beamFirstX}{\theM@beamFirstH}{\theM@beamLastH}{+\M@stem}%
-    \fi
+    \M@DrawBeamLevels[\theM@beamLastX+\M@hsep]{#1}{\theM@beamFirstX}{\theM@beamFirstH}{\theM@beamLastH}%
 }
 
 \newcommand{\M@FlatNote}[2]{
@@ -1326,13 +1263,7 @@
     \fi
 
     \setcounter{MX}{\theM@aux}\pgfmathsetmacro{\M@realX}{\theMX*0.0625}
-    \ifnum#1<16
-        \pgfmathsetmacro\M@Sstem{\M@stem+0.1}
-    \fi\ifnum#1=16
-        \pgfmathsetmacro\M@Sstem{\M@stem+0.2}
-    \fi\ifnum#1=32
-        \pgfmathsetmacro\M@Sstem{\M@stem+0.3}
-    \fi
+    \M@SetBeamStem{#1}%
     \foreach\IND in {#2} {\ifthenelse{\equal{\IND}{!}}{\M@addhalfMX}{%
         \M@NotEmpty{\IND}{%
             \M@BeamColumnAnchor{\IND}%
@@ -1345,21 +1276,7 @@
     \pgfmathsetmacro\M@High{int(\M@heightBeam + \pgfmathresult * 10*\M@Sstem)}
     \setcounter{M@height}{\M@High}
 
-    \ifnum#1=8
-        \pgfmathsetmacro\M@Sstem{\M@stem+0.1}
-        \Be@m{\theM@aux}{\M@heightBeam}{\M@heightBeam}{+\M@Sstem}
-    \fi\ifnum#1=16
-        \pgfmathsetmacro\M@Sstem{\M@stem+0.2}
-        \Be@m{\theM@aux}{\M@heightBeam}{\M@heightBeam}{+\M@Sstem}
-        \pgfmathsetmacro\M@Sstem{\M@stem+0.05}
-        \Be@m{\theM@aux}{\M@heightBeam}{\M@heightBeam}{+\M@Sstem}
-    \fi\ifnum#1=32
-        \pgfmathsetmacro\M@Sstem{\M@stem+0.3}
-        \Be@m{\theM@aux}{\M@heightBeam}{\M@heightBeam}{+\M@Sstem}
-        \pgfmathsetmacro\M@Sstem{\M@stem+0.15}
-        \Be@m{\theM@aux}{\M@heightBeam}{\M@heightBeam}{+\M@Sstem}
-        \Be@m{\theM@aux}{\M@heightBeam}{\M@heightBeam}{+\M@stem}
-    \fi
+    \M@DrawBeamLevels{#1}{\theM@aux}{\M@heightBeam}{\M@heightBeam}%
 }
 
 \newif\ifM@restMulti
@@ -1441,19 +1358,12 @@
 	, yshift/.estore in=\MshiftY
 }	
 
+\newcommand{\M@ParallelArtic}[2]{\Artic{#1}{#2}}
 \newcommand{\Artics}[2][]{
 	\pgfkeys{/Martics, default, #1}%
 	\Adv
 	\begin{scope}[xshift=\M@shiftX cm,yshift=\MshiftY cm]
-	\setcounter{M@aux}{\theMX}
-	\foreach\INDp/\INDh in {#2} {
-		\ifthenelse{\equal{\INDp}{!}}{\M@addhalfMX}{
-		\M@NotEmpty{\INDp}{
-			\Artic{\INDp}{\INDh}
-		}
-		\M@addMX
-	}}
-	\setcounter{MX}{\theM@aux}\pgfmathsetmacro{\M@realX}{\theMX*0.0625}
+	\M@ParallelList{#2}{\M@ParallelArtic}%
 	\end{scope}
 }
 
@@ -1530,33 +1440,33 @@
 	\end{scope}
 }
 
-\newcommand{\dflat}{\tikz [baseline] \node [anchor=base, inner sep=0pt] {\reflectbox{$\flat$}};}
+\newcommand{\dflat}{\tikz [baseline] \node [anchor=base, inner sep=0pt] {\reflectbox{$\M@flatGlyph$}};}
 
-\newcommand{\sflat}{\tikz [baseline] \node [anchor=base, inner sep=0pt] {\reflectbox{$\flat$}$\flat$};}
+\newcommand{\sflat}{\tikz [baseline] \node [anchor=base, inner sep=0pt] {\reflectbox{$\M@flatGlyph$}$\M@flatGlyph$};}
 
 \newcommand{\dsharp}{\tikz [baseline] {%
 		\clip (-0.2em,-1ex) rectangle (-0.01em,2ex);
-		\node[anchor=base, inner sep=0pt] {$\sharp$};}
+		\node[anchor=base, inner sep=0pt] {$\M@sharpGlyph$};}
 }
 
 \newcommand{\ssharp}{\tikz [baseline] {%
-		\node[anchor=base,inner sep=0pt,name=leftsharp] at (0,0) {$\sharp$};
+		\node[anchor=base,inner sep=0pt,name=leftsharp] at (0,0) {$\M@sharpGlyph$};
 		\node  at (leftsharp.east) [xshift=-0.1em, yshift=0.15ex, inner sep=0pt,anchor=west] {\dsharp};}
 }
 
 \newcommand{\M@Acc}[3][-0.25]{ % place sharps and flats (hardcoded)
 	\pgfmathsetmacro{\M@realX}{\theMX*0.0625}
-	\M@EqStr{#2}{-2}{\M@PlaceNL[#1-0.07]{#3+0.1}{{\resizebox{0.3cm}{0.35cm}{\doubleflat}}}}
+	\M@EqStr{#2}{-2}{\M@PlaceNL[#1-0.07]{#3+0.1}{{\resizebox{0.3cm}{0.35cm}{\M@doubleFlatGlyph}}}}
 	\M@EqStr{#2}{-1.5}{\M@PlaceNL[#1-0.07]{#3+0.1}{{\resizebox{0.3cm}{0.35cm}{\sflat}}}}
-	\M@EqStr{#2}{-1}{\M@PlaceNL[#1]{#3+0.1}{{\resizebox{0.15cm}{0.35cm}{\flat}}}}
-	\M@EqStr{#2}{b}{\M@PlaceNL[#1]{#3+0.1}{{\resizebox{0.15cm}{0.35cm}{\flat}}}}
+	\M@EqStr{#2}{-1}{\M@PlaceNL[#1]{#3+0.1}{{\resizebox{0.15cm}{0.35cm}{\M@flatGlyph}}}}
+	\M@EqStr{#2}{b}{\M@PlaceNL[#1]{#3+0.1}{{\resizebox{0.15cm}{0.35cm}{\M@flatGlyph}}}}
 	\M@EqStr{#2}{-0.5}{\M@PlaceNL[#1]{#3+0.1}{{\resizebox{0.15cm}{0.35cm}{\dflat}}}}
-	\M@EqStr{#2}{0}{\M@PlaceNL[#1]{#3}{{\resizebox{0.15cm}{0.35cm}{\natural}}}}
+	\M@EqStr{#2}{0}{\M@PlaceNL[#1]{#3}{{\resizebox{0.15cm}{0.35cm}{\M@naturalGlyph}}}}
 	\M@EqStr{#2}{0.5}{\M@PlaceNL[#1+0.07]{#3-0.015}{{\resizebox{0.2cm}{0.35cm}{\dsharp}}}}
-	\M@EqStr{#2}{1}{\M@PlaceNL[#1]{#3}{{\resizebox{0.15cm}{0.35cm}{\sharp}}}}
-	\M@EqStr{#2}{\#}{\M@PlaceNL[#1]{#3}{{\resizebox{0.15cm}{0.35cm}{\sharp}}}}
+	\M@EqStr{#2}{1}{\M@PlaceNL[#1]{#3}{{\resizebox{0.15cm}{0.35cm}{\M@sharpGlyph}}}}
+	\M@EqStr{#2}{\#}{\M@PlaceNL[#1]{#3}{{\resizebox{0.15cm}{0.35cm}{\M@sharpGlyph}}}}
 	\M@EqStr{#2}{1.5}{\M@PlaceNL[#1+0.02]{#3}{{\resizebox{0.3cm}{0.35cm}{\ssharp}}}}
-	\M@EqStr{#2}{2}{\M@PlaceNL[#1]{#3}{{\resizebox{0.15cm}{0.15cm}{\doublesharp}}}}
+	\M@EqStr{#2}{2}{\M@PlaceNL[#1]{#3}{{\resizebox{0.15cm}{0.15cm}{\M@doubleSharpGlyph}}}}
 }
 
 \pgfkeys{
@@ -1585,17 +1495,12 @@
 , xshift/.estore in=\M@shiftX
 , yshift/.estore in=\MshiftY
 }
+\newcommand{\M@ParallelAcc}[2]{\M@Acc{#1}{#2}}
 \newcommand{\Accs}[2][]{
 	\pgfkeys{/MAccs, default, #1}%
 	\begin{scope}[xshift=\M@shiftX cm,yshift=\MshiftY cm]
 	\Adv
-	\setcounter{M@aux}{\theMX}
-	\foreach\INDi/\INDj in {#2} {
-		\ifthenelse{\equal{\INDi}{!}}{\M@addhalfMX}{
-		\M@NotEmpty{\INDi}{\M@Acc{\INDi}{\INDj}}
-		\M@addMX
-	}}
-	\setcounter{MX}{\theM@aux}\pgfmathsetmacro{\M@realX}{\theMX*0.0625}
+	\M@ParallelList{#2}{\M@ParallelAcc}%
 	\end{scope}
 }
 
@@ -1610,82 +1515,38 @@
 	\addtocounter{M@aux}{\theM@max}
 }
 
-\newcommand{\M@DrawKey}[1]{
-	\ifnum#1=0 \else
-	\pgfmathparse{int(10*(abs(#1)-1)^(1/2)+20)}\setcounter{M@min}{\pgfmathresult}
-	\pgfmathsetmacro{\M@result}{int(abs(#1)*2-23)}
-	\ifnum#1>0
-	\foreach\IND [count=\INDi] in {10,7,11,8,5,9,6} {
-		\ifnum\INDi>#1 \else
-		\M@KB{\IND}{#1}
-		\M@Acc[-0.01*\theM@min]{1}{\theM@aux}
-		\addtocounter{M@min}{\M@result}
-		\fi
-	}
-	\else \ifnum#1<0
-	\foreach\IND [count=\INDi] in {6,9,5,8,4,7,3} {
-		\ifnum\INDi>-#1 \else
-		\M@KB{\IND}{#1}
-		\M@Acc[-0.01*\theM@min]{-1}{\theM@aux}
-		\addtocounter{M@min}{\M@result}
-		\fi
-	}
-	\fi\fi
-	\fi
+\newcommand{\M@WalkKeyOrder}[3]{% #1 order, #2 absolute key size, #3 kept accidentals
+    \foreach\IND [count=\INDi] in {#1} {%
+        \ifnum\INDi>#2 \else
+            \ifnum\INDi>#3
+                \M@KB{\IND}{\M@KeySign}%
+                \M@Acc[-0.01*\theM@min]{\M@KeyAccType}{\theM@aux}%
+            \fi
+            \addtocounter{M@min}{\M@result}%
+        \fi
+    }%
 }
 
-\newcommand{\M@DrawNoKey}[1]{
-	\ifnum#1=0 \else
-	\pgfmathparse{int(10*(abs(#1)-1)^(1/2)+20)}\setcounter{M@min}{\pgfmathresult}
-	\pgfmathsetmacro{\M@result}{int(abs(#1)*2-23)}
-	\ifnum#1>0
-	\foreach\IND [count=\INDi] in {10,7,11,8,5,9,6} {
-		\ifnum\INDi>#1 \else
-		\M@KB{\IND}{1}
-		\M@Acc[-0.01*\theM@min]{0}{\theM@aux}
-		\addtocounter{M@min}{\M@result}
-		\fi
-	}
-	\else\ifnum#1<0
-	\foreach\IND [count=\INDi] in {6,9,5,8,4,7,3} {
-		\ifnum\INDi>-#1 \else
-		\M@KB{\IND}{-1}
-		\M@Acc[-0.01*\theM@min]{0}{\theM@aux}
-		\addtocounter{M@min}{\M@result}
-		\fi
-	}
-	\fi\fi
-	\fi
+\newcommand{\M@WalkKeySignature}[3]{% #1 signed key, #2 kept accidentals, #3 naturals (0/1)
+    \ifnum#1=0 \else
+        \pgfmathtruncatemacro{\M@KeyAbs}{abs(#1)}%
+        \pgfmathparse{int(10*(abs(#1)-1)^(1/2)+20)}\setcounter{M@min}{\pgfmathresult}%
+        \pgfmathsetmacro{\M@result}{int(abs(#1)*2-23)}%
+        \ifnum#1>0
+            \def\M@KeySign{1}%
+            \ifnum#3=1 \def\M@KeyAccType{0}\else \def\M@KeyAccType{1}\fi
+            \M@WalkKeyOrder{10,7,11,8,5,9,6}{\M@KeyAbs}{#2}%
+        \else
+            \def\M@KeySign{-1}%
+            \ifnum#3=1 \def\M@KeyAccType{0}\else \def\M@KeyAccType{-1}\fi
+            \M@WalkKeyOrder{6,9,5,8,4,7,3}{\M@KeyAbs}{#2}%
+        \fi
+    \fi
 }
 
-\newcommand{\M@DrawKeyCancellation}[2]{
-	\ifnum#1=0 \else
-	\pgfmathtruncatemacro{\M@oldkeyabs}{abs(#1)}
-	\pgfmathparse{int(10*(abs(#1)-1)^(1/2)+20)}\setcounter{M@min}{\pgfmathresult}
-	\pgfmathsetmacro{\M@result}{int(abs(#1)*2-23)}
-	\ifnum#1>0
-	\foreach\IND [count=\INDi] in {10,7,11,8,5,9,6} {
-		\ifnum\INDi>\M@oldkeyabs \else
-			\ifnum\INDi>#2
-				\M@KB{\IND}{1}
-				\M@Acc[-0.01*\theM@min]{0}{\theM@aux}
-			\fi
-			\addtocounter{M@min}{\M@result}
-		\fi
-	}
-	\else
-	\foreach\IND [count=\INDi] in {6,9,5,8,4,7,3} {
-		\ifnum\INDi>\M@oldkeyabs \else
-			\ifnum\INDi>#2
-				\M@KB{\IND}{-1}
-				\M@Acc[-0.01*\theM@min]{0}{\theM@aux}
-			\fi
-			\addtocounter{M@min}{\M@result}
-		\fi
-	}
-	\fi
-	\fi
-}
+\newcommand{\M@DrawKey}[1]{\M@WalkKeySignature{#1}{0}{0}}
+\newcommand{\M@DrawNoKey}[1]{\M@WalkKeySignature{#1}{0}{1}}
+\newcommand{\M@DrawKeyCancellation}[2]{\M@WalkKeySignature{#1}{#2}{1}}
 
 \newcommand{\Key}[1]{
 	\setcounter{M@key}{#1}
@@ -1711,27 +1572,12 @@
 	\ifnum#1=0 \else
 		\ifnum#2=0
 			\M@mixedCanceltrue
-		\else
-			\ifnum#1>0
-				\ifnum#2<0
-					\M@mixedCanceltrue
-				\else
-					\ifnum\M@newkeyabs<\M@oldkeyabs
-						\M@mixedCanceltrue
-						\edef\M@mixedKeep{\M@newkeyabs}
-					\fi
-				\fi
-			\else
-				\ifnum#2>0
-					\M@mixedCanceltrue
-				\else
-					\ifnum\M@newkeyabs<\M@oldkeyabs
-						\M@mixedCanceltrue
-						\edef\M@mixedKeep{\M@newkeyabs}
-					\fi
-				\fi
-			\fi
-		\fi
+		\else\ifnum\numexpr#1*#2\relax<0
+			\M@mixedCanceltrue
+		\else\ifnum\M@newkeyabs<\M@oldkeyabs
+			\M@mixedCanceltrue
+			\edef\M@mixedKeep{\M@newkeyabs}
+		\fi\fi\fi
 	\fi
 	\ifM@mixedCancel
 		\M@DrawKeyCancellation{#1}{\M@mixedKeep}
@@ -1957,6 +1803,16 @@
 \newcounter{Mslurred}
 \newcounter{MslurredB}
 \newcounter{MslurredE}
+\newcommand{\M@DrawSlurred}[1]{%
+	\Slur[#1angle=\MSlurredAng%
+		, b=\MSlurredB%
+		, e=\theMslurred*0.0625+\MSlurredE-1
+		, width=\MSlurredW%
+		, xshift=\MSlurredX%
+		, yshift=\MSlurredY%
+		]%
+		{\theMslurredB}{\theMslurredE}%
+}
 \newenvironment{Slurred}[3][]{%
 \pgfmathsetmacro{\Slurraux}{int(\theMX+\M@hsep*2)}
 \setcounter{Mslurred}{\Slurraux}
@@ -1969,24 +1825,9 @@
 \setcounter{Mslurred}{\theM@aux}
 \addtocounter{Mslurred}{-\theMX}
 \ifMswapS
-	\Slur[swap%
-		, angle=\MSlurredAng%
-		, b=\MSlurredB%
-		, e=\theMslurred*0.0625+\MSlurredE-1
-		, width=\MSlurredW%
-		, xshift=\MSlurredX%
-		, yshift=\MSlurredY%
-		]%
-		{\theMslurredB}{\theMslurredE}%
+	\M@DrawSlurred{swap,}%
 \else
-	\Slur[angle=\MSlurredAng%
-		, b=\MSlurredB%
-		, e=\theMslurred*0.0625+\MSlurredE-1
-		, width=\MSlurredW%
-		, xshift=\MSlurredX%
-		, yshift=\MSlurredY%
-		]%
-		{\theMslurredB}{\theMslurredE}%
+	\M@DrawSlurred{}%
 \fi
 \setcounter{MX}{\theM@aux}
 }
