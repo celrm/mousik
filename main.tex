@@ -55,71 +55,53 @@
 	The way to draw a score is by means of the \texttt{mousik} environment. For longer examples, open the \href{run:examples.pdf}{\textit{examples}} document.
 	
 	\begin{center}
-		\begin{mousik}
-			\Clef[octave=8]
-			\TimeSig{4}{4}
-			
-			\MDots{*/1, , */3, }
-			\Note{|-,=|,|-,=|}{1,2,3,4}
+		\begin{mousik}[piano, piano-sep=2]
+			\UpperStaff
+			\Clef[octave=8] \TimeSig{4}{4}
+			\MDots{*/1, , */3, } \Note{|-,=|,|-,=|}{1,2,3,4}
 			\Note{4}{2}
-			\Artic{^}{0}
-			\Note{8}{0,1}
+			\Artic{^}{0} \Note{8}{0,1}
 			\Tie[e=2]{1}
 			\Barline
 			\Note{1}{1}
-			
 			\Barline[t=|.]
 
-			\BreakLine
-			
-			\Clef[t=4]
-			\TimeSig{4}{4}
-			
-			\Note{2}{13}	\Back
-			\Note{2}{10}	\Back
-			\Note{2}{8}
-			\Space[1.5]
-			
-			\MDot{13}\Note{4}{13}	\Back
-			\MDot{9}\Note{4}{9}		\Back
-			\MDot{7}\Note{4}{7}
-			\Space[0.5]
-			
-			\Note{4}{12}\Tie[e=2]{12}						\Back
-			\Note{4}{10}\Tie[b=0.25,e=1.75]{10}				\Back
-			\Note[back]{4}{9}\Swap\Tie[b=0.25,e=1.75]{9}	\Back
-			\Note{8}{7}\Swap\Tie[e=2]{7}
-		
+			\LowerStaff			
+			\Clef[t=4] \TimeSig{4}{4}
+			\Note{2}{13/10/8} \Space[1.5]
+			\MDot{13}\MDot{9}\MDot{7} \Note{4}{13/9/7} \Space[0.5]
+			\Note{8}{12/10/<9/7}
+			\Tie[e=2]{12} \Tie[b=0.25,e=1.75]{10}
+			\Tie[swap,b=0.25,e=1.75]{9} \Tie[swap,e=2]{7}
 			\Barline
-			
-			\Note{1}{12}		\Back
-			\Note{1}{10}		\Back
-			\Note[back]{1}{9}	\Back
-			\Note{1}{7}
-
-			\Barline[t=|.]
+			\Note{1}{12/10/<9/7}
 		\end{mousik}
 	\end{center}
 	
 	\begin{lstlisting}[basicstyle=\ttfamily\small]
-		  \begin{mousik}
-		     \Clef[octave=8]
-		     \TimeSig{4}{4}
-		     
-		     \MDots{*/1, , */3, }
-		     \Note{|-,=|,|-,=|}{1,2,3,4}		     
-		     \Note{4}{2}
-		     \Artic{^}{0}
-		     \Note{8}{0,1}		     
-		     \Tie[e=2]{1}
-		     \Barline
-		     \Note{1}{1}
-		     
-		     \Barline[t= |.]
-		  \end{mousik}
+	\begin{mousik}[piano, piano-sep=2]
+		\UpperStaff
+		\Clef[octave=8] \TimeSig{4}{4}
+		\MDots{*/1, , */3, } \Note{|-,=|,|-,=|}{1,2,3,4}
+		\Note{4}{2}
+		\Artic{^}{0} \Note{8}{0,1}
+		\Tie[e=2]{1}
+		\Barline
+		\Note{1}{1}
+		\Barline[t=|.]
+
+		\LowerStaff			
+		\Clef[t=4] \TimeSig{4}{4}
+		\Note{2}{13/10/8} \Space[1.5]
+		\MDot{13}\MDot{9}\MDot{7} \Note{4}{13/9/7} \Space[0.5]
+		\Note{8}{12/10/<9/7}
+		\Tie[e=2]{12} \Tie[b=0.25,e=1.75]{10}
+		\Tie[swap,b=0.25,e=1.75]{9} \Tie[swap,e=2]{7}
+		\Barline
+		\Note{1}{12/10/<9/7}
+	\end{mousik}
 	\end{lstlisting}
 
-%	\subsection{Options}
 It has some options:
 	\begin{enumerate}[-]
 		\item \textsl{color} changes the background color. Default is white.
@@ -128,24 +110,11 @@ It has some options:
 		\item \textsl{hsep} changes the horizontal separation. Default is 8. Beams and parallel dot lists follow the same separation.
 		\item \textsl{vsep} changes the vertical separation in case of an overflow. Default is 2, in cm.
 		\item \textsl{single} draws a one-line staff, useful for percussion examples. Notes keep the usual absolute height system; height 6 lies on the line.
-		\item \textsl{piano} draws an upper and a lower five-line staff. Use \verb|\UpperStaff| and \verb|\LowerStaff| to choose which one receives the following commands. Each staff keeps its own cursor, clef and key, so alignment remains manual.
+		\item \textsl{piano} draws an upper and a lower five-line staff. Use \verb|\UpperStaff| and \verb|\LowerStaff| to choose which one receives the following commands. Each staff keeps its own cursor, clef, and key.
 		\item \textsl{piano-sep} changes the distance between the two piano staves. Default is 1.6, in cm.
+		\item \textsl{piano-bars} chooses whether barlines in piano mode are \texttt{joined} across both staves or \texttt{separate}. Default is \texttt{joined}. The command advances only the active staff.
 		\item \textsl{tikz} allows extra options for the outside \texttt{tikz} environment.
 	\end{enumerate}
-
-For example, this is a short piano fragment:
-	\begin{lstlisting}[basicstyle=\ttfamily\small]
-		  \begin{mousik}[piano]
-		     \Clef
-		     \TimeSig{4}{4}
-		     \Note{8}{5,6}
-		     \LowerStaff
-		     \Clef[t=4]
-		     \TimeSig{4}{4}
-		     \Note{8}{1,2}
-		     \UpperStaff
-		  \end{mousik}
-	\end{lstlisting}
 
 \todo{resize}
 \todo{compatibility issues}
@@ -337,7 +306,21 @@ For example, this is a short piano fragment:
 		\end{mousik}
 	\end{center}
 	
-	The \verb|\Note| command might also print several notes tied together with a beam, if the second argument is a list of heights separated by commas. Two notes will be tied together with an oblique beam, but three or more will have a straight beam.%\todo{monotone triplets sliding beam}
+	Heights separated by \texttt{/} correspond to chords: they belong to the same note event and are printed at the same x-position. Sometimes two heads need to be displaced to fit in a chord. For this, prefix the head that should move left with \texttt{<}.
+	
+	\begin{center}
+		\begin{mousik}
+			\Clef
+			\TTT[-0.5]{Note\{1\}\{0/4/7\}}
+			\Note{1}{0/4/7}
+			\Space[2]
+			\TTT[0.25]{Note\{1\}\{12/10/<9/7\}}
+			\Note{1}{12/10/<9/7}
+			\Barline[t=|.]
+		\end{mousik}
+	\end{center}
+	
+	The \verb|\Note| command also prints several notes tied together with a beam, if the second argument is a list of heights separated by commas. Two notes will be tied together with an oblique beam, but three or more will have a straight beam.%\todo{monotone triplets sliding beam}
 	
 %	The notes go upside down when their height (or maximum height) is bigger than 6. However, for manual control, the \verb|\Swap| command might be used \textit{before} the note.
 
@@ -455,14 +438,14 @@ For example, this is a short piano fragment:
 				\Clef
 				\TimeSig{C}{}
 				
-				\Note{1}{4}	\Back	\Note{1}{8}	\Back	\Note{1}{-1}
+				\Note{1}{4/8/-1}
 				\Barline
 				
 				\Space[0.5]\TTT{Rest[multi]\{17\}}\Space[-0.5]
 				\Rest[multi]{17}
 				
 				\Barline
-				\Note{1}{4}	\Back	\Note{1}{9}	\Back	\Note{1}{0}
+				\Note{1}{4/9/0}
 				
 				\Barline[t=|.]
 			\end{mousik}
@@ -473,40 +456,7 @@ For example, this is a short piano fragment:
 	\end{enumerate}
 	
 	\subsubsection{\texttt{\textbackslash Back}}
-	\todo{maybe fix chord}
-	Chords may be obtained by means of the \verb|\Back| command. It accepts an optional argument: the number of notes to step backwards \textemdash mostly for the \verb|\Note| command\textemdash\ with 1 as default.
-	
-	The best way to use it is to call the \verb|\Note| command with the highest notes; then call the \verb|\Back| command; then call the \verb|\Note| command with the duration 4 of a quarter note, to print them on top.
-	
-%	If the stem needs to be longer, the user may need the \verb|\Enlarge| command, which accepts as arguments the 2 heights of both notes. \todo{option as enlarge or swap in enlarge}
-	
-	\begin{center}
-		\begin{mousik}
-			\Clef
-			
-			\TTT{Note\{1\}\{6\}}
-			\TTT[-0.5]{Back}
-			\TTT[-1]{Note\{1\}\{4\}}
-			\Note{1}{6}
-			\Back
-			\Note{1}{4}
-			
-			\Space[2.5]	
-			
-			\TTT{Note[swap]\{16\}\{7\}}
-			\TTT[-0.5]{Back}
-%			\TTT[-1]{Swap\textbackslash Enlarge\{7\}\{0\}}
-			\TTT[-1]{Note[stem=0.7]\{4\}\{0\}}
-			\Note[swap]{16}{7}
-			\Back
-%			\Swap\Enlarge{7}{0}
-			\Note[stem=0.7]{4}{0}
-			
-			\Barline[t=|.]
-		\end{mousik}
-	\end{center}
-		
-	For extreme uses of the command, extra \verb|\Space| commands might be needed.
+	The \verb|\Back| command moves the horizontal cursor backwards. Its optional argument is the number of note positions to step backwards, with 1 as default. It is useful for superimposing independent voices, as well as for more complicated chords.
 	
 	\begin{center}
 		\begin{mousik}
