@@ -67,7 +67,9 @@
 \newcommand{\M@EqStr}[3]{\ifthenelse{\equal{#1}{#2}}{#3}{}}
 \newcommand{\M@NotEmpty}[2]{\ifthenelse{\equal{#1}{}}{}{#2}}
 
+\newcounter{M@afterBar}
 \newcommand{\M@moveMX}[1]{%
+    \setcounter{M@afterBar}{0}%
     \pgfmathparse{int((#1)*\M@hsep)}%
     \addtocounter{MX}{\pgfmathresult}%
     \pgfmathsetmacro{\M@realX}{\theMX*0.0625}%
@@ -103,6 +105,8 @@
 \newcounter{M@lowerClef}
 \newcounter{M@upperKey}
 \newcounter{M@lowerKey}
+\newcounter{M@upperAfterBar}
+\newcounter{M@lowerAfterBar}
 
 \pgfkeys{
 	/mousik/.is family
@@ -145,6 +149,8 @@
 \setcounter{M@upperMY}{0}\setcounter{M@lowerMY}{0}%
 \setcounter{M@upperClef}{-1}\setcounter{M@lowerClef}{-1}%
 \setcounter{M@upperKey}{0}\setcounter{M@lowerKey}{0}%
+\setcounter{M@afterBar}{0}%
+\setcounter{M@upperAfterBar}{0}\setcounter{M@lowerAfterBar}{0}%
 \M@lengthSetfalse
 \ifM@single
 	\def\M@staffBottom{0.2}\def\M@staffTop{0.6}\def\M@staffMid{0.4}%
@@ -159,18 +165,22 @@
 \ifnum\theM@staff=1
 	\setcounter{M@upperMX}{\theMX}\setcounter{M@upperMY}{\theMY}%
 	\setcounter{M@upperClef}{\theM@clef}\setcounter{M@upperKey}{\theM@key}%
+	\setcounter{M@upperAfterBar}{\theM@afterBar}%
 \else
 	\setcounter{M@lowerMX}{\theMX}\setcounter{M@lowerMY}{\theMY}%
 	\setcounter{M@lowerClef}{\theM@clef}\setcounter{M@lowerKey}{\theM@key}%
+	\setcounter{M@lowerAfterBar}{\theM@afterBar}%
 \fi}
 
 \newcommand{\M@RestoreStaffState}[1]{%
 \ifnum#1=1
 	\setcounter{MX}{\theM@upperMX}\setcounter{MY}{\theM@upperMY}%
 	\setcounter{M@clef}{\theM@upperClef}\setcounter{M@key}{\theM@upperKey}%
+	\setcounter{M@afterBar}{\theM@upperAfterBar}%
 \else
 	\setcounter{MX}{\theM@lowerMX}\setcounter{MY}{\theM@lowerMY}%
 	\setcounter{M@clef}{\theM@lowerClef}\setcounter{M@key}{\theM@lowerKey}%
+	\setcounter{M@afterBar}{\theM@lowerAfterBar}%
 \fi
 \pgfmathsetmacro{\M@realX}{\theMX*0.0625}}
 
@@ -614,64 +624,6 @@
     \fi
 }
 
-\newcommand{\M@DrawMixedBeamPiece}[3]{%
-  \pgfmathsetmacro{\M@BeamH}{\M@hsep*0.0625}%
-  \pgfmathsetmacro{\M@BeamNoteX}{(\theMX-\M@hsep)*0.0625}%
-  \pgfmathsetmacro{\M@BeamY}{-\theMY*\M@vsep-0.2+(#2)*0.1}%
-  \pgfmathsetmacro{\M@BeamOffset}{#3}%
-  \ifnoMswap
-    \pgfmathsetmacro{\M@BeamStemX}{\M@BeamNoteX+0.128}%
-    \def\M@BeamKind{#1}%
-    \ifx\M@BeamKind\M@beamFull
-      \pgfmathsetmacro{\M@BeamL}{-0.5*\M@BeamH-0.025}%
-      \pgfmathsetmacro{\M@BeamR}{ 0.5*\M@BeamH-0.022}%
-    \else\ifx\M@BeamKind\M@beamLeft
-      \pgfmathsetmacro{\M@BeamL}{-0.5*\M@BeamH-0.025}%
-      \pgfmathsetmacro{\M@BeamR}{-0.025}%
-    \else\ifx\M@BeamKind\M@beamRight
-      \pgfmathsetmacro{\M@BeamL}{0}%
-      \pgfmathsetmacro{\M@BeamR}{0.5*\M@BeamH-0.022}%
-    \else\ifx\M@BeamKind\M@beamPrev
-      \pgfmathsetmacro{\M@BeamL}{-\M@BeamH-0.072}%
-      \pgfmathsetmacro{\M@BeamR}{-0.5*\M@BeamH-0.025}%
-    \else
-      \pgfmathsetmacro{\M@BeamL}{-1.5*\M@BeamH-0.022}%
-      \pgfmathsetmacro{\M@BeamR}{-0.5*\M@BeamH-0.025}%
-    \fi\fi\fi\fi
-    \draw[line width=\M@beam mm]
-      (\M@BeamStemX+\M@BeamL,\M@BeamY+\M@BeamOffset) --
-      (\M@BeamStemX+\M@BeamR,\M@BeamY+\M@BeamOffset);
-  \else
-    \pgfmathsetmacro{\M@BeamStemX}{\M@BeamNoteX-0.125}%
-    \def\M@BeamKind{#1}%
-    \ifx\M@BeamKind\M@beamFull
-      \pgfmathsetmacro{\M@BeamL}{-0.5*\M@BeamH-0.025}%
-      \pgfmathsetmacro{\M@BeamR}{ 0.5*\M@BeamH-0.025}%
-    \else\ifx\M@BeamKind\M@beamLeft
-      \pgfmathsetmacro{\M@BeamL}{-0.5*\M@BeamH-0.025}%
-      \pgfmathsetmacro{\M@BeamR}{-0.028}%
-    \else\ifx\M@BeamKind\M@beamRight
-      \pgfmathsetmacro{\M@BeamL}{0}%
-      \pgfmathsetmacro{\M@BeamR}{0.5*\M@BeamH-0.025}%
-    \else\ifx\M@BeamKind\M@beamPrev
-      \pgfmathsetmacro{\M@BeamL}{-\M@BeamH-0.075}%
-      \pgfmathsetmacro{\M@BeamR}{-0.5*\M@BeamH-0.025}%
-    \else
-      \pgfmathsetmacro{\M@BeamL}{-1.5*\M@BeamH-0.025}%
-      \pgfmathsetmacro{\M@BeamR}{-0.5*\M@BeamH-0.025}%
-    \fi\fi\fi\fi
-    \draw[line width=\M@beam mm]
-      (\M@BeamStemX+\M@BeamL,\M@BeamY-\M@BeamOffset) --
-      (\M@BeamStemX+\M@BeamR,\M@BeamY-\M@BeamOffset);
-  \fi
-}
-\def\M@beamFull{full}
-\def\M@beamLeft{left}
-\def\M@beamRight{right}
-\def\M@beamPrev{prev}
-\newcommand{\M@MixedBeamSegment}[3]{\M@DrawMixedBeamPiece{#1}{#2}{#3}}
-
-
 \newcommand{\Fl@g}[2][0]{
 	\pgfmathsetmacro{\M@realX}{\theMX*0.0625}
 	\ifnoMswap
@@ -1065,6 +1017,144 @@
 	\M@EqStr{#1}{|///}{\def\M@DurationToken{|≡}}%
 }
 
+\newcommand{\M@MixedTokenInfo}[1]{%
+	\M@NormalizeDurationToken{#1}%
+	\def\M@mixDur{0}%
+	\def\M@mixStartTwo{0}%
+	\def\M@mixEndTwo{0}%
+	\def\M@mixStartThree{0}%
+	\def\M@mixEndThree{0}%
+	\M@EqStr{\M@DurationToken}{-}{\def\M@mixDur{8}}%
+	\M@EqStr{\M@DurationToken}{|-}{\def\M@mixDur{8}}%
+	\M@EqStr{\M@DurationToken}{-|}{\def\M@mixDur{8}}%
+	\M@EqStr{\M@DurationToken}{=}{\def\M@mixDur{16}}%
+	\M@EqStr{\M@DurationToken}{|=}{\def\M@mixDur{16}\def\M@mixStartTwo{1}}%
+	\M@EqStr{\M@DurationToken}{=|}{\def\M@mixDur{16}\def\M@mixEndTwo{1}}%
+	\M@EqStr{\M@DurationToken}{≡}{\def\M@mixDur{32}}%
+	\M@EqStr{\M@DurationToken}{|≡}{\def\M@mixDur{32}\def\M@mixStartThree{1}}%
+	\M@EqStr{\M@DurationToken}{≡|}{\def\M@mixDur{32}\def\M@mixEndThree{1}}%
+}
+
+\newcommand{\M@DrawMixedConnection}[4]{% left cursor, right cursor, beam height, offset
+	\pgfmathsetmacro{\M@BeamLeftX}{(#1)*0.0625}%
+	\pgfmathsetmacro{\M@BeamRightX}{(#2)*0.0625}%
+	\pgfmathsetmacro{\M@BeamY}{-\theMY*\M@vsep-0.2+(#3)*0.1}%
+	\pgfmathsetmacro{\M@BeamOffset}{#4}%
+	\ifnoMswap
+		\draw[line width=\M@beam mm]
+			(\M@BeamLeftX+0.103,\M@BeamY+\M@BeamOffset) --
+			(\M@BeamRightX+0.128,\M@BeamY+\M@BeamOffset);%
+	\else
+		\draw[line width=\M@beam mm]
+			(\M@BeamLeftX-0.153,\M@BeamY-\M@BeamOffset) --
+			(\M@BeamRightX-0.125,\M@BeamY-\M@BeamOffset);%
+	\fi
+}
+
+\newcommand{\M@DrawMixedHook}[4]{% left/right, cursor, beam height, offset
+	\pgfmathsetmacro{\M@BeamX}{(#2)*0.0625}%
+	\pgfmathsetmacro{\M@BeamHalf}{0.5*\M@hsep*0.0625}%
+	\pgfmathsetmacro{\M@BeamY}{-\theMY*\M@vsep-0.2+(#3)*0.1}%
+	\pgfmathsetmacro{\M@BeamOffset}{#4}%
+	\def\M@HookSide{#1}%
+	\def\M@HookRight{right}%
+	\ifnoMswap
+		\ifx\M@HookSide\M@HookRight
+			\draw[line width=\M@beam mm]
+				(\M@BeamX+0.103,\M@BeamY+\M@BeamOffset) --
+				(\M@BeamX+\M@BeamHalf,\M@BeamY+\M@BeamOffset);%
+		\else
+			\draw[line width=\M@beam mm]
+				(\M@BeamX-\M@BeamHalf,\M@BeamY+\M@BeamOffset) --
+				(\M@BeamX+0.128,\M@BeamY+\M@BeamOffset);%
+		\fi
+	\else
+		\ifx\M@HookSide\M@HookRight
+			\draw[line width=\M@beam mm]
+				(\M@BeamX-0.153,\M@BeamY-\M@BeamOffset) --
+				(\M@BeamX+\M@BeamHalf,\M@BeamY-\M@BeamOffset);%
+		\else
+			\draw[line width=\M@beam mm]
+				(\M@BeamX-\M@BeamHalf,\M@BeamY-\M@BeamOffset) --
+				(\M@BeamX-0.125,\M@BeamY-\M@BeamOffset);%
+		\fi
+	\fi
+}
+
+\newcommand{\M@FinalizeMixedEvent}[2]{% right connection at levels 2 and 3
+	\ifnum\M@mixPrevDur>15
+		\ifnum\M@mixPrevLeftTwo=0 \ifnum#1=0
+			\ifnum\M@mixPrevStartTwo=1
+				\M@DrawMixedHook{right}{\M@mixPrevX}{\M@heightBeam}{\M@mixSecondOffset}%
+			\else\ifnum\M@mixPrevEndTwo=1
+				\M@DrawMixedHook{left}{\M@mixPrevX}{\M@heightBeam}{\M@mixSecondOffset}%
+			\else\ifnum\M@mixPrevDur=32
+				% For an isolated 32nd, the third-beam marker also chooses the
+				% direction of the required second beamlet.
+				\ifnum\M@mixPrevStartThree=1
+					\M@DrawMixedHook{right}{\M@mixPrevX}{\M@heightBeam}{\M@mixSecondOffset}%
+				\else\ifnum\M@mixPrevEndThree=1
+					\M@DrawMixedHook{left}{\M@mixPrevX}{\M@heightBeam}{\M@mixSecondOffset}%
+				\fi\fi
+			\fi\fi\fi
+		\fi\fi
+	\fi
+	\ifnum\M@mixPrevDur=32
+		\ifnum\M@mixPrevLeftThree=0 \ifnum#2=0
+			\ifnum\M@mixPrevStartThree=1
+				\M@DrawMixedHook{right}{\M@mixPrevX}{\M@heightBeam}{\M@stem}%
+			\else\ifnum\M@mixPrevEndThree=1
+				\M@DrawMixedHook{left}{\M@mixPrevX}{\M@heightBeam}{\M@stem}%
+			\fi\fi
+		\fi\fi
+	\fi
+}
+
+\newcommand{\M@DrawMixedBeamLevels}[1]{%
+	\ifnum\theM@duration=16
+		\pgfmathsetmacro{\M@mixSecondOffset}{\M@stem+0.05}%
+	\else
+		\pgfmathsetmacro{\M@mixSecondOffset}{\M@stem+0.15}%
+	\fi
+	\def\M@mixHavePrev{0}%
+	\setcounter{MX}{\theM@aux}%
+	\foreach\INDd in {#1} {%
+		\M@MixedTokenInfo{\INDd}%
+		\ifnum\M@mixDur>0
+			\def\M@mixConnTwo{0}%
+			\def\M@mixConnThree{0}%
+			\ifnum\M@mixHavePrev=1
+				\ifnum\M@mixPrevDur>15 \ifnum\M@mixDur>15
+					\ifnum\M@mixPrevEndTwo=0 \ifnum\M@mixStartTwo=0
+						\M@DrawMixedConnection{\M@mixPrevX}{\theMX}{\M@heightBeam}{\M@mixSecondOffset}%
+						\def\M@mixConnTwo{1}%
+					\fi\fi
+				\fi\fi
+				\ifnum\M@mixPrevDur=32 \ifnum\M@mixDur=32
+					\ifnum\M@mixPrevEndThree=0 \ifnum\M@mixStartThree=0
+						\M@DrawMixedConnection{\M@mixPrevX}{\theMX}{\M@heightBeam}{\M@stem}%
+						\def\M@mixConnThree{1}%
+					\fi\fi
+				\fi\fi
+				\M@FinalizeMixedEvent{\M@mixConnTwo}{\M@mixConnThree}%
+			\fi
+			\xdef\M@mixPrevDur{\M@mixDur}%
+			\xdef\M@mixPrevX{\theMX}%
+			\xdef\M@mixPrevStartTwo{\M@mixStartTwo}%
+			\xdef\M@mixPrevEndTwo{\M@mixEndTwo}%
+			\xdef\M@mixPrevStartThree{\M@mixStartThree}%
+			\xdef\M@mixPrevEndThree{\M@mixEndThree}%
+			\xdef\M@mixPrevLeftTwo{\M@mixConnTwo}%
+			\xdef\M@mixPrevLeftThree{\M@mixConnThree}%
+			\xdef\M@mixHavePrev{1}%
+		\fi
+		\ifthenelse{\equal{\INDd}{!}}{\M@addhalfMX}{\M@addMX}%
+	}%
+	\ifnum\M@mixHavePrev=1
+		\M@FinalizeMixedEvent{0}{0}%
+	\fi
+}
+
 \newcommand{\M@MixedNote}[2]{
 	\setcounter{M@duration}{8}
 	\foreach\INDd in {#1} {
@@ -1105,84 +1195,12 @@
 \ifnoMswap {\pgfmathparse{1}} \else {\pgfmathparse{-1}} \fi
 \pgfmathsetmacro\M@High{int(\M@heightBeam + \pgfmathresult * 10*\M@Sstem)}
 \setcounter{M@height}{\M@High}
-	\setcounter{Mlast}{-1}
 	\M@SetBeamStem{\theM@duration}%
 	\Be@m{\theM@aux}{\M@heightBeam}{\M@heightBeam}{+\M@Sstem}
-	\ifnum\theM@duration=16
-		\setcounter{MX}{\theM@aux}\pgfmathsetmacro{\M@realX}{\theMX*0.0625}
-		\setcounter{M@first}{-50}
-		\pgfmathsetmacro\M@Sstem{\M@stem+0.05}
-		\foreach\INDd in {#1} {
-			\ifthenelse{\equal{\INDd}{!}}
-			{\M@addhalfMX}
-			{\M@addMX}
-			\MM@ixedBeam{\INDd}
-		}
-	\fi
-	\ifnum\theM@duration=32
-		\setcounter{MX}{\theM@aux}\pgfmathsetmacro{\M@realX}{\theMX*0.0625}
-		\setcounter{M@first}{-50}
-		\pgfmathsetmacro\M@Sstem{\M@stem+0.15}
-		\foreach\INDd in {#1} {
-			\ifthenelse{\equal{\INDd}{!}}
-				{\M@addhalfMX}
-				{\M@addMX}
-				\MM@ixedBeam{\INDd}
-		}
+	\ifnum\theM@duration>8
+		\M@DrawMixedBeamLevels{#1}%
 	\fi
 }
-\newcounter{Mlast}
-\newcounter{Mlasted}
-\newcommand{\MM@ixedBeam}[1]{
-	\M@NormalizeDurationToken{#1}%
-	\M@EqStr{\M@DurationToken}{!}{\setcounter{Mlasted}{\theMlast}}
-	\M@EqStr{\M@DurationToken}{}{\setcounter{Mlasted}{-1*\theMlast}}
-	%
-	\setcounter{Mlast}{8}
-	\M@EqStr{\M@DurationToken}{=}
-		{\setcounter{Mlast}{16}
-		\M@MixedBeamSegment{full}{\M@heightBeam}{+\M@Sstem}}
-	\M@EqStr{\M@DurationToken}{=|}
-		{\setcounter{Mlast}{16}
-		\M@MixedBeamSegment{left}{\M@heightBeam}{+\M@Sstem}}
-	\M@EqStr{\M@DurationToken}{|=}
-		{\setcounter{Mlast}{16}
-		\M@MixedBeamSegment{right}{\M@heightBeam}{+\M@Sstem}}
-	%
-	\M@EqStr{\M@DurationToken}{≡}
-		{\setcounter{Mlast}{32}
-		\M@MixedBeamSegment{full}{\M@heightBeam}{+\M@Sstem}
-		\M@MixedBeamSegment{full}{\M@heightBeam}{+\M@stem}}
-	\M@EqStr{\M@DurationToken}{≡|}
-		{\setcounter{Mlast}{32}
-		\M@MixedBeamSegment{left}{\M@heightBeam}{+\M@Sstem}
-		\M@MixedBeamSegment{left}{\M@heightBeam}{+\M@stem}}
-	\M@EqStr{\M@DurationToken}{|≡}
-		{\setcounter{Mlast}{32}
-		\M@MixedBeamSegment{right}{\M@heightBeam}{+\M@Sstem}
-		\M@MixedBeamSegment{right}{\M@heightBeam}{+\M@stem}}
-	%
-	\ifnum\theMlast>\theMlasted \else
-		\ifnum\theMlast=16
-			\M@MixedBeamSegment{prev}{\M@heightBeam}{+\M@Sstem}
-		\fi\ifnum\theMlast=32
-			\M@MixedBeamSegment{prev}{\M@heightBeam}{+\M@Sstem}
-			\M@MixedBeamSegment{prev}{\M@heightBeam}{+\M@stem}
-		\fi
-	\fi\ifnum\theMlast=32 \ifnum\theMlasted=16
-		\M@MixedBeamSegment{prev}{\M@heightBeam}{+\M@Sstem}
-	\fi\fi
-	\ifnum\theMlast>-\theMlasted \else
-		\ifnum\theMlast=16
-			\M@MixedBeamSegment{prevlong}{\M@heightBeam}{+\M@Sstem}
-		\fi\ifnum\theMlast=32
-			\M@MixedBeamSegment{prevlong}{\M@heightBeam}{+\M@Sstem}
-			\M@MixedBeamSegment{prevlong}{\M@heightBeam}{+\M@stem}
-		\fi
-	\fi
-	\ifthenelse{\equal{\M@DurationToken}{}}{}{\ifthenelse{\equal{\M@DurationToken}{!}}{}{\setcounter{Mlasted}{-2}}}
-}
-
 \newcommand{\M@TwoNote}[2]{
     \M@BeamHeads{#2}%
 
@@ -1548,16 +1566,23 @@
 \newcommand{\M@DrawNoKey}[1]{\M@WalkKeySignature{#1}{0}{1}}
 \newcommand{\M@DrawKeyCancellation}[2]{\M@WalkKeySignature{#1}{#2}{1}}
 
+\newcommand{\M@BarKeyKern}{%
+	\ifnum\theM@afterBar=1 \M@remquarterMX \fi}
+
 \newcommand{\Key}[1]{
 	\setcounter{M@key}{#1}
-	\ifnum#1=0 \else
+	\ifnum#1=0 \setcounter{M@afterBar}{0}%
+	\else
+		\M@BarKeyKern
 		\M@DrawKey{#1}
 		\M@addMX
 	\fi
 }
 
 \newcommand{\NoKey}[1]{
-	\ifnum#1=0 \else
+	\ifnum#1=0 \setcounter{M@afterBar}{0}%
+	\else
+		\M@BarKeyKern
 		\M@DrawNoKey{#1}
 		\M@addMX
 	\fi
@@ -1565,6 +1590,9 @@
 
 \newif\ifM@mixedCancel
 \newcommand{\MixedKey}[2]{
+	\ifnum#1=0 \ifnum#2=0 \setcounter{M@afterBar}{0}%
+		\else \M@BarKeyKern \fi
+	\else \M@BarKeyKern \fi
 	\M@mixedCancelfalse
 	\pgfmathtruncatemacro{\M@oldkeyabs}{abs(#1)}
 	\pgfmathtruncatemacro{\M@newkeyabs}{abs(#2)}
@@ -1619,11 +1647,13 @@
 \newcommand{\Dynamics}[2][]{\Text[#1]{\Large\dynmark{#2}}}
 
 \newcommand{\Back}[1][1]{
+	\setcounter{M@afterBar}{0}%
 	\pgfmathparse{int(-\M@hsep-#1*\M@hsep)}
 	\addtocounter{MX}{\pgfmathresult}
 }
 
 \newcommand{\Space}[1][1]{
+	\setcounter{M@afterBar}{0}% explicit spacing cancels bar-to-key kerning
 	\pgfmathsetmacro\SPac{int((#1) * \M@hsep * 2)}
 	\ifnum\SPac<0 \else {\Adv} \fi
 	\addtocounter{MX}{\SPac} \pgfmathsetmacro\M@realX{\theMX*0.0625}
@@ -1694,6 +1724,7 @@
 		{\M@BarDots{-0.24}\M@BarThin[-0.12]\M@BarThick\M@BarDots{0.24}\M@BarThin[0.12]}{}
 	\end{scope}
 	\M@addMX \ifnum\M@COmp<0 {\M@addMX}\fi
+	\setcounter{M@afterBar}{1}%
 }
 
 \newcommand{\Adv}{
