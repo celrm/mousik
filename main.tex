@@ -1,6 +1,7 @@
 \documentclass[final]{article}
 
-\usepackage{listings}\usepackage{courier}
+\usepackage{listings}
+\usepackage{courier}
 \lstset{
 	literate={≡}{{$\equiv$}}1
 	, basicstyle=\ttfamily\small
@@ -10,14 +11,13 @@
 \usepackage{multicol}
 \usepackage{enumerate}
 \usepackage{parskip}
-\usepackage{easy-todo}
 
 \usepackage{mousik}
 
 \title{The \textsf{mousik} package\footnote{This
-		document corresponds to \textsf{mousik} v0.1, dated 2020/07/01.}}
-\author{Celia Rubio Madrigal\footnote{Email: \href{mailto:celirubio.m@gmail.com}{\texttt{celirubio.m@gmail.com}}}}
-\date{July 1, 2020}
+		document corresponds to \textsf{mousik} v0.1, dated 2026/08/22.}}
+\author{Celia Rubio Madrigal\footnote{Email: \href{mailto:rubiomadrigalcelia@gmail.com}{\texttt{rubiomadrigalcelia@gmail.com}}}}
+\date{August 22, 2026}
 
 \newcommand{\TTT}[2][0]{\Text[yshift=#1]{\texttt{\textbackslash #2}}}
 
@@ -25,12 +25,11 @@
 \usetikzlibrary{decorations.fractals,lindenmayersystems}
 
 \begin{document}
-	\listoftodos	
 	
 	\maketitle
 	
 	\begin{abstract}
-        This is a music-related package for writing musical notation in \LaTeX{}. It is based on the \textsf{tikz} package and includes staves, clefs, key and time signatures, notes and chords, rests, beams and tuplets, accidentals, articulations, slurs and ties, dynamics and hairpins, and piano notation. It uses short commands and allows the user to control the position and shape of the musical elements. Everything is written directly in \LaTeX{} without extra languages or steps.
+        This is a music-related package for writing musical notation in \LaTeX{}. It is based on the \textsf{tikz} package and includes staves, clefs, key and time signatures, notes and chords, rests, beams and tuplets, accidentals, articulations, slurs and ties, dynamics and hairpins, and piano notation. It uses short commands and allows the user to control the position and shape of the musical elements. Everything is written directly in \LaTeX{} without extra languages or steps.\footnote{The code is also hosted at \href{https://github.com/celrm/mousik}{https://github.com/celrm/mousik}.}
         
         \begin{center}
             \textbf{Keywords}
@@ -47,61 +46,61 @@
 	
 	\section{Introduction}\label{intro}
 
-    The \textsf{mousik} package has a rather simple idea. It is based on the \textsf{tikz} package, and the score is treated mostly as a drawing. The package does not try to understand the music or decide how everything should be engraved. Instead, it is somewhat similar to ``what you see is what you get''. It provides short commands for notes, rests, beams, slurs, accidentals, articulations, etc., and lets the user change the position and shape of these elements directly. This makes it useful for small examples, such as those in articles or exercises.
+    The \textsf{mousik} package renders music scores with \LaTeX{}. It is based on the \textsf{tikz} package, and the scores are treated as drawings. The package does not try to understand the music, and it does not decide how to layout the music elements. It provides short commands for notes, rests, beams, slurs, accidentals, articulations, etc., and lets the user change the position and shape of these elements directly. This makes it most useful for small examples.
 
-    There are several other ways to write music with \LaTeX. Some of them use a different program or a different notation language. \textsf{LilyPond} has its own input language and program, and tools such as \textsf{lilypond-book} or \textsf{LyLuaTeX} make it possible to include it in a \LaTeX{} document. The \textsf{abc} package works in a similar way, as the music is written in ABC notation and converted by an external program. \textsf{MusiXTeX} works directly with TeX, but it requires a detailed description of the score and uses a separate pass to calculate horizontal spacing. \textsf{PMX} makes MusiXTeX easier to write, but it uses its own notation and a conversion step.
+    There are several other ways to write music with \LaTeX{}, but as of today, they require different programs, notations, or steps. \textsf{LilyPond} has its own language and program, and you may need extra tools such as \textsf{lilypond-book} or \textsf{LyLuaTeX} to include it in \LaTeX{}. As for the \textsf{abc} package, the music is written in ABC notation and converted by an external program. \textsf{MusiXTeX} works directly with TeX, but it requires very detailed score descriptions, and it also uses a second pass to calculate spacing. \textsf{PMX} makes MusiXTeX easier to write, but it uses its own notation and a conversion step.
 
-    In comparison, \textsf{mousik} is meant to stay simple. The music is written directly in \LaTeX{}, with short commands and without extra steps.
+    In comparison, \textsf{mousik} is meant to be simple. The music is written directly in \LaTeX{}, with short commands and without extra steps.
 
     \section{The \texttt{mousik} environment}
 	The way to draw a score is by means of the \texttt{mousik} environment. For longer examples, open the \href{run:examples.pdf}{\textit{examples}} document.
 	
 	\begin{center}
-		\begin{mousik}[piano, piano-sep=2]
-			\UpperStaff
-			\Clef[octave=8] \TimeSig{4}{4}
-			\MDots{*/1, , */3, } \Note{|-,=|,|-,=|}{1,2,3,4}
-			\Note{4}{2}
-			\Artic{^}{0} \Note{8}{0,1}
-			\Tie[e=2]{1}
-			\Barline
-			\Note{1}{1}
-			\Barline[t=|.]
+\begin{mousik}[piano, piano-sep=2]
+	\UpperStaff \Clef[octave=8] \TimeSig{4}{4}
+	\Dotted{*/1,,*/3,} \Note{|-,=|,|-,=|}{1,2,3,4}
+	\Note{4}{2}
+	\Artic{^}{0} \Note{8}{0,1} \Tie[eshift=2]{1}
+	\Barline
+	\Note{1}{1}
+	\Barline[t=|.]
 
-			\LowerStaff			
-			\Clef[t=4] \TimeSig{4}{4}
-			\Note{2}{13/10/8} \Space[1.5]
-			\MDot{13}\MDot{9}\MDot{7} \Note{4}{13/9/7} \Space[0.5]
-			\Note{8}{12/10/<9/7}
-			\Tie[e=2]{12} \Tie[b=0.25,e=1.75]{10}
-			\Tie[swap,b=0.25,e=1.75]{9} \Tie[swap,e=2]{7}
-			\Barline
-			\Note{1}{12/10/<9/7}
-		\end{mousik}
+	\LowerStaff	 \Clef[t=4]  \TimeSig{4}{4}
+	\Note{2}{13/10/8} \Space[1.5]
+	\Dotted{13} \Dotted{9} \Dotted{7}
+	\Note{4}{13/9/7} \Space[0.5]
+	\Note{8}{12/10/<9/7}
+	\Tie[eshift=2]{12} 
+	\Tie[bshift=0.25,eshift=1.75]{10}
+	\Tie[swap,bshift=0.25,eshift=1.75]{9} 
+	\Tie[swap,eshift=2]{7}
+	\Barline
+	\Note{1}{12/10/<9/7}
+\end{mousik}
 	\end{center}
 	
 	\begin{lstlisting}[basicstyle=\ttfamily\small]
-	\begin{mousik}[piano, piano-sep=2]
-		\UpperStaff
-		\Clef[octave=8] \TimeSig{4}{4}
-		\MDots{*/1, , */3, } \Note{|-,=|,|-,=|}{1,2,3,4}
-		     \Note{4}{2}
-		\Artic{^}{0} \Note{8}{0,1}
-		     \Tie[e=2]{1}
-		     \Barline
-		     \Note{1}{1}
-		\Barline[t=|.]
+\begin{mousik}[piano, piano-sep=2]
+	\UpperStaff \Clef[octave=8] \TimeSig{4}{4}
+	\Dotted{*/1,,*/3,} \Note{|-,=|,|-,=|}{1,2,3,4}
+	\Note{4}{2}
+	\Artic{^}{0} \Note{8}{0,1} \Tie[eshift=2]{1}
+	\Barline
+	\Note{1}{1}
+	\Barline[t=|.]
 
-		\LowerStaff			
-		\Clef[t=4] \TimeSig{4}{4}
-		\Note{2}{13/10/8} \Space[1.5]
-		\MDot{13}\MDot{9}\MDot{7} \Note{4}{13/9/7} \Space[0.5]
-		\Note{8}{12/10/<9/7}
-		\Tie[e=2]{12} \Tie[b=0.25,e=1.75]{10}
-		\Tie[swap,b=0.25,e=1.75]{9} \Tie[swap,e=2]{7}
-		\Barline
-		\Note{1}{12/10/<9/7}
-		  \end{mousik}
+	\LowerStaff	 \Clef[t=4]  \TimeSig{4}{4}
+	\Note{2}{13/10/8} \Space[1.5]
+	\Dotted{13} \Dotted{9} \Dotted{7}
+	\Note{4}{13/9/7} \Space[0.5]
+	\Note{8}{12/10/<9/7}
+	\Tie[eshift=2]{12} 
+	\Tie[bshift=0.25,eshift=1.75]{10}
+	\Tie[swap,bshift=0.25,eshift=1.75]{9} 
+	\Tie[swap,eshift=2]{7}
+	\Barline
+	\Note{1}{12/10/<9/7}
+\end{mousik}
 	\end{lstlisting}
 
 It has some options:
@@ -109,7 +108,10 @@ It has some options:
 		\item \textsl{color} changes the background color. Default is white.
 		\item \textsl{indent} indents the first line. Default is 0, in cm.
 		\item \textsl{long} changes the maximum width of the score. Default is 100.
-		\item \textsl{hsep} changes the horizontal separation. Default is 8. Beams and parallel dot lists follow the same separation.
+		\item \textsl{hsep} changes the base horizontal separation. Default is 8. Beams and parallel dot lists follow the same separation. It does not change \textsl{indent}.
+		\item \textsl{accsep} changes the horizontal space for accidentals, represented by \texttt{!}, in units of \textsl{hsep}. Default is 0.5.
+		\item \textsl{barsep} changes the horizontal space around barlines, in units of \textsl{hsep}. Default is 2, which centers a barline between two gaps. 
+		\item \textsl{scale} uniformly rescales the score, including symbols, text, line widths and spacing. Default is 1.
 		\item \textsl{vsep} changes the vertical separation in case of an overflow. Default is 2, in cm.
 		\item \textsl{single} draws a one-line staff, useful for percussion examples. Notes keep the usual absolute height system; height 6 lies on the line.
 		\item \textsl{piano} draws an upper and a lower five-line staff. Use \verb|\UpperStaff| and \verb|\LowerStaff| to choose which one receives the following commands. Each staff keeps its own cursor, clef, and key.
@@ -117,9 +119,6 @@ It has some options:
 		\item \textsl{piano-bars} chooses whether barlines in piano mode are \texttt{joined} across both staves or \texttt{separate}. Default is \texttt{joined}. The command advances only the active staff.
 		\item \textsl{tikz} allows extra options for the outside \texttt{tikz} environment.
 	\end{enumerate}
-
-% \todo{resize}
-% \todo{compatibility issues}
 
 	\section{Available commands}
 	
@@ -160,7 +159,9 @@ It has some options:
 	Automatic overflow is the safest option after a bar or a space. Otherwise, visual errors may appear (see subsection \ref{overflow}). To start a new line explicitly, use \verb|\BreakLine|.
 	
 	\subsection{\texttt{\textbackslash Space}}
-	The \verb|\Space| command may be used when no bar is needed, or to add extra space between symbols. Its optional argument changes the amount of space. Default is 1, where 1 is the normal separation between symbols. Negative values may also be used (see subsection \ref{space}).
+	The \verb|\Space| command may be used when no bar is needed, or to add extra space between symbols. Its optional argument changes the amount of space. Default is 1. One \verb|\Space| unit is two \textsl{hsep} units, i.e. the cursor advance between events. Negative values move the cursor backwards, which can also be useful to superimpose voices or place symbols manually (see subsection \ref{space}).
+
+	For finer control, there are two related commands. \verb|\NoteSpace| is measured in note units (one \textsl{hsep}). \verb|\AccSpace| is measured in accidental-gap units (one \texttt{!}).
 	
 	\begin{center}
 		\begin{mousik}
@@ -260,7 +261,7 @@ The \verb|\Note| command prints notes and chords. It has two compulsory argument
 			\foreach \i in {1,2,4,8,16,32} {
 				\Text[yshift=-0.5]{\i}
 				\Note{\i}{5}
-				\Back
+				\Space[-1]
 				\Note[swap]{\i}{2}
 			}
 			\Barline[t=|.]
@@ -283,7 +284,7 @@ The second argument may also contain heights separated by \texttt{/} to form a c
 It has some options:
 \begin{enumerate}[-]
 \item \textsl{beam} chooses the beam width. Default is 1, in mm. 
-\item \textsl{sloped} makes a beam of three or more notes follow a slope from the first note to the last instead of being horizontal.  Two-note beams are always oblique. \todo{sloped creates non vertical end of beams}
+\item \textsl{sloped} makes a beam of three or more notes follow a slope from the first note to the last instead of being horizontal.  Two-note beams are always oblique.
 \item \textsl{head} chooses the type of head. Default is \texttt{.} (round), but \texttt{x} (cross) and \texttt{o} (hollow) are also possible.
 \item \textsl{stem} chooses the stem height. Default is 5, in mm. By default, stems point up below height 6 and down otherwise, but \textsl{swap} can reverse this.
 \item \textsl{tuplet} prints the number of a tuplet. The number is calculated by default, but it may also be assigned. \textsl{tuplet-bracket} adds a bracket, and \textsl{tuplet-xshift} and \textsl{tuplet-yshift} move the tuplet marking.
@@ -295,22 +296,22 @@ It has some options:
 \begin{mousik}
 \Clef
 
-\Text[yshift=0]{\ttfamily \textbackslash Note}
-\Text[yshift=-0.5]{\ttfamily \{1\}\{12/10/<9/7\}}
+\Text[yshift=0]{\ttfamily \textbackslash Note\{1\}\{12/10/<9/7\}}
 \Note{1}{12/10/<9/7}
 \Space[1.5]
-\Text[yshift=-1.25,xshift=0.5]{\ttfamily \textbackslash Note[sloped,tuplet,swap]}
-\Text[yshift=-1.75,xshift=0.5]{\ttfamily\{8\}\{0/4,1/5,2/6\}}
-\Note[sloped,tuplet,swap]{8}{0/4,1/5,2/6}
+\Text[yshift=-0.5,xshift=0.5]{\ttfamily \textbackslash Note[sloped,tuplet,swap,stem=6]}
+\Text[yshift=-1,xshift=0.5]{\ttfamily\{8\}\{0/4,1/5,2/6\}}
+\Note[sloped,tuplet,swap,stem=6]{8}{0/4,1/5,2/6}
 \Space[1.5]
-\Text[yshift=0]{\ttfamily \textbackslash Note[head=x,stem=7]}
-\Text[yshift=-0.5]{\ttfamily \{16\}\{5\}}
-\Note[head=x,stem=7]{16}{5}
+\Text[yshift=0]{\ttfamily \textbackslash Note[head=x]\{16\}\{5\}}
+\Note[head=x]{16}{5}
 \Barline[t=|.]
 \end{mousik}
 \end{center}
 
-Notes with different durations may also be joined in the same beam group. In this case the first argument is a list. \texttt{-} means an eighth note, \texttt{=} a sixteenth note and $\equiv$ a thirty-second note. A \texttt{|} may be added before or after a symbol to mark where that level begins or ends. If there is no neighbouring note at that level, the side of the \texttt{|} also chooses the direction. The forms \texttt{//} and \texttt{///} are equivalent to \texttt{=} and $\equiv$. Inside a beam group, \texttt{!} leaves a space of 0.75 cm, and an empty item leaves a note position.
+Notes with different durations may also be joined in the same beam group. In this case the first argument is a list. \texttt{-} means an eighth note, \texttt{=} a sixteenth note and $\equiv$ a thirty-second note. A \texttt{|} may be added before or after a symbol to mark where that beam level begins or ends. The forms \texttt{//} and \texttt{///} are equivalent to \texttt{=} and $\equiv$. 
+
+Inside a beam group, \texttt{!} inserts extra space for accidentals or dots. The extra amount is \textsl{accsep} note units, where one note unit is one \textsl{hsep}; by default \textsl{accsep}=0.5. An empty item leaves a whole \textsl{hsep} unit (usually for rests).
 	\begin{center}
 		\begin{mousik}
 			\Clef
@@ -322,7 +323,7 @@ Notes with different durations may also be joined in the same beam group. In thi
 			
 			\Barline[t=|.]
 		\end{mousik}
-	\end{center}\todo{the first one looks too short and the last one too long, not half half}
+	\end{center}
 
 \subsubsection{\texttt{\textbackslash Rest}}\label{rest}
 	The \verb|\Rest| command prints a rest. It accepts its duration as an argument: 1, 2, 4, 8, 16 or 32.
@@ -356,42 +357,6 @@ Notes with different durations may also be joined in the same beam group. In thi
 		\end{mousik}
 	\end{center}
 
-	\subsubsection{\texttt{\textbackslash Back}}
-	The \verb|\Back| command moves the horizontal cursor backwards. Its optional argument is the number of note positions to step backwards, with 1 as default. It is useful for superimposing independent voices, as well as a manual alternative to chords.
-	
-	\begin{center}
-		\begin{mousik}
-			\Clef
-			
-			\TTT{Note\{8\}\{5,4/2\}}
-			\Note{8}{5,4/2}
-			
-			\Space[2]
-			
-			\TTT{Note\{8\}\{5,4\}}
-			\TTT[-0.5]{Back}
-			\TTT[-1]{Note\{4\}\{2\}}
-			\Note{8}{5,4}
-			\Back
-			\Note{4}{2}
-			
-			\Space[2]
-			
-			\TTT[-0.25]{Note\{8\}\{5,4\}}
-			\TTT[-0.75]{Back[2]}
-			\TTT[-1.25]{Rest[yshift=-0.625]\{8\}} 
-			\TTT[-1.75]{Back[0]}
-			\TTT[-2.25]{Note[swap]\{8\}\{2\}}
-			\Note{8}{5,4}
-			\Back[2]
-			\Rest[yshift=-0.625]{8} 
-			\Back[0] 
-			\Note[swap]{8}{2}
-			
-			\Barline[t=|.]
-		\end{mousik}
-	\end{center}\todo{why 0.625?}\todo{why is back[0] needed here?}\todo{Looks like space[-2] works better than doing back? perhaps its better to have a separate section on using negative space for rests and polyphony}
-
 	\subsection{Keys and accidentals}
 	
 	\subsubsection{\texttt{\textbackslash Acc}}\label{acc}
@@ -417,13 +382,13 @@ Notes with different durations may also be joined in the same beam group. In thi
 		\end{mousik}
 	\end{center}
 	
-	When there are several notes, the \verb|\Accs| command might be useful. It accepts as an argument a list of pairs: type/height. Where there is no accidental, the spot can be left empty. It also accepts the \textsl{xshift} and \textsl{yshift} options.
+	When there are several notes, the \verb|\Accs| command may be useful. It accepts as an argument a list of pairs: type/height. Where there is no accidental, the spot can be left empty. It also accepts the \textsl{xshift} and \textsl{yshift} options.
 	
 \begin{center}
 	\begin{mousik}
 		\Clef
 		
-		\Space[0.5]
+		\Space[1]
 		\TTT{Accs\{-2/5, ,-1/1\}}
 		\TTT[-0.5]{Note\{8\}\{5,3,1\}}
 		\Space[-0.5]
@@ -479,7 +444,7 @@ Notes with different durations may also be joined in the same beam group. In thi
 	\end{center}
 	
 	\subsubsection{\texttt{\textbackslash MixedKey}}
-	The \verb|\MixedKey| command prints a change of key signature. It accepts two arguments: the old key signature and the new one. For example, \verb|\MixedKey{5}{2}| changes from five sharps to two sharps, and \verb|\MixedKey{2}{-3}| changes from two sharps to three flats.	
+	The \verb|\MixedKey| command prints a change of key signature. It accepts two arguments: the old key signature and the new one. 
 	Cancellation naturals are printed when needed. 
 	
 	\begin{center}
@@ -530,51 +495,47 @@ Notes with different durations may also be joined in the same beam group. In thi
 	
 	\subsection{Other symbols}
 	
-	\subsubsection{\texttt{\textbackslash MDot}}\label{dot}
-	\todo{change name of mdot? to another reasonable thing that is not dot (as this exists already i think)}
-	The \verb|\MDot| command prints one or two dots in front of a note or rest. It accepts a compulsory argument: the height of the dot, which corresponds to those of the notes.
-	
+	\subsubsection{\texttt{\textbackslash Dotted}}\label{dot}
+	The \verb|\Dotted| command adds one or two dots to the following note or rest. With one note, its compulsory argument is the height of the dot, which corresponds to those of the notes. With several notes, the argument may be a list of pairs: symbols/height, where symbols can be $*$ or $**$. Where there are no dots, the spot can be left empty.
 	
 	It has some options:
 	\begin{enumerate}[-]
-		\item \textsl{t} (type) accepts $**$ or $..$ to produce 2 dots. The default is $*$.
+		\item \textsl{t} (type) accepts $**$ or $..$ to produce 2 dots when a single height is given. The default is $*$.
 		\item \textsl{xshift} moves the element horizontally (x axis). Default is 0, in cm.
 		\item \textsl{yshift} moves the element vertically (y axis). Default is 0, in cm.
 	\end{enumerate}
-	
-	When there are several notes, the \verb|\MDots| command can be useful. It accepts as an argument a list of pairs: symbols/height, where symbols can be $*$ or $**$. Where there are no dots, the spot can be left empty. It also accepts the \textsl{xshift} and \textsl{yshift} options.
-	
+
 	\begin{center}
 		\begin{mousik}		
 			\Clef
 			
-			\TTT{MDot\{5\}}
+			\TTT{Dotted\{5\}}
 			\TTT[-0.5]{Note\{4\}\{5\}}
-			\MDot{5}
+			\Dotted{5}
 			\Note{4}{5}
 			
 			\Space[1.75]
 			
-			\TTT{MDot[t=**]\{7\}}
+			\TTT{Dotted[t=**]\{7\}}
 			\TTT[-0.5]{Rest\{8\}}
-			\MDot[t= **]{7}
+			\Dotted[t= **]{7}
 			\Rest{8}
 			
 			\Space[3]
 			
-			\TTT{MDots\{,**/3,!,\}}
+			\TTT{Dotted\{,**/3,!,\}}
 			\TTT[-0.5]{Note\{|-,-,!,$\equiv$|\}\{5,2,!,3\}}
 			
 			\Space[-0.5]
 			
-			\MDots{,**/3,!,}
+			\Dotted{,**/3,!,}
 			\Note{|-,-,!,≡|}{5,2,!,3}
 			
 			\Space[0.5]
 			
 			\Barline[t=|.]
 		\end{mousik}
-	\end{center} \todo{this one is currently ok in terms of = spacing, but if i change it at one point i will need to check}
+	\end{center}
 	
 	\subsubsection{\texttt{\textbackslash Tie}}
 	
@@ -582,8 +543,8 @@ Notes with different durations may also be joined in the same beam group. In thi
 	
 	\begin{enumerate}[-]
 		\item \textsl{angle} changes the angle in which it is drawn. Default is 20, in degrees.
-		\item \textsl{b} (beginning) changes the starting point. Default is 0, in cm.
-		\item \textsl{e} (end) changes the ending point. Default is 1, in cm.
+		\item \textsl{bshift} changes the starting point. Default is 0, in cm.
+		\item \textsl{eshift} changes the ending point. Default is 1, in cm.
 		\item \textsl{swap} prints the element upside down. Default is false, which means like a \textit{u} if the height is less than 6, and like an \textit{n} otherwise.
 		\item \textsl{width} changes the line width. Default is 0.15, in mm.
 		\item \textsl{xshift} moves the element horizontally (x axis). Default is 0, in cm.
@@ -596,10 +557,10 @@ Notes with different durations may also be joined in the same beam group. In thi
 			\TimeSig{3}{4}
 			\Rest{4}
 			\Space[1]
-			\TTT{Tie[e=2]\{6\}}
+			\TTT{Tie[eshift=2]\{6\}}
 			\Space[-1]
 			\Note{2}{6}
-			\Tie[e=2]{6}
+			\Tie[eshift=2]{6}
 			\Barline
 			\Note{4}{6}
 			\Rest{8}
@@ -608,14 +569,14 @@ Notes with different durations may also be joined in the same beam group. In thi
 			\Space[-0.5]
 			\Note{8}{4}
 			\Tie{4}
-			\MDot{5}
+			\Dotted{5}
 			\Note{4}{4}
 			\Barline[t=|.]
 		\end{mousik}
 	\end{center}
 
 	\subsubsection{\texttt{\textbackslash Slur}}
-	The \verb|\Slur| command draws a slur between two consecutive notes. It accepts two compulsory arguments: the absolute heights of its beginning and end. It accepts the same options as \verb|\Tie|: \textsl{angle}, \textsl{b}, \textsl{e}, \textsl{swap}, \textsl{width}, \textsl{xshift} and \textsl{yshift}.
+	The \verb|\Slur| command draws a slur between two consecutive notes. It accepts two compulsory arguments: the absolute heights of its beginning and end. It accepts the same options as \verb|\Tie|: \textsl{angle}, \textsl{bshift}, \textsl{eshift}, \textsl{swap}, \textsl{width}, \textsl{xshift} and \textsl{yshift}.
 	
 	\begin{center}
 		\begin{mousik}
@@ -632,7 +593,8 @@ Notes with different durations may also be joined in the same beam group. In thi
 	
 	\subsubsection{The \texttt{Slurred} environment}
 	
-	The \verb|Slurred| environment draws a slur between the notes placed inside. It has two mandatory arguments: the heights of both beginning and end notes. It accepts the same options as \verb|\Slur|: \textsl{angle}, \textsl{b}, \textsl{e}, \textsl{swap}, \textsl{width}, \textsl{xshift} and \textsl{yshift}. \todo{angle in and out?}
+	The \verb|Slurred| environment draws a slur between the notes placed inside. It has two mandatory arguments: the heights of both beginning and end notes. It accepts the same options as \verb|\Slur|: \textsl{angle}, \textsl{bshift}, \textsl{eshift}, \textsl{swap}, \textsl{width}, \textsl{xshift} and \textsl{yshift}. 
+	
 	
 	\begin{center}
 		\begin{mousik}
@@ -655,51 +617,31 @@ Notes with different durations may also be joined in the same beam group. In thi
 	
 	The \verb|Crescendo| and \verb|Decrescendo| environments draw hairpins between the notes placed inside. Their options are:
 	\begin{enumerate}[-]
-		\item \textsl{height} moves the centre of the hairpin vertically. Default is 0. 
-		\item \textsl{begin} and \textsl{end} set the full opening of the hairpin at its beginning and end, in cm. A crescendo defaults to \texttt{begin=0,end=0.4}. A decrescendo defaults to \texttt{begin=0.4,end=0}.
-		\item \textsl{b} and \textsl{e} move the beginning and ending points horizontally from the first and last heads. Defaults are 0.1 and -0.1, in cm.
+		\item \textsl{bopen} and \textsl{eopen} set the full opening of the hairpin at its beginning and end, in cm. A crescendo defaults to \texttt{bopen=0,eopen=0.4}. A decrescendo defaults to \texttt{bopen=0.4,eopen=0}.
+		\item \textsl{bshift} and \textsl{eshift} move the beginning and ending points horizontally from the first and last heads. Defaults are 0.1 and -0.1, in cm.
 		\item \textsl{width} changes the line width. Default is 0.15, in mm.
 		\item \textsl{xshift} moves the hairpin horizontally. Default is 0, in cm.
 		\item \textsl{yshift} moves the hairpin vertically. Default is 0, in cm.
 	\end{enumerate}
 	
-	A hairpin that continues after a line break should be written as two independent pieces. Give the first piece a chosen \textsl{end} opening and use the same value as \textsl{begin} on the next line.
-\todo{these examples are not so good as they are too many but the line break should still exist}
+	A hairpin that continues after a line break should be written as two independent pieces. Give the first piece a chosen \textsl{eopen} and use the same value as \textsl{bopen} on the next line.
 	\begin{center}
 		\begin{mousik}
+			\Clef \TimeSig{4}{4}
+			\begin{Crescendo}[eopen=0.24]
+				\Note{4}{2}\Note{4}{3}\Note{4}{4}\Note{4}{5}
+			\end{Crescendo}
+			\Barline
+
+			\BreakLine
 			\Clef
-
-			\Text{\ttfamily Crescendo[height=-3]}
-			\begin{Crescendo}[height=-3]
-				\foreach\i in {2,...,-1}{\Note{4}{\i}}
-			\end{Crescendo}			
-
-			\Text{\ttfamily Decrescendo}
+			\begin{Crescendo}[bopen=0.24]
+				\Note{4}{5}\Note{4}{6}
+			\end{Crescendo}
 			\begin{Decrescendo}
-				\foreach\i in {6,...,3}{\Note{4}{\i}}
+				\Note{4}{5}\Note{4}{4}
 			\end{Decrescendo}
-
 			\Barline[t=|.]
-		\end{mousik}
-	\end{center}
-
-	\begin{center}
-		\begin{mousik}
-			\Clef
-			\Text{\ttfamily end=0.24}
-			\begin{Crescendo}[end=0.24]
-				\Note{4}{2}\Note{4}{3}\Note{4}{4}
-			\end{Crescendo}
-			\Space
-		\end{mousik}
-		
-		\begin{mousik}
-			\Clef
-			\Text{\ttfamily begin=0.24,end=0.4}
-			\begin{Crescendo}[begin=0.24,end=0.4]
-				\Note{4}{4}\Note{4}{5}\Note{4}{6}
-			\end{Crescendo}
-			\Space
 		\end{mousik}
 	\end{center}
 	
@@ -758,13 +700,15 @@ It has some options:
 	\item \textsl{yshift} moves the element vertically (y axis). Default is 0, in cm.
 \end{enumerate}
 
-When there are several notes, the \verb|\Artics| command might be useful. It accepts as an argument a list of pairs: symbols/height. Where there are no symbols, the spot shall be left empty. It also accepts the \textsl{xshift} and \textsl{yshift} options.
+When there are several notes, the \verb|\Artics| command may be useful. It accepts as an argument a list of pairs: symbols/height. Where there are no symbols, the spot can be left empty. It also accepts the \textsl{xshift} and \textsl{yshift} options.
 
 \begin{center}
 	\begin{mousik}
 		\Clef
-		\TTT[-0.55]{Artics\{./3, ,>/3\}}
-		\TTT[-1.05]{Note\{8\}\{3,4,5\}}
+		\Space[0.5]
+		\TTT{Artics\{./3, ,>/3\}}
+		\TTT[-0.5]{Note\{8\}\{3,4,5\}}
+		\Space[-0.5]
 		\Artics{./3, ,>/3}
 		\Note{8}{3,4,5}
 		\Barline[t=|.]
@@ -834,43 +778,41 @@ The \verb|\Symbol| command is similar to the \verb|\Artic| command, but it only 
 	\end{center}
 
 \subsection{\texttt{\textbackslash Tempo}}
-The \verb|\Tempo| command prints a metronome tempo indicator. It has two arguments: the duration of the note and the numerical tempo which will be printed. It has the same options as the \verb|\Text| command. An optional \textsl{yshift} of 2.5 is recommended.
+The \verb|\Tempo| command prints a metronome tempo indicator. It has two arguments: the duration of the note and the numerical tempo which will be printed. It has the same options as the \verb|\Text| command. Its default position is above the staff.
 \begin{center}
 \begin{mousik}
 	\Clef
-	\Tempo[yshift=2.5]{8}{120}
-	{\TTT{Tempo[yshift=2.5]\{8\}\{120\}}}
+	\Tempo{8}{120}
+	{\TTT{Tempo\{8\}\{120\}}}
 	\Note{4}{2}
 	\Space[3]
-	\Tempo[yshift=2.4]{2}{60}
-	{\TTT[-0.5]{Tempo[yshift=2.4]\{2\}\{60\}}}
+	\Tempo{2}{60}
+	{\TTT{Tempo\{2\}\{60\}}}
 	\Note{4}{4}
 	\Barline[t=|.]
 \end{mousik}
 \end{center}
-\todo{for some reason the 2 needs 2.4 instead of 2.5}
 	
 	\section{Tips and observations} \label{errors}
 	\newcommand{\sbs}[1]{\refstepcounter{subsection}\phantomsection\label{#1}\thesubsection\quad}
 	\subsection*{\sbs{overflow}Overflow of lines}
-	The environment has a maximum width, which may be changed with the \textsl{long} option. When the cursor reaches that width, the next element triggers an automatic overflow. This starts a new staff line and repeats the current clef and key signature.
-	
-	Sometimes relying on automatic overflow can produce awkward spacing. 
-	For a more predictable layout you may use \verb|\BreakLine|, and add or remove spaces for a more controlled positioning.
+	The environment has a maximum width, which may be changed with the \textsl{long} option. When the cursor reaches that width, the next element triggers an automatic overflow. This starts a new staff line and repeats the current clef and key signature. 	For a more predictable layout you may use \verb|\BreakLine|, add indents, change the length of spaces, or add or remove spaces for a more controlled positioning.
 	
 	\begin{mousik}
 		\Clef
 		\Key{-3}
+\Space[0.5]
 		\TimeSig{2}{4}
-		\Note{8}{0,1}
+		\Note{8}{1}
 		\Barline
-		\Note{8}{2,3}
+		\Note{4}{2}\Note{4}{3}
 		\Barline
-		\Note{8}{4,5}
+		\Note{4}{4}\Note{4}{5}
 		\Barline
-		\Note{8}{6,7}
+		\Note{4}{6}\Note{4}{7}
 		\Barline
-		\Note{8}{8,9}
+		\Note{4}{8}\Note{4}{9}
+\Barline[t=|.]
 	\end{mousik}
 
 	
@@ -878,13 +820,13 @@ The \verb|\Tempo| command prints a metronome tempo indicator. It has two argumen
 	
 	Spaces serve as the manual progression of an invisible cursor during the printing.
 	
-	Most elements are separated by a distance of 1 cm, so a \verb|\Space| command that has an argument smaller than -1 will actually step backwards. A \verb|\Space| with a 0 as the argument does nothing.
+	A negative argument moves the cursor backwards. For example, \verb|\Space[-1]| moves it back by one normal separation. A \verb|\Space| with 0 as the argument does nothing. Negative spaces can be used to superimpose voices for polyphony or to place symbols manually.
 	
-	The \verb|\Space| command is truly relevant in this package. Not a lot of logic is internally implemented, so the user is supposed to adjust everything at their convenience.
+	The \verb|\Space| command is very relevant in this package. Because logic is not implemented internally, the user is supposed to adjust every element at their convenience.
 	
-	\subsection*{\sbs{command}What if it does become too cumbersome: your own commands}
+	\subsection*{\sbs{command}Using your own commands}
 	\begin{multicols}{2}
-		If a concrete rhythm is constantly used on a music piece, but the commands become increasingly long and tedious, the user might want to summarize it by creating their own vocabulary.
+		If a concrete rhythm is constantly used on a music piece, but the commands become increasingly long and tedious, the user may want to summarize it by creating their own vocabulary.
 		
 		\newcommand{\ttc}[2][]{\Note[#1]{|-,|=,=|}{#2}}
 		\newcommand{\tct}[2][]{\Note[#1]{|=,=|,-|}{#2}}
@@ -909,12 +851,12 @@ The \verb|\Tempo| command prints a metronome tempo indicator. It has two argumen
 	\end{mousik}
 	\end{lstlisting}
 	
-	\subsection*{\sbs{tikz}On your own: working with the \textsf{tikz} package}
-	As stated in the introduction (section \ref{intro}), the \textsf{mousik} package is based on the \textsf{tikz} package. In fact, the \texttt{mousik} environment is a disguised version of a \texttt{tikzpicture} environment, but with some variables and a printed staff.
+	\subsection*{\sbs{tikz}Working with the \textsf{tikz} package}
+	The \textsf{mousik} package is based on the \textsf{tikz} package. In fact, the \texttt{mousik} environment is a disguised version of a \texttt{tikzpicture} environment, but with some initialized variables and a printed staff.
 	
 	This implies two separate things:
 	\begin{enumerate}
-		\item The mousik environment admits other commands inside, not just the commands explained in this text. For example, I might draw nodes, lines, or even a fractal behind my score:
+		\item The mousik environment admits other commands inside, not just the commands explained in this text. For example, one may draw nodes, lines, or even a fractal behind my score:
 	
 	\begin{mousik}
 		\Clef
@@ -927,10 +869,7 @@ The \verb|\Tempo| command prints a metronome tempo indicator. It has two argumen
 		\Note{8}{7,4}
 		\Note{-,|=,=|}{5,7,6}
 		\Note{8}{7,8}
-		
 		\Barline
-		\Accs{,,0/6}
-		\Note{-,|=,=|}{4,7,6}
 		
 		\begin{scope}[xshift=9cm,rotate=180]
 			\draw [l-system={rule set={F -> F-F++F-F}, step=2pt, angle=60,
@@ -939,7 +878,7 @@ The \verb|\Tempo| command prints a metronome tempo indicator. It has two argumen
 	\end{mousik}
 	
 
-	\item The commands explained here might be used in a \texttt{tikzpicture} environment, and will appear with no staff. However, the command \verb|\Init| should be used at the beginning to avoid initialization errors.
+	\item The commands explained here may be used in a \texttt{tikzpicture} environment, and will appear with no staff. However, the command \verb|\Init| should be used at the beginning to avoid initialization errors.
 	
 	\begin{tikzpicture}
 		\Init
@@ -953,35 +892,18 @@ The \verb|\Tempo| command prints a metronome tempo indicator. It has two argumen
 		\Note{8}{7,4}
 		\Note{-,|=,=|}{5,7,6}
 		\Note{8}{7,8}
-		
 		\Barline
-		\Accs{,,0/6}
-		\Note{-,|=,=|}{4,7,6}
+		
 	\end{tikzpicture}
 	\end{enumerate}
 
-%
-%	\section{The package code}	\todo{beautiful code}
-%	\lstset{
-%		language=[Latex]Tex,
-%		%
-%		basicstyle=\footnotesize\sffamily,
-%		keywordstyle=\footnotesize\sffamily,
-%		identifierstyle=\footnotesize\sffamily,
-%		commentstyle=\footnotesize\sffamily,
-%		stringstyle=\footnotesize\sffamily,
-%		escapechar=¬,
-%		%		
-%		numberstyle=\footnotesize\sffamily,%\ttfamily\tiny\color[gray]{0.3},
-%		numbers=left,
-%		stepnumber=2,
-%		numbersep=15pt,
-%		%
-%		columns=flexible,
-%		showstringspaces=false,
-%		tabsize=4,
-%	}
-%	\lstinputlisting{mousik.sty}`
+
+	\section{Notes from the author}
+	This package was developed almost entirely in the summer of 2020. It succeeds a smaller music notation package that I had developed in 2019 for twelve-tone music notation (\href{https://github.com/celrm/ddphonism}{ddphonism}). 
+	
+	Back then, the hand-made computational geometry became very cumbersome, and some important features had display errors that were difficult to fix by hand (for instance, the placement of slurs, de/crescendos, and mixed keys). In 2026, generative AI tools were advanced enough to receive the remaining list of to-dos and fix them under my supervision.
+
+	The code relies on the \textsf{tikz} package for rendering, and the \textsf{musixtex} and \textsf{harmony} packages for musical symbols. The package is still in early development, so behavior may change in the future. I welcome any suggestions for improvement.
 	
 \end{document}
 	

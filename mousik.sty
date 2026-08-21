@@ -68,8 +68,10 @@
 \newcommand{\M@NotEmpty}[2]{\ifthenelse{\equal{#1}{}}{}{#2}}
 
 \newcounter{M@afterBar}
+\newcounter{M@canTuckBar}
 \newcommand{\M@moveMX}[1]{%
     \setcounter{M@afterBar}{0}%
+    \setcounter{M@canTuckBar}{0}%
     \pgfmathparse{int((#1)*\M@hsep)}%
     \addtocounter{MX}{\pgfmathresult}%
     \pgfmathsetmacro{\M@realX}{\theMX*0.0625}%
@@ -77,9 +79,18 @@
 \newcommand{\M@addMX}{\M@moveMX{1}}
 \newcommand{\M@addhalfMX}{\M@moveMX{0.5}}
 \newcommand{\M@addquarterMX}{\M@moveMX{0.25}}
+\newcommand{\M@addAccMX}{\M@moveMX{\M@accsep}}
 \newcommand{\M@remMX}{\M@moveMX{-1}}
 \newcommand{\M@remhalfMX}{\M@moveMX{-0.5}}
 \newcommand{\M@remquarterMX}{\M@moveMX{-0.25}}
+
+\newcommand{\M@ApplyIndent}{%
+    \pgfmathparse{int(round(16*(\M@indent)))}% 1 MX unit = 0.0625 cm
+    \setcounter{MX}{\pgfmathresult}%
+    \pgfmathsetmacro{\M@realX}{\theMX*0.0625}%
+    \setcounter{M@afterBar}{0}%
+    \setcounter{M@canTuckBar}{0}%
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % The main environment
@@ -89,6 +100,7 @@
 \newcounter{MY}
 \newcounter{M@clef}
 \newcounter{M@key}
+\newsavebox{\M@scorebox}
 
 
 \newif\ifM@single
@@ -107,6 +119,18 @@
 \newcounter{M@lowerKey}
 \newcounter{M@upperAfterBar}
 \newcounter{M@lowerAfterBar}
+\newcounter{M@upperCanTuckBar}
+\newcounter{M@lowerCanTuckBar}
+\newcounter{M@barAdvance}
+\newcounter{M@barTuck}
+\newcounter{M@barGapMX}
+\newcounter{M@upperBarAdvance}
+\newcounter{M@lowerBarAdvance}
+\newcounter{M@advAfterBar}
+\newcounter{M@advBarAdvance}
+\newcounter{M@lastBarMX}
+\newcounter{M@lastBarMY}
+\newcounter{M@lastBarStaff}
 
 \pgfkeys{
 	/mousik/.is family
@@ -116,6 +140,9 @@
 		, long = 100
 		, color = white
 		, hsep = 8
+		, accsep = 0.5
+		, barsep = 2
+		, scale = 1
 		, vsep = 2
 		, single = false
 		, piano = false
@@ -127,6 +154,9 @@
 	, long/.estore in=\M@long
 	, color/.estore in=\M@color
 	, hsep/.estore in=\M@hsep
+	, accsep/.estore in=\M@accsep
+	, barsep/.estore in=\M@barsep
+	, scale/.estore in=\M@scale
 	, vsep/.estore in=\M@vsep
 	, single/.is if=M@single
 	, piano/.is if=M@piano
@@ -149,8 +179,12 @@
 \setcounter{M@upperMY}{0}\setcounter{M@lowerMY}{0}%
 \setcounter{M@upperClef}{-1}\setcounter{M@lowerClef}{-1}%
 \setcounter{M@upperKey}{0}\setcounter{M@lowerKey}{0}%
-\setcounter{M@afterBar}{0}%
+\setcounter{M@afterBar}{0}\setcounter{M@canTuckBar}{0}%
 \setcounter{M@upperAfterBar}{0}\setcounter{M@lowerAfterBar}{0}%
+\setcounter{M@upperCanTuckBar}{0}\setcounter{M@lowerCanTuckBar}{0}%
+\setcounter{M@barAdvance}{0}\setcounter{M@upperBarAdvance}{0}\setcounter{M@lowerBarAdvance}{0}%
+\setcounter{M@advAfterBar}{0}\setcounter{M@advBarAdvance}{0}%
+\setcounter{M@lastBarMX}{-100000}\setcounter{M@lastBarMY}{-100000}\setcounter{M@lastBarStaff}{0}%
 \M@lengthSetfalse
 \ifM@single
 	\def\M@staffBottom{0.2}\def\M@staffTop{0.6}\def\M@staffMid{0.4}%
@@ -166,10 +200,14 @@
 	\setcounter{M@upperMX}{\theMX}\setcounter{M@upperMY}{\theMY}%
 	\setcounter{M@upperClef}{\theM@clef}\setcounter{M@upperKey}{\theM@key}%
 	\setcounter{M@upperAfterBar}{\theM@afterBar}%
+	\setcounter{M@upperCanTuckBar}{\theM@canTuckBar}%
+	\setcounter{M@upperBarAdvance}{\theM@barAdvance}%
 \else
 	\setcounter{M@lowerMX}{\theMX}\setcounter{M@lowerMY}{\theMY}%
 	\setcounter{M@lowerClef}{\theM@clef}\setcounter{M@lowerKey}{\theM@key}%
 	\setcounter{M@lowerAfterBar}{\theM@afterBar}%
+	\setcounter{M@lowerCanTuckBar}{\theM@canTuckBar}%
+	\setcounter{M@lowerBarAdvance}{\theM@barAdvance}%
 \fi}
 
 \newcommand{\M@RestoreStaffState}[1]{%
@@ -177,10 +215,14 @@
 	\setcounter{MX}{\theM@upperMX}\setcounter{MY}{\theM@upperMY}%
 	\setcounter{M@clef}{\theM@upperClef}\setcounter{M@key}{\theM@upperKey}%
 	\setcounter{M@afterBar}{\theM@upperAfterBar}%
+	\setcounter{M@canTuckBar}{\theM@upperCanTuckBar}%
+	\setcounter{M@barAdvance}{\theM@upperBarAdvance}%
 \else
 	\setcounter{MX}{\theM@lowerMX}\setcounter{MY}{\theM@lowerMY}%
 	\setcounter{M@clef}{\theM@lowerClef}\setcounter{M@key}{\theM@lowerKey}%
 	\setcounter{M@afterBar}{\theM@lowerAfterBar}%
+	\setcounter{M@canTuckBar}{\theM@lowerCanTuckBar}%
+	\setcounter{M@barAdvance}{\theM@lowerBarAdvance}%
 \fi
 \pgfmathsetmacro{\M@realX}{\theMX*0.0625}}
 
@@ -204,7 +246,16 @@
 \M@SaveStaffState
 \ifnum\theM@staff=2 \pgftransformyshift{\M@pianoSep cm}\fi
 \pgfmathparse{int(2*\M@hsep)}\setcounter{M@aux}{\pgfmathresult}%
-\addtocounter{M@upperMX}{-\theM@aux}\addtocounter{M@lowerMX}{-\theM@aux}%
+\ifnum\theM@upperAfterBar=1
+    \addtocounter{M@upperMX}{-\theM@upperBarAdvance}%
+\else
+    \addtocounter{M@upperMX}{-\theM@aux}%
+\fi
+\ifnum\theM@lowerAfterBar=1
+    \addtocounter{M@lowerMX}{-\theM@lowerBarAdvance}%
+\else
+    \addtocounter{M@lowerMX}{-\theM@aux}%
+\fi
 \ifnum\theM@upperMX<0 \setcounter{M@upperMX}{0}\fi
 \ifnum\theM@lowerMX<0 \setcounter{M@lowerMX}{0}\fi
 \ifnum\theM@upperMY>\theM@lowerMY
@@ -224,10 +275,11 @@
 
 \newenvironment{mousik}[1][]{%
 \Init[#1]%
-\noindent\begin{tikzpicture}[
+\noindent\begin{lrbox}{\M@scorebox}%
+\begin{tikzpicture}[
 	background rectangle/.style={fill=\M@color},
 	show background rectangle,\M@TIKz]
-\Space[\M@indent]
+\M@ApplyIndent
 \ifM@piano
 	\setcounter{M@upperMX}{\theMX}\setcounter{M@lowerMX}{\theMX}%
 \fi
@@ -235,14 +287,22 @@
 \ifM@piano
 	\M@PreparePianoStaff
 \else
-	\M@remMX\M@remMX
+    % End the staff at the printed last symbol.  A final barline has its own
+    % spacing (barsep), so do not assume the old fixed two-hsep advance.
+    \ifnum\theM@afterBar=1
+        \addtocounter{MX}{-\theM@barAdvance}%
+        \pgfmathsetmacro{\M@realX}{\theMX*0.0625}%
+    \else
+        \M@remMX\M@remMX
+    \fi
 \fi
 \M@Staff % paint the staff at the end
 \setcounter{MX}{0}\setcounter{MY}{0}
 \setcounter{M@clef}{-1}\setcounter{M@key}{0}
-\end{tikzpicture}}
+\end{tikzpicture}%
+\end{lrbox}%
+\scalebox{\M@scale}{\usebox{\M@scorebox}}}
 
-% Mswap is used to swap the stem of the note
 \newif\ifMswap\Mswapfalse % the user defined
 \newif\ifnoMswap\noMswapfalse % the internal
 \newcommand{\Swap}{\ifnoMswap \noMswapfalse \else \noMswaptrue \fi}
@@ -262,10 +322,23 @@
 	}%
 \fi}
 
+\newcommand{\M@DrawPianoInitial}[1]{%
+\pgfmathsetmacro{\M@XcoordOne}{%
+	\ifnum#1=0 {-0.25+\M@indent} \else {-0.25} \fi}%
+\pgfmathsetmacro{\M@PianoTopY}{-#1*\M@vsep+\M@staffTop}%
+\pgfmathsetmacro{\M@PianoBottomY}{-#1*\M@vsep-\M@pianoSep+\M@staffBottom}%
+\pgfmathsetmacro{\M@PianoMidY}{(\M@PianoTopY+\M@PianoBottomY)/2}%
+\pgfmathsetmacro{\M@PianoBraceH}{\M@PianoTopY-\M@PianoBottomY}%
+\pgfmathtruncatemacro{\M@PianoBraceChar}{max(128,min(173,round(128+14.2264*\M@PianoBraceH)))}%
+\draw (\M@XcoordOne,\M@PianoTopY+0.007) -- (\M@XcoordOne,\M@PianoBottomY-0.007);%
+\node[inner sep=0pt] at (\M@XcoordOne-0.10,\M@PianoMidY)
+	{\mxsps\char\M@PianoBraceChar\relax};%
+}
+
 \newcommand{\M@Staff}{%
 \foreach\INDi in {0,...,\theMY} {% amount of score systems
 	\M@DrawStaffAt{\INDi}{0}%
-	\ifM@piano \M@DrawStaffAt{\INDi}{-\M@pianoSep}\fi
+	\ifM@piano \M@DrawStaffAt{\INDi}{-\M@pianoSep}\M@DrawPianoInitial{\INDi}\fi
 }}
 
 \newcommand{\Octave}[1]{ % where to place the clefs (hardcoded)
@@ -391,7 +464,7 @@
 
 \newcommand{\TimeSig}[3][]{
 	\pgfkeys{/MTimeSig, default, #1}%
-	\Adv\M@remquarterMX % todo: check for other keys
+	\Adv\M@remquarterMX 
 \begin{scope}[xshift=\M@shiftX cm,yshift=\MshiftY cm]
 	\normalsize
 	\ifx&#3&
@@ -413,35 +486,14 @@
 	{\M@PlaceNR[+0.15*\IND]{#2}{\resizebox{0.1cm}{0.1cm}{$\bullet$}}}}
 
 \pgfkeys{
-	/MDot/.is family
-	, /MDot
-	, default/.style = 
-	{	t = *
+	/Dotted/.is family
+	, /Dotted
+	, default/.style =
+	{ t = *
 		, xshift = 0
 		, yshift = 0
 	}
-	, t/.estore in=\MDotT
-	, xshift/.estore in=\M@shiftX
-	, yshift/.estore in=\MshiftY
-}
-\newcommand{\MDot}[2][]{
-	\pgfkeys{/MDot, default, #1}%
-	\pgfmathsetmacro{\M@realX}{\theMX*0.0625}
-	\begin{scope}[xshift=\M@shiftX cm,yshift=\MshiftY cm]
-	\M@EqStr{\MDotT}{*}{\M@Dot[1]{#2}}
-	\M@EqStr{\MDotT}{.}{\M@Dot[1]{#2}}
-	\M@EqStr{\MDotT}{**}{\M@Dot[2]{#2}}
-	\M@EqStr{\MDotT}{..}{\M@Dot[2]{#2}}
-	\end{scope}
-}
-
-\pgfkeys{
-	/MDots/.is family
-	, /MDots
-	, default/.style = 
-	{	xshift = 0
-		, yshift = 0
-	}
+	, t/.estore in=\M@DottedT
 	, xshift/.estore in=\M@shiftX
 	, yshift/.estore in=\MshiftY
 }
@@ -450,20 +502,51 @@
 \newcommand{\M@ParallelList}[2]{% #1 symbol/height list, #2 action(symbol,height)
 	\setcounter{M@aux}{\theMX}%
 	\foreach\INDp/\INDh in {#1} {%
-		\ifthenelse{\equal{\INDp}{!}}{\M@addhalfMX}{%
+		\ifthenelse{\equal{\INDp}{!}}{\M@addAccMX}{%
 			\M@NotEmpty{\INDp}{#2{\INDp}{\INDh}}%
 			\M@addMX
 		}%
 	}%
 	\setcounter{MX}{\theM@aux}\pgfmathsetmacro{\M@realX}{\theMX*0.0625}%
 }
-\newcommand{\M@ParallelDot}[2]{\MDot[t=#1]{#2}}
-\newcommand{\MDots}[2][]{
-	\pgfkeys{/MDots, default, #1}%
-	\Adv
-\begin{scope}[xshift=\M@shiftX cm,yshift=\MshiftY cm]
-	\M@ParallelList{#2}{\M@ParallelDot}%
-\end{scope}
+
+\newcommand{\M@DrawDotted}[2]{% #1 type, #2 height
+	\M@EqStr{#1}{*}{\M@Dot[1]{#2}}%
+	\M@EqStr{#1}{.}{\M@Dot[1]{#2}}%
+	\M@EqStr{#1}{**}{\M@Dot[2]{#2}}%
+	\M@EqStr{#1}{..}{\M@Dot[2]{#2}}%
+}
+\newcommand{\M@ParallelDotted}[2]{\pgfmathsetmacro{\M@realX}{\theMX*0.0625}\M@DrawDotted{#1}{#2}}
+
+\newif\ifM@DottedList
+\def\M@CheckDottedList#1{%
+	\M@DottedListfalse
+	\def\M@DottedComma##1,##2\M@DottedEnd{%
+		\def\M@DottedTail{##2}%
+		\ifx\M@DottedTail\@empty\else\M@DottedListtrue\fi}%
+	\expandafter\M@DottedComma#1,\M@DottedEnd
+	\ifM@DottedList\else
+		\def\M@DottedSlash##1/##2\M@DottedEnd{%
+			\def\M@DottedTail{##2}%
+			\ifx\M@DottedTail\@empty\else\M@DottedListtrue\fi}%
+		\expandafter\M@DottedSlash#1/\M@DottedEnd
+	\fi
+}
+
+\newcommand{\Dotted}[2][]{%
+	\pgfkeys{/Dotted, default, #1}%
+	\M@CheckDottedList{#2}%
+	\ifM@DottedList
+		\Adv
+		\begin{scope}[xshift=\M@shiftX cm,yshift=\MshiftY cm]
+			\M@ParallelList{#2}{\M@ParallelDotted}%
+		\end{scope}
+	\else
+		\pgfmathsetmacro{\M@realX}{\theMX*0.0625}%
+		\begin{scope}[xshift=\M@shiftX cm,yshift=\MshiftY cm]
+			\M@DrawDotted{\M@DottedT}{#2}%
+		\end{scope}
+	\fi
 }
 
 \newcounter{M@height}
@@ -583,20 +666,46 @@
 	\fi
 }
 
+\newcommand{\M@DrawSlopedBeam}[4]{% left x/y, right x/y; vertical ends
+  \pgfmathsetmacro{\M@BeamHalfThickness}{0.05*\M@beam}% beam is in mm; coordinates are cm
+  \ifx\tikz@strokecolor\pgfutil@empty
+    \fill
+  \else
+    \fill[\tikz@strokecolor]
+  \fi
+    (#1,#2+\M@BeamHalfThickness) --
+    (#3,#4+\M@BeamHalfThickness) --
+    (#3,#4-\M@BeamHalfThickness) --
+    (#1,#2-\M@BeamHalfThickness) -- cycle;
+}
+
 \newcommand{\Be@m}[5][\theMX]{
   \pgfmathsetmacro{\M@BeamLeftX}{(#2)*0.0625}%
   \pgfmathsetmacro{\M@BeamRightX}{((#1)-\M@hsep)*0.0625}%
   \pgfmathsetmacro{\M@BeamLeftY}{-\theMY*\M@vsep-0.2+(#3)*0.1}%
   \pgfmathsetmacro{\M@BeamRightY}{-\theMY*\M@vsep-0.2+(#4)*0.1}%
   \pgfmathsetmacro{\M@BeamOffset}{#5}%
+  \pgfmathtruncatemacro{\M@BeamFlat}{abs((#4)-(#3)) < 0.0001 ? 1 : 0}%
   \ifnoMswap
-    \draw[line width=\M@beam mm]
-      (\M@BeamLeftX+0.103,\M@BeamLeftY+\M@BeamOffset) --
-      (\M@BeamRightX+0.128,\M@BeamRightY+\M@BeamOffset);
+    \ifnum\M@BeamFlat=1
+      \draw[line width=\M@beam mm]
+        (\M@BeamLeftX+0.103,\M@BeamLeftY+\M@BeamOffset) --
+        (\M@BeamRightX+0.128,\M@BeamRightY+\M@BeamOffset);%
+    \else
+      \M@DrawSlopedBeam
+        {\M@BeamLeftX+0.103}{\M@BeamLeftY+\M@BeamOffset}
+        {\M@BeamRightX+0.128}{\M@BeamRightY+\M@BeamOffset}%
+    \fi
   \else
-    \draw[line width=\M@beam mm]
-      (\M@BeamLeftX-0.153,\M@BeamLeftY-\M@BeamOffset) --
-      (\M@BeamRightX-0.125,\M@BeamRightY-\M@BeamOffset);
+    \ifnum\M@BeamFlat=1
+      \draw[line width=\M@beam mm]
+        (\M@BeamLeftX-0.153,\M@BeamLeftY-\M@BeamOffset) --
+        (\M@BeamRightX-0.125,\M@BeamRightY-\M@BeamOffset);%
+    \else
+      \M@DrawSlopedBeam
+        {\M@BeamLeftX-0.153}{\M@BeamLeftY-\M@BeamOffset}
+        {\M@BeamRightX-0.125}{\M@BeamRightY-\M@BeamOffset}%
+    \fi
   \fi
 }
 
@@ -901,7 +1010,7 @@
     \setcounter{M@min}{50}%
     \setcounter{MX}{\theM@aux}%
     \foreach\IND in {#1} {%
-        \ifthenelse{\equal{\IND}{!}}{\M@addhalfMX}{%
+        \ifthenelse{\equal{\IND}{!}}{\M@addAccMX}{%
             \M@NotEmpty{\IND}{%
                 \M@BeamColumnBounds{\IND}%
                 \M@ax{\theM@columnMax}%
@@ -917,7 +1026,7 @@
     \setcounter{M@beamFound}{0}%
     \setcounter{MX}{\theM@aux}%
     \foreach\IND in {#1} {%
-        \ifthenelse{\equal{\IND}{!}}{\M@addhalfMX}{%
+        \ifthenelse{\equal{\IND}{!}}{\M@addAccMX}{%
             \M@NotEmpty{\IND}{%
                 \M@BeamColumnAnchor{\IND}%
                 \ifnum\theM@beamFound=0
@@ -997,7 +1106,7 @@
 
 	\setcounter{MX}{\theM@aux}\pgfmathsetmacro{\M@realX}{\theMX*0.0625}
 	\foreach \IND in {#3} {
-		\ifthenelse{\equal{\IND}{!}}{\M@addhalfMX}{
+		\ifthenelse{\equal{\IND}{!}}{\M@addAccMX}{
 		\M@NotEmpty{\IND}{\M@LedgerColumn{\IND}}
 		\M@addMX}
 	}
@@ -1005,6 +1114,7 @@
 	
 	\ifthenelse{\equal{\M@tuplet}{0}}{}{\Tuplet[\M@tuplet]}
 	\end{scope}
+	\setcounter{M@canTuckBar}{1}% a barline may use the trailing half-gap left by this event
 }
 
 \newcommand{\M@NormalizeDurationToken}[1]{%
@@ -1035,48 +1145,62 @@
 	\M@EqStr{\M@DurationToken}{≡|}{\def\M@mixDur{32}\def\M@mixEndThree{1}}%
 }
 
+\newcommand{\M@SetMixedStemOffsets}{%
+	\ifnoMswap
+		\pgfmathsetmacro{\M@MixedLeftStemOffset}{0.103}%
+		\pgfmathsetmacro{\M@MixedRightStemOffset}{0.128}%
+	\else
+		\pgfmathsetmacro{\M@MixedLeftStemOffset}{-0.153}%
+		\pgfmathsetmacro{\M@MixedRightStemOffset}{-0.125}%
+	\fi
+}
+
 \newcommand{\M@DrawMixedConnection}[4]{% left cursor, right cursor, beam height, offset
 	\pgfmathsetmacro{\M@BeamLeftX}{(#1)*0.0625}%
 	\pgfmathsetmacro{\M@BeamRightX}{(#2)*0.0625}%
 	\pgfmathsetmacro{\M@BeamY}{-\theMY*\M@vsep-0.2+(#3)*0.1}%
 	\pgfmathsetmacro{\M@BeamOffset}{#4}%
+	\M@SetMixedStemOffsets
 	\ifnoMswap
 		\draw[line width=\M@beam mm]
-			(\M@BeamLeftX+0.103,\M@BeamY+\M@BeamOffset) --
-			(\M@BeamRightX+0.128,\M@BeamY+\M@BeamOffset);%
+			(\M@BeamLeftX+\M@MixedLeftStemOffset,\M@BeamY+\M@BeamOffset) --
+			(\M@BeamRightX+\M@MixedRightStemOffset,\M@BeamY+\M@BeamOffset);%
 	\else
 		\draw[line width=\M@beam mm]
-			(\M@BeamLeftX-0.153,\M@BeamY-\M@BeamOffset) --
-			(\M@BeamRightX-0.125,\M@BeamY-\M@BeamOffset);%
+			(\M@BeamLeftX+\M@MixedLeftStemOffset,\M@BeamY-\M@BeamOffset) --
+			(\M@BeamRightX+\M@MixedRightStemOffset,\M@BeamY-\M@BeamOffset);%
 	\fi
 }
 
 \newcommand{\M@DrawMixedHook}[4]{% left/right, cursor, beam height, offset
 	\pgfmathsetmacro{\M@BeamX}{(#2)*0.0625}%
-	\pgfmathsetmacro{\M@BeamHalf}{0.5*\M@hsep*0.0625}%
+	\pgfmathsetmacro{\M@BeamStep}{\M@hsep*0.0625}%
 	\pgfmathsetmacro{\M@BeamY}{-\theMY*\M@vsep-0.2+(#3)*0.1}%
 	\pgfmathsetmacro{\M@BeamOffset}{#4}%
+	\M@SetMixedStemOffsets
+	\pgfmathsetmacro{\M@HookRightEnd}{0.5*(\M@MixedLeftStemOffset+\M@BeamStep+\M@MixedRightStemOffset)}%
+	\pgfmathsetmacro{\M@HookLeftBegin}{0.5*(-\M@BeamStep+\M@MixedLeftStemOffset+\M@MixedRightStemOffset)}%
 	\def\M@HookSide{#1}%
 	\def\M@HookRight{right}%
 	\ifnoMswap
 		\ifx\M@HookSide\M@HookRight
 			\draw[line width=\M@beam mm]
-				(\M@BeamX+0.103,\M@BeamY+\M@BeamOffset) --
-				(\M@BeamX+\M@BeamHalf,\M@BeamY+\M@BeamOffset);%
+				(\M@BeamX+\M@MixedLeftStemOffset,\M@BeamY+\M@BeamOffset) --
+				(\M@BeamX+\M@HookRightEnd,\M@BeamY+\M@BeamOffset);%
 		\else
 			\draw[line width=\M@beam mm]
-				(\M@BeamX-\M@BeamHalf,\M@BeamY+\M@BeamOffset) --
-				(\M@BeamX+0.128,\M@BeamY+\M@BeamOffset);%
+				(\M@BeamX+\M@HookLeftBegin,\M@BeamY+\M@BeamOffset) --
+				(\M@BeamX+\M@MixedRightStemOffset,\M@BeamY+\M@BeamOffset);%
 		\fi
 	\else
 		\ifx\M@HookSide\M@HookRight
 			\draw[line width=\M@beam mm]
-				(\M@BeamX-0.153,\M@BeamY-\M@BeamOffset) --
-				(\M@BeamX+\M@BeamHalf,\M@BeamY-\M@BeamOffset);%
+				(\M@BeamX+\M@MixedLeftStemOffset,\M@BeamY-\M@BeamOffset) --
+				(\M@BeamX+\M@HookRightEnd,\M@BeamY-\M@BeamOffset);%
 		\else
 			\draw[line width=\M@beam mm]
-				(\M@BeamX-\M@BeamHalf,\M@BeamY-\M@BeamOffset) --
-				(\M@BeamX-0.125,\M@BeamY-\M@BeamOffset);%
+				(\M@BeamX+\M@HookLeftBegin,\M@BeamY-\M@BeamOffset) --
+				(\M@BeamX+\M@MixedRightStemOffset,\M@BeamY-\M@BeamOffset);%
 		\fi
 	\fi
 }
@@ -1089,8 +1213,6 @@
 			\else\ifnum\M@mixPrevEndTwo=1
 				\M@DrawMixedHook{left}{\M@mixPrevX}{\M@heightBeam}{\M@mixSecondOffset}%
 			\else\ifnum\M@mixPrevDur=32
-				% For an isolated 32nd, the third-beam marker also chooses the
-				% direction of the required second beamlet.
 				\ifnum\M@mixPrevStartThree=1
 					\M@DrawMixedHook{right}{\M@mixPrevX}{\M@heightBeam}{\M@mixSecondOffset}%
 				\else\ifnum\M@mixPrevEndThree=1
@@ -1148,7 +1270,7 @@
 			\xdef\M@mixPrevLeftThree{\M@mixConnThree}%
 			\xdef\M@mixHavePrev{1}%
 		\fi
-		\ifthenelse{\equal{\INDd}{!}}{\M@addhalfMX}{\M@addMX}%
+		\ifthenelse{\equal{\INDd}{!}}{\M@addAccMX}{\M@addMX}%
 	}%
 	\ifnum\M@mixHavePrev=1
 		\M@FinalizeMixedEvent{0}{0}%
@@ -1184,7 +1306,7 @@
 	\setcounter{MX}{\theM@aux}
 	\M@SetBeamStem{\theM@duration}%
 	\foreach\IND in {#2} {
-		\ifthenelse{\equal{\IND}{!}}{\M@addhalfMX}{
+		\ifthenelse{\equal{\IND}{!}}{\M@addAccMX}{
 		\M@NotEmpty{\IND}{%
 			\M@BeamColumnAnchor{\IND}%
 			\M@enlarge[\M@Sstem]{\M@columnStemStart}{\M@heightBeam}%
@@ -1212,7 +1334,7 @@
     \M@ScanBeamEndpoints{#2}%
     \setcounter{MX}{\theM@aux}\pgfmathsetmacro{\M@realX}{\theMX*0.0625}
     \M@SetBeamStem{#1}%
-    \foreach\IND in {#2} {\ifthenelse{\equal{\IND}{!}}{\M@addhalfMX}{%
+    \foreach\IND in {#2} {\ifthenelse{\equal{\IND}{!}}{\M@addAccMX}{%
         \M@NotEmpty{\IND}{%
             \M@BeamColumnAnchor{\IND}%
             \M@enlarge[\M@Sstem]{\M@columnStemStart}{\M@columnAnchor}%
@@ -1244,7 +1366,7 @@
     \M@SetBeamStem{#1}%
 
     \foreach\IND in {#2} {%
-        \ifthenelse{\equal{\IND}{!}}{\M@addhalfMX}{%
+        \ifthenelse{\equal{\IND}{!}}{\M@addAccMX}{%
             \M@NotEmpty{\IND}{%
                 \M@BeamColumnAnchor{\IND}%
                 \pgfmathsetmacro{\M@SlopeH}{%
@@ -1282,7 +1404,7 @@
 
     \setcounter{MX}{\theM@aux}\pgfmathsetmacro{\M@realX}{\theMX*0.0625}
     \M@SetBeamStem{#1}%
-    \foreach\IND in {#2} {\ifthenelse{\equal{\IND}{!}}{\M@addhalfMX}{%
+    \foreach\IND in {#2} {\ifthenelse{\equal{\IND}{!}}{\M@addAccMX}{%
         \M@NotEmpty{\IND}{%
             \M@BeamColumnAnchor{\IND}%
             \M@enlarge[\M@Sstem]{\M@columnStemStart}{\M@heightBeam}%
@@ -1348,6 +1470,7 @@
 	
 	\end{scope}
 \M@addMX\M@addMX
+\setcounter{M@canTuckBar}{1}% a barline may use the trailing half-gap left by this event
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1646,14 +1769,22 @@
 
 \newcommand{\Dynamics}[2][]{\Text[#1]{\Large\dynmark{#2}}}
 
-\newcommand{\Back}[1][1]{
-	\setcounter{M@afterBar}{0}%
-	\pgfmathparse{int(-\M@hsep-#1*\M@hsep)}
-	\addtocounter{MX}{\pgfmathresult}
+\newcommand{\NoteSpace}[1][1]{%
+	\setcounter{M@afterBar}{0}% manual spacing cancels bar-to-key kerning
+	\setcounter{M@canTuckBar}{0}% and prevents a following bar from consuming note tail space
+	\pgfmathsetmacro\SPac{int((#1) * \M@hsep)}%
+	\ifnum\SPac<0 \else {\Adv} \fi
+	\addtocounter{MX}{\SPac}\pgfmathsetmacro\M@realX{\theMX*0.0625}%
+}
+\newcommand{\AccSpace}[1][1]{%
+	\pgfmathparse{(#1)*(\M@accsep)}%
+	\edef\M@AccSpaceAmount{\pgfmathresult}%
+	\NoteSpace[\M@AccSpaceAmount]%
 }
 
 \newcommand{\Space}[1][1]{
 	\setcounter{M@afterBar}{0}% explicit spacing cancels bar-to-key kerning
+	\setcounter{M@canTuckBar}{0}% and prevents a following bar from consuming note tail space
 	\pgfmathsetmacro\SPac{int((#1) * \M@hsep * 2)}
 	\ifnum\SPac<0 \else {\Adv} \fi
 	\addtocounter{MX}{\SPac} \pgfmathsetmacro\M@realX{\theMX*0.0625}
@@ -1703,7 +1834,15 @@
 	\fi}
 
 \newcommand{\Barline}[1][]{
-	\pgfmathsetmacro\M@COmp{int(\theMX*0.0625*100-\M@long*12)}
+    \setcounter{M@barTuck}{\theM@canTuckBar}%
+    \pgfmathparse{int(\M@hsep)}\setcounter{M@aux}{\pgfmathresult}%
+    \pgfmathparse{int(round(\M@barsep*\theM@aux))}%
+    \setcounter{M@barGapMX}{\pgfmathresult}%
+    \setcounter{M@afterBar}{0}\setcounter{M@canTuckBar}{0}%
+    \ifnum\theM@barTuck=1
+        \addtocounter{MX}{-\theM@aux}\addtocounter{MX}{-\theM@aux}%
+        \addtocounter{MX}{\theM@barGapMX}%
+    \fi
 	\pgfmathsetmacro{\M@realX}{\theMX*0.0625}
 	\pgfkeys{/Barline, default, #1}%
 	\M@SetBarGeometry
@@ -1723,39 +1862,64 @@
 	\ifthenelse{\equal{\M@BarT}{:|:}}%
 		{\M@BarDots{-0.24}\M@BarThin[-0.12]\M@BarThick\M@BarDots{0.24}\M@BarThin[0.12]}{}
 	\end{scope}
-	\M@addMX \ifnum\M@COmp<0 {\M@addMX}\fi
+	\setcounter{M@lastBarMX}{\theMX}\setcounter{M@lastBarMY}{\theMY}\setcounter{M@lastBarStaff}{\theM@staff}%
+    \addtocounter{MX}{\theM@barGapMX}% leave the same clearance after the printed bar
+    \pgfmathsetmacro{\M@realX}{\theMX*0.0625}%
+    \setcounter{M@barAdvance}{\theM@barGapMX}%
 	\setcounter{M@afterBar}{1}%
+    \setcounter{M@canTuckBar}{0}%
 }
 
 \newcommand{\Adv}{
+	\setcounter{M@advAfterBar}{\theM@afterBar}%
+	\setcounter{M@advBarAdvance}{\theM@barAdvance}%
 	\M@addhalfMX
 	\pgfmathsetmacro\C@mp{int(\M@realX*100-\M@long*12)}
 	\ifnum\C@mp>0
-		\BreakLine
+		\M@remhalfMX
+		\M@DoBreakLine{\theM@advAfterBar}{\theM@advBarAdvance}
 		\ifnum\theM@clef=0 \else {\Clef[t=\theM@clef]} \fi
 		\Key{\theM@key}
 	\else {\M@remhalfMX} \fi
 }
 
-\newcommand{\BreakLine}{
-	\Space[-1]
+\newcommand{\M@DoBreakLine}[2]{
+	\ifnum#1=1
+		\addtocounter{MX}{-#2}%
+		\pgfmathsetmacro{\M@realX}{\theMX*0.0625}%
+		\setcounter{M@afterBar}{0}%
+		\def\M@BreakPad{0}%
+	\else
+		\Space[-1]%
+		\def\M@BreakPad{1}% keep the old small margin unless the line ends on a barline
+		\ifnum\theMX=\theM@lastBarMX
+			\ifnum\theMY=\theM@lastBarMY
+				\ifnum\theM@staff=\theM@lastBarStaff \def\M@BreakPad{0}\fi
+			\fi
+		\fi
+	\fi
 	\ifM@lengthSet\else
 		\ifnum\theMY=0
-			\pgfmathsetmacro{\M@long}{(\theMX+1)*6.25/12}%
+			\pgfmathsetmacro{\M@long}{(\theMX+\M@BreakPad)*6.25/12}%
 			\M@lengthSettrue
 		\fi
 	\fi
 	\setcounter{MX}{0}\pgfmathsetmacro{\M@realX}{0}
+    \setcounter{M@canTuckBar}{0}%
 	\addtocounter{MY}{1}
 }
 
-\newcommand{\Tempo}[3][]{
-	\ifnum#2=1
-	\Text[#1]{\tikz[baseline]{\Note{#2}{3}}\Large\textbf{ = #3}}
-	\else
-	\Text[#1]{\tikz{\Note{#2}{1}}\Large\textbf{ = #3}}
-	\fi
-	\Space[-1]
+\newcommand{\BreakLine}{\M@DoBreakLine{\theM@afterBar}{\theM@barAdvance}}
+
+\newcommand{\M@TempoNote}[1]{%
+	\raisebox{0.02cm}[0.85cm][0.20cm]{%
+		\makebox[0.45cm][c]{\tikz[baseline=0pt]{\Note{#1}{2}}}%
+	}%
+}
+
+\newcommand{\Tempo}[3][]{%
+	\Text[yshift=2.5,#1]{\M@TempoNote{#2}\Large\textbf{ = #3}}%
+	\Space[-1]% undo the cursor movement made by the internal note
 }
 
 \newcommand{\Tie}[2][]{
@@ -1769,16 +1933,16 @@
 	, /MSlur
 	, default/.style = 
 	{	angle = 20
-		, b = 0
-		, e = 1
+		, bshift = 0
+		, eshift = 1
 		, swap = false
 		, width = 0.15
 		, xshift = 0
 		, yshift = 0
 	}
 	, angle/.estore in=\MSlurAng
-	, b/.estore in=\MSlurB
-	, e/.estore in=\MSlurE
+	, bshift/.estore in=\MSlurBshift
+	, eshift/.estore in=\MSlurEshift
 	, swap/.is if=MslurSwap
 	, width/.estore in=\MSlurW
 	, xshift/.estore in=\M@shiftX
@@ -1788,7 +1952,7 @@
 	\begingroup
 	\pgfkeys{/MSlur, default, #1}%
 	\pgfmathsetmacro{\M@realX}{\theMX*0.0625}%
-	\pgfmathsetmacro{\M@SlurDX}{(\MSlurE)-(\MSlurB)}%
+	\pgfmathsetmacro{\M@SlurDX}{(\MSlurEshift)-(\MSlurBshift)}%
 	\pgfmathsetmacro{\M@SlurDY}{0.1*((#3)-(#2))}%
 	\pgfmathsetmacro{\M@SlurSlope}{atan2(\M@SlurDY,\M@SlurDX)}%
 	\ifnum#2<6 \MslurBelowtrue \else \MslurBelowfalse \fi
@@ -1799,12 +1963,12 @@
 	\ifMslurBelow
 		\pgfmathsetmacro{\M@SlurOut}{\M@SlurSlope-\MSlurAng}%
 		\pgfmathsetmacro{\M@SlurIn}{\M@SlurSlope+180+\MSlurAng}%
-		\draw[line width=\MSlurW mm] (-1+\MSlurB+\M@realX,-\theMY*\M@vsep+0.1*#2-0.35) to[out=\M@SlurOut,in=\M@SlurIn] (-1+\MSlurE+\M@realX,-\theMY*\M@vsep+0.1*#3-0.35);
+		\draw[line width=\MSlurW mm] (-1+\MSlurBshift+\M@realX,-\theMY*\M@vsep+0.1*#2-0.35) to[out=\M@SlurOut,in=\M@SlurIn] (-1+\MSlurEshift+\M@realX,-\theMY*\M@vsep+0.1*#3-0.35);
 	\else
 		\pgfmathsetmacro{\M@SlurOut}{\M@SlurSlope+\MSlurAng}%
 		\pgfmathsetmacro{\M@SlurIn}{\M@SlurSlope+180-\MSlurAng}%
 		\draw[line width=\MSlurW mm]
-		 (-1+\MSlurB+\M@realX,-\theMY*\M@vsep+0.1*#2-0.05) to[out=\M@SlurOut,in=\M@SlurIn] (-1+\MSlurE+\M@realX,-\theMY*\M@vsep+0.1*#3-0.05);
+		 (-1+\MSlurBshift+\M@realX,-\theMY*\M@vsep+0.1*#2-0.05) to[out=\M@SlurOut,in=\M@SlurIn] (-1+\MSlurEshift+\M@realX,-\theMY*\M@vsep+0.1*#3-0.05);
 	\fi
 	\end{scope}
 	\endgroup
@@ -1816,16 +1980,16 @@
 	, /MSlurred
 	, default/.style = 
 	{	angle = 20
-		, b = 0
-		, e = 1
+		, bshift = 0
+		, eshift = 1
 		, swap = false
 		, width = 0.15
 		, xshift = 0
 		, yshift = 0
 	}
 	, angle/.estore in=\MSlurredAng
-	, b/.estore in=\MSlurredB
-	, e/.estore in=\MSlurredE
+	, bshift/.estore in=\MSlurredBshift
+	, eshift/.estore in=\MSlurredEshift
 	, swap/.is if=MswapS
 	, width/.estore in=\MSlurredW
 	, xshift/.estore in=\MSlurredX
@@ -1836,8 +2000,8 @@
 \newcounter{MslurredE}
 \newcommand{\M@DrawSlurred}[1]{%
 	\Slur[#1angle=\MSlurredAng%
-		, b=\MSlurredB%
-		, e=\theMslurred*0.0625+\MSlurredE-1
+		, bshift=\MSlurredBshift%
+		, eshift=\theMslurred*0.0625+\MSlurredEshift-1
 		, width=\MSlurredW%
 		, xshift=\MSlurredX%
 		, yshift=\MSlurredY%
@@ -1869,20 +2033,18 @@
     /Mhairpin/.is family
     , /Mhairpin
     , common/.style = {
-        height = 0
-        , b = 0.1
-        , e = -0.1
+        bshift = 0.1
+        , eshift = -0.1
         , width = 0.15
         , xshift = 0
         , yshift = 0
     }
-    , crescendo/.style = {common, begin = 0, end = 0.4}
-    , decrescendo/.style = {common, begin = 0.4, end = 0}
-    , height/.estore in=\M@HairpinHeight
-    , begin/.estore in=\M@HairpinBeginOpen
-    , end/.estore in=\M@HairpinEndOpen
-    , b/.estore in=\M@HairpinB
-    , e/.estore in=\M@HairpinE
+    , crescendo/.style = {common, bopen = 0, eopen = 0.4}
+    , decrescendo/.style = {common, bopen = 0.4, eopen = 0}
+    , bopen/.estore in=\M@HairpinBeginOpen
+    , eopen/.estore in=\M@HairpinEndOpen
+    , bshift/.estore in=\M@HairpinBshift
+    , eshift/.estore in=\M@HairpinEshift
     , width/.estore in=\M@HairpinW
     , xshift/.estore in=\M@HairpinX
     , yshift/.estore in=\M@HairpinY
@@ -1900,12 +2062,12 @@
 
 \newcommand{\M@HairpinFinishEnv}{%
     \ifnum\theMY=\theMcresMY\else
-        \PackageWarning{mousik}{Hairpin crossed a score line; split it into two environments and match end/begin apertures}%
+        \PackageWarning{mousik}{Hairpin crossed a score line; split it into two environments and match eopen/bopen apertures}%
     \fi
-    \pgfmathsetmacro{\M@HairpinStartX}{\theMcres*0.0625 + \M@HairpinB}%
+    \pgfmathsetmacro{\M@HairpinStartX}{\theMcres*0.0625 + \M@HairpinBshift}%
     \pgfmathsetmacro{\M@HairpinLastNoteX}{(\theMX-2*\M@hsep)*0.0625}%
-    \pgfmathsetmacro{\M@HairpinEndX}{\M@HairpinLastNoteX + \M@HairpinE}%
-    \pgfmathsetmacro{\M@HairpinCenterY}{-\theMY*\M@vsep + 0.1*\M@HairpinHeight - 0.7}%
+    \pgfmathsetmacro{\M@HairpinEndX}{\M@HairpinLastNoteX + \M@HairpinEshift}%
+    \pgfmathsetmacro{\M@HairpinCenterY}{-\theMY*\M@vsep - 0.7}%
     \pgfmathsetmacro{\M@HairpinBeginHalf}{0.5*\M@HairpinBeginOpen}%
     \pgfmathsetmacro{\M@HairpinEndHalf}{0.5*\M@HairpinEndOpen}%
     \begin{scope}[xshift=\M@HairpinX cm,yshift=\M@HairpinY cm]
