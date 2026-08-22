@@ -79,6 +79,16 @@
 \newcommand{\M@addMX}{\M@moveMX{1}}
 \newcommand{\M@addhalfMX}{\M@moveMX{0.5}}
 \newcommand{\M@addquarterMX}{\M@moveMX{0.25}}
+\newcommand{\M@moveFixedMX}[1]{%
+    \setcounter{M@afterBar}{0}%
+    \setcounter{M@canTuckBar}{0}%
+    \pgfmathparse{int(round(16*(#1)))}% 1 MX unit = 0.0625 cm
+    \addtocounter{MX}{\pgfmathresult}%
+    \pgfmathsetmacro{\M@realX}{\theMX*0.0625}%
+}
+\newcommand{\M@addStructMX}{\M@moveFixedMX{0.5}}% one old/default hsep unit
+\newcommand{\M@addStructTwoMX}{\M@moveFixedMX{1.0}}% two old/default hsep units
+\newcommand{\M@remStructQuarterMX}{\M@moveFixedMX{-0.125}}% old/default quarter unit
 \newcommand{\M@addAccMX}{\M@moveMX{\M@accsep}}
 \newcommand{\M@remMX}{\M@moveMX{-1}}
 \newcommand{\M@remhalfMX}{\M@moveMX{-0.5}}
@@ -440,7 +450,7 @@
 		\draw[line width=1.5mm] (\M@realX+0.3,-\theMY*\M@vsep+0.2) -- (\M@realX+0.3,-\theMY*\M@vsep+0.6);
 	\fi
 \end{scope}
-\M@addMX\M@addMX
+\M@addStructTwoMX
 }
 
 \newlength{\M@Width}
@@ -464,21 +474,22 @@
 
 \newcommand{\TimeSig}[3][]{
 	\pgfkeys{/MTimeSig, default, #1}%
-	\Adv\M@remquarterMX 
+	\Adv
+	\pgfmathsetmacro{\M@TimeSigX}{\M@realX-0.375}%
 \begin{scope}[xshift=\M@shiftX cm,yshift=\MshiftY cm]
 	\normalsize
 	\ifx&#3&
 		\ifthenelse{\equal{#2}{C}}%
-			{\node at (\M@realX-0.25,-\theMY*\M@vsep+0.5) {\meterC};}%
+			{\node at (\M@TimeSigX,-\theMY*\M@vsep+0.5) {\meterC};}%
 		{\ifthenelse{\equal{#2}{C|}}%
-			{\node at (\M@realX-0.25,-\theMY*\M@vsep+0.575) {\allabreve};}%
-		{\node at (\M@realX-0.25,-\theMY*\M@vsep+0.4) {\bf \M@Resize{#2}};}}
+			{\node at (\M@TimeSigX,-\theMY*\M@vsep+0.575) {\allabreve};}%
+		{\node at (\M@TimeSigX,-\theMY*\M@vsep+0.4) {\bf \M@Resize{#2}};}}
 	\else
-		\node at (\M@realX-0.25,-\theMY*\M@vsep+0.6) {\bf \M@Resize{#2}};
-		\node at (\M@realX-0.25,-\theMY*\M@vsep+0.2) {\bf \M@Resize{#3}};
+		\node at (\M@TimeSigX,-\theMY*\M@vsep+0.6) {\bf \M@Resize{#2}};
+		\node at (\M@TimeSigX,-\theMY*\M@vsep+0.2) {\bf \M@Resize{#3}};
 	\fi
 \end{scope}
-\M@addMX\M@addMX\M@addquarterMX
+\M@addStructTwoMX
 }
 
 \newcommand{\M@Dot}[2][1]{
@@ -1042,6 +1053,190 @@
     }%
 }
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Appoggiaturas
+
+\newif\ifM@appogSwap
+\newif\ifM@appogSlurSwap
+\newcounter{M@appogSavedMX}
+\newcounter{M@appogSavedAfterBar}
+\newcounter{M@appogSavedCanTuckBar}
+
+\pgfkeys{
+    /MAppog/.is family,
+    /MAppog,
+    default/.style={
+        scale=1,
+        before=0.5,
+        swap=false,
+        slur=0,
+        to=,
+        slur-swap=false,
+        slur-width=0.12,
+        xshift=0,
+        yshift=0,
+        slur-xshift=0,
+        slur-yshift=0
+    },
+    scale/.estore in=\M@appogScale,
+    before/.estore in=\M@appogBefore,
+    space/.estore in=\M@appogBefore,
+    swap/.is if=M@appogSwap,
+    slur/.estore in=\M@appogSlurAngle,
+    to/.estore in=\M@appogSlurTo,
+    slur-swap/.is if=M@appogSlurSwap,
+    slur-width/.estore in=\M@appogSlurWidth,
+    xshift/.estore in=\M@appogXshift,
+    yshift/.estore in=\M@appogYshift,
+    slur-xshift/.estore in=\M@appogSlurXshift,
+    slur-yshift/.estore in=\M@appogSlurYshift
+}
+
+\newif\ifM@appogStemUp
+
+\newcommand{\M@SetAppogStemDirection}[1]{% #1 appoggiatura height
+    \ifnum#1<6
+        \ifM@appogSwap \M@appogStemUpfalse \else \M@appogStemUptrue \fi
+    \else
+        \ifM@appogSwap \M@appogStemUptrue \else \M@appogStemUpfalse \fi
+    \fi
+}
+
+\newcommand{\M@NativeAppogSymbol}[1]{% #1 duration
+    \ifM@appogStemUp
+        \ifnum#1=4
+            {\smallnotesize\zqu{0}}%
+        \else\ifnum#1=8
+            {\advancefalse\grcu{0}}%
+        \else\ifnum#1=16
+            {\smallnotesize\zccu{0}}%
+        \else\ifnum#1=32
+            {\smallnotesize\zcccu{0}}%
+        \else
+            \PackageWarning{mousik}{Unsupported appoggiatura duration #1; using 8}%
+            {\advancefalse\grcu{0}}%
+        \fi\fi\fi\fi
+    \else
+        \ifnum#1=4
+            {\smallnotesize\zql{0}}%
+        \else\ifnum#1=8
+            {\advancefalse\grcl{0}}%
+        \else\ifnum#1=16
+            {\smallnotesize\zccl{0}}%
+        \else\ifnum#1=32
+            {\smallnotesize\zcccl{0}}%
+        \else
+            \PackageWarning{mousik}{Unsupported appoggiatura duration #1; using 8}%
+            {\advancefalse\grcl{0}}%
+        \fi\fi\fi\fi
+    \fi
+}
+
+\newcommand{\M@DrawAppogNote}[2]{% #1 duration, #2 height
+    \begingroup
+        \M@SetAppogStemDirection{#2}%
+        \pgfmathsetmacro{\M@appogBaseX}{\theMX*0.0625}%
+        \pgfmathsetmacro{\M@appogHeadX}{\M@appogBaseX-(\M@appogBefore)+(\M@appogXshift)}%
+        \pgfmathsetmacro{\M@appogHeadY}{-\theMY*\M@vsep-0.195+(#2)*0.1+(\M@appogYshift)}%
+        \pgfmathsetmacro{\M@appogNativeHeadX}{\M@appogHeadX-0.072*(\M@appogScale)}%
+        \node[inner sep=0pt,outer sep=0pt,anchor=base,transform shape,
+              scale=\M@appogScale]
+            at (\M@appogNativeHeadX,\M@appogHeadY) {\M@NativeAppogSymbol{#1}};%
+    \endgroup
+}
+
+\newcommand{\M@DrawAppogSlur}[7]{% x1,y1,x2,y2,angle,width,side
+    \edef\M@appogThisSide{#7}%
+    \def\M@appogDown{down}%
+    \pgfmathsetmacro{\M@appogGap}{0.04}% cm
+    \pgfmathsetmacro{\M@appogSX}{(#1)+(0.072+\M@appogGap)*(\M@appogScale)}%
+    \pgfmathsetmacro{\M@appogEX}{(#3)-(0.115+\M@appogGap)}%
+    \pgfmathsetmacro{\M@appogSpan}{max(0.001,abs(\M@appogEX-\M@appogSX))}%
+    \pgfmathsetmacro{\M@appogBulge}{0.025+0.55*\M@appogSpan*tan((#5)/2)}%
+    \pgfmathsetmacro{\M@appogCOneX}{\M@appogSX+0.33*(\M@appogEX-\M@appogSX)}%
+    \pgfmathsetmacro{\M@appogCTwoX}{\M@appogSX+0.67*(\M@appogEX-\M@appogSX)}%
+    \ifx\M@appogThisSide\M@appogDown
+        \pgfmathsetmacro{\M@appogSY}{(#2)-(0.045+\M@appogGap)*(\M@appogScale)}%
+        \pgfmathsetmacro{\M@appogEY}{(#4)-(0.080+\M@appogGap)}%
+        \pgfmathsetmacro{\M@appogControlY}{min(\M@appogSY,\M@appogEY)-\M@appogBulge}%
+    \else
+        \pgfmathsetmacro{\M@appogSY}{(#2)+(0.045+\M@appogGap)*(\M@appogScale)}%
+        \pgfmathsetmacro{\M@appogEY}{(#4)+(0.080+\M@appogGap)}%
+        \pgfmathsetmacro{\M@appogControlY}{max(\M@appogSY,\M@appogEY)+\M@appogBulge}%
+    \fi
+    \draw[line width=#6 mm]
+        (\M@appogSX,\M@appogSY)
+        .. controls (\M@appogCOneX,\M@appogControlY) and (\M@appogCTwoX,\M@appogControlY) ..
+        (\M@appogEX,\M@appogEY);%
+}
+
+\newcommand{\M@SetAppogSlurSide}[1]{% #1 appoggiatura height
+    \M@SetAppogStemDirection{#1}%
+    \ifM@appogStemUp
+        \def\M@appogSlurSide{down}%
+    \else
+        \def\M@appogSlurSide{up}%
+    \fi
+    \ifM@appogSlurSwap
+        \def\M@appogUp{up}%
+        \ifx\M@appogSlurSide\M@appogUp
+            \def\M@appogSlurSide{down}%
+        \else
+            \def\M@appogSlurSide{up}%
+        \fi
+    \fi
+}
+
+\newcommand{\M@MaybeDrawAppogSlur}[2]{% #1 appoggiatura height, #2 target logical MX
+    \pgfmathtruncatemacro{\M@appogSlurOn}{abs(\M@appogSlurAngle)>0.0001 ? 1 : 0}%
+    \ifnum\M@appogSlurOn=1
+        \ifthenelse{\equal{\M@appogSlurTo}{}}{%
+            \PackageWarning{mousik}{Appoggiatura slur requested without target height; use slur=<angle>,to=<height>; slur omitted}%
+        }{%
+            \M@SetAppogSlurSide{#1}%
+            \pgfmathsetmacro{\M@appogTargetBaseX}{(#2)*0.0625}%
+            \pgfmathsetmacro{\M@appogTargetBaseY}{-\theMY*\M@vsep-0.195+(\M@appogSlurTo)*0.1}%
+            \pgfmathsetmacro{\M@appogStartX}{\M@appogTargetBaseX-(\M@appogBefore)+(\M@appogXshift)}%
+            \pgfmathsetmacro{\M@appogStartY}{-\theMY*\M@vsep-0.195+(#1)*0.1+(\M@appogYshift)}%
+            \pgfmathsetmacro{\M@appogTargetX}{\M@appogTargetBaseX-0.01+(\M@appogSlurXshift)}%
+            \pgfmathsetmacro{\M@appogTargetY}{\M@appogTargetBaseY+(\M@appogSlurYshift)}%
+            \M@DrawAppogSlur
+                {\M@appogStartX}{\M@appogStartY}
+                {\M@appogTargetX}{\M@appogTargetY}
+                {\M@appogSlurAngle}{\M@appogSlurWidth}{\M@appogSlurSide}%
+        }%
+    \fi
+}
+
+\newcommand{\Appog}[3][]{%
+    \pgfkeys{/MAppog, default, #1}%
+    \edef\M@appogTargetMX{\theMX}%
+    \M@DrawAppogNote{#2}{#3}%
+    \M@MaybeDrawAppogSlur{#3}{\M@appogTargetMX}%
+}
+
+\newcommand{\Appogs}[2][]{%
+    \pgfkeys{/MAppog, default, #1}%
+    \setcounter{M@appogSavedMX}{\theMX}%
+    \setcounter{M@appogSavedAfterBar}{\theM@afterBar}%
+    \setcounter{M@appogSavedCanTuckBar}{\theM@canTuckBar}%
+    \foreach\M@appogDur/\M@appogHeight in {#2} {%
+        \ifthenelse{\equal{\M@appogDur}{!}}{\M@addAccMX}{%
+            \M@NotEmpty{\M@appogDur}{%
+                \edef\M@appogTargetMX{\theMX}%
+                \M@DrawAppogNote{\M@appogDur}{\M@appogHeight}%
+                \M@MaybeDrawAppogSlur{\M@appogHeight}{\M@appogTargetMX}%
+            }%
+            \M@addMX
+        }%
+    }%
+    \setcounter{MX}{\theM@appogSavedMX}%
+    \setcounter{M@afterBar}{\theM@appogSavedAfterBar}%
+    \setcounter{M@canTuckBar}{\theM@appogSavedCanTuckBar}%
+    \pgfmathsetmacro{\M@realX}{\theMX*0.0625}%
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Notes : everything together
 
@@ -1314,8 +1509,11 @@
 		\M@addMX}
 	}
 
-\ifnoMswap {\pgfmathparse{1}} \else {\pgfmathparse{-1}} \fi
-\pgfmathsetmacro\M@High{int(\M@heightBeam + \pgfmathresult * 10*\M@Sstem)}
+\ifnoMswap
+    \pgfmathsetmacro\M@High{int(\M@heightBeam + 10*\M@Sstem)}%
+\else
+    \pgfmathsetmacro\M@High{int(\M@heightBeam - 10*\M@Sstem)}%
+\fi
 \setcounter{M@height}{\M@High}
 	\M@SetBeamStem{\theM@duration}%
 	\Be@m{\theM@aux}{\M@heightBeam}{\M@heightBeam}{+\M@Sstem}
@@ -1488,18 +1686,26 @@
 	\node at (\M@realX#1,-\theMY*\M@vsep-0.5+0.1*#2) {#3};
 }
 
+\newif\ifM@articsSwap
+\newif\ifM@articSwap
+\newif\ifM@articBelow
 \pgfkeys{
 	/Martics/.is family
 	, /Martics
 	, default/.style = 
 	{	xshift = 0
 		, yshift = 0
+		, swap = false
 	}
 	, xshift/.estore in=\M@shiftX
 	, yshift/.estore in=\MshiftY
+	, swap/.is if=M@articsSwap
 }	
 
-\newcommand{\M@ParallelArtic}[2]{\Artic{#1}{#2}}
+\newcommand{\M@ParallelArtic}[2]{%
+	\ifM@articsSwap \Artic[swap]{#1}{#2}%
+	\else \Artic{#1}{#2}%
+	\fi}
 \newcommand{\Artics}[2][]{
 	\pgfkeys{/Martics, default, #1}%
 	\Adv
@@ -1514,16 +1720,22 @@
 	, default/.style = 
 	{	xshift = 0
 		, yshift = 0
+		, swap = false
 	}
 	, xshift/.estore in=\M@shiftX
 	, yshift/.estore in=\MshiftY
+	, swap/.is if=M@articSwap
 }	
 
 \newcommand{\Artic}[3][]{
 	\pgfkeys{/Martic, default, #1}%
 	\pgfmathsetmacro{\M@realX}{\theMX*0.0625}
+	\ifnum#3<6 \M@articBelowtrue \else \M@articBelowfalse \fi
+	\ifM@articSwap
+		\ifM@articBelow \M@articBelowfalse \else \M@articBelowtrue \fi
+	\fi
 	\begin{scope}[xshift=\M@shiftX cm,yshift=\MshiftY cm]
-	\ifnum#3<6
+	\ifM@articBelow
 	\M@EqStr{#2}{.}{\M@PlaceND[-0.125]{#3+0.15}{\lpz{0}}}
 	\M@EqStr{#2}{'}{\M@PlaceND[-0.125]{#3+0.1}{\lppz{0}}}
 	\M@EqStr{#2}{>}{\M@PlaceND[-0.1]{#3+0.1}{\lsf{0}}}
@@ -1690,57 +1902,56 @@
 \newcommand{\M@DrawKeyCancellation}[2]{\M@WalkKeySignature{#1}{#2}{1}}
 
 \newcommand{\M@BarKeyKern}{%
-	\ifnum\theM@afterBar=1 \M@remquarterMX \fi}
+    \ifnum\theM@afterBar=1 \M@remStructQuarterMX \fi}
 
 \newcommand{\Key}[1]{
-	\setcounter{M@key}{#1}
-	\ifnum#1=0 \setcounter{M@afterBar}{0}%
-	\else
-		\M@BarKeyKern
-		\M@DrawKey{#1}
-		\M@addMX
-	\fi
+    \setcounter{M@key}{#1}
+    \ifnum#1=0 \setcounter{M@afterBar}{0}%
+    \else
+        \M@BarKeyKern
+        \M@DrawKey{#1}%
+        \M@addStructMX
+    \fi
 }
 
 \newcommand{\NoKey}[1]{
-	\ifnum#1=0 \setcounter{M@afterBar}{0}%
-	\else
-		\M@BarKeyKern
-		\M@DrawNoKey{#1}
-		\M@addMX
-	\fi
+    \ifnum#1=0 \setcounter{M@afterBar}{0}%
+    \else
+        \M@BarKeyKern
+        \M@DrawNoKey{#1}%
+        \M@addStructMX
+    \fi
 }
 
 \newif\ifM@mixedCancel
 \newcommand{\MixedKey}[2]{
-	\ifnum#1=0 \ifnum#2=0 \setcounter{M@afterBar}{0}%
-		\else \M@BarKeyKern \fi
-	\else \M@BarKeyKern \fi
-	\M@mixedCancelfalse
-	\pgfmathtruncatemacro{\M@oldkeyabs}{abs(#1)}
-	\pgfmathtruncatemacro{\M@newkeyabs}{abs(#2)}
-	\def\M@mixedKeep{0}
-	\ifnum#1=0 \else
-		\ifnum#2=0
-			\M@mixedCanceltrue
-		\else\ifnum\numexpr#1*#2\relax<0
-			\M@mixedCanceltrue
-		\else\ifnum\M@newkeyabs<\M@oldkeyabs
-			\M@mixedCanceltrue
-			\edef\M@mixedKeep{\M@newkeyabs}
-		\fi\fi\fi
-	\fi
-	\ifM@mixedCancel
-		\M@DrawKeyCancellation{#1}{\M@mixedKeep}
-		\M@addMX
-	\fi
-	\ifnum#2=0 \else
-		\M@DrawKey{#2}
-		\M@addMX
-	\fi
-	\setcounter{M@key}{#2}
+    \ifnum#1=0 \ifnum#2=0 \setcounter{M@afterBar}{0}%
+        \else \M@BarKeyKern \fi
+    \else \M@BarKeyKern \fi
+    \M@mixedCancelfalse
+    \pgfmathtruncatemacro{\M@oldkeyabs}{abs(#1)}
+    \pgfmathtruncatemacro{\M@newkeyabs}{abs(#2)}
+    \def\M@mixedKeep{0}
+    \ifnum#1=0 \else
+        \ifnum#2=0
+            \M@mixedCanceltrue
+        \else\ifnum\numexpr#1*#2\relax<0
+            \M@mixedCanceltrue
+        \else\ifnum\M@newkeyabs<\M@oldkeyabs
+            \M@mixedCanceltrue
+            \edef\M@mixedKeep{\M@newkeyabs}
+        \fi\fi\fi
+    \fi
+    \ifM@mixedCancel
+        \M@DrawKeyCancellation{#1}{\M@mixedKeep}%
+        \M@addStructMX
+    \fi
+    \ifnum#2=0 \else
+        \M@DrawKey{#2}%
+        \M@addStructMX
+    \fi
+    \setcounter{M@key}{#2}
 }
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1852,15 +2063,15 @@
 	\ifthenelse{\equal{\M@BarT}{:}}%
 		{\draw[dashed] (\M@realX,\M@BarTopY) -- (\M@realX,\M@BarBottomY);}{}
 	\ifthenelse{\equal{\M@BarT}{||}}%
-		{\M@BarThin[-0.06]\M@BarThin[0.06]}{}
+		{\M@BarThin[-0.12]\M@BarThin}{}
 	\ifthenelse{\equal{\M@BarT}{|.}}%
 		{\M@BarThin[-0.12]\M@BarThick}{}
 	\ifthenelse{\equal{\M@BarT}{:|}}%
 		{\M@BarDots{-0.24}\M@BarThin[-0.12]\M@BarThick}{}
 	\ifthenelse{\equal{\M@BarT}{|:}}%
-		{\M@BarThick\M@BarDots{0.24}\M@BarThin[0.12]}{}
+		{\M@BarThick[-0.3275]\M@BarDots{-0.0875}\M@BarThin[-0.2075]}{}
 	\ifthenelse{\equal{\M@BarT}{:|:}}%
-		{\M@BarDots{-0.24}\M@BarThin[-0.12]\M@BarThick\M@BarDots{0.24}\M@BarThin[0.12]}{}
+		{\M@BarDots{-0.5675}\M@BarThin[-0.4475]\M@BarThick[-0.3275]\M@BarDots{-0.0875}\M@BarThin[-0.2075]}{}
 	\end{scope}
 	\setcounter{M@lastBarMX}{\theMX}\setcounter{M@lastBarMY}{\theMY}\setcounter{M@lastBarStaff}{\theM@staff}%
     \addtocounter{MX}{\theM@barGapMX}% leave the same clearance after the printed bar
@@ -1950,7 +2161,8 @@
 }
 \newcommand{\Slur}[3][]{%
 	\begingroup
-	\pgfkeys{/MSlur, default, #1}%
+	\pgfmathsetmacro{\M@SlurTrail}{2*\M@hsep*0.0625}%
+	\pgfkeys{/MSlur, default, eshift=\M@SlurTrail, #1}%
 	\pgfmathsetmacro{\M@realX}{\theMX*0.0625}%
 	\pgfmathsetmacro{\M@SlurDX}{(\MSlurEshift)-(\MSlurBshift)}%
 	\pgfmathsetmacro{\M@SlurDY}{0.1*((#3)-(#2))}%
@@ -1963,12 +2175,12 @@
 	\ifMslurBelow
 		\pgfmathsetmacro{\M@SlurOut}{\M@SlurSlope-\MSlurAng}%
 		\pgfmathsetmacro{\M@SlurIn}{\M@SlurSlope+180+\MSlurAng}%
-		\draw[line width=\MSlurW mm] (-1+\MSlurBshift+\M@realX,-\theMY*\M@vsep+0.1*#2-0.35) to[out=\M@SlurOut,in=\M@SlurIn] (-1+\MSlurEshift+\M@realX,-\theMY*\M@vsep+0.1*#3-0.35);
+		\draw[line width=\MSlurW mm] (-\M@SlurTrail+\MSlurBshift+\M@realX,-\theMY*\M@vsep+0.1*#2-0.35) to[out=\M@SlurOut,in=\M@SlurIn] (-\M@SlurTrail+\MSlurEshift+\M@realX,-\theMY*\M@vsep+0.1*#3-0.35);
 	\else
 		\pgfmathsetmacro{\M@SlurOut}{\M@SlurSlope+\MSlurAng}%
 		\pgfmathsetmacro{\M@SlurIn}{\M@SlurSlope+180-\MSlurAng}%
 		\draw[line width=\MSlurW mm]
-		 (-1+\MSlurBshift+\M@realX,-\theMY*\M@vsep+0.1*#2-0.05) to[out=\M@SlurOut,in=\M@SlurIn] (-1+\MSlurEshift+\M@realX,-\theMY*\M@vsep+0.1*#3-0.05);
+		 (-\M@SlurTrail+\MSlurBshift+\M@realX,-\theMY*\M@vsep+0.1*#2-0.05) to[out=\M@SlurOut,in=\M@SlurIn] (-\M@SlurTrail+\MSlurEshift+\M@realX,-\theMY*\M@vsep+0.1*#3-0.05);
 	\fi
 	\end{scope}
 	\endgroup
